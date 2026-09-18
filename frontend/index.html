@@ -1,0 +1,2787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Taana-Baana — From Hands to Markets. An AI-powered digital platform connecting Indian artisans and their craft with the digital marketplace."
+    >
+
+    <meta name="theme-color" content="#fbf5e9">
+
+    <title>Taana-Baana — From Hands to Markets</title>
+
+    <!-- =========================
+         GOOGLE FONTS
+    ========================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- =========================
+         CSS
+    ========================== -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<!-- =========================================================
+     PAGE LOADER / INTRO
+========================================================= -->
+
+<div class="intro-screen" id="introScreen">
+
+    <div class="intro-pattern pattern-one"></div>
+    <div class="intro-pattern pattern-two"></div>
+
+    <div class="intro-thread thread-one"></div>
+    <div class="intro-thread thread-two"></div>
+
+    <div class="intro-content">
+
+        <div class="intro-logo-box">
+
+            <!-- YOUR ACTUAL LOGO -->
+            <img
+                src="assets/logo.png"
+                alt="Taana-Baana"
+                class="intro-logo"
+                onerror="this.style.display='none'; document.getElementById('introLogoFallback').style.display='block';"
+            >
+
+            <!-- Fallback if logo file is missing -->
+            <div
+                class="logo-fallback intro-logo-fallback"
+                id="introLogoFallback"
+            >
+                <span>taana-baana</span>
+                <small>From Hands to Markets.</small>
+            </div>
+
+        </div>
+
+        <div class="intro-line"></div>
+
+        <p class="intro-tagline">
+            From Hands to Markets.
+        </p>
+
+        <button
+            class="intro-enter"
+            id="enterSite"
+            type="button"
+        >
+            <span>Enter Taana-Baana</span>
+            <strong>→</strong>
+        </button>
+
+        <button
+            class="skip-intro"
+            id="skipIntro"
+            type="button"
+        >
+            Skip intro
+        </button>
+
+    </div>
+</div>
+
+
+<!-- =========================================================
+     CURSOR
+========================================================= -->
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+
+<!-- =========================================================
+     SCROLL PROGRESS
+========================================================= -->
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<header class="site-header" id="siteHeader">
+
+    <div class="nav-container">
+
+        <a
+            href="#top"
+            class="brand"
+            aria-label="Taana-Baana Home"
+        >
+
+            <div class="brand-logo-wrapper">
+
+                <img
+                    src="assets/logo.png"
+                    alt="Taana-Baana"
+                    class="brand-logo"
+                    onerror="this.style.display='none'; document.getElementById('brandFallback').style.display='block';"
+                >
+
+                <div
+                    class="logo-fallback brand-fallback"
+                    id="brandFallback"
+                >
+                    <span>taana-baana</span>
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <nav class="desktop-nav">
+
+            <a
+                href="#top"
+                class="nav-link active"
+            >
+                Home
+            </a>
+
+
+            <div class="nav-dropdown">
+
+                <button
+                    class="nav-link dropdown-button"
+                    type="button"
+                    data-dropdown-toggle
+                >
+                    Features
+                    <span>⌄</span>
+                </button>
+
+                <div class="dropdown-menu">
+
+                    <a href="#studio">
+                        <span class="dropdown-icon">✦</span>
+                        AI Product Studio
+                    </a>
+
+                    <a href="#catalog">
+                        <span class="dropdown-icon">Aa</span>
+                        Speak-to-Sell
+                    </a>
+
+                    <a href="#pricing">
+                        <span class="dropdown-icon">₹</span>
+                        Smart Pricing
+                    </a>
+
+                    <a href="#market">
+                        <span class="dropdown-icon">↗</span>
+                        Market Linkage
+                    </a>
+
+                    <a href="#identity">
+                        <span class="dropdown-icon">◉</span>
+                        Artisan Identity
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <a
+                href="#how"
+                class="nav-link"
+            >
+                How It Works
+            </a>
+
+
+            <a
+                href="#artisans"
+                class="nav-link"
+            >
+                Artisans
+            </a>
+
+
+            <a
+                href="#about"
+                class="nav-link"
+            >
+                About
+            </a>
+
+        </nav>
+
+
+        <div class="nav-actions">
+
+            <button
+                class="dashboard-button"
+                type="button"
+                data-open-dashboard
+            >
+                Dashboard
+            </button>
+
+            <button
+                class="primary-button nav-start"
+                type="button"
+                data-open-studio
+            >
+                Start Creating
+                <span>↗</span>
+            </button>
+
+        </div>
+
+
+        <button
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            type="button"
+            aria-label="Open menu"
+            aria-expanded="false"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+    </div>
+
+
+    <!-- MOBILE MENU -->
+
+    <div
+        class="mobile-menu"
+        id="mobileMenu"
+    >
+
+        <a href="#top">Home</a>
+        <a href="#studio">AI Product Studio</a>
+        <a href="#catalog">Speak-to-Sell</a>
+        <a href="#pricing">Smart Pricing</a>
+        <a href="#market">Market Linkage</a>
+        <a href="#artisans">Artisans</a>
+        <a href="#about">About</a>
+
+        <button
+            class="primary-button"
+            data-open-studio
+        >
+            Start Creating →
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main id="top">
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero-section">
+
+    <div class="hero-noise"></div>
+
+    <div
+        class="hero-orb orb-one"
+        data-parallax="0.12"
+    ></div>
+
+    <div
+        class="hero-orb orb-two"
+        data-parallax="-0.08"
+    ></div>
+
+    <div
+        class="hero-orb orb-three"
+        data-parallax="0.05"
+    ></div>
+
+
+    <div class="hero-thread thread-a"></div>
+    <div class="hero-thread thread-b"></div>
+    <div class="hero-thread thread-c"></div>
+
+
+    <div class="container hero-container">
+
+        <div class="hero-copy">
+
+            <div
+                class="eyebrow reveal"
+            >
+                <span class="eyebrow-dot"></span>
+                AI × Indian Craft × Commerce
+            </div>
+
+
+            <h1
+                class="hero-title reveal"
+                data-delay="100"
+            >
+
+                <span>
+                    Every craft
+                </span>
+
+                <span class="italic">
+                    deserves
+                </span>
+
+                <span>
+                    a market.
+                </span>
+
+            </h1>
+
+
+            <p
+                class="hero-description reveal"
+                data-delay="200"
+            >
+                Taana-Baana weaves traditional craftsmanship with
+                intelligent technology — helping artisans turn
+                handmade products into professional digital businesses.
+            </p>
+
+
+            <div
+                class="hero-actions reveal"
+                data-delay="300"
+            >
+
+                <button
+                    class="primary-button hero-button"
+                    data-open-studio
+                >
+                    Create My First Listing
+                    <span>→</span>
+                </button>
+
+                <a
+                    href="#how"
+                    class="text-button"
+                >
+                    Discover how it works
+                    <span>↓</span>
+                </a>
+
+            </div>
+
+
+            <div
+                class="hero-trust reveal"
+                data-delay="400"
+            >
+
+                <div class="trust-avatars">
+
+                    <div>✦</div>
+                    <div>✿</div>
+                    <div>◈</div>
+                    <div>+</div>
+
+                </div>
+
+                <div>
+                    <strong>Craft meets technology</strong>
+                    <span>Designed for India's artisan communities</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- HERO VISUAL -->
+
+        <div
+            class="hero-visual"
+            data-parallax="-0.06"
+        >
+
+            <div class="hero-art-card">
+
+                <div class="art-card-top">
+
+                    <span>
+                        <i></i>
+                        LIVE CRAFT
+                    </span>
+
+                    <span>
+                        01 / 04
+                    </span>
+
+                </div>
+
+
+                <div class="craft-artwork">
+
+                    <div class="sun"></div>
+
+                    <div class="mountain mountain-one"></div>
+                    <div class="mountain mountain-two"></div>
+
+                    <div class="craft-pot pot-one"></div>
+                    <div class="craft-pot pot-two"></div>
+                    <div class="craft-pot pot-three"></div>
+
+                    <div class="art-flower flower-one">✿</div>
+                    <div class="art-flower flower-two">✾</div>
+
+                    <div class="woven-circle"></div>
+
+                </div>
+
+
+                <div class="art-card-bottom">
+
+                    <div>
+                        <small>Featured craft</small>
+                        <strong>Handwoven Heritage</strong>
+                    </div>
+
+                    <div class="art-arrow">
+                        ↗
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="floating-card floating-card-one">
+
+                <span class="mini-icon">✦</span>
+
+                <div>
+                    <small>AI generated</small>
+                    <strong>Product Listing</strong>
+                </div>
+
+                <span class="check">✓</span>
+
+            </div>
+
+
+            <div class="floating-card floating-card-two">
+
+                <span class="price-symbol">₹</span>
+
+                <div>
+                    <small>Suggested price</small>
+                    <strong>₹1,850</strong>
+                </div>
+
+                <span class="up">↑ 12%</span>
+
+            </div>
+
+
+            <div class="floating-thread"></div>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-bottom-label">
+
+        <span>Scroll to explore</span>
+
+        <div class="scroll-line">
+            <span></span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CRAFT TICKER
+========================================================= -->
+
+<div class="craft-ticker">
+
+    <div class="ticker-track">
+
+        <span>HANDLOOM</span>
+        <b>✦</b>
+
+        <span>POTTERY</span>
+        <b>✦</b>
+
+        <span>WOODCRAFT</span>
+        <b>✦</b>
+
+        <span>EMBROIDERY</span>
+        <b>✦</b>
+
+        <span>METALWORK</span>
+        <b>✦</b>
+
+        <span>BAMBOO</span>
+        <b>✦</b>
+
+        <span>TEXTILES</span>
+        <b>✦</b>
+
+        <span>HANDLOOM</span>
+        <b>✦</b>
+
+        <span>POTTERY</span>
+        <b>✦</b>
+
+        <span>WOODCRAFT</span>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     STATS
+========================================================= -->
+
+<section class="stats-section">
+
+    <div class="container stats-grid">
+
+        <div class="stat-item reveal">
+
+            <strong data-counter="700">0+</strong>
+
+            <span>
+                Craft traditions across India
+            </span>
+
+        </div>
+
+
+        <div class="stat-item reveal">
+
+            <strong data-counter="28">0</strong>
+
+            <span>
+                States and diverse craft regions
+            </span>
+
+        </div>
+
+
+        <div class="stat-item reveal">
+
+            <strong data-counter="24">0/7</strong>
+
+            <span>
+                Year-round digital visibility
+            </span>
+
+        </div>
+
+
+        <div class="stat-item reveal">
+
+            <strong>AI</strong>
+
+            <span>
+                Built around the artisan
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     HERITAGE
+========================================================= -->
+
+<section
+    class="heritage-section section"
+    id="about"
+>
+
+    <div class="container">
+
+        <div class="section-heading split-heading">
+
+            <div>
+
+                <span class="section-kicker">
+                    THE STORY WE CARRY
+                </span>
+
+                <h2>
+                    India's crafts are not
+                    <em>just products.</em>
+                </h2>
+
+            </div>
+
+            <p>
+                Behind every weave, carving, painting and handmade
+                object is a person, a family, a community and
+                generations of knowledge.
+            </p>
+
+        </div>
+
+
+        <div class="heritage-grid">
+
+            <div class="heritage-image-card">
+
+                <div class="heritage-image">
+
+                    <div class="heritage-pattern"></div>
+
+                    <span class="heritage-label">
+                        ROOTED IN TRADITION
+                    </span>
+
+                    <div class="heritage-symbol">
+                        ❋
+                    </div>
+
+                </div>
+
+                <div class="image-caption">
+
+                    <span>
+                        Craft is culture.
+                    </span>
+
+                    <span>
+                        01
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="heritage-content">
+
+                <div class="heritage-number">
+                    01
+                </div>
+
+                <h3>
+                    From generations
+                    <br>
+                    to generations.
+                </h3>
+
+                <p>
+                    India's artisan communities carry techniques
+                    that have survived centuries. But traditional
+                    skill alone does not guarantee visibility in
+                    today's digital economy.
+                </p>
+
+                <p>
+                    Taana-Baana bridges that gap without taking
+                    away what makes handmade work special.
+                </p>
+
+
+                <a
+                    href="#how"
+                    class="underlined-link"
+                >
+                    Follow the journey
+                    <span>→</span>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CRAFT MAP / REGIONS
+========================================================= -->
+
+<section class="craft-map-section section">
+
+    <div class="container">
+
+        <div class="section-heading centered">
+
+            <span class="section-kicker">
+                A LIVING TAPESTRY
+            </span>
+
+            <h2>
+                One country.
+                <br>
+                <em>Countless stories.</em>
+            </h2>
+
+            <p>
+                Explore the diversity of Indian craft traditions.
+            </p>
+
+        </div>
+
+
+        <div class="craft-grid">
+
+            <article
+                class="craft-card large-card reveal"
+                data-craft="textile"
+            >
+
+                <div class="craft-visual textile-visual">
+
+                    <div class="pattern-grid"></div>
+
+                    <span class="craft-state">
+                        GUJARAT
+                    </span>
+
+                    <span class="craft-symbol">
+                        ✣
+                    </span>
+
+                </div>
+
+                <div class="craft-card-info">
+
+                    <div>
+                        <small>01</small>
+                        <h3>Textile Arts</h3>
+                    </div>
+
+                    <span>→</span>
+
+                </div>
+
+            </article>
+
+
+            <article
+                class="craft-card reveal"
+                data-craft="pottery"
+            >
+
+                <div class="craft-visual pottery-visual">
+
+                    <div class="pottery-shape"></div>
+
+                    <span class="craft-state">
+                        RAJASTHAN
+                    </span>
+
+                </div>
+
+                <div class="craft-card-info">
+
+                    <div>
+                        <small>02</small>
+                        <h3>Pottery</h3>
+                    </div>
+
+                    <span>→</span>
+
+                </div>
+
+            </article>
+
+
+            <article
+                class="craft-card reveal"
+                data-craft="wood"
+            >
+
+                <div class="craft-visual wood-visual">
+
+                    <div class="wood-pattern">
+                        ◉
+                    </div>
+
+                    <span class="craft-state">
+                        KERALA
+                    </span>
+
+                </div>
+
+                <div class="craft-card-info">
+
+                    <div>
+                        <small>03</small>
+                        <h3>Woodcraft</h3>
+                    </div>
+
+                    <span>→</span>
+
+                </div>
+
+            </article>
+
+
+            <article
+                class="craft-card reveal"
+                data-craft="bamboo"
+            >
+
+                <div class="craft-visual bamboo-visual">
+
+                    <div class="bamboo-lines"></div>
+
+                    <span class="craft-state">
+                        ASSAM
+                    </span>
+
+                </div>
+
+                <div class="craft-card-info">
+
+                    <div>
+                        <small>04</small>
+                        <h3>Bamboo Craft</h3>
+                    </div>
+
+                    <span>→</span>
+
+                </div>
+
+            </article>
+
+
+            <article
+                class="craft-card large-card reveal"
+                data-craft="embroidery"
+            >
+
+                <div class="craft-visual embroidery-visual">
+
+                    <div class="embroidery-pattern">
+                        ✿
+                        ✤
+                        ❋
+                        ✾
+                    </div>
+
+                    <span class="craft-state">
+                        PUNJAB
+                    </span>
+
+                </div>
+
+                <div class="craft-card-info">
+
+                    <div>
+                        <small>05</small>
+                        <h3>Embroidery</h3>
+                    </div>
+
+                    <span>→</span>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     PROBLEM → SOLUTION
+========================================================= -->
+
+<section class="problem-section section">
+
+    <div class="container">
+
+        <div class="problem-intro">
+
+            <span class="section-kicker">
+                THE GAP
+            </span>
+
+            <h2>
+                Great craftsmanship
+                <br>
+                shouldn't mean
+                <em>limited reach.</em>
+            </h2>
+
+        </div>
+
+
+        <div class="problem-grid">
+
+            <div class="problem-column">
+
+                <span class="column-label">
+                    TODAY
+                </span>
+
+                <div class="problem-card">
+
+                    <span>01</span>
+
+                    <h3>
+                        Physical markets
+                        are temporary.
+                    </h3>
+
+                    <p>
+                        Exhibitions and fairs create valuable
+                        opportunities, but they cannot provide
+                        continuous year-round market access.
+                    </p>
+
+                </div>
+
+
+                <div class="problem-card">
+
+                    <span>02</span>
+
+                    <h3>
+                        Digital selling
+                        feels complicated.
+                    </h3>
+
+                    <p>
+                        Photography, descriptions, pricing,
+                        cataloging and online publishing can
+                        become barriers.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="solution-column">
+
+                <span class="column-label">
+                    WITH TAANA-BAANA
+                </span>
+
+                <div class="solution-card">
+
+                    <div class="solution-icon">
+                        ✦
+                    </div>
+
+                    <h3>
+                        The artisan creates.
+                        AI handles the complexity.
+                    </h3>
+
+                    <p>
+                        Capture a product. Speak naturally.
+                        Let AI transform your craft into a
+                        professional digital listing.
+                    </p>
+
+                    <button
+                        class="dark-button"
+                        data-open-studio
+                    >
+                        Experience the workflow →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FEATURES INTRO
+========================================================= -->
+
+<section class="features-intro section">
+
+    <div class="container">
+
+        <span class="section-kicker">
+            THE DIGITAL TOOLKIT
+        </span>
+
+        <div class="features-big-heading">
+
+            <h2>
+                From
+                <span>hands</span>
+                to
+                <span>markets.</span>
+            </h2>
+
+            <p>
+                One intuitive platform for everything an artisan
+                needs to build a digital business.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     AI PRODUCT STUDIO
+========================================================= -->
+
+<section
+    class="feature-section studio-section section"
+    id="studio"
+>
+
+    <div class="container feature-layout">
+
+        <div class="feature-copy reveal">
+
+            <span class="feature-number">
+                01 / 06
+            </span>
+
+            <span class="section-kicker">
+                AI PRODUCT STUDIO
+            </span>
+
+            <h2>
+                Your craft.
+                <br>
+                <em>Studio-ready.</em>
+            </h2>
+
+            <p>
+                Turn an ordinary product photograph into a
+                marketplace-ready visual with AI-powered
+                background cleanup, lighting correction,
+                framing and presentation.
+            </p>
+
+
+            <ul class="feature-list">
+
+                <li>
+                    <span>✓</span>
+                    Background cleanup
+                </li>
+
+                <li>
+                    <span>✓</span>
+                    Lighting enhancement
+                </li>
+
+                <li>
+                    <span>✓</span>
+                    E-commerce framing
+                </li>
+
+                <li>
+                    <span>✓</span>
+                    Professional presentation
+                </li>
+
+            </ul>
+
+
+            <button
+                class="outline-button"
+                data-open-studio
+            >
+                Open Product Studio →
+            </button>
+
+        </div>
+
+
+        <div class="feature-demo studio-demo reveal">
+
+            <div class="demo-window">
+
+                <div class="window-bar">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                    <small>
+                        AI PRODUCT STUDIO
+                    </small>
+
+                </div>
+
+
+                <div class="studio-canvas">
+
+                    <div class="studio-product">
+
+                        <div class="product-vase"></div>
+
+                        <div class="product-shadow"></div>
+
+                    </div>
+
+
+                    <div class="ai-badge">
+                        ✦ AI ENHANCED
+                    </div>
+
+
+                    <div class="studio-toolbar">
+
+                        <button class="active">
+                            ✦ Enhance
+                        </button>
+
+                        <button>
+                            Background
+                        </button>
+
+                        <button>
+                            Light
+                        </button>
+
+                        <button>
+                            Crop
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SPEAK TO SELL
+========================================================= -->
+
+<section
+    class="feature-section catalog-section section"
+    id="catalog"
+>
+
+    <div class="container feature-layout reverse">
+
+        <div class="feature-copy reveal">
+
+            <span class="feature-number">
+                02 / 06
+            </span>
+
+            <span class="section-kicker">
+                SPEAK-TO-SELL
+            </span>
+
+            <h2>
+                No complicated
+                <br>
+                <em>typing required.</em>
+            </h2>
+
+            <p>
+                Speak about your product in the language you
+                are comfortable with. Taana-Baana transforms
+                your voice into a polished digital catalog.
+            </p>
+
+
+            <div class="language-pills">
+
+                <span>മലയാളം</span>
+                <span>हिन्दी</span>
+                <span>தமிழ்</span>
+                <span>বাংলা</span>
+                <span>English</span>
+
+            </div>
+
+
+            <button
+                class="outline-button"
+                data-open-catalog
+            >
+                Try Voice Catalog →
+            </button>
+
+        </div>
+
+
+        <div class="feature-demo voice-demo reveal">
+
+            <div class="phone-frame">
+
+                <div class="phone-notch"></div>
+
+                <div class="phone-content">
+
+                    <span class="phone-label">
+                        YOUR STORY
+                    </span>
+
+                    <div class="voice-orb">
+
+                        <div class="voice-wave"></div>
+
+                        <strong>🎙</strong>
+
+                    </div>
+
+                    <p class="voice-text">
+                        “This is a handwoven cotton
+                        saree made using traditional
+                        techniques...”
+                    </p>
+
+                    <div class="voice-language">
+                        ● Listening in Malayalam
+                    </div>
+
+
+                    <div class="generated-listing">
+
+                        <small>
+                            AI GENERATED LISTING
+                        </small>
+
+                        <strong>
+                            Handwoven Heritage Cotton Saree
+                        </strong>
+
+                        <p>
+                            Traditional handcrafted textile
+                            created with natural fibres...
+                        </p>
+
+                        <div class="listing-tags">
+                            <span>Handmade</span>
+                            <span>Cotton</span>
+                            <span>Traditional</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SMART PRICING
+========================================================= -->
+
+<section
+    class="pricing-section section"
+    id="pricing"
+>
+
+    <div class="container">
+
+        <div class="section-heading split-heading">
+
+            <div>
+
+                <span class="section-kicker">
+                    DON'T UNDERPRICE ME
+                </span>
+
+                <h2>
+                    Know the value
+                    <br>
+                    <em>behind your craft.</em>
+                </h2>
+
+            </div>
+
+            <p>
+                A transparent pricing assistant that considers
+                materials, labour, packaging, platform costs,
+                margin and market signals.
+            </p>
+
+        </div>
+
+
+        <div class="pricing-demo">
+
+            <div class="pricing-inputs">
+
+                <div class="input-group">
+
+                    <label>
+                        Material cost
+                    </label>
+
+                    <div class="price-input">
+                        <span>₹</span>
+
+                        <input
+                            type="number"
+                            id="materialCost"
+                            value="650"
+                            min="0"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Labour cost
+                    </label>
+
+                    <div class="price-input">
+                        <span>₹</span>
+
+                        <input
+                            type="number"
+                            id="labourCost"
+                            value="700"
+                            min="0"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Other costs
+                    </label>
+
+                    <div class="price-input">
+                        <span>₹</span>
+
+                        <input
+                            type="number"
+                            id="otherCost"
+                            value="150"
+                            min="0"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="dark-button calculate-button"
+                    id="calculatePrice"
+                >
+                    Calculate fair price
+                </button>
+
+            </div>
+
+
+            <div class="pricing-result">
+
+                <div class="pricing-result-top">
+
+                    <span>
+                        AI SUGGESTION
+                    </span>
+
+                    <span class="price-confidence">
+                        ● Market aligned
+                    </span>
+
+                </div>
+
+
+                <div class="main-price">
+
+                    <small>
+                        Recommended selling price
+                    </small>
+
+                    <strong id="recommendedPrice">
+                        ₹2,250
+                    </strong>
+
+                </div>
+
+
+                <div class="price-options">
+
+                    <div>
+                        <small>
+                            Minimum sustainable
+                        </small>
+
+                        <strong id="minimumPrice">
+                            ₹1,800
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+                        <small>
+                            Recommended
+                        </small>
+
+                        <strong id="recommendedSmall">
+                            ₹2,250
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+                        <small>
+                            Premium
+                        </small>
+
+                        <strong id="premiumPrice">
+                            ₹2,700
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="price-bar">
+
+                    <span style="width:72%"></span>
+
+                </div>
+
+
+                <p>
+                    Based on your estimated production cost
+                    and a sustainable artisan margin.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     MARKET LINKAGE
+========================================================= -->
+
+<section
+    class="market-section section"
+    id="market"
+>
+
+    <div class="container">
+
+        <div class="market-heading">
+
+            <span class="section-kicker">
+                CREATE ONCE. REACH EVERYWHERE.
+            </span>
+
+            <h2>
+                Your craft should travel
+                <em>beyond the exhibition.</em>
+            </h2>
+
+            <p>
+                Create professional digital catalogs, share
+                products, connect with buyers and prepare for
+                wider marketplace integrations.
+            </p>
+
+        </div>
+
+
+        <div class="market-board">
+
+            <div class="market-topbar">
+
+                <span>
+                    TAANA-BAANA MARKET
+                </span>
+
+                <div>
+                    <span class="live-dot"></span>
+                    LIVE CATALOG
+                </div>
+
+            </div>
+
+
+            <div class="market-content">
+
+                <aside class="market-sidebar">
+
+                    <div class="market-profile">
+
+                        <div class="profile-avatar">
+                            ✿
+                        </div>
+
+                        <div>
+                            <strong>
+                                Meera Crafts
+                            </strong>
+
+                            <small>
+                                Kerala · Artisan
+                            </small>
+                        </div>
+
+                    </div>
+
+
+                    <button class="sidebar-active">
+                        Overview
+                    </button>
+
+                    <button>
+                        Products
+                    </button>
+
+                    <button>
+                        Enquiries
+                    </button>
+
+                    <button>
+                        Orders
+                    </button>
+
+                    <button>
+                        Analytics
+                    </button>
+
+                </aside>
+
+
+                <div class="market-main">
+
+                    <div class="market-main-header">
+
+                        <div>
+                            <small>
+                                GOOD MORNING, MEERA
+                            </small>
+
+                            <h3>
+                                Your craft is moving.
+                            </h3>
+                        </div>
+
+                        <button
+                            class="small-dark-button"
+                            data-open-studio
+                        >
+                            + Add product
+                        </button>
+
+                    </div>
+
+
+                    <div class="dashboard-stats">
+
+                        <div>
+                            <small>
+                                Catalog views
+                            </small>
+
+                            <strong>
+                                2,846
+                            </strong>
+
+                            <span>
+                                ↑ 18.4%
+                            </span>
+                        </div>
+
+
+                        <div>
+                            <small>
+                                Enquiries
+                            </small>
+
+                            <strong>
+                                24
+                            </strong>
+
+                            <span>
+                                ↑ 8.2%
+                            </span>
+                        </div>
+
+
+                        <div>
+                            <small>
+                                Products
+                            </small>
+
+                            <strong>
+                                38
+                            </strong>
+
+                            <span>
+                                Active
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="market-products">
+
+                        <div class="market-product">
+
+                            <div class="product-mini textile-mini"></div>
+
+                            <div>
+                                <strong>
+                                    Handwoven Cotton Saree
+                                </strong>
+
+                                <small>
+                                    Textile · Kerala
+                                </small>
+                            </div>
+
+                            <strong>
+                                ₹2,250
+                            </strong>
+
+                        </div>
+
+
+                        <div class="market-product">
+
+                            <div class="product-mini pot-mini"></div>
+
+                            <div>
+                                <strong>
+                                    Terracotta Serving Set
+                                </strong>
+
+                                <small>
+                                    Pottery · Rajasthan
+                                </small>
+                            </div>
+
+                            <strong>
+                                ₹1,850
+                            </strong>
+
+                        </div>
+
+
+                        <div class="market-product">
+
+                            <div class="product-mini wood-mini"></div>
+
+                            <div>
+                                <strong>
+                                    Carved Wooden Lamp
+                                </strong>
+
+                                <small>
+                                    Woodcraft · Kerala
+                                </small>
+                            </div>
+
+                            <strong>
+                                ₹3,200
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     DIGITAL IDENTITY
+========================================================= -->
+
+<section
+    class="identity-section section"
+    id="identity"
+>
+
+    <div class="container identity-layout">
+
+        <div class="identity-card-wrap reveal">
+
+            <div class="identity-card">
+
+                <div class="identity-card-header">
+
+                    <span>
+                        TAANA-BAANA
+                    </span>
+
+                    <span>
+                        ARTISAN ID
+                    </span>
+
+                </div>
+
+
+                <div class="identity-profile">
+
+                    <div class="identity-avatar">
+                        ✿
+                    </div>
+
+                    <div>
+
+                        <small>
+                            ARTISAN
+                        </small>
+
+                        <h3>
+                            Meera Krishnan
+                        </h3>
+
+                        <p>
+                            Handloom Artisan · Kerala
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="identity-divider"></div>
+
+
+                <div class="identity-details">
+
+                    <div>
+                        <small>
+                            Craft
+                        </small>
+
+                        <strong>
+                            Handloom Weaving
+                        </strong>
+                    </div>
+
+                    <div>
+                        <small>
+                            Experience
+                        </small>
+
+                        <strong>
+                            18 Years
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="identity-footer">
+
+                    <div class="qr-placeholder">
+                        ▦
+                    </div>
+
+                    <div>
+                        <strong>
+                            Digital Craft Identity
+                        </strong>
+
+                        <small>
+                            Scan to explore the collection
+                        </small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="identity-copy reveal">
+
+            <span class="section-kicker">
+                DIGITAL ARTISAN IDENTITY
+            </span>
+
+            <h2>
+                Let the world know
+                <em>who made it.</em>
+            </h2>
+
+            <p>
+                Every artisan gets a reusable digital identity
+                that brings together their story, craft,
+                products and digital catalog.
+            </p>
+
+
+            <div class="identity-points">
+
+                <div>
+                    <span>01</span>
+                    <strong>Craft story</strong>
+                    <p>
+                        Preserve the person and tradition
+                        behind every product.
+                    </p>
+                </div>
+
+                <div>
+                    <span>02</span>
+                    <strong>Product portfolio</strong>
+                    <p>
+                        Build a professional collection
+                        over time.
+                    </p>
+                </div>
+
+                <div>
+                    <span>03</span>
+                    <strong>Shareable profile</strong>
+                    <p>
+                        One identity that can travel
+                        across markets.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     HOW IT WORKS
+========================================================= -->
+
+<section
+    class="how-section section"
+    id="how"
+>
+
+    <div class="container">
+
+        <div class="section-heading centered">
+
+            <span class="section-kicker">
+                SIMPLE BY DESIGN
+            </span>
+
+            <h2>
+                Four steps.
+                <br>
+                <em>One less barrier.</em>
+            </h2>
+
+        </div>
+
+
+        <div class="workflow">
+
+            <div class="workflow-line"></div>
+
+
+            <div class="workflow-step reveal">
+
+                <div class="workflow-number">
+                    01
+                </div>
+
+                <div class="workflow-icon">
+                    ◌
+                </div>
+
+                <h3>
+                    Capture
+                </h3>
+
+                <p>
+                    Photograph your product
+                    using your phone.
+                </p>
+
+            </div>
+
+
+            <div class="workflow-step reveal">
+
+                <div class="workflow-number">
+                    02
+                </div>
+
+                <div class="workflow-icon">
+                    ✦
+                </div>
+
+                <h3>
+                    Create
+                </h3>
+
+                <p>
+                    AI enhances the image
+                    and creates your listing.
+                </p>
+
+            </div>
+
+
+            <div class="workflow-step reveal">
+
+                <div class="workflow-number">
+                    03
+                </div>
+
+                <div class="workflow-icon">
+                    ₹
+                </div>
+
+                <h3>
+                    Price
+                </h3>
+
+                <p>
+                    Understand your costs
+                    and choose a fair price.
+                </p>
+
+            </div>
+
+
+            <div class="workflow-step reveal">
+
+                <div class="workflow-number">
+                    04
+                </div>
+
+                <div class="workflow-icon">
+                    ↗
+                </div>
+
+                <h3>
+                    Connect
+                </h3>
+
+                <p>
+                    Share your catalog
+                    with customers and buyers.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ARTISAN STORIES
+========================================================= -->
+
+<section
+    class="artisans-section section"
+    id="artisans"
+>
+
+    <div class="container">
+
+        <div class="section-heading split-heading">
+
+            <div>
+
+                <span class="section-kicker">
+                    PEOPLE BEHIND THE CRAFT
+                </span>
+
+                <h2>
+                    Meet the
+                    <em>makers.</em>
+                </h2>
+
+            </div>
+
+            <a
+                href="#market"
+                class="underlined-link"
+            >
+                Explore artisan marketplace →
+            </a>
+
+        </div>
+
+
+        <div class="artisan-grid">
+
+            <article class="artisan-card artisan-main reveal">
+
+                <div class="artisan-photo artisan-photo-one">
+
+                    <span>
+                        KERALA
+                    </span>
+
+                    <div class="artisan-symbol">
+                        ✿
+                    </div>
+
+                </div>
+
+                <div class="artisan-info">
+
+                    <div>
+                        <small>
+                            HANDLOOM WEAVER
+                        </small>
+
+                        <h3>
+                            Meera's Threads
+                        </h3>
+                    </div>
+
+                    <span>
+                        →
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <article class="artisan-card reveal">
+
+                <div class="artisan-photo artisan-photo-two">
+
+                    <span>
+                        RAJASTHAN
+                    </span>
+
+                    <div class="artisan-symbol">
+                        ◈
+                    </div>
+
+                </div>
+
+                <div class="artisan-info">
+
+                    <div>
+                        <small>
+                            POTTERY MAKER
+                        </small>
+
+                        <h3>
+                            Mitti Stories
+                        </h3>
+                    </div>
+
+                    <span>
+                        →
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <article class="artisan-card reveal">
+
+                <div class="artisan-photo artisan-photo-three">
+
+                    <span>
+                        ASSAM
+                    </span>
+
+                    <div class="artisan-symbol">
+                        ✣
+                    </div>
+
+                </div>
+
+                <div class="artisan-info">
+
+                    <div>
+                        <small>
+                            BAMBOO ARTISAN
+                        </small>
+
+                        <h3>
+                            Baans Collective
+                        </h3>
+                    </div>
+
+                    <span>
+                        →
+                    </span>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     B2B
+========================================================= -->
+
+<section class="b2b-section section">
+
+    <div class="container">
+
+        <div class="b2b-card">
+
+            <div class="b2b-decoration">
+                ╱╲
+                ╲╱
+            </div>
+
+            <div class="b2b-copy">
+
+                <span class="section-kicker">
+                    FOR BUYERS & COOPERATIVES
+                </span>
+
+                <h2>
+                    From one artisan
+                    <br>
+                    to a <em>whole cluster.</em>
+                </h2>
+
+                <p>
+                    Help buyers discover artisan communities,
+                    send bulk enquiries and connect with
+                    producers for larger requirements.
+                </p>
+
+                <button
+                    class="cream-button"
+                    data-open-buyer
+                >
+                    Explore B2B Marketplace →
+                </button>
+
+            </div>
+
+
+            <div class="b2b-visual">
+
+                <div class="buyer-request">
+
+                    <div class="buyer-top">
+
+                        <span>
+                            NEW B2B REQUEST
+                        </span>
+
+                        <span>
+                            02m ago
+                        </span>
+
+                    </div>
+
+                    <h3>
+                        500 × Handwoven Jute Bags
+                    </h3>
+
+                    <div class="buyer-details">
+
+                        <span>
+                            Budget: ₹250 / unit
+                        </span>
+
+                        <span>
+                            Delivery: 30 days
+                        </span>
+
+                    </div>
+
+                    <div class="buyer-match">
+
+                        <div class="match-icon">
+                            ✓
+                        </div>
+
+                        <div>
+                            <small>
+                                AI MATCH
+                            </small>
+
+                            <strong>
+                                8 artisans found
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     AI BUSINESS MANAGER
+========================================================= -->
+
+<section class="manager-section section">
+
+    <div class="container manager-layout">
+
+        <div class="manager-copy">
+
+            <span class="section-kicker">
+                YOUR AI BUSINESS MANAGER
+            </span>
+
+            <h2>
+                Ask.
+                <br>
+                Understand.
+                <br>
+                <em>Grow.</em>
+            </h2>
+
+            <p>
+                A simple conversational assistant that can
+                help artisans understand products, pricing,
+                orders and digital selling.
+            </p>
+
+
+            <button
+                class="primary-button"
+                id="openAssistant"
+            >
+                Talk to Taana-Baana AI →
+            </button>
+
+        </div>
+
+
+        <div class="assistant-window reveal">
+
+            <div class="assistant-header">
+
+                <div class="assistant-avatar">
+                    ✦
+                </div>
+
+                <div>
+                    <strong>
+                        Taana-Baana AI
+                    </strong>
+
+                    <small>
+                        Your digital business companion
+                    </small>
+                </div>
+
+                <span class="assistant-online">
+                    ●
+                </span>
+
+            </div>
+
+
+            <div class="assistant-messages">
+
+                <div class="message user-message">
+                    How much should I price this saree?
+                </div>
+
+                <div class="message ai-message">
+
+                    <span class="ai-mini">
+                        ✦
+                    </span>
+
+                    Based on your material and labour costs,
+                    I suggest starting around <strong>₹2,250</strong>.
+                    Would you like to see the calculation?
+
+                </div>
+
+                <div class="message user-message">
+                    Yes, show me.
+                </div>
+
+                <div class="typing-message">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+            </div>
+
+
+            <div class="assistant-input">
+
+                <span>
+                    Ask anything...
+                </span>
+
+                <button>
+                    ↑
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FINAL CTA
+========================================================= -->
+
+<section class="final-cta section">
+
+    <div class="cta-pattern"></div>
+
+    <div class="container">
+
+        <div class="cta-inner">
+
+            <div class="cta-thread"></div>
+
+            <span class="section-kicker">
+                THE FUTURE IS HANDMADE
+            </span>
+
+            <h2>
+                Your hands
+                <br>
+                make the magic.
+            </h2>
+
+            <p>
+                Let technology help the world
+                discover it.
+            </p>
+
+            <button
+                class="cream-button large"
+                data-open-studio
+            >
+                Start Creating with Taana-Baana
+                <span>→</span>
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="site-footer">
+
+    <div class="container">
+
+        <div class="footer-top">
+
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+
+                    <img
+                        src="assets/logo.png"
+                        alt="Taana-Baana"
+                        onerror="this.style.display='none'; document.getElementById('footerFallback').style.display='block';"
+                    >
+
+                    <div
+                        class="logo-fallback"
+                        id="footerFallback"
+                    >
+                        taana-baana
+                    </div>
+
+                </div>
+
+                <p>
+                    From Hands to Markets.
+                </p>
+
+                <span>
+                    Weaving traditional craftsmanship
+                    with intelligent technology.
+                </span>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Platform
+                </h4>
+
+                <a href="#studio">AI Product Studio</a>
+                <a href="#catalog">Speak-to-Sell</a>
+                <a href="#pricing">Smart Pricing</a>
+                <a href="#market">Market Linkage</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Explore
+                </h4>
+
+                <a href="#artisans">Artisans</a>
+                <a href="#how">How It Works</a>
+                <a href="#about">Our Story</a>
+                <a href="#market">Marketplace</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Built for
+                </h4>
+
+                <a href="#top">Artisans</a>
+                <a href="#top">Cooperatives</a>
+                <a href="#top">Buyers</a>
+                <a href="#top">Communities</a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 Taana-Baana
+            </span>
+
+            <span>
+                Made with purpose for India's craft communities.
+            </span>
+
+            <a href="#top">
+                Back to top ↑
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================================================
+     STUDIO MODAL
+========================================================= -->
+
+<div
+    class="modal-overlay"
+    id="studioModal"
+>
+
+    <div class="modal studio-modal">
+
+        <button
+            class="modal-close"
+            data-close-modal
+        >
+            ×
+        </button>
+
+        <div class="modal-kicker">
+            TAANA-BAANA AI STUDIO
+        </div>
+
+        <h2>
+            Let's create
+            <em>your listing.</em>
+        </h2>
+
+        <p>
+            This interactive frontend preview demonstrates
+            how an artisan can move from a product photo
+            to a professional digital listing.
+        </p>
+
+
+        <div class="upload-area">
+
+            <div class="upload-icon">
+                ↑
+            </div>
+
+            <strong>
+                Drop your product photo here
+            </strong>
+
+            <span>
+                or choose an image from your device
+            </span>
+
+            <input
+                type="file"
+                id="productImage"
+                accept="image/*"
+            >
+
+            <label for="productImage">
+                Choose Product Image
+            </label>
+
+        </div>
+
+
+        <div
+            class="preview-area"
+            id="previewArea"
+        >
+
+            <div class="preview-image">
+                <span>Product preview</span>
+            </div>
+
+            <div class="preview-info">
+
+                <span>
+                    AI READY
+                </span>
+
+                <h3>
+                    Your product will appear here
+                </h3>
+
+                <p>
+                    Image enhancement, catalog generation
+                    and pricing will be connected to the
+                    backend in the next stage.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="dark-button full-button"
+            id="simulateAI"
+        >
+            ✦ Enhance with AI
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     ASSISTANT MODAL
+========================================================= -->
+
+<div
+    class="modal-overlay"
+    id="assistantModal"
+>
+
+    <div class="modal assistant-modal">
+
+        <button
+            class="modal-close"
+            data-close-modal
+        >
+            ×
+        </button>
+
+        <div class="modal-kicker">
+            AI BUSINESS MANAGER
+        </div>
+
+        <h2>
+            What can I help
+            <em>you with?</em>
+        </h2>
+
+
+        <div class="assistant-quick-options">
+
+            <button>
+                💰 Price my product
+            </button>
+
+            <button>
+                📝 Create a listing
+            </button>
+
+            <button>
+                📦 Find bulk buyers
+            </button>
+
+            <button>
+                📈 Understand my sales
+            </button>
+
+        </div>
+
+
+        <div class="chat-box">
+
+            <div class="chat-message ai">
+                Namaste! 🌿 Tell me about your craft and
+                I'll help you take the next step.
+            </div>
+
+        </div>
+
+
+        <div class="chat-input">
+
+            <input
+                type="text"
+                placeholder="Speak or type your question..."
+                id="assistantInput"
+            >
+
+            <button id="sendAssistant">
+                →
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div
+    class="toast"
+    id="toast"
+>
+    <span>✓</span>
+    <p>Action completed</p>
+</div>
+
+
+<!-- =========================================================
+     BACK TO TOP
+========================================================= -->
+
+<button
+    class="back-to-top"
+    id="backToTop"
+    aria-label="Back to top"
+>
+    ↑
+</button>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script src="js/main.js"></script>
+
+</body>
+</html>

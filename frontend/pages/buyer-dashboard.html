@@ -1,0 +1,2183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Buyer Dashboard — Discover Indian artisan products, manage enquiries, orders and saved crafts."
+    >
+
+    <title>Buyer Dashboard — Taana-Baana</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Existing project styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+
+    <style>
+
+        /* =====================================================
+           BUYER DASHBOARD
+        ===================================================== */
+
+        .buyer-dashboard {
+            min-height: 100vh;
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(201, 166, 91, 0.12),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 90% 20%,
+                    rgba(196, 61, 115, 0.08),
+                    transparent 30%
+                ),
+                #fcf6ea;
+        }
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .buyer-topbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            min-height: 76px;
+            padding: 0 5vw;
+
+            background: rgba(252, 246, 234, 0.92);
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(59, 41, 34, 0.08);
+        }
+
+        .buyer-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+
+            text-decoration: none;
+            color: #3b2922;
+        }
+
+        .buyer-brand img {
+            width: 145px;
+            height: auto;
+            display: block;
+        }
+
+        .buyer-nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .buyer-nav a {
+            position: relative;
+
+            color: #3b2922;
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition:
+                color 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .buyer-nav a:hover {
+            color: #a95338;
+            transform: translateY(-1px);
+        }
+
+        .buyer-nav a.active {
+            color: #a95338;
+        }
+
+        .buyer-nav a.active::after {
+            content: "";
+
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -8px;
+
+            height: 2px;
+
+            background: #c96f4a;
+            border-radius: 20px;
+        }
+
+        .buyer-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .buyer-icon-btn {
+            width: 42px;
+            height: 42px;
+
+            border: 1px solid rgba(59, 41, 34, 0.12);
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.65);
+
+            display: grid;
+            place-items: center;
+
+            cursor: pointer;
+
+            font-size: 18px;
+
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease;
+        }
+
+        .buyer-icon-btn:hover {
+            transform: translateY(-2px);
+            background: #fff;
+        }
+
+        .buyer-avatar {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            display: grid;
+            place-items: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #c96f4a,
+                    #c43d73
+                );
+
+            color: white;
+
+            font-weight: 700;
+            font-size: 14px;
+
+            box-shadow:
+                0 7px 18px rgba(169, 83, 56, 0.22);
+        }
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .buyer-main {
+            width: min(1400px, 92%);
+            margin: 0 auto;
+
+            padding: 55px 0 90px;
+        }
+
+        /* =====================================================
+           WELCOME
+        ===================================================== */
+
+        .buyer-welcome {
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 48px;
+
+            border-radius: 30px;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    #fffaf1 0%,
+                    #f4e5d2 50%,
+                    #ead4c0 100%
+                );
+
+            border: 1px solid rgba(59, 41, 34, 0.08);
+
+            box-shadow:
+                0 24px 70px rgba(59, 41, 34, 0.08);
+        }
+
+        .buyer-welcome::before {
+            content: "";
+
+            position: absolute;
+
+            width: 300px;
+            height: 300px;
+
+            right: -90px;
+            top: -130px;
+
+            border-radius: 50%;
+
+            border: 35px solid rgba(201, 166, 91, 0.12);
+        }
+
+        .buyer-welcome::after {
+            content: "";
+
+            position: absolute;
+
+            width: 190px;
+            height: 190px;
+
+            right: 100px;
+            bottom: -120px;
+
+            border-radius: 50%;
+
+            border: 25px solid rgba(196, 61, 115, 0.08);
+        }
+
+        .buyer-welcome-content {
+            position: relative;
+            z-index: 2;
+
+            max-width: 700px;
+        }
+
+        .buyer-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+
+            margin-bottom: 15px;
+
+            color: #a95338;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .buyer-eyebrow span {
+            width: 25px;
+            height: 2px;
+
+            background: #c96f4a;
+
+            display: block;
+        }
+
+        .buyer-welcome h1 {
+            margin: 0;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: clamp(34px, 5vw, 62px);
+
+            line-height: 1.04;
+
+            color: #3b2922;
+        }
+
+        .buyer-welcome h1 em {
+            color: #a95338;
+            font-weight: 600;
+        }
+
+        .buyer-welcome p {
+            max-width: 610px;
+
+            margin: 20px 0 0;
+
+            color: #66564d;
+
+            line-height: 1.8;
+
+            font-size: 15px;
+        }
+
+        .buyer-welcome-actions {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 12px;
+
+            margin-top: 28px;
+        }
+
+        .buyer-primary-btn,
+        .buyer-secondary-btn {
+            border: none;
+
+            min-height: 48px;
+
+            padding: 0 23px;
+
+            border-radius: 14px;
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            text-decoration: none;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .buyer-primary-btn {
+            background: #3b2922;
+            color: #fffaf1;
+
+            box-shadow:
+                0 12px 28px rgba(59, 41, 34, 0.18);
+        }
+
+        .buyer-secondary-btn {
+            background: rgba(255, 255, 255, 0.65);
+            color: #3b2922;
+
+            border: 1px solid rgba(59, 41, 34, 0.1);
+        }
+
+        .buyer-primary-btn:hover,
+        .buyer-secondary-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* =====================================================
+           STATS
+        ===================================================== */
+
+        .buyer-stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 16px;
+
+            margin-top: 22px;
+        }
+
+        .buyer-stat {
+            padding: 24px;
+
+            background: rgba(255, 255, 255, 0.75);
+
+            border:
+                1px solid
+                rgba(59, 41, 34, 0.08);
+
+            border-radius: 20px;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .buyer-stat:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 18px 40px rgba(59, 41, 34, 0.08);
+        }
+
+        .buyer-stat-icon {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 13px;
+
+            display: grid;
+            place-items: center;
+
+            background: #f3e1ce;
+
+            font-size: 19px;
+
+            margin-bottom: 16px;
+        }
+
+        .buyer-stat:nth-child(2) .buyer-stat-icon {
+            background: #e2e9dc;
+        }
+
+        .buyer-stat:nth-child(3) .buyer-stat-icon {
+            background: #f3dce5;
+        }
+
+        .buyer-stat:nth-child(4) .buyer-stat-icon {
+            background: #e7dfef;
+        }
+
+        .buyer-stat-number {
+            display: block;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color: #3b2922;
+
+            font-size: 30px;
+            font-weight: 700;
+        }
+
+        .buyer-stat-label {
+            color: #76675e;
+
+            font-size: 12px;
+            font-weight: 600;
+
+            margin-top: 3px;
+        }
+
+        /* =====================================================
+           SECTION
+        ===================================================== */
+
+        .buyer-section {
+            margin-top: 55px;
+        }
+
+        .buyer-section-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 22px;
+        }
+
+        .buyer-section-title {
+            margin: 0;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color: #3b2922;
+
+            font-size: 31px;
+        }
+
+        .buyer-section-subtitle {
+            margin: 7px 0 0;
+
+            color: #7a6b62;
+
+            font-size: 13px;
+        }
+
+        .buyer-view-all {
+            color: #a95338;
+
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .buyer-view-all:hover {
+            text-decoration: underline;
+        }
+
+        /* =====================================================
+           DISCOVER CARDS
+        ===================================================== */
+
+        .buyer-discover-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+        }
+
+        .discover-card {
+            position: relative;
+
+            min-height: 210px;
+
+            overflow: hidden;
+
+            border-radius: 24px;
+
+            padding: 24px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+
+            text-decoration: none;
+
+            color: white;
+
+            box-shadow:
+                0 15px 35px rgba(59, 41, 34, 0.1);
+
+            transition:
+                transform 0.35s ease,
+                box-shadow 0.35s ease;
+        }
+
+        .discover-card:hover {
+            transform: translateY(-7px);
+
+            box-shadow:
+                0 24px 45px rgba(59, 41, 34, 0.16);
+        }
+
+        .discover-card::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(30, 19, 15, 0.78),
+                    rgba(30, 19, 15, 0.05)
+                );
+        }
+
+        .discover-pattern {
+            position: absolute;
+
+            inset: 0;
+
+            opacity: 0.25;
+
+            background-image:
+                linear-gradient(
+                    45deg,
+                    transparent 45%,
+                    rgba(255,255,255,0.7) 46%,
+                    rgba(255,255,255,0.7) 54%,
+                    transparent 55%
+                );
+
+            background-size: 25px 25px;
+        }
+
+        .discover-card:nth-child(1) {
+            background:
+                linear-gradient(
+                    135deg,
+                    #8c4734,
+                    #c96f4a
+                );
+        }
+
+        .discover-card:nth-child(2) {
+            background:
+                linear-gradient(
+                    135deg,
+                    #315d7a,
+                    #274c77
+                );
+        }
+
+        .discover-card:nth-child(3) {
+            background:
+                linear-gradient(
+                    135deg,
+                    #8d3e67,
+                    #c43d73
+                );
+        }
+
+        .discover-card:nth-child(4) {
+            background:
+                linear-gradient(
+                    135deg,
+                    #3f6b50,
+                    #687557
+                );
+        }
+
+        .discover-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .discover-icon {
+            position: absolute;
+
+            top: 24px;
+            right: 24px;
+
+            width: 44px;
+            height: 44px;
+
+            border-radius: 50%;
+
+            display: grid;
+            place-items: center;
+
+            background: rgba(255,255,255,0.16);
+
+            backdrop-filter: blur(10px);
+
+            font-size: 20px;
+        }
+
+        .discover-card h3 {
+            margin: 0;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 24px;
+        }
+
+        .discover-card p {
+            margin: 7px 0 0;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+
+            opacity: 0.9;
+        }
+
+        /* =====================================================
+           ORDERS + SAVED
+        ===================================================== */
+
+        .buyer-content-grid {
+            display: grid;
+
+            grid-template-columns:
+                1.5fr
+                1fr;
+
+            gap: 20px;
+        }
+
+        .buyer-panel {
+            background: rgba(255,255,255,0.76);
+
+            border:
+                1px solid
+                rgba(59, 41, 34, 0.08);
+
+            border-radius: 24px;
+
+            padding: 25px;
+        }
+
+        .buyer-panel-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 20px;
+        }
+
+        .buyer-panel-heading h3 {
+            margin: 0;
+
+            color: #3b2922;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 21px;
+        }
+
+        /* =====================================================
+           ORDER
+        ===================================================== */
+
+        .buyer-order {
+            display: flex;
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 15px 0;
+
+            border-bottom:
+                1px solid
+                rgba(59, 41, 34, 0.08);
+        }
+
+        .buyer-order:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .order-image {
+            width: 62px;
+            height: 62px;
+
+            flex-shrink: 0;
+
+            border-radius: 15px;
+
+            display: grid;
+            place-items: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e7d4be,
+                    #d3b99e
+                );
+
+            font-size: 28px;
+        }
+
+        .order-info {
+            flex: 1;
+        }
+
+        .order-info h4 {
+            margin: 0;
+
+            color: #3b2922;
+
+            font-size: 14px;
+        }
+
+        .order-info p {
+            margin: 4px 0 0;
+
+            color: #86776e;
+
+            font-size: 11px;
+        }
+
+        .order-status {
+            padding: 7px 10px;
+
+            border-radius: 20px;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+        .order-status.delivered {
+            background: #dce8d8;
+            color: #3e6942;
+        }
+
+        .order-status.shipped {
+            background: #e0e8f1;
+            color: #385a78;
+        }
+
+        .order-status.processing {
+            background: #f5e7c9;
+            color: #80632d;
+        }
+
+        /* =====================================================
+           SAVED PRODUCTS
+        ===================================================== */
+
+        .saved-product {
+            display: flex;
+
+            gap: 13px;
+
+            padding: 13px 0;
+
+            border-bottom:
+                1px solid
+                rgba(59, 41, 34, 0.08);
+        }
+
+        .saved-product:last-child {
+            border-bottom: none;
+        }
+
+        .saved-image {
+            width: 58px;
+            height: 58px;
+
+            flex-shrink: 0;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 14px;
+
+            background: #f1e2d0;
+
+            font-size: 25px;
+        }
+
+        .saved-info {
+            flex: 1;
+        }
+
+        .saved-info h4 {
+            margin: 0;
+
+            font-size: 13px;
+
+            color: #3b2922;
+        }
+
+        .saved-info p {
+            margin: 3px 0;
+
+            font-size: 10px;
+
+            color: #8b7b71;
+        }
+
+        .saved-price {
+            color: #a95338;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* =====================================================
+           B2B
+        ===================================================== */
+
+        .b2b-banner {
+            position: relative;
+
+            overflow: hidden;
+
+            display: grid;
+
+            grid-template-columns:
+                1.3fr
+                0.7fr;
+
+            gap: 30px;
+
+            padding: 38px;
+
+            border-radius: 26px;
+
+            background:
+                linear-gradient(
+                    125deg,
+                    #294d5e,
+                    #274c77
+                );
+
+            color: white;
+        }
+
+        .b2b-banner::after {
+            content: "";
+
+            position: absolute;
+
+            width: 300px;
+            height: 300px;
+
+            right: -100px;
+            top: -120px;
+
+            border-radius: 50%;
+
+            border: 40px solid rgba(255,255,255,0.07);
+        }
+
+        .b2b-banner-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .b2b-label {
+            font-size: 10px;
+            font-weight: 700;
+
+            letter-spacing: 0.15em;
+
+            opacity: 0.75;
+        }
+
+        .b2b-banner h2 {
+            margin: 10px 0 10px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 31px;
+        }
+
+        .b2b-banner p {
+            max-width: 580px;
+
+            margin: 0;
+
+            line-height: 1.7;
+
+            font-size: 13px;
+
+            opacity: 0.84;
+        }
+
+        .b2b-button {
+            position: relative;
+            z-index: 2;
+
+            align-self: center;
+            justify-self: end;
+
+            padding: 14px 22px;
+
+            border-radius: 13px;
+
+            background: #fffaf1;
+
+            color: #274c77;
+
+            text-decoration: none;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            transition:
+                transform 0.25s ease;
+        }
+
+        .b2b-button:hover {
+            transform: translateY(-3px);
+        }
+
+        /* =====================================================
+           ARTISAN CONNECTION
+        ===================================================== */
+
+        .artisan-mini-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+        }
+
+        .artisan-mini-card {
+            display: flex;
+            align-items: center;
+
+            gap: 14px;
+
+            padding: 19px;
+
+            background: rgba(255,255,255,0.75);
+
+            border:
+                1px solid
+                rgba(59,41,34,0.08);
+
+            border-radius: 20px;
+
+            text-decoration: none;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .artisan-mini-card:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 16px 30px rgba(59,41,34,0.08);
+        }
+
+        .artisan-mini-avatar {
+            width: 52px;
+            height: 52px;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            display: grid;
+            place-items: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e5c6ae,
+                    #c96f4a
+                );
+
+            font-size: 22px;
+        }
+
+        .artisan-mini-info h4 {
+            margin: 0;
+
+            color: #3b2922;
+
+            font-size: 13px;
+        }
+
+        .artisan-mini-info p {
+            margin: 4px 0 0;
+
+            color: #85756b;
+
+            font-size: 10px;
+        }
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .buyer-footer {
+            margin-top: 70px;
+
+            padding: 30px 0 0;
+
+            border-top:
+                1px solid
+                rgba(59,41,34,0.08);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            color: #887970;
+
+            font-size: 11px;
+        }
+
+        .buyer-footer strong {
+            color: #3b2922;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1100px) {
+
+            .buyer-discover-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .buyer-stats {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .buyer-content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .artisan-mini-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 800px) {
+
+            .buyer-topbar {
+                padding: 0 4vw;
+            }
+
+            .buyer-nav {
+                display: none;
+            }
+
+            .buyer-main {
+                width: 92%;
+                padding-top: 30px;
+            }
+
+            .buyer-welcome {
+                padding: 32px 25px;
+            }
+
+            .buyer-welcome h1 {
+                font-size: 39px;
+            }
+
+            .buyer-welcome p {
+                font-size: 13px;
+            }
+
+            .buyer-stats {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .buyer-discover-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .b2b-banner {
+                grid-template-columns: 1fr;
+                padding: 30px 25px;
+            }
+
+            .b2b-button {
+                justify-self: start;
+            }
+
+            .artisan-mini-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 520px) {
+
+            .buyer-brand img {
+                width: 125px;
+            }
+
+            .buyer-icon-btn {
+                display: none;
+            }
+
+            .buyer-main {
+                width: 94%;
+            }
+
+            .buyer-welcome {
+                border-radius: 22px;
+            }
+
+            .buyer-welcome h1 {
+                font-size: 34px;
+            }
+
+            .buyer-stats {
+                gap: 10px;
+            }
+
+            .buyer-stat {
+                padding: 18px;
+            }
+
+            .buyer-stat-number {
+                font-size: 25px;
+            }
+
+            .buyer-section-title {
+                font-size: 26px;
+            }
+
+            .buyer-section-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .buyer-order {
+                align-items: flex-start;
+            }
+
+            .order-status {
+                display: none;
+            }
+
+            .buyer-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+        }
+
+        /* =====================================================
+           REDUCED MOTION
+        ===================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="buyer-dashboard">
+
+
+    <!-- =====================================================
+         TOP NAVIGATION
+    ===================================================== -->
+
+    <header class="buyer-topbar">
+
+        <a
+            href="../index.html"
+            class="buyer-brand"
+            aria-label="Taana-Baana Home"
+        >
+
+            <img
+                src="../assets/logo.png"
+                alt="Taana-Baana — From Hands to Markets"
+            >
+
+        </a>
+
+
+        <nav
+            class="buyer-nav"
+            aria-label="Buyer navigation"
+        >
+
+            <a
+                href="marketplace.html"
+            >
+                Explore
+            </a>
+
+            <a
+                href="marketplace.html"
+            >
+                Marketplace
+            </a>
+
+            <a
+                href="buyer-dashboard.html"
+                class="active"
+            >
+                Dashboard
+            </a>
+
+            <a
+                href="about.html"
+            >
+                Our Story
+            </a>
+
+        </nav>
+
+
+        <div class="buyer-actions">
+
+            <button
+                class="buyer-icon-btn"
+                type="button"
+                aria-label="Notifications"
+                id="buyerNotifications"
+            >
+                ♡
+            </button>
+
+            <button
+                class="buyer-icon-btn"
+                type="button"
+                aria-label="Shopping cart"
+                id="buyerCart"
+            >
+                🛒
+            </button>
+
+            <div
+                class="buyer-avatar"
+                title="Buyer profile"
+            >
+                AK
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+    ===================================================== -->
+
+    <main class="buyer-main">
+
+
+        <!-- =================================================
+             WELCOME
+        ================================================= -->
+
+        <section class="buyer-welcome reveal">
+
+            <div class="buyer-welcome-content">
+
+                <div class="buyer-eyebrow">
+                    <span></span>
+                    BUYER SPACE
+                </div>
+
+                <h1>
+                    Discover the hands
+                    <em>behind the craft.</em>
+                </h1>
+
+                <p>
+                    Explore handmade products, connect directly
+                    with artisans, save your favourites and bring
+                    meaningful Indian craftsmanship into your
+                    everyday life.
+                </p>
+
+
+                <div class="buyer-welcome-actions">
+
+                    <a
+                        href="marketplace.html"
+                        class="buyer-primary-btn"
+                    >
+                        Explore Marketplace →
+                    </a>
+
+                    <a
+                        href="marketplace.html"
+                        class="buyer-secondary-btn"
+                    >
+                        Find Artisans
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             BUYER STATS
+        ================================================= -->
+
+        <section
+            class="buyer-stats"
+            aria-label="Buyer statistics"
+        >
+
+            <article class="buyer-stat reveal">
+
+                <div class="buyer-stat-icon">
+                    🛍
+                </div>
+
+                <span
+                    class="buyer-stat-number"
+                    data-count="8"
+                >
+                    8
+                </span>
+
+                <span class="buyer-stat-label">
+                    Orders
+                </span>
+
+            </article>
+
+
+            <article class="buyer-stat reveal">
+
+                <div class="buyer-stat-icon">
+                    💌
+                </div>
+
+                <span
+                    class="buyer-stat-number"
+                    data-count="3"
+                >
+                    3
+                </span>
+
+                <span class="buyer-stat-label">
+                    Artisan Enquiries
+                </span>
+
+            </article>
+
+
+            <article class="buyer-stat reveal">
+
+                <div class="buyer-stat-icon">
+                    ♡
+                </div>
+
+                <span
+                    class="buyer-stat-number"
+                    data-count="12"
+                >
+                    12
+                </span>
+
+                <span class="buyer-stat-label">
+                    Saved Products
+                </span>
+
+            </article>
+
+
+            <article class="buyer-stat reveal">
+
+                <div class="buyer-stat-icon">
+                    ✦
+                </div>
+
+                <span
+                    class="buyer-stat-number"
+                    data-count="5"
+                >
+                    5
+                </span>
+
+                <span class="buyer-stat-label">
+                    Artisans Followed
+                </span>
+
+            </article>
+
+        </section>
+
+
+        <!-- =================================================
+             DISCOVER
+        ================================================= -->
+
+        <section class="buyer-section">
+
+            <div class="buyer-section-header">
+
+                <div>
+
+                    <h2 class="buyer-section-title">
+                        Explore the craft map
+                    </h2>
+
+                    <p class="buyer-section-subtitle">
+                        Discover products across India's rich
+                        craft traditions.
+                    </p>
+
+                </div>
+
+                <a
+                    href="marketplace.html"
+                    class="buyer-view-all"
+                >
+                    View marketplace →
+                </a>
+
+            </div>
+
+
+            <div class="buyer-discover-grid">
+
+
+                <a
+                    href="marketplace.html"
+                    class="discover-card reveal"
+                >
+
+                    <div class="discover-pattern"></div>
+
+                    <div class="discover-icon">
+                        🧵
+                    </div>
+
+                    <div class="discover-content">
+
+                        <h3>
+                            Textiles
+                        </h3>
+
+                        <p>
+                            Handwoven fabrics, embroidery,
+                            weaving and traditional textiles.
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+                <a
+                    href="marketplace.html"
+                    class="discover-card reveal"
+                >
+
+                    <div class="discover-pattern"></div>
+
+                    <div class="discover-icon">
+                        🪵
+                    </div>
+
+                    <div class="discover-content">
+
+                        <h3>
+                            Woodcraft
+                        </h3>
+
+                        <p>
+                            Handmade décor, carved pieces
+                            and functional craft.
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+                <a
+                    href="marketplace.html"
+                    class="discover-card reveal"
+                >
+
+                    <div class="discover-pattern"></div>
+
+                    <div class="discover-icon">
+                        🪡
+                    </div>
+
+                    <div class="discover-content">
+
+                        <h3>
+                            Embroidery
+                        </h3>
+
+                        <p>
+                            Detailed handmade work carrying
+                            stories through every stitch.
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+                <a
+                    href="marketplace.html"
+                    class="discover-card reveal"
+                >
+
+                    <div class="discover-pattern"></div>
+
+                    <div class="discover-icon">
+                        🏺
+                    </div>
+
+                    <div class="discover-content">
+
+                        <h3>
+                            Pottery
+                        </h3>
+
+                        <p>
+                            Terracotta, ceramics and
+                            handcrafted vessels.
+                        </p>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             ORDERS + SAVED
+        ================================================= -->
+
+        <section class="buyer-section">
+
+            <div class="buyer-content-grid">
+
+
+                <!-- ORDERS -->
+
+                <div class="buyer-panel reveal">
+
+                    <div class="buyer-panel-heading">
+
+                        <h3>
+                            Recent orders
+                        </h3>
+
+                        <a
+                            href="#"
+                            class="buyer-view-all"
+                        >
+                            View all
+                        </a>
+
+                    </div>
+
+
+                    <div class="buyer-order">
+
+                        <div class="order-image">
+                            🧺
+                        </div>
+
+                        <div class="order-info">
+
+                            <h4>
+                                Handwoven Bamboo Basket
+                            </h4>
+
+                            <p>
+                                From Maya Crafts · Order #TB1048
+                            </p>
+
+                        </div>
+
+                        <span class="order-status delivered">
+                            Delivered
+                        </span>
+
+                    </div>
+
+
+                    <div class="buyer-order">
+
+                        <div class="order-image">
+                            🧣
+                        </div>
+
+                        <div class="order-info">
+
+                            <h4>
+                                Handloom Cotton Stole
+                            </h4>
+
+                            <p>
+                                From Meera Weaves · Order #TB1042
+                            </p>
+
+                        </div>
+
+                        <span class="order-status shipped">
+                            Shipped
+                        </span>
+
+                    </div>
+
+
+                    <div class="buyer-order">
+
+                        <div class="order-image">
+                            🏺
+                        </div>
+
+                        <div class="order-info">
+
+                            <h4>
+                                Terracotta Vase Set
+                            </h4>
+
+                            <p>
+                                From Earth & Clay · Order #TB1037
+                            </p>
+
+                        </div>
+
+                        <span class="order-status processing">
+                            Processing
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SAVED -->
+
+                <div class="buyer-panel reveal">
+
+                    <div class="buyer-panel-heading">
+
+                        <h3>
+                            Saved crafts
+                        </h3>
+
+                        <a
+                            href="marketplace.html"
+                            class="buyer-view-all"
+                        >
+                            Explore
+                        </a>
+
+                    </div>
+
+
+                    <div class="saved-product">
+
+                        <div class="saved-image">
+                            👜
+                        </div>
+
+                        <div class="saved-info">
+
+                            <h4>
+                                Kutch Embroidered Bag
+                            </h4>
+
+                            <p>
+                                Artisan-made
+                            </p>
+
+                            <span class="saved-price">
+                                ₹1,250
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="saved-product">
+
+                        <div class="saved-image">
+                            🪔
+                        </div>
+
+                        <div class="saved-info">
+
+                            <h4>
+                                Handmade Terracotta Lamps
+                            </h4>
+
+                            <p>
+                                Home décor
+                            </p>
+
+                            <span class="saved-price">
+                                ₹850
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="saved-product">
+
+                        <div class="saved-image">
+                            🧵
+                        </div>
+
+                        <div class="saved-info">
+
+                            <h4>
+                                Natural Dye Handloom Saree
+                            </h4>
+
+                            <p>
+                                Handwoven textile
+                            </p>
+
+                            <span class="saved-price">
+                                ₹3,400
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             B2B
+        ================================================= -->
+
+        <section class="buyer-section">
+
+            <div class="b2b-banner reveal">
+
+                <div class="b2b-banner-content">
+
+                    <div class="b2b-label">
+                        FOR BUSINESSES & ORGANISATIONS
+                    </div>
+
+                    <h2>
+                        Looking for craft
+                        in bulk?
+                    </h2>
+
+                    <p>
+                        Post a requirement for corporate gifting,
+                        hospitality, events, retail collections
+                        or bulk procurement. Taana-Baana can help
+                        connect requirements with artisan businesses.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="#"
+                    class="b2b-button"
+                    id="postRequirement"
+                >
+                    Post B2B Requirement →
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             ARTISANS
+        ================================================= -->
+
+        <section class="buyer-section">
+
+            <div class="buyer-section-header">
+
+                <div>
+
+                    <h2 class="buyer-section-title">
+                        Meet the makers
+                    </h2>
+
+                    <p class="buyer-section-subtitle">
+                        Follow the people and stories behind
+                        the products you love.
+                    </p>
+
+                </div>
+
+                <a
+                    href="marketplace.html"
+                    class="buyer-view-all"
+                >
+                    Discover more →
+                </a>
+
+            </div>
+
+
+            <div class="artisan-mini-grid">
+
+
+                <a
+                    href="artisan.html"
+                    class="artisan-mini-card reveal"
+                >
+
+                    <div class="artisan-mini-avatar">
+                        👩🏽‍🎨
+                    </div>
+
+                    <div class="artisan-mini-info">
+
+                        <h4>
+                            Meera Weaves
+                        </h4>
+
+                        <p>
+                            Handloom · Kerala
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+                <a
+                    href="artisan.html"
+                    class="artisan-mini-card reveal"
+                >
+
+                    <div class="artisan-mini-avatar">
+                        👨🏽‍🌾
+                    </div>
+
+                    <div class="artisan-mini-info">
+
+                        <h4>
+                            Earth & Clay
+                        </h4>
+
+                        <p>
+                            Pottery · Rajasthan
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+                <a
+                    href="artisan.html"
+                    class="artisan-mini-card reveal"
+                >
+
+                    <div class="artisan-mini-avatar">
+                        👩🏽‍🦱
+                    </div>
+
+                    <div class="artisan-mini-info">
+
+                        <h4>
+                            Maya Crafts
+                        </h4>
+
+                        <p>
+                            Bamboo Craft · Assam
+                        </p>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================= -->
+
+        <footer class="buyer-footer">
+
+            <div>
+                <strong>TAANA-BAANA</strong>
+                · From Hands to Markets.
+            </div>
+
+            <div>
+                Supporting meaningful connections
+                between makers and markets.
+            </div>
+
+        </footer>
+
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     PAGE INTERACTIONS
+========================================================= -->
+
+<script src="../js/main.js" defer></script>
+<script src="../js/pages.js" defer></script>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    /* -------------------------------------------------------
+       Notifications
+    ------------------------------------------------------- */
+
+    const notificationButton =
+        document.getElementById("buyerNotifications");
+
+    if (notificationButton) {
+
+        notificationButton.addEventListener(
+            "click",
+            () => {
+
+                if (typeof showToast === "function") {
+
+                    showToast(
+                        "You have 2 new artisan updates."
+                    );
+
+                } else {
+
+                    alert(
+                        "You have 2 new artisan updates."
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* -------------------------------------------------------
+       Cart
+    ------------------------------------------------------- */
+
+    const cartButton =
+        document.getElementById("buyerCart");
+
+    if (cartButton) {
+
+        cartButton.addEventListener(
+            "click",
+            () => {
+
+                window.location.href =
+                    "marketplace.html";
+
+            }
+        );
+
+    }
+
+
+    /* -------------------------------------------------------
+       B2B requirement
+    ------------------------------------------------------- */
+
+    const postRequirement =
+        document.getElementById("postRequirement");
+
+    if (postRequirement) {
+
+        postRequirement.addEventListener(
+            "click",
+            (event) => {
+
+                event.preventDefault();
+
+                if (typeof showToast === "function") {
+
+                    showToast(
+                        "B2B requirement module coming next."
+                    );
+
+                } else {
+
+                    alert(
+                        "B2B requirement module coming next."
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* -------------------------------------------------------
+       Simple reveal fallback
+       Existing main.js can also handle .reveal.
+    ------------------------------------------------------- */
+
+    const revealItems =
+        document.querySelectorAll(".reveal");
+
+    if (
+        !("IntersectionObserver" in window)
+    ) {
+
+        revealItems.forEach(
+            item => item.classList.add("visible")
+        );
+
+        return;
+
+    }
+
+    const observer =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(
+                    entry => {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add(
+                                "visible"
+                            );
+
+                            observer.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                threshold: 0.12
+            }
+        );
+
+
+    revealItems.forEach(
+        item => observer.observe(item)
+    );
+
+});
+
+</script>
+
+
+</body>
+</html>

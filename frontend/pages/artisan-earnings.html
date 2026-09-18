@@ -1,0 +1,2152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Taana-Baana artisan earnings dashboard — understand sales, costs, revenue and profit."
+    >
+
+    <title>My Earnings | Taana-Baana</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+
+    <style>
+        /* =========================================================
+           TAANA-BAANA — ARTISAN EARNINGS
+           ========================================================= */
+
+        :root {
+            --ivory: #fcf6ea;
+            --cream: #fff9f0;
+            --paper: #f7efe2;
+            --brown: #3b2922;
+            --deep-brown: #2a1d18;
+            --terracotta: #c96f4a;
+            --burnt: #a95338;
+            --sage: #879b76;
+            --olive: #687557;
+            --gold: #c9a65b;
+            --sand: #e8d7bc;
+            --soft-sage: #dce2d2;
+            --soft-terracotta: #ebc5b5;
+            --indigo: #274c77;
+            --pink: #c43d73;
+            --marigold: #e9a23b;
+            --peacock: #0f7c78;
+            --green: #3e7c59;
+            --plum: #6d3b63;
+            --white: #ffffff;
+            --border: rgba(59, 41, 34, 0.11);
+            --shadow: 0 18px 50px rgba(59, 41, 34, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background:
+                radial-gradient(circle at 10% 12%, rgba(201,166,91,.12), transparent 24%),
+                radial-gradient(circle at 90% 30%, rgba(15,124,120,.08), transparent 25%),
+                var(--ivory);
+            color: var(--brown);
+            font-family: "DM Sans", sans-serif;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        /* ---------------------------------------------------------
+           PAGE WRAPPER
+           --------------------------------------------------------- */
+
+        .earnings-page {
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .earnings-container {
+            width: min(1220px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        /* ---------------------------------------------------------
+           BREADCRUMB
+           --------------------------------------------------------- */
+
+        .earnings-breadcrumb {
+            padding-top: 34px;
+            margin-bottom: 22px;
+        }
+
+        .earnings-breadcrumb a {
+            text-decoration: none;
+            font-size: 13px;
+            color: rgba(59, 41, 34, .62);
+            transition: color .25s ease;
+        }
+
+        .earnings-breadcrumb a:hover {
+            color: var(--terracotta);
+        }
+
+        .earnings-breadcrumb span {
+            margin: 0 9px;
+            color: rgba(59, 41, 34, .3);
+        }
+
+        .earnings-breadcrumb strong {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* ---------------------------------------------------------
+           HERO
+           --------------------------------------------------------- */
+
+        .earnings-hero {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1.25fr .75fr;
+            gap: 30px;
+            align-items: stretch;
+            margin-bottom: 28px;
+        }
+
+        .earnings-hero-main {
+            position: relative;
+            overflow: hidden;
+            min-height: 300px;
+            padding: 46px;
+            border-radius: 34px;
+            background:
+                linear-gradient(135deg, rgba(255,255,255,.55), transparent),
+                #e7dfd0;
+            border: 1px solid rgba(59,41,34,.08);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-pattern {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: .28;
+            background-image:
+                repeating-linear-gradient(
+                    45deg,
+                    transparent 0 22px,
+                    rgba(59,41,34,.08) 23px,
+                    transparent 24px 44px
+                );
+            mask-image: linear-gradient(
+                to right,
+                transparent,
+                black 35%,
+                black 75%,
+                transparent
+            );
+        }
+
+        .hero-thread {
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            right: -65px;
+            top: -80px;
+            border: 2px solid rgba(201,166,91,.45);
+            border-radius: 50%;
+            transform: rotate(-20deg);
+        }
+
+        .hero-thread::before,
+        .hero-thread::after {
+            content: "";
+            position: absolute;
+            inset: 22px;
+            border: 1px solid rgba(201,166,91,.4);
+            border-radius: 50%;
+        }
+
+        .hero-thread::after {
+            inset: 48px;
+            border-color: rgba(201,166,91,.32);
+        }
+
+        .earnings-eyebrow {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: rgba(255,255,255,.58);
+            color: var(--olive);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .earnings-eyebrow::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--green);
+        }
+
+        .earnings-hero h1 {
+            position: relative;
+            max-width: 650px;
+            margin: 18px 0 12px;
+            font-family: "Playfair Display", serif;
+            font-size: clamp(42px, 5vw, 68px);
+            line-height: .98;
+            letter-spacing: -.04em;
+            color: var(--deep-brown);
+        }
+
+        .earnings-hero h1 span {
+            color: var(--terracotta);
+        }
+
+        .earnings-hero-copy {
+            position: relative;
+            max-width: 620px;
+            margin: 0;
+            color: rgba(59,41,34,.72);
+            font-size: 15px;
+            line-height: 1.75;
+        }
+
+        .hero-artisan-chip {
+            position: absolute;
+            left: 46px;
+            bottom: 34px;
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            padding: 9px 14px 9px 9px;
+            border: 1px solid rgba(59,41,34,.09);
+            border-radius: 999px;
+            background: rgba(255,255,255,.65);
+            backdrop-filter: blur(12px);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .hero-artisan-avatar {
+            width: 30px;
+            height: 30px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--terracotta);
+            color: white;
+            font-weight: 800;
+        }
+
+        /* ---------------------------------------------------------
+           TOTAL REVENUE CARD
+           --------------------------------------------------------- */
+
+        .revenue-card {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 32px;
+            border-radius: 34px;
+            background: var(--deep-brown);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .revenue-card::before {
+            content: "";
+            position: absolute;
+            width: 190px;
+            height: 190px;
+            right: -70px;
+            top: -70px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,.14);
+        }
+
+        .revenue-card::after {
+            content: "";
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            right: -30px;
+            top: -30px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,.1);
+        }
+
+        .revenue-top {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .revenue-label {
+            font-size: 12px;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.62);
+            font-weight: 700;
+        }
+
+        .revenue-period {
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: rgba(255,255,255,.09);
+            color: rgba(255,255,255,.8);
+            font-size: 11px;
+        }
+
+        .revenue-number {
+            position: relative;
+            z-index: 1;
+            margin: 20px 0 7px;
+            font-size: clamp(42px, 5vw, 60px);
+            line-height: 1;
+            font-weight: 700;
+            letter-spacing: -.045em;
+        }
+
+        .revenue-change {
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            width: fit-content;
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: rgba(62,124,89,.18);
+            color: #b9d9bf;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .revenue-bottom {
+            position: relative;
+            z-index: 1;
+            margin-top: 30px;
+        }
+
+        .revenue-bottom p {
+            margin: 0 0 10px;
+            color: rgba(255,255,255,.58);
+            font-size: 12px;
+        }
+
+        .revenue-progress {
+            height: 7px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: rgba(255,255,255,.12);
+        }
+
+        .revenue-progress span {
+            display: block;
+            width: 72%;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--gold), var(--terracotta));
+        }
+
+        .revenue-target {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 11px;
+            color: rgba(255,255,255,.48);
+        }
+
+        /* ---------------------------------------------------------
+           STAT CARDS
+           --------------------------------------------------------- */
+
+        .earnings-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            position: relative;
+            overflow: hidden;
+            min-height: 145px;
+            padding: 23px;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            background: rgba(255,255,255,.62);
+            box-shadow: 0 10px 35px rgba(59,41,34,.045);
+            transition:
+                transform .3s ease,
+                box-shadow .3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 42px rgba(59,41,34,.09);
+        }
+
+        .stat-card::after {
+            content: "";
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            right: -25px;
+            bottom: -25px;
+            border-radius: 50%;
+            background: var(--soft-terracotta);
+            opacity: .55;
+        }
+
+        .stat-icon {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 17px;
+            border-radius: 12px;
+            background: var(--soft-terracotta);
+            font-size: 17px;
+        }
+
+        .stat-card:nth-child(2) .stat-icon {
+            background: var(--soft-sage);
+        }
+
+        .stat-card:nth-child(3) .stat-icon {
+            background: #f3e4bb;
+        }
+
+        .stat-card:nth-child(4) .stat-icon {
+            background: #d7e5e2;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: rgba(59,41,34,.58);
+        }
+
+        .stat-value {
+            margin-top: 5px;
+            font-size: 25px;
+            font-weight: 800;
+            color: var(--deep-brown);
+        }
+
+        .stat-note {
+            margin-top: 5px;
+            font-size: 11px;
+            color: rgba(59,41,34,.5);
+        }
+
+        /* ---------------------------------------------------------
+           MAIN GRID
+           --------------------------------------------------------- */
+
+        .earnings-main-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.5fr) minmax(310px, .8fr);
+            gap: 22px;
+            align-items: start;
+            margin-bottom: 32px;
+        }
+
+        .panel {
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            background: rgba(255,255,255,.72);
+            box-shadow: 0 12px 40px rgba(59,41,34,.055);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 27px 28px 20px;
+            border-bottom: 1px solid rgba(59,41,34,.08);
+        }
+
+        .panel-title {
+            margin: 0;
+            font-family: "Playfair Display", serif;
+            font-size: 24px;
+            color: var(--deep-brown);
+        }
+
+        .panel-subtitle {
+            margin: 5px 0 0;
+            font-size: 12px;
+            line-height: 1.6;
+            color: rgba(59,41,34,.53);
+        }
+
+        .period-select {
+            padding: 9px 12px;
+            border: 1px solid rgba(59,41,34,.12);
+            border-radius: 11px;
+            outline: none;
+            background: white;
+            color: var(--brown);
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        /* ---------------------------------------------------------
+           BAR CHART
+           --------------------------------------------------------- */
+
+        .chart-wrap {
+            padding: 26px 28px 30px;
+        }
+
+        .chart {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 18px;
+            height: 280px;
+            padding-top: 12px;
+        }
+
+        .chart-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            height: 100%;
+        }
+
+        .chart-amount {
+            margin-bottom: 8px;
+            font-size: 10px;
+            color: rgba(59,41,34,.55);
+            font-weight: 700;
+        }
+
+        .bar-track {
+            position: relative;
+            width: min(42px, 70%);
+            height: 205px;
+            display: flex;
+            align-items: flex-end;
+            border-radius: 12px 12px 4px 4px;
+            background:
+                repeating-linear-gradient(
+                    to top,
+                    rgba(59,41,34,.045) 0,
+                    rgba(59,41,34,.045) 1px,
+                    transparent 1px,
+                    transparent 41px
+                );
+        }
+
+        .bar {
+            width: 100%;
+            height: var(--height);
+            min-height: 15px;
+            border-radius: 12px 12px 5px 5px;
+            background: linear-gradient(
+                to top,
+                var(--terracotta),
+                #e6a17f
+            );
+            transform-origin: bottom;
+            animation: growBar 1s cubic-bezier(.16,1,.3,1) both;
+        }
+
+        .chart-column:nth-child(2) .bar {
+            background: linear-gradient(to top, var(--sage), #b5c5a7);
+        }
+
+        .chart-column:nth-child(3) .bar {
+            background: linear-gradient(to top, var(--gold), #e4ca87);
+        }
+
+        .chart-column:nth-child(4) .bar {
+            background: linear-gradient(to top, var(--indigo), #7591b0);
+        }
+
+        .chart-column:nth-child(5) .bar {
+            background: linear-gradient(to top, var(--peacock), #6db0ac);
+        }
+
+        .chart-column:nth-child(6) .bar {
+            background: linear-gradient(to top, var(--pink), #db8caf);
+        }
+
+        @keyframes growBar {
+            from {
+                transform: scaleY(0);
+            }
+
+            to {
+                transform: scaleY(1);
+            }
+        }
+
+        .chart-month {
+            margin-top: 10px;
+            font-size: 11px;
+            font-weight: 700;
+            color: rgba(59,41,34,.54);
+        }
+
+        .chart-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-top: 22px;
+            padding-top: 17px;
+            border-top: 1px dashed rgba(59,41,34,.12);
+            font-size: 11px;
+            color: rgba(59,41,34,.57);
+        }
+
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--terracotta);
+        }
+
+        /* ---------------------------------------------------------
+           PROFIT BREAKDOWN
+           --------------------------------------------------------- */
+
+        .breakdown-body {
+            padding: 25px 28px 28px;
+        }
+
+        .profit-highlight {
+            padding: 18px;
+            margin-bottom: 20px;
+            border-radius: 18px;
+            background: var(--deep-brown);
+            color: white;
+        }
+
+        .profit-highlight small {
+            display: block;
+            color: rgba(255,255,255,.58);
+            font-size: 11px;
+        }
+
+        .profit-highlight strong {
+            display: block;
+            margin-top: 5px;
+            font-size: 31px;
+        }
+
+        .breakdown-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 0;
+            border-bottom: 1px dashed rgba(59,41,34,.12);
+            font-size: 12px;
+        }
+
+        .breakdown-row:last-child {
+            border-bottom: 0;
+        }
+
+        .breakdown-name {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(59,41,34,.67);
+        }
+
+        .breakdown-marker {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--terracotta);
+        }
+
+        .breakdown-row:nth-child(3) .breakdown-marker {
+            background: var(--gold);
+        }
+
+        .breakdown-row:nth-child(4) .breakdown-marker {
+            background: var(--indigo);
+        }
+
+        .breakdown-row:nth-child(5) .breakdown-marker {
+            background: var(--sage);
+        }
+
+        .breakdown-value {
+            font-weight: 800;
+            color: var(--deep-brown);
+        }
+
+        /* ---------------------------------------------------------
+           TRANSACTIONS
+           --------------------------------------------------------- */
+
+        .transactions-panel {
+            margin-bottom: 32px;
+        }
+
+        .transaction-list {
+            padding: 4px 28px 12px;
+        }
+
+        .transaction {
+            display: grid;
+            grid-template-columns: 42px minmax(0,1fr) auto auto;
+            gap: 14px;
+            align-items: center;
+            padding: 17px 0;
+            border-bottom: 1px dashed rgba(59,41,34,.12);
+        }
+
+        .transaction:last-child {
+            border-bottom: 0;
+        }
+
+        .transaction-icon {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            background: var(--soft-sage);
+            font-size: 17px;
+        }
+
+        .transaction:nth-child(2) .transaction-icon {
+            background: #f3e4bb;
+        }
+
+        .transaction:nth-child(3) .transaction-icon {
+            background: var(--soft-terracotta);
+        }
+
+        .transaction:nth-child(4) .transaction-icon {
+            background: #d7e5e2;
+        }
+
+        .transaction-name {
+            margin-bottom: 4px;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .transaction-meta {
+            font-size: 11px;
+            color: rgba(59,41,34,.48);
+        }
+
+        .transaction-status {
+            padding: 6px 9px;
+            border-radius: 999px;
+            background: var(--soft-sage);
+            color: var(--green);
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .transaction-amount {
+            min-width: 82px;
+            text-align: right;
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        /* ---------------------------------------------------------
+           BUSINESS INSIGHT
+           --------------------------------------------------------- */
+
+        .insight-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 50px;
+        }
+
+        .insight-card {
+            position: relative;
+            overflow: hidden;
+            padding: 26px;
+            border-radius: 25px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,.65);
+            transition: transform .3s ease;
+        }
+
+        .insight-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .insight-card:nth-child(1) {
+            background: #f0e7d7;
+        }
+
+        .insight-card:nth-child(2) {
+            background: #e2e9dc;
+        }
+
+        .insight-card:nth-child(3) {
+            background: #e7dedf;
+        }
+
+        .insight-number {
+            font-size: 34px;
+            font-weight: 800;
+            color: var(--deep-brown);
+        }
+
+        .insight-title {
+            margin-top: 7px;
+            font-weight: 800;
+            font-size: 14px;
+        }
+
+        .insight-copy {
+            margin: 7px 0 0;
+            font-size: 12px;
+            line-height: 1.65;
+            color: rgba(59,41,34,.58);
+        }
+
+        .insight-card::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            right: -42px;
+            bottom: -45px;
+            border-radius: 50%;
+            border: 1px solid rgba(59,41,34,.1);
+        }
+
+        /* ---------------------------------------------------------
+           AI BUSINESS MANAGER
+           --------------------------------------------------------- */
+
+        .ai-manager {
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 30px;
+            align-items: center;
+            padding: 30px 32px;
+            margin-bottom: 28px;
+            border-radius: 28px;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(39,76,119,.95),
+                    rgba(15,124,120,.94)
+                );
+            color: white;
+            box-shadow: 0 18px 50px rgba(39,76,119,.14);
+        }
+
+        .ai-manager::before {
+            content: "";
+            position: absolute;
+            width: 240px;
+            height: 240px;
+            right: 18%;
+            top: -170px;
+            border: 1px solid rgba(255,255,255,.13);
+            border-radius: 50%;
+        }
+
+        .ai-manager-copy {
+            position: relative;
+            z-index: 1;
+        }
+
+        .ai-label {
+            display: inline-flex;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(255,255,255,.13);
+            color: rgba(255,255,255,.84);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+
+        .ai-manager h2 {
+            margin: 11px 0 7px;
+            font-family: "Playfair Display", serif;
+            font-size: 27px;
+        }
+
+        .ai-manager p {
+            max-width: 700px;
+            margin: 0;
+            color: rgba(255,255,255,.7);
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .ai-button {
+            position: relative;
+            z-index: 1;
+            flex-shrink: 0;
+            padding: 13px 18px;
+            border: 0;
+            border-radius: 13px;
+            background: white;
+            color: var(--deep-brown);
+            font-weight: 800;
+            font-size: 12px;
+            cursor: pointer;
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        .ai-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(0,0,0,.16);
+        }
+
+        /* ---------------------------------------------------------
+           BUTTONS
+           --------------------------------------------------------- */
+
+        .earnings-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 11px;
+            margin-bottom: 55px;
+        }
+
+        .action-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 16px;
+            border-radius: 13px;
+            text-decoration: none;
+            border: 1px solid rgba(59,41,34,.12);
+            background: white;
+            color: var(--brown);
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .25s ease;
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            border-color: var(--terracotta);
+            color: var(--terracotta);
+        }
+
+        .action-button.primary {
+            background: var(--terracotta);
+            color: white;
+            border-color: var(--terracotta);
+        }
+
+        .action-button.primary:hover {
+            background: var(--burnt);
+            color: white;
+        }
+
+        /* ---------------------------------------------------------
+           MODAL
+           --------------------------------------------------------- */
+
+        .earnings-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            place-items: center;
+            padding: 20px;
+            background: rgba(42,29,24,.52);
+            backdrop-filter: blur(8px);
+        }
+
+        .earnings-modal.active {
+            display: grid;
+        }
+
+        .modal-card {
+            width: min(480px, 100%);
+            padding: 32px;
+            border-radius: 27px;
+            background: var(--cream);
+            box-shadow: 0 30px 90px rgba(0,0,0,.2);
+            animation: modalIn .35s cubic-bezier(.16,1,.3,1);
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(.96);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-icon {
+            width: 52px;
+            height: 52px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 16px;
+            border-radius: 16px;
+            background: var(--soft-sage);
+            font-size: 22px;
+        }
+
+        .modal-card h3 {
+            margin: 0;
+            font-family: "Playfair Display", serif;
+            font-size: 27px;
+        }
+
+        .modal-card p {
+            margin: 9px 0 22px;
+            color: rgba(59,41,34,.6);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .modal-close {
+            width: 100%;
+            border: 0;
+            padding: 13px;
+            border-radius: 13px;
+            background: var(--deep-brown);
+            color: white;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        /* ---------------------------------------------------------
+           RESPONSIVE
+           --------------------------------------------------------- */
+
+        @media (max-width: 1000px) {
+            .earnings-hero {
+                grid-template-columns: 1fr;
+            }
+
+            .earnings-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .earnings-main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .insight-section {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .earnings-container {
+                width: min(100% - 24px, 1220px);
+            }
+
+            .earnings-breadcrumb {
+                padding-top: 22px;
+            }
+
+            .earnings-hero-main {
+                padding: 30px 24px 90px;
+                min-height: 330px;
+                border-radius: 25px;
+            }
+
+            .earnings-hero h1 {
+                font-size: 44px;
+            }
+
+            .hero-artisan-chip {
+                left: 24px;
+                bottom: 27px;
+            }
+
+            .revenue-card {
+                min-height: 270px;
+                padding: 26px;
+                border-radius: 25px;
+            }
+
+            .earnings-stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .stat-card {
+                min-height: 135px;
+                padding: 17px;
+                border-radius: 19px;
+            }
+
+            .stat-value {
+                font-size: 21px;
+            }
+
+            .panel {
+                border-radius: 22px;
+            }
+
+            .panel-header {
+                padding: 21px 19px 17px;
+            }
+
+            .panel-title {
+                font-size: 21px;
+            }
+
+            .chart-wrap {
+                padding: 20px 14px 23px;
+            }
+
+            .chart {
+                gap: 7px;
+                height: 235px;
+            }
+
+            .bar-track {
+                height: 170px;
+                width: min(34px, 80%);
+            }
+
+            .chart-amount {
+                font-size: 8px;
+            }
+
+            .chart-month {
+                font-size: 9px;
+            }
+
+            .breakdown-body {
+                padding: 20px;
+            }
+
+            .transaction-list {
+                padding: 3px 19px 10px;
+            }
+
+            .transaction {
+                grid-template-columns: 38px minmax(0,1fr) auto;
+            }
+
+            .transaction-status {
+                display: none;
+            }
+
+            .transaction-amount {
+                min-width: auto;
+                font-size: 12px;
+            }
+
+            .insight-section {
+                grid-template-columns: 1fr;
+            }
+
+            .ai-manager {
+                grid-template-columns: 1fr;
+                padding: 25px;
+                border-radius: 23px;
+            }
+
+            .ai-button {
+                width: 100%;
+            }
+
+            .earnings-actions {
+                flex-direction: column;
+            }
+
+            .action-button {
+                width: 100%;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="earnings-page">
+
+    <!-- =========================================================
+         NAVIGATION
+         ========================================================= -->
+
+    <header class="site-header">
+        <div class="container nav-container">
+
+            <a
+                href="../index.html"
+                class="brand-logo-link"
+                aria-label="Taana-Baana Home"
+            >
+                <img
+                    src="../assets/logo.png"
+                    alt="Taana-Baana — From Hands to Markets"
+                    class="brand-logo"
+                >
+            </a>
+
+            <nav class="main-nav" aria-label="Main navigation">
+
+                <div class="nav-dropdown">
+                    <button
+                        class="nav-dropdown-toggle"
+                        type="button"
+                        aria-expanded="false"
+                    >
+                        Features
+                        <span>⌄</span>
+                    </button>
+
+                    <div class="nav-dropdown-menu">
+                        <a href="studio.html">AI Product Studio</a>
+                        <a href="catalog.html">AI Cataloger</a>
+                        <a href="pricing.html">Smart Pricing</a>
+                        <a href="marketplace.html">Marketplace</a>
+                        <a href="b2b.html">B2B Connect</a>
+                    </div>
+                </div>
+
+                <a href="marketplace.html">Marketplace</a>
+                <a href="b2b.html">B2B</a>
+                <a href="how-it-works.html">How It Works</a>
+                <a href="about.html">About</a>
+
+            </nav>
+
+            <div class="nav-actions">
+                <a href="artisan-dashboard.html" class="nav-login">
+                    Dashboard
+                </a>
+
+                <a href="profile.html" class="nav-cta">
+                    My Profile
+                </a>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- =========================================================
+         MAIN
+         ========================================================= -->
+
+    <main>
+
+        <div class="earnings-container">
+
+            <!-- Breadcrumb -->
+            <div class="earnings-breadcrumb">
+                <a href="artisan-dashboard.html">Artisan Dashboard</a>
+                <span>→</span>
+                <strong>My Earnings</strong>
+            </div>
+
+
+            <!-- =================================================
+                 HERO
+                 ================================================= -->
+
+            <section class="earnings-hero">
+
+                <div class="earnings-hero-main">
+
+                    <div class="hero-pattern"></div>
+                    <div class="hero-thread"></div>
+
+                    <div class="earnings-eyebrow">
+                        Artisan finance
+                    </div>
+
+                    <h1>
+                        See where your
+                        <span>craft</span> takes you.
+                    </h1>
+
+                    <p class="earnings-hero-copy">
+                        A simple view of your sales, revenue, costs and
+                        estimated profit — so your craft business is easier
+                        to understand and plan.
+                    </p>
+
+                    <div class="hero-artisan-chip">
+                        <span class="hero-artisan-avatar">A</span>
+                        <span>Artisan workspace · 2026</span>
+                    </div>
+
+                </div>
+
+
+                <!-- Revenue -->
+                <div class="revenue-card">
+
+                    <div class="revenue-top">
+
+                        <div class="revenue-label">
+                            Total revenue
+                        </div>
+
+                        <div class="revenue-period">
+                            This year
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <div class="revenue-number">
+                            ₹2,48,650
+                        </div>
+
+                        <div class="revenue-change">
+                            ↑ 18.4% vs last period
+                        </div>
+                    </div>
+
+                    <div class="revenue-bottom">
+
+                        <p>
+                            ₹2.5L yearly target
+                        </p>
+
+                        <div class="revenue-progress">
+                            <span></span>
+                        </div>
+
+                        <div class="revenue-target">
+                            <span>₹0</span>
+                            <span>₹2,50,000</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 QUICK STATS
+                 ================================================= -->
+
+            <section class="earnings-stats">
+
+                <article class="stat-card">
+
+                    <div class="stat-icon">🧾</div>
+
+                    <div class="stat-label">
+                        Completed orders
+                    </div>
+
+                    <div class="stat-value">
+                        86
+                    </div>
+
+                    <div class="stat-note">
+                        +14 this month
+                    </div>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <div class="stat-icon">📦</div>
+
+                    <div class="stat-label">
+                        Average order value
+                    </div>
+
+                    <div class="stat-value">
+                        ₹2,891
+                    </div>
+
+                    <div class="stat-note">
+                        Across completed orders
+                    </div>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <div class="stat-icon">🌿</div>
+
+                    <div class="stat-label">
+                        Estimated profit
+                    </div>
+
+                    <div class="stat-value">
+                        ₹91,430
+                    </div>
+
+                    <div class="stat-note">
+                        After listed costs
+                    </div>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <div class="stat-icon">💰</div>
+
+                    <div class="stat-label">
+                        Pending payout
+                    </div>
+
+                    <div class="stat-value">
+                        ₹18,750
+                    </div>
+
+                    <div class="stat-note">
+                        From 4 active orders
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <!-- =================================================
+                 CHART + BREAKDOWN
+                 ================================================= -->
+
+            <section class="earnings-main-grid">
+
+                <!-- Revenue chart -->
+
+                <article class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h2 class="panel-title">
+                                Revenue journey
+                            </h2>
+
+                            <p class="panel-subtitle">
+                                Your monthly sales value at a glance.
+                            </p>
+                        </div>
+
+                        <select
+                            class="period-select"
+                            id="chartPeriod"
+                            aria-label="Revenue period"
+                        >
+                            <option value="6">Last 6 months</option>
+                            <option value="12">Last 12 months</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="chart-wrap">
+
+                        <div class="chart" id="revenueChart">
+
+                            <div class="chart-column">
+                                <span class="chart-amount">₹22k</span>
+                                <div class="bar-track">
+                                    <div class="bar" style="--height: 44%;"></div>
+                                </div>
+                                <span class="chart-month">Apr</span>
+                            </div>
+
+                            <div class="chart-column">
+                                <span class="chart-amount">₹31k</span>
+                                <div class="bar-track">
+                                    <div class="bar" style="--height: 62%;"></div>
+                                </div>
+                                <span class="chart-month">May</span>
+                            </div>
+
+                            <div class="chart-column">
+                                <span class="chart-amount">₹27k</span>
+                                <div class="bar-track">
+                                    <div class="bar" style="--height: 54%;"></div>
+                                </div>
+                                <span class="chart-month">Jun</span>
+                            </div>
+
+                            <div class="chart-column">
+                                <span class="chart-amount">₹39k</span>
+                                <div class="bar-track">
+                                    <div class="bar" style="--height: 78%;"></div>
+                                </div>
+                                <span class="chart-month">Jul</span>
+                            </div>
+
+                            <div class="chart-column">
+                                <span class="chart-amount">₹45k</span>
+                                <div class="bar-track">
+                                    <div class="bar" style="--height: 90%;"></div>
+                                </div>
+                                <span class="chart-month">Aug</span>
+                            </div>
+
+                            <div class="chart-column">
+                                <span class="chart-amount">₹49k</span>
+                                <div class="bar-track">
+                                    <div class="bar" style="--height: 98%;"></div>
+                                </div>
+                                <span class="chart-month">Sep</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="chart-legend">
+
+                            <span class="legend-item">
+                                <span class="legend-dot"></span>
+                                Gross sales
+                            </span>
+
+                            <span>
+                                Highest month: September
+                            </span>
+
+                            <span>
+                                Growth trend: +18.4%
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Profit breakdown -->
+
+                <article class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h2 class="panel-title">
+                                Profit snapshot
+                            </h2>
+
+                            <p class="panel-subtitle">
+                                Understand where your money goes.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="breakdown-body">
+
+                        <div class="profit-highlight">
+
+                            <small>
+                                Estimated net profit
+                            </small>
+
+                            <strong>
+                                ₹91,430
+                            </strong>
+
+                        </div>
+
+
+                        <div class="breakdown-row">
+
+                            <div class="breakdown-name">
+                                <span class="breakdown-marker"></span>
+                                Sales revenue
+                            </div>
+
+                            <div class="breakdown-value">
+                                ₹2,48,650
+                            </div>
+
+                        </div>
+
+
+                        <div class="breakdown-row">
+
+                            <div class="breakdown-name">
+                                <span class="breakdown-marker"></span>
+                                Raw materials
+                            </div>
+
+                            <div class="breakdown-value">
+                                − ₹82,400
+                            </div>
+
+                        </div>
+
+
+                        <div class="breakdown-row">
+
+                            <div class="breakdown-name">
+                                <span class="breakdown-marker"></span>
+                                Packaging
+                            </div>
+
+                            <div class="breakdown-value">
+                                − ₹19,820
+                            </div>
+
+                        </div>
+
+
+                        <div class="breakdown-row">
+
+                            <div class="breakdown-name">
+                                <span class="breakdown-marker"></span>
+                                Other costs
+                            </div>
+
+                            <div class="breakdown-value">
+                                − ₹54,?00
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <!-- =================================================
+                 RECENT TRANSACTIONS
+                 ================================================= -->
+
+            <section class="panel transactions-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h2 class="panel-title">
+                            Recent earnings
+                        </h2>
+
+                        <p class="panel-subtitle">
+                            Your latest completed and processing payments.
+                        </p>
+                    </div>
+
+                    <button
+                        class="action-button"
+                        id="exportButton"
+                        type="button"
+                    >
+                        ↓ Export
+                    </button>
+
+                </div>
+
+
+                <div class="transaction-list">
+
+                    <div class="transaction">
+
+                        <div class="transaction-icon">
+                            🧵
+                        </div>
+
+                        <div>
+                            <div class="transaction-name">
+                                Handwoven Cotton Scarves
+                            </div>
+
+                            <div class="transaction-meta">
+                                TB-0984 · Meera Studios · 12 Sep 2026
+                            </div>
+                        </div>
+
+                        <div class="transaction-status">
+                            Paid
+                        </div>
+
+                        <div class="transaction-amount">
+                            + ₹8,400
+                        </div>
+
+                    </div>
+
+
+                    <div class="transaction">
+
+                        <div class="transaction-icon">
+                            🏺
+                        </div>
+
+                        <div>
+                            <div class="transaction-name">
+                                Terracotta Tableware Set
+                            </div>
+
+                            <div class="transaction-meta">
+                                TB-1039 · Mitti Studio · 08 Sep 2026
+                            </div>
+                        </div>
+
+                        <div class="transaction-status">
+                            Processing
+                        </div>
+
+                        <div class="transaction-amount">
+                            + ₹12,600
+                        </div>
+
+                    </div>
+
+
+                    <div class="transaction">
+
+                        <div class="transaction-icon">
+                            👜
+                        </div>
+
+                        <div>
+                            <div class="transaction-name">
+                                Handcrafted Jute Bags
+                            </div>
+
+                            <div class="transaction-meta">
+                                TB-1048 · Arya Sustainable Ventures · 04 Sep 2026
+                            </div>
+                        </div>
+
+                        <div class="transaction-status">
+                            Processing
+                        </div>
+
+                        <div class="transaction-amount">
+                            + ₹18,750
+                        </div>
+
+                    </div>
+
+
+                    <div class="transaction">
+
+                        <div class="transaction-icon">
+                            🧺
+                        </div>
+
+                        <div>
+                            <div class="transaction-name">
+                                Bamboo Storage Baskets
+                            </div>
+
+                            <div class="transaction-meta">
+                                TB-1027 · Green Home Collective · 28 Aug 2026
+                            </div>
+                        </div>
+
+                        <div class="transaction-status">
+                            Paid
+                        </div>
+
+                        <div class="transaction-amount">
+                            + ₹15,200
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 BUSINESS INSIGHTS
+                 ================================================= -->
+
+            <section class="insight-section">
+
+                <article class="insight-card">
+
+                    <div class="insight-number">
+                        37%
+                    </div>
+
+                    <div class="insight-title">
+                        Orders from B2B buyers
+                    </div>
+
+                    <p class="insight-copy">
+                        A growing part of your earnings currently comes
+                        from bulk and business enquiries.
+                    </p>
+
+                </article>
+
+
+                <article class="insight-card">
+
+                    <div class="insight-number">
+                        ₹3.2K
+                    </div>
+
+                    <div class="insight-title">
+                        Average profit per order
+                    </div>
+
+                    <p class="insight-copy">
+                        Based on the costs and completed orders currently
+                        recorded in this demo dashboard.
+                    </p>
+
+                </article>
+
+
+                <article class="insight-card">
+
+                    <div class="insight-number">
+                        4.8/5
+                    </div>
+
+                    <div class="insight-title">
+                        Buyer satisfaction
+                    </div>
+
+                    <p class="insight-copy">
+                        Strong buyer feedback can support repeat orders
+                        and long-term business relationships.
+                    </p>
+
+                </article>
+
+            </section>
+
+
+            <!-- =================================================
+                 AI BUSINESS MANAGER
+                 ================================================= -->
+
+            <section class="ai-manager">
+
+                <div class="ai-manager-copy">
+
+                    <span class="ai-label">
+                        AI Business Manager · Prototype
+                    </span>
+
+                    <h2>
+                        Want to understand your business better?
+                    </h2>
+
+                    <p>
+                        Ask simple questions like “How much did I earn this
+                        month?”, “Which product gives me more profit?” or
+                        “What should I price my next order at?”.
+                        This interface is prepared for the future AI backend.
+                    </p>
+
+                </div>
+
+                <button
+                    class="ai-button"
+                    id="openAiButton"
+                    type="button"
+                >
+                    Ask Business Manager →
+                </button>
+
+            </section>
+
+
+            <!-- =================================================
+                 ACTIONS
+                 ================================================= -->
+
+            <div class="earnings-actions">
+
+                <a
+                    href="artisan-orders.html"
+                    class="action-button primary"
+                >
+                    ← View My Orders
+                </a>
+
+                <a
+                    href="pricing.html"
+                    class="action-button"
+                >
+                    Open Smart Pricing
+                </a>
+
+                <a
+                    href="catalog.html"
+                    class="action-button"
+                >
+                    Manage Catalog
+                </a>
+
+                <a
+                    href="artisan-dashboard.html"
+                    class="action-button"
+                >
+                    Artisan Dashboard
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- =============================================================
+     AI MODAL
+     ============================================================= -->
+
+<div
+    class="earnings-modal"
+    id="aiModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="aiModalTitle"
+>
+
+    <div class="modal-card">
+
+        <div class="modal-icon">
+            ✨
+        </div>
+
+        <h3 id="aiModalTitle">
+            AI Business Manager
+        </h3>
+
+        <p>
+            This is the frontend prototype for Taana-Baana's AI business
+            assistant. The future backend can connect your sales, costs,
+            inventory and market data to answer business questions in
+            your preferred language.
+        </p>
+
+        <button
+            class="modal-close"
+            id="closeAiButton"
+            type="button"
+        >
+            Got it
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =============================================================
+     SCRIPTS
+     ============================================================= -->
+
+<script src="../js/main.js" defer></script>
+<script src="../js/pages.js" defer></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    /* ---------------------------------------------------------
+       AI MODAL
+       --------------------------------------------------------- */
+
+    const aiModal = document.getElementById("aiModal");
+    const openAiButton = document.getElementById("openAiButton");
+    const closeAiButton = document.getElementById("closeAiButton");
+
+    function openAiModal() {
+        if (!aiModal) return;
+
+        aiModal.classList.add("active");
+        document.body.style.overflow = "hidden";
+
+        if (closeAiButton) {
+            setTimeout(() => closeAiButton.focus(), 50);
+        }
+    }
+
+    function closeAiModal() {
+        if (!aiModal) return;
+
+        aiModal.classList.remove("active");
+        document.body.style.overflow = "";
+    }
+
+    openAiButton?.addEventListener("click", openAiModal);
+    closeAiButton?.addEventListener("click", closeAiModal);
+
+    aiModal?.addEventListener("click", (event) => {
+        if (event.target === aiModal) {
+            closeAiModal();
+        }
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && aiModal?.classList.contains("active")) {
+            closeAiModal();
+        }
+    });
+
+
+    /* ---------------------------------------------------------
+       PERIOD SELECT
+       Frontend demonstration only.
+       --------------------------------------------------------- */
+
+    const chartPeriod = document.getElementById("chartPeriod");
+
+    chartPeriod?.addEventListener("change", () => {
+
+        const bars = document.querySelectorAll(".bar");
+
+        bars.forEach((bar) => {
+            bar.style.animation = "none";
+
+            requestAnimationFrame(() => {
+                bar.style.animation = "";
+            });
+        });
+
+        if (typeof window.taanaToast === "function") {
+            window.taanaToast(
+                chartPeriod.value === "12"
+                    ? "12-month view is ready for the analytics backend."
+                    : "Showing the latest 6 months."
+            );
+        }
+    });
+
+
+    /* ---------------------------------------------------------
+       EXPORT BUTTON
+       --------------------------------------------------------- */
+
+    const exportButton = document.getElementById("exportButton");
+
+    exportButton?.addEventListener("click", () => {
+
+        const report = [
+            "TAANA-BAANA — ARTISAN EARNINGS REPORT",
+            "--------------------------------------",
+            "Period: 2026",
+            "",
+            "Total Revenue: ₹2,48,650",
+            "Completed Orders: 86",
+            "Average Order Value: ₹2,891",
+            "Estimated Profit: ₹91,430",
+            "Pending Payout: ₹18,750",
+            "",
+            "Recent Earnings:",
+            "Handwoven Cotton Scarves — ₹8,400",
+            "Terracotta Tableware Set — ₹12,600",
+            "Handcrafted Jute Bags — ₹18,750",
+            "Bamboo Storage Baskets — ₹15,200"
+        ].join("\\n");
+
+        const blob = new Blob(
+            [report],
+            { type: "text/plain;charset=utf-8" }
+        );
+
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = "taana-baana-earnings-report.txt";
+
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        URL.revokeObjectURL(url);
+
+        if (typeof window.taanaToast === "function") {
+            window.taanaToast("Earnings report exported.");
+        }
+    });
+
+
+    /* ---------------------------------------------------------
+       DEMO USER STATE
+       --------------------------------------------------------- */
+
+    localStorage.setItem(
+        "taanaBaanaLastArtisanPage",
+        "artisan-earnings"
+    );
+
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Learn about Taana-Baana — an AI-powered digital platform connecting Indian artisans with year-round markets."
+    >
+
+    <title>About — Taana-Baana</title>
+
+    <!-- Existing site styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+
+    <!-- Cultural visual layer -->
+    <link rel="stylesheet" href="../css/culture.css">
+
+    <style>
+        /* =====================================================
+           ABOUT PAGE — ADDITIVE PAGE-SPECIFIC STYLING
+           ===================================================== */
+
+        .about-page {
+            overflow: hidden;
+        }
+
+        .about-hero {
+            min-height: 72vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            isolation: isolate;
+            padding: 110px 0 90px;
+        }
+
+        .about-hero::before {
+            content: "";
+            position: absolute;
+            width: 520px;
+            height: 520px;
+            border-radius: 50%;
+            left: -260px;
+            top: 30px;
+            border: 1px solid rgba(201,111,74,.22);
+            box-shadow:
+                0 0 0 25px rgba(201,111,74,.025),
+                0 0 0 50px rgba(201,111,74,.02),
+                0 0 0 75px rgba(201,111,74,.015);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .about-hero::after {
+            content: "";
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            right: -120px;
+            bottom: -80px;
+            border-radius: 50%;
+            border: 1px dashed rgba(15,124,120,.25);
+            box-shadow:
+                0 0 0 20px rgba(15,124,120,.025),
+                0 0 0 40px rgba(15,124,120,.018);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .about-hero-grid {
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            align-items: center;
+            gap: 80px;
+        }
+
+        .about-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 14px;
+            border: 1px solid rgba(201,111,74,.22);
+            border-radius: 999px;
+            color: #a95338;
+            background: rgba(201,111,74,.055);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+        }
+
+        .about-title {
+            margin: 22px 0 20px;
+            font-size: clamp(48px, 6vw, 86px);
+            line-height: .96;
+            letter-spacing: -.055em;
+        }
+
+        .about-title em {
+            color: #c96f4a;
+            font-family: "Playfair Display", Georgia, serif;
+            font-weight: 500;
+        }
+
+        .about-intro {
+            max-width: 650px;
+            font-size: 18px;
+            line-height: 1.75;
+            color: #725f54;
+        }
+
+        .about-hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 32px;
+        }
+
+        .about-visual {
+            position: relative;
+            min-height: 480px;
+        }
+
+        .about-art-card {
+            position: absolute;
+            inset: 30px 30px 30px 20px;
+            border-radius: 28px;
+            overflow: hidden;
+            background:
+                linear-gradient(
+                    145deg,
+                    #d99a78,
+                    #b85f43 48%,
+                    #274c77
+                );
+            box-shadow:
+                0 35px 90px rgba(59,41,34,.18);
+            transform: rotate(2deg);
+        }
+
+        .about-art-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: .25;
+            background:
+                repeating-linear-gradient(
+                    90deg,
+                    transparent 0,
+                    transparent 18px,
+                    rgba(255,255,255,.35) 19px,
+                    transparent 20px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent 0,
+                    transparent 18px,
+                    rgba(255,255,255,.28) 19px,
+                    transparent 20px
+                );
+        }
+
+        .about-art-card::after {
+            content: "TAANA • BAANA";
+            position: absolute;
+            left: 28px;
+            bottom: 24px;
+            color: rgba(255,255,255,.85);
+            font-size: 10px;
+            letter-spacing: .28em;
+            font-weight: 700;
+        }
+
+        .about-orbit {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 1px solid rgba(201,166,91,.55);
+            border-radius: 50%;
+            right: -15px;
+            top: 0;
+        }
+
+        .about-orbit::before,
+        .about-orbit::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .about-orbit::before {
+            width: 12px;
+            height: 12px;
+            background: #e9a23b;
+            top: 17px;
+            left: 25px;
+        }
+
+        .about-orbit::after {
+            width: 8px;
+            height: 8px;
+            background: #c43d73;
+            right: 20px;
+            bottom: 22px;
+        }
+
+        .about-float-card {
+            position: absolute;
+            left: -5px;
+            bottom: 10px;
+            padding: 18px 22px;
+            border-radius: 18px;
+            background: rgba(255,249,240,.94);
+            border: 1px solid rgba(59,41,34,.10);
+            box-shadow: 0 20px 45px rgba(59,41,34,.14);
+            backdrop-filter: blur(15px);
+        }
+
+        .about-float-card strong {
+            display: block;
+            color: #3b2922;
+            font-size: 15px;
+        }
+
+        .about-float-card span {
+            display: block;
+            margin-top: 4px;
+            color: #806d61;
+            font-size: 11px;
+        }
+
+        /* Story */
+
+        .about-story {
+            padding: 110px 0;
+            position: relative;
+        }
+
+        .about-story-grid {
+            display: grid;
+            grid-template-columns: .8fr 1.2fr;
+            gap: 90px;
+            align-items: start;
+        }
+
+        .about-section-label {
+            color: #a95338;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .18em;
+        }
+
+        .about-story h2 {
+            margin-top: 16px;
+            font-size: clamp(38px, 4.5vw, 62px);
+            line-height: 1;
+            letter-spacing: -.045em;
+        }
+
+        .about-copy {
+            color: #725f54;
+            font-size: 16px;
+            line-height: 1.85;
+        }
+
+        .about-copy + .about-copy {
+            margin-top: 20px;
+        }
+
+        /* Meaning */
+
+        .meaning-section {
+            padding: 110px 0;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(201,111,74,.055),
+                    rgba(233,162,59,.055),
+                    rgba(15,124,120,.045)
+                );
+            position: relative;
+        }
+
+        .meaning-heading {
+            max-width: 720px;
+            margin-bottom: 50px;
+        }
+
+        .meaning-heading h2 {
+            margin-top: 15px;
+            font-size: clamp(38px, 5vw, 64px);
+            line-height: 1;
+            letter-spacing: -.045em;
+        }
+
+        .meaning-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .meaning-card {
+            min-height: 270px;
+            padding: 32px;
+            border-radius: 24px;
+            background: rgba(255,249,240,.82);
+            border: 1px solid rgba(59,41,34,.10);
+            box-shadow: 0 15px 45px rgba(59,41,34,.06);
+            position: relative;
+            overflow: hidden;
+            transition:
+                transform .4s cubic-bezier(.16,1,.3,1),
+                box-shadow .4s ease;
+        }
+
+        .meaning-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(59,41,34,.12);
+        }
+
+        .meaning-card:nth-child(1) {
+            border-top: 3px solid #c96f4a;
+        }
+
+        .meaning-card:nth-child(2) {
+            border-top: 3px solid #0f7c78;
+        }
+
+        .meaning-card:nth-child(3) {
+            border-top: 3px solid #c43d73;
+        }
+
+        .meaning-number {
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: 54px;
+            color: rgba(59,41,34,.09);
+            line-height: 1;
+        }
+
+        .meaning-card h3 {
+            margin-top: 22px;
+            font-size: 23px;
+        }
+
+        .meaning-card p {
+            margin-top: 12px;
+            color: #75645a;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        /* Problem / Solution */
+
+        .mission-section {
+            padding: 120px 0;
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .mission-card {
+            padding: 42px;
+            border-radius: 26px;
+            border: 1px solid rgba(59,41,34,.10);
+            background: #fff9f0;
+            box-shadow: 0 20px 55px rgba(59,41,34,.07);
+        }
+
+        .mission-card.problem {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(196,61,115,.07),
+                    rgba(255,249,240,.95)
+                );
+        }
+
+        .mission-card.solution {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15,124,120,.08),
+                    rgba(255,249,240,.95)
+                );
+        }
+
+        .mission-icon {
+            width: 54px;
+            height: 54px;
+            display: grid;
+            place-items: center;
+            border-radius: 16px;
+            font-size: 23px;
+            background: rgba(201,111,74,.10);
+        }
+
+        .solution .mission-icon {
+            background: rgba(15,124,120,.10);
+        }
+
+        .mission-card h3 {
+            margin-top: 24px;
+            font-size: 28px;
+        }
+
+        .mission-card p {
+            margin-top: 12px;
+            color: #75645a;
+            line-height: 1.75;
+        }
+
+        .mission-list {
+            margin-top: 25px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .mission-list li {
+            display: flex;
+            gap: 12px;
+            padding: 11px 0;
+            border-bottom: 1px solid rgba(59,41,34,.08);
+            color: #5f4e45;
+            font-size: 14px;
+        }
+
+        .mission-list li::before {
+            content: "✦";
+            color: #c96f4a;
+            flex-shrink: 0;
+        }
+
+        .solution .mission-list li::before {
+            color: #0f7c78;
+        }
+
+        /* Feature overview */
+
+        .about-features {
+            padding: 110px 0;
+            background: #f6ede3;
+        }
+
+        .about-feature-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-top: 50px;
+        }
+
+        .about-feature {
+            padding: 28px;
+            min-height: 230px;
+            border-radius: 22px;
+            background: rgba(255,249,240,.85);
+            border: 1px solid rgba(59,41,34,.09);
+            transition:
+                transform .35s ease,
+                box-shadow .35s ease;
+        }
+
+        .about-feature:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 45px rgba(59,41,34,.10);
+        }
+
+        .about-feature-icon {
+            font-size: 26px;
+        }
+
+        .about-feature h3 {
+            margin-top: 25px;
+            font-size: 20px;
+        }
+
+        .about-feature p {
+            margin-top: 10px;
+            color: #75645a;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        /* CTA */
+
+        .about-cta {
+            padding: 120px 0;
+        }
+
+        .about-cta-box {
+            position: relative;
+            overflow: hidden;
+            padding: 75px 55px;
+            border-radius: 32px;
+            text-align: center;
+            color: white;
+            background:
+                linear-gradient(
+                    125deg,
+                    #9f5037,
+                    #c96f4a 42%,
+                    #274c77 100%
+                );
+            box-shadow: 0 35px 80px rgba(59,41,34,.18);
+        }
+
+        .about-cta-box::before {
+            content: "";
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            right: -80px;
+            top: -110px;
+            border: 1px solid rgba(255,255,255,.25);
+            box-shadow:
+                0 0 0 20px rgba(255,255,255,.035),
+                0 0 0 40px rgba(255,255,255,.025);
+        }
+
+        .about-cta-box::after {
+            content: "";
+            position: absolute;
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            left: -100px;
+            bottom: -130px;
+            border: 1px dashed rgba(255,255,255,.22);
+        }
+
+        .about-cta-box h2 {
+            position: relative;
+            z-index: 1;
+            font-size: clamp(38px, 5vw, 65px);
+            line-height: 1;
+            letter-spacing: -.045em;
+        }
+
+        .about-cta-box p {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 20px auto 0;
+            color: rgba(255,255,255,.82);
+            line-height: 1.7;
+        }
+
+        .about-cta-actions {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 13px;
+            margin-top: 30px;
+        }
+
+        .about-cta-actions .btn {
+            background: #fff9f0;
+            color: #3b2922;
+            border-color: #fff9f0;
+        }
+
+        .about-cta-actions .btn:hover {
+            background: #ffffff;
+            color: #a95338;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 1000px) {
+
+            .about-hero-grid,
+            .about-story-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-visual {
+                max-width: 650px;
+                width: 100%;
+                margin: 0 auto;
+            }
+
+            .meaning-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .about-hero {
+                padding: 80px 0 60px;
+            }
+
+            .about-hero-grid {
+                gap: 50px;
+            }
+
+            .about-title {
+                font-size: 50px;
+            }
+
+            .about-intro {
+                font-size: 16px;
+            }
+
+            .about-visual {
+                min-height: 370px;
+            }
+
+            .about-art-card {
+                inset: 20px 15px 20px 5px;
+            }
+
+            .mission-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mission-card {
+                padding: 30px;
+            }
+
+            .about-feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-cta-box {
+                padding: 55px 25px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .meaning-card,
+            .about-feature {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="about-page">
+
+    <!-- =====================================================
+         NAVIGATION
+         ===================================================== -->
+
+    <header class="site-header">
+
+        <div class="container nav-container">
+
+            <a
+                href="../index.html"
+                class="brand-logo-link"
+                aria-label="Taana-Baana Home"
+            >
+                <img
+                    src="../assets/logo.png"
+                    alt="Taana-Baana — From Hands to Markets"
+                    class="brand-logo"
+                >
+            </a>
+
+
+            <nav class="main-nav" aria-label="Main navigation">
+
+                <a
+                    href="../index.html"
+                    class="nav-link"
+                >
+                    Home
+                </a>
+
+
+                <div class="nav-dropdown">
+
+                    <button
+                        class="nav-link dropdown-toggle"
+                        type="button"
+                        aria-expanded="false"
+                    >
+                        AI Tools
+                        <span aria-hidden="true">⌄</span>
+                    </button>
+
+                    <div class="dropdown-menu">
+
+                        <a href="studio.html">
+                            <span>📸</span>
+                            AI Product Studio
+                        </a>
+
+                        <a href="catalog.html">
+                            <span>📝</span>
+                            AI Catalog Developer
+                        </a>
+
+                        <a href="pricing.html">
+                            <span>💰</span>
+                            Smart Pricing
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    href="marketplace.html"
+                    class="nav-link"
+                >
+                    Marketplace
+                </a>
+
+
+                <a
+                    href="about.html"
+                    class="nav-link active"
+                    aria-current="page"
+                >
+                    About
+                </a>
+
+            </nav>
+
+
+            <div class="nav-actions">
+
+                <a
+                    href="login.html"
+                    class="nav-login"
+                >
+                    Login
+                </a>
+
+                <a
+                    href="login.html"
+                    class="btn btn-primary"
+                >
+                    Get Started
+                </a>
+
+            </div>
+
+
+            <button
+                class="mobile-menu-toggle"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <!-- =================================================
+             HERO
+             ================================================= -->
+
+        <section class="about-hero">
+
+            <div class="container">
+
+                <div class="about-hero-grid">
+
+                    <div
+                        class="reveal"
+                        data-reveal
+                    >
+
+                        <span class="about-eyebrow">
+                            The story behind Taana-Baana
+                        </span>
+
+
+                        <h1 class="about-title">
+                            Weaving
+                            <em>tradition</em>
+                            into opportunity.
+                        </h1>
+
+
+                        <p class="about-intro">
+                            Taana-Baana is an AI-powered digital business
+                            platform designed to help Indian artisans,
+                            weavers, craftspeople and micro-entrepreneurs
+                            move from occasional exhibitions to
+                            year-round digital markets.
+                        </p>
+
+
+                        <div class="about-hero-actions">
+
+                            <a
+                                href="studio.html"
+                                class="btn btn-primary magnetic"
+                            >
+                                Try AI Studio →
+                            </a>
+
+                            <a
+                                href="marketplace.html"
+                                class="btn btn-secondary magnetic"
+                            >
+                                Explore Marketplace
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="about-visual reveal"
+                        data-reveal
+                    >
+
+                        <div
+                            class="about-orbit"
+                            aria-hidden="true"
+                        ></div>
+
+
+                        <div
+                            class="about-art-card"
+                            aria-hidden="true"
+                        ></div>
+
+
+                        <div class="about-float-card">
+
+                            <strong>
+                                From Hands to Markets.
+                            </strong>
+
+                            <span>
+                                Craft × AI × Opportunity
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             OUR STORY
+             ================================================= -->
+
+        <section class="about-story">
+
+            <div class="container">
+
+                <div class="about-story-grid">
+
+                    <div
+                        class="reveal"
+                        data-reveal
+                    >
+
+                        <span class="about-section-label">
+                            Why Taana-Baana?
+                        </span>
+
+                        <h2>
+                            The craft already exists.
+                            The digital bridge should too.
+                        </h2>
+
+                    </div>
+
+
+                    <div
+                        class="reveal"
+                        data-reveal
+                    >
+
+                        <p class="about-copy">
+                            Across India, artisans and craftspeople
+                            create products carrying generations of
+                            knowledge, culture and identity. Yet access
+                            to markets can remain limited by digital
+                            literacy, language barriers, product
+                            photography, catalog creation and pricing
+                            challenges.
+                        </p>
+
+
+                        <p class="about-copy">
+                            Physical exhibitions and trade fairs can
+                            create valuable opportunities, but those
+                            opportunities are periodic. Taana-Baana
+                            is designed around a different idea:
+                            helping artisans build a digital presence
+                            that remains available beyond an exhibition
+                            date.
+                        </p>
+
+
+                        <p class="about-copy">
+                            Instead of expecting every artisan to become
+                            a photographer, copywriter, translator,
+                            pricing analyst and digital marketer,
+                            Taana-Baana brings those capabilities into
+                            one simple workflow.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             NAME / MEANING
+             ================================================= -->
+
+        <section class="meaning-section">
+
+            <div class="container">
+
+                <div
+                    class="meaning-heading reveal"
+                    data-reveal
+                >
+
+                    <span class="about-section-label">
+                        Why the name?
+                    </span>
+
+                    <h2>
+                        Two threads.
+                        One digital fabric.
+                    </h2>
+
+                </div>
+
+
+                <div class="meaning-grid">
+
+                    <article
+                        class="meaning-card reveal"
+                        data-reveal
+                    >
+
+                        <div class="meaning-number">
+                            01
+                        </div>
+
+                        <h3>
+                            TAANA
+                        </h3>
+
+                        <p>
+                            The warp — representing the artisan,
+                            traditional skill, heritage, raw
+                            materials and the craft itself.
+                        </p>
+
+                    </article>
+
+
+                    <article
+                        class="meaning-card reveal"
+                        data-reveal
+                    >
+
+                        <div class="meaning-number">
+                            02
+                        </div>
+
+                        <h3>
+                            BAANA
+                        </h3>
+
+                        <p>
+                            The weft — representing technology,
+                            AI, digital catalogs, pricing,
+                            buyers and access to new markets.
+                        </p>
+
+                    </article>
+
+
+                    <article
+                        class="meaning-card reveal"
+                        data-reveal
+                    >
+
+                        <div class="meaning-number">
+                            03
+                        </div>
+
+                        <h3>
+                            TOGETHER
+                        </h3>
+
+                        <p>
+                            Taana-Baana brings both threads
+                            together — connecting traditional
+                            craftsmanship with modern digital
+                            opportunity.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PROBLEM / SOLUTION
+             ================================================= -->
+
+        <section class="mission-section">
+
+            <div class="container">
+
+                <div
+                    class="section-heading reveal"
+                    data-reveal
+                >
+
+                    <span class="section-kicker">
+                        The mission
+                    </span>
+
+                    <h2>
+                        Making digital commerce
+                        easier to enter.
+                    </h2>
+
+                </div>
+
+
+                <div class="mission-grid">
+
+                    <article
+                        class="mission-card problem reveal"
+                        data-reveal
+                    >
+
+                        <div class="mission-icon">
+                            🌾
+                        </div>
+
+                        <h3>
+                            The challenge
+                        </h3>
+
+                        <p>
+                            A great handmade product does not
+                            automatically become a great digital
+                            product listing.
+                        </p>
+
+                        <ul class="mission-list">
+
+                            <li>
+                                Limited year-round market access
+                            </li>
+
+                            <li>
+                                Difficulty creating professional
+                                product photographs
+                            </li>
+
+                            <li>
+                                Language and digital-literacy barriers
+                            </li>
+
+                            <li>
+                                Uncertainty around competitive pricing
+                            </li>
+
+                            <li>
+                                Time-consuming catalog creation
+                            </li>
+
+                        </ul>
+
+                    </article>
+
+
+                    <article
+                        class="mission-card solution reveal"
+                        data-reveal
+                    >
+
+                        <div class="mission-icon">
+                            ✨
+                        </div>
+
+                        <h3>
+                            The Taana-Baana approach
+                        </h3>
+
+                        <p>
+                            Give the artisan a simple digital
+                            business companion while keeping
+                            the artisan in control.
+                        </p>
+
+                        <ul class="mission-list">
+
+                            <li>
+                                Photograph once and create a
+                                polished product presentation
+                            </li>
+
+                            <li>
+                                Speak naturally in a regional language
+                            </li>
+
+                            <li>
+                                Generate multilingual catalog content
+                            </li>
+
+                            <li>
+                                Understand material, labour and
+                                market-based pricing factors
+                            </li>
+
+                            <li>
+                                Share products with buyers digitally
+                            </li>
+
+                        </ul>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PLATFORM FEATURES
+             ================================================= -->
+
+        <section class="about-features">
+
+            <div class="container">
+
+                <div
+                    class="section-heading reveal"
+                    data-reveal
+                >
+
+                    <span class="section-kicker">
+                        One platform
+                    </span>
+
+                    <h2>
+                        From the first photo
+                        to the first buyer.
+                    </h2>
+
+                    <p>
+                        Taana-Baana brings the essential digital
+                        steps into one accessible workflow.
+                    </p>
+
+                </div>
+
+
+                <div class="about-feature-grid">
+
+                    <article
+                        class="about-feature reveal"
+                        data-reveal
+                    >
+
+                        <div class="about-feature-icon">
+                            📸
+                        </div>
+
+                        <h3>
+                            AI Product Studio
+                        </h3>
+
+                        <p>
+                            Transform a simple product photograph
+                            into a cleaner, marketplace-ready
+                            presentation.
+                        </p>
+
+                    </article>
+
+
+                    <article
+                        class="about-feature reveal"
+                        data-reveal
+                    >
+
+                        <div class="about-feature-icon">
+                            🎙️
+                        </div>
+
+                        <h3>
+                            Speak-to-Sell
+                        </h3>
+
+                        <p>
+                            Use voice input in a regional language
+                            to provide product information naturally.
+                        </p>
+
+                    </article>
+
+
+                    <article
+                        class="about-feature reveal"
+                        data-reveal
+                    >
+
+                        <div class="about-feature-icon">
+                            🌐
+                        </div>
+
+                        <h3>
+                            Multilingual Catalog
+                        </h3>
+
+                        <p>
+                            Turn artisan-provided information into
+                            structured product content for wider
+                            digital audiences.
+                        </p>
+
+                    </article>
+
+
+                    <article
+                        class="about-feature reveal"
+                        data-reveal
+                    >
+
+                        <div class="about-feature-icon">
+                            💰
+                        </div>
+
+                        <h3>
+                            Smart Pricing
+                        </h3>
+
+                        <p>
+                            Present pricing factors transparently so
+                            artisans can understand costs, margins
+                            and suggested price ranges.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CTA
+             ================================================= -->
+
+        <section class="about-cta">
+
+            <div class="container">
+
+                <div
+                    class="about-cta-box reveal"
+                    data-reveal
+                >
+
+                    <h2>
+                        Let the craft
+                        travel further.
+                    </h2>
+
+                    <p>
+                        Traditional craftsmanship deserves a
+                        year-round digital presence — without
+                        asking artisans to become technology experts.
+                    </p>
+
+
+                    <div class="about-cta-actions">
+
+                        <a
+                            href="studio.html"
+                            class="btn magnetic"
+                        >
+                            Create a Product →
+                        </a>
+
+                        <a
+                            href="login.html"
+                            class="btn magnetic"
+                        >
+                            Enter Taana-Baana
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+
+                    <a href="../index.html">
+                        <img
+                            src="../assets/logo.png"
+                            alt="Taana-Baana"
+                            class="brand-logo"
+                        >
+                    </a>
+
+                    <p>
+                        From Hands to Markets.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h4>
+                        Platform
+                    </h4>
+
+                    <a href="studio.html">
+                        AI Studio
+                    </a>
+
+                    <a href="catalog.html">
+                        Catalog Developer
+                    </a>
+
+                    <a href="pricing.html">
+                        Smart Pricing
+                    </a>
+
+                    <a href="marketplace.html">
+                        Marketplace
+                    </a>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h4>
+                        Explore
+                    </h4>
+
+                    <a href="artisan.html">
+                        Artisan
+                    </a>
+
+                    <a href="dashboard.html">
+                        Dashboard
+                    </a>
+
+                    <a href="about.html">
+                        About
+                    </a>
+
+                    <a href="login.html">
+                        Login
+                    </a>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h4>
+                        Taana-Baana
+                    </h4>
+
+                    <p>
+                        Traditional craft woven together
+                        with accessible technology.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <span>
+                    © 2026 Taana-Baana
+                </span>
+
+                <span>
+                    From Hands to Markets.
+                </span>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Existing JavaScript -->
+    <script src="../js/main.js" defer></script>
+    <script src="../js/pages.js" defer></script>
+
+</body>
+</html>

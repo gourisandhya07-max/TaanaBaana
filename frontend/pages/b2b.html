@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Taana-Baana B2B Marketplace — connect businesses with Indian artisan makers and clusters."
+    >
+
+    <title>B2B Marketplace — Taana-Baana</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+
+    <style>
+        /* =====================================================
+           TAANA-BAANA — B2B MARKETPLACE
+           Added page styling — does not modify global styles
+        ===================================================== */
+
+        .b2b-page {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(196,61,115,.08), transparent 25%),
+                radial-gradient(circle at 90% 20%, rgba(15,124,120,.08), transparent 25%),
+                #fcf6ea;
+            color: #3b2922;
+            overflow: hidden;
+        }
+
+        .b2b-hero {
+            position: relative;
+            min-height: 72vh;
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            align-items: center;
+            gap: 60px;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 120px 40px 80px;
+        }
+
+        .b2b-hero::before,
+        .b2b-hero::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .b2b-hero::before {
+            width: 320px;
+            height: 320px;
+            right: -100px;
+            top: 60px;
+            border: 1px solid rgba(201,166,91,.3);
+        }
+
+        .b2b-hero::after {
+            width: 180px;
+            height: 180px;
+            left: -70px;
+            bottom: 30px;
+            border: 1px dashed rgba(196,61,115,.3);
+        }
+
+        .b2b-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 15px;
+            border-radius: 999px;
+            background: #fff9f0;
+            border: 1px solid #e8d7bc;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .16em;
+            color: #a95338;
+            text-transform: uppercase;
+        }
+
+        .b2b-eyebrow span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #3e7c59;
+            box-shadow: 0 0 0 5px rgba(62,124,89,.12);
+        }
+
+        .b2b-title {
+            margin: 25px 0 20px;
+            max-width: 700px;
+            font-family: "Playfair Display", serif;
+            font-size: clamp(52px, 7vw, 94px);
+            line-height: .95;
+            letter-spacing: -.045em;
+            font-weight: 600;
+        }
+
+        .b2b-title em {
+            color: #c96f4a;
+            font-weight: 500;
+        }
+
+        .b2b-subtitle {
+            max-width: 650px;
+            font-size: 18px;
+            line-height: 1.75;
+            color: #6d5b52;
+        }
+
+        .b2b-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 32px;
+        }
+
+        .b2b-primary,
+        .b2b-secondary {
+            min-height: 52px;
+            padding: 0 24px;
+            border-radius: 15px;
+            border: 0;
+            cursor: pointer;
+            font-family: "DM Sans", sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        .b2b-primary {
+            background: #3b2922;
+            color: #fff9f0;
+            box-shadow: 0 15px 35px rgba(59,41,34,.18);
+        }
+
+        .b2b-secondary {
+            background: #fff9f0;
+            color: #3b2922;
+            border: 1px solid #ddcbb5;
+        }
+
+        .b2b-primary:hover,
+        .b2b-secondary:hover {
+            transform: translateY(-3px);
+        }
+
+        /* =========================
+           MATCHING VISUAL
+        ========================= */
+
+        .b2b-visual {
+            position: relative;
+            min-height: 510px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .b2b-orbit {
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border: 1px dashed rgba(201,166,91,.55);
+            border-radius: 50%;
+            animation: orbitSpin 22s linear infinite;
+        }
+
+        .b2b-orbit::before,
+        .b2b-orbit::after {
+            content: "";
+            position: absolute;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+        }
+
+        .b2b-orbit::before {
+            top: 45px;
+            left: 70px;
+            background: #c43d73;
+        }
+
+        .b2b-orbit::after {
+            bottom: 35px;
+            right: 65px;
+            background: #0f7c78;
+        }
+
+        @keyframes orbitSpin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .b2b-core {
+            position: relative;
+            z-index: 2;
+            width: 210px;
+            height: 210px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-radius: 50%;
+            background:
+                linear-gradient(145deg, #fff9f0, #f0dfc7);
+            border: 1px solid #d9c2a4;
+            box-shadow:
+                0 30px 70px rgba(59,41,34,.15),
+                inset 0 0 40px rgba(201,166,91,.12);
+        }
+
+        .b2b-core-inner strong {
+            display: block;
+            font-family: "Playfair Display", serif;
+            font-size: 30px;
+        }
+
+        .b2b-core-inner span {
+            display: block;
+            margin-top: 8px;
+            font-size: 11px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: #a95338;
+            font-weight: 700;
+        }
+
+        .b2b-node {
+            position: absolute;
+            z-index: 3;
+            width: 145px;
+            padding: 18px;
+            border-radius: 20px;
+            background: rgba(255,249,240,.94);
+            border: 1px solid #e3d2bc;
+            box-shadow: 0 20px 45px rgba(59,41,34,.12);
+            backdrop-filter: blur(12px);
+            animation: nodeFloat 4s ease-in-out infinite;
+        }
+
+        .b2b-node:nth-child(2) {
+            top: 35px;
+            left: 15px;
+        }
+
+        .b2b-node:nth-child(3) {
+            top: 80px;
+            right: 5px;
+            animation-delay: .7s;
+        }
+
+        .b2b-node:nth-child(4) {
+            bottom: 50px;
+            left: 35px;
+            animation-delay: 1.3s;
+        }
+
+        .b2b-node:nth-child(5) {
+            bottom: 15px;
+            right: 25px;
+            animation-delay: 1.9s;
+        }
+
+        @keyframes nodeFloat {
+            0%,100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-9px);
+            }
+        }
+
+        .b2b-node-icon {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .b2b-node:nth-child(2) .b2b-node-icon {
+            background: #f5d5cb;
+        }
+
+        .b2b-node:nth-child(3) .b2b-node-icon {
+            background: #dce2d2;
+        }
+
+        .b2b-node:nth-child(4) .b2b-node-icon {
+            background: #dfe4f0;
+        }
+
+        .b2b-node:nth-child(5) .b2b-node-icon {
+            background: #f5e1ae;
+        }
+
+        .b2b-node strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .b2b-node small {
+            display: block;
+            margin-top: 4px;
+            color: #806f65;
+            line-height: 1.4;
+        }
+
+        /* =========================
+           HOW IT WORKS STRIP
+        ========================= */
+
+        .b2b-process {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 70px 30px 100px;
+        }
+
+        .b2b-section-heading {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 45px;
+        }
+
+        .b2b-section-heading small {
+            color: #a95338;
+            font-size: 11px;
+            letter-spacing: .15em;
+            font-weight: 800;
+        }
+
+        .b2b-section-heading h2 {
+            margin: 12px 0;
+            font-family: "Playfair Display", serif;
+            font-size: clamp(35px, 5vw, 58px);
+        }
+
+        .b2b-section-heading p {
+            color: #76645b;
+            line-height: 1.7;
+        }
+
+        .b2b-process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .b2b-process-card {
+            position: relative;
+            padding: 28px;
+            min-height: 210px;
+            border-radius: 24px;
+            background: #fff9f0;
+            border: 1px solid #e5d5c1;
+            transition: transform .3s ease, box-shadow .3s ease;
+        }
+
+        .b2b-process-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 25px 50px rgba(59,41,34,.1);
+        }
+
+        .b2b-process-number {
+            font-family: "Playfair Display", serif;
+            font-size: 42px;
+            color: #c96f4a;
+        }
+
+        .b2b-process-card h3 {
+            margin: 15px 0 9px;
+            font-size: 17px;
+        }
+
+        .b2b-process-card p {
+            margin: 0;
+            color: #77675e;
+            line-height: 1.55;
+            font-size: 13px;
+        }
+
+        /* =========================
+           REQUIREMENT PREVIEW
+        ========================= */
+
+        .requirement-section {
+            padding: 90px 30px;
+            background: #3b2922;
+            color: #fff9f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .requirement-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: .08;
+            background-image:
+                repeating-linear-gradient(
+                    45deg,
+                    transparent 0 20px,
+                    #fff 20px 21px
+                );
+            pointer-events: none;
+        }
+
+        .requirement-wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: .85fr 1.15fr;
+            gap: 55px;
+            align-items: center;
+        }
+
+        .requirement-copy small {
+            color: #e9a23b;
+            font-weight: 800;
+            letter-spacing: .15em;
+        }
+
+        .requirement-copy h2 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(38px, 5vw, 64px);
+            line-height: 1;
+            margin: 15px 0;
+        }
+
+        .requirement-copy p {
+            color: #ddcec3;
+            line-height: 1.7;
+        }
+
+        .requirement-card {
+            background: #fff9f0;
+            color: #3b2922;
+            border-radius: 28px;
+            padding: 30px;
+            box-shadow: 0 30px 80px rgba(0,0,0,.22);
+        }
+
+        .requirement-card-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .requirement-card-top strong {
+            font-family: "Playfair Display", serif;
+            font-size: 23px;
+        }
+
+        .live-badge {
+            padding: 7px 11px;
+            border-radius: 999px;
+            background: #dcebdc;
+            color: #3e7c59;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .requirement-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .requirement-field {
+            padding: 17px;
+            border-radius: 15px;
+            background: #f7eee3;
+        }
+
+        .requirement-field.full {
+            grid-column: 1 / -1;
+        }
+
+        .requirement-field small {
+            display: block;
+            color: #89766b;
+            font-size: 10px;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .requirement-field strong {
+            font-size: 14px;
+        }
+
+        .requirement-cta {
+            width: 100%;
+            margin-top: 20px;
+            min-height: 52px;
+            border: 0;
+            border-radius: 14px;
+            background: #c96f4a;
+            color: white;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform .25s ease;
+        }
+
+        .requirement-cta:hover {
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+            .b2b-hero {
+                grid-template-columns: 1fr;
+                padding-top: 90px;
+            }
+
+            .b2b-visual {
+                min-height: 450px;
+            }
+
+            .b2b-process-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .requirement-wrap {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .b2b-hero {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .b2b-title {
+                font-size: 50px;
+            }
+
+            .b2b-visual {
+                transform: scale(.82);
+                margin: -30px -30px;
+            }
+
+            .b2b-process {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .b2b-process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .requirement-section {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .requirement-fields {
+                grid-template-columns: 1fr;
+            }
+
+            .requirement-field.full {
+                grid-column: auto;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .b2b-orbit,
+            .b2b-node {
+                animation: none;
+            }
+
+            .b2b-primary,
+            .b2b-secondary,
+            .b2b-process-card,
+            .requirement-cta {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="b2b-page">
+
+    <!-- ==========================================
+         NAVIGATION
+    =========================================== -->
+
+    <header class="site-header">
+        <nav class="navbar">
+
+            <a
+                href="../index.html"
+                class="brand-logo-link"
+                aria-label="Taana-Baana Home"
+            >
+                <img
+                    src="../assets/logo.png"
+                    alt="Taana-Baana — From Hands to Markets"
+                    class="brand-logo"
+                >
+            </a>
+
+            <div class="nav-links">
+
+                <div class="nav-dropdown">
+                    <button
+                        class="nav-dropdown-toggle"
+                        type="button"
+                    >
+                        Features
+                        <span>⌄</span>
+                    </button>
+
+                    <div class="nav-dropdown-menu">
+
+                        <a href="studio.html">
+                            AI Product Studio
+                        </a>
+
+                        <a href="catalog.html">
+                            Voice-to-Catalogue
+                        </a>
+
+                        <a href="pricing.html">
+                            Smart Pricing
+                        </a>
+
+                        <a href="artisan.html">
+                            Artisan Identity
+                        </a>
+
+                    </div>
+                </div>
+
+                <a href="marketplace.html">
+                    Marketplace
+                </a>
+
+                <a href="b2b.html" class="active">
+                    B2B
+                </a>
+
+                <a href="how-it-works.html">
+                    How It Works
+                </a>
+
+                <a href="about.html">
+                    About
+                </a>
+
+            </div>
+
+            <div class="nav-actions">
+
+                <a href="login.html" class="nav-login">
+                    Login
+                </a>
+
+                <a href="register.html" class="nav-cta">
+                    Get Started
+                </a>
+
+            </div>
+
+        </nav>
+    </header>
+
+
+    <!-- ==========================================
+         HERO
+    =========================================== -->
+
+    <main>
+
+        <section class="b2b-hero">
+
+            <div class="b2b-copy">
+
+                <div class="b2b-eyebrow">
+                    <span></span>
+                    B2B CRAFT NETWORK
+                </div>
+
+                <h1 class="b2b-title">
+                    Craft at
+                    <br>
+                    <em>scale.</em>
+                </h1>
+
+                <p class="b2b-subtitle">
+                    Connect businesses with artisan makers and
+                    clusters for meaningful bulk orders — without
+                    losing the human story behind every product.
+                </p>
+
+                <div class="b2b-actions">
+
+                    <button
+                        class="b2b-primary"
+                        id="postRequirementBtn"
+                        type="button"
+                    >
+                        Post a Requirement →
+                    </button>
+
+                    <button
+                        class="b2b-secondary"
+                        id="viewMatchesBtn"
+                        type="button"
+                    >
+                        Explore Matches
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="b2b-visual">
+
+                <div class="b2b-orbit"></div>
+
+                <div class="b2b-core">
+                    <div class="b2b-core-inner">
+                        <strong>Taana<br>Baana</strong>
+                        <span>One woven network</span>
+                    </div>
+                </div>
+
+                <div class="b2b-node">
+                    <div class="b2b-node-icon">🏢</div>
+                    <strong>Business</strong>
+                    <small>Bulk requirement</small>
+                </div>
+
+                <div class="b2b-node">
+                    <div class="b2b-node-icon">🧵</div>
+                    <strong>Artisan</strong>
+                    <small>Craft expertise</small>
+                </div>
+
+                <div class="b2b-node">
+                    <div class="b2b-node-icon">🌿</div>
+                    <strong>Cluster</strong>
+                    <small>Shared capacity</small>
+                </div>
+
+                <div class="b2b-node">
+                    <div class="b2b-node-icon">📦</div>
+                    <strong>Order</strong>
+                    <small>From requirement to delivery</small>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             PROCESS
+        =========================================== -->
+
+        <section class="b2b-process">
+
+            <div class="b2b-section-heading">
+
+                <small>HOW B2B WORKS</small>
+
+                <h2>
+                    From requirement
+                    <br>
+                    to makers.
+                </h2>
+
+                <p>
+                    A simple flow for businesses looking for
+                    handmade products in meaningful quantities.
+                </p>
+
+            </div>
+
+
+            <div class="b2b-process-grid">
+
+                <article class="b2b-process-card">
+
+                    <div class="b2b-process-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Describe what you need
+                    </h3>
+
+                    <p>
+                        Tell us the product, quantity, budget,
+                        destination and deadline.
+                    </p>
+
+                </article>
+
+
+                <article class="b2b-process-card">
+
+                    <div class="b2b-process-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Find suitable makers
+                    </h3>
+
+                    <p>
+                        The prototype matching system compares
+                        requirement details with maker capabilities.
+                    </p>
+
+                </article>
+
+
+                <article class="b2b-process-card">
+
+                    <div class="b2b-process-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Review responses
+                    </h3>
+
+                    <p>
+                        Compare capacity, indicative pricing,
+                        craft and delivery information.
+                    </p>
+
+                </article>
+
+
+                <article class="b2b-process-card">
+
+                    <div class="b2b-process-number">
+                        04
+                    </div>
+
+                    <h3>
+                        Build the order
+                    </h3>
+
+                    <p>
+                        Send enquiries, receive quotations and
+                        coordinate larger orders.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             REQUIREMENT PREVIEW
+        =========================================== -->
+
+        <section class="requirement-section">
+
+            <div class="requirement-wrap">
+
+                <div class="requirement-copy">
+
+                    <small>BUYER REQUIREMENT</small>
+
+                    <h2>
+                        Need 500?
+                        <br>
+                        Find the
+                        <br>
+                        <em>right makers.</em>
+                    </h2>
+
+                    <p>
+                        Post a requirement once and explore
+                        potential artisan and cluster matches.
+                    </p>
+
+                    <button
+                        class="b2b-secondary"
+                        id="postRequirementBtn2"
+                        type="button"
+                    >
+                        Create Requirement →
+                    </button>
+
+                </div>
+
+
+                <div class="requirement-card">
+
+                    <div class="requirement-card-top">
+
+                        <strong>
+                            Handmade Jute Bags
+                        </strong>
+
+                        <span class="live-badge">
+                            READY TO MATCH
+                        </span>
+
+                    </div>
+
+
+                    <div class="requirement-fields">
+
+                        <div class="requirement-field">
+
+                            <small>
+                                Quantity
+                            </small>
+
+                            <strong>
+                                500 units
+                            </strong>
+
+                        </div>
+
+
+                        <div class="requirement-field">
+
+                            <small>
+                                Budget
+                            </small>
+
+                            <strong>
+                                ₹250 / unit
+                            </strong>
+
+                        </div>
+
+
+                        <div class="requirement-field">
+
+                            <small>
+                                Delivery
+                            </small>
+
+                            <strong>
+                                Bengaluru
+                            </strong>
+
+                        </div>
+
+
+                        <div class="requirement-field">
+
+                            <small>
+                                Deadline
+                            </small>
+
+                            <strong>
+                                20 October
+                            </strong>
+
+                        </div>
+
+
+                        <div class="requirement-field full">
+
+                            <small>
+                                Customisation
+                            </small>
+
+                            <strong>
+                                Logo embroidery + kraft packaging
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="requirement-cta"
+                        id="findMatchesBtn"
+                        type="button"
+                    >
+                        Find Artisan Matches →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="../js/main.js" defer></script>
+<script src="../js/pages.js" defer></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const goToRequirement = () => {
+        window.location.href = "post-requirement.html";
+    };
+
+    const goToMatches = () => {
+        window.location.href = "matching.html";
+    };
+
+    document
+        .getElementById("postRequirementBtn")
+        ?.addEventListener("click", goToRequirement);
+
+    document
+        .getElementById("postRequirementBtn2")
+        ?.addEventListener("click", goToRequirement);
+
+    document
+        .getElementById("findMatchesBtn")
+        ?.addEventListener("click", goToMatches);
+
+    document
+        .getElementById("viewMatchesBtn")
+        ?.addEventListener("click", goToMatches);
+
+});
+</script>
+
+</body>
+</html>

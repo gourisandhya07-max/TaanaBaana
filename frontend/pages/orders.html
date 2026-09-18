@@ -1,0 +1,2826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Track artisan orders from confirmation to delivery on Taana-Baana."
+    >
+
+    <title>Orders — Taana-Baana</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Tiro+Devanagari+Sanskrit&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+
+
+    <style>
+
+        /* =====================================================
+           TAANA-BAANA — ORDER TRACKING
+        ===================================================== */
+
+        .orders-page {
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 5% 10%,
+                    rgba(201,111,74,.10),
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 95% 20%,
+                    rgba(15,124,120,.08),
+                    transparent 26%
+                ),
+                #fcf6ea;
+
+            color: #3b2922;
+
+        }
+
+
+        /* =====================================================
+           PAGE HEADER
+        ===================================================== */
+
+        .orders-header {
+
+            max-width: 1180px;
+
+            margin: 0 auto;
+
+            padding:
+                125px
+                30px
+                30px;
+
+        }
+
+
+        .orders-breadcrumb {
+
+            display: flex;
+
+            gap: 8px;
+
+            align-items: center;
+
+            margin-bottom: 25px;
+
+            color: #927e72;
+
+            font-size: 10px;
+
+        }
+
+
+        .orders-breadcrumb a {
+
+            color: #927e72;
+
+            text-decoration: none;
+
+        }
+
+
+        .orders-breadcrumb span {
+
+            color: #c96f4a;
+
+        }
+
+
+        .orders-heading {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-end;
+
+            gap: 25px;
+
+        }
+
+
+        .orders-eyebrow {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding:
+                8px
+                13px;
+
+            border-radius: 999px;
+
+            background: #e3eee6;
+
+            color: #3e7158;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            letter-spacing: .13em;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .orders-eyebrow::before {
+
+            content: "";
+
+            width: 6px;
+
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: #3e7c59;
+
+        }
+
+
+        .orders-header h1 {
+
+            margin:
+                17px
+                0
+                9px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(43px, 6vw, 67px);
+
+            line-height: .98;
+
+            letter-spacing: -.045em;
+
+        }
+
+
+        .orders-header h1 em {
+
+            color: #c96f4a;
+
+            font-weight: 500;
+
+        }
+
+
+        .orders-header p {
+
+            max-width: 600px;
+
+            margin: 0;
+
+            color: #78665d;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+        }
+
+
+        .order-number {
+
+            flex-shrink: 0;
+
+            padding:
+                15px
+                18px;
+
+            border:
+                1px solid
+                #dfccb5;
+
+            border-radius: 15px;
+
+            background: #fff9f0;
+
+        }
+
+
+        .order-number small {
+
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: #98857a;
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+            letter-spacing: .1em;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .order-number strong {
+
+            color: #a95338;
+
+            font-size: 11px;
+
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ===================================================== */
+
+        .orders-content {
+
+            max-width: 1120px;
+
+            margin: 0 auto;
+
+            padding:
+                0
+                30px
+                100px;
+
+        }
+
+
+        .orders-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                315px;
+
+            gap: 18px;
+
+            align-items: start;
+
+        }
+
+
+        /* =====================================================
+           MAIN TRACKING CARD
+        ===================================================== */
+
+        .tracking-card {
+
+            overflow: hidden;
+
+            border:
+                1px solid
+                #e1d0b9;
+
+            border-radius: 23px;
+
+            background: #fff9f0;
+
+            box-shadow:
+                0
+                15px
+                45px
+                rgba(59,41,34,.06);
+
+        }
+
+
+        .tracking-top {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            padding:
+                22px
+                25px;
+
+            border-bottom:
+                1px solid
+                #eadcca;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff9f0,
+                    #f6eadc
+                );
+
+        }
+
+
+        .tracking-artisan {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        .artisan-symbol {
+
+            width: 50px;
+
+            height: 50px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 14px;
+
+            background: #e9cbbd;
+
+            font-size: 23px;
+
+        }
+
+
+        .tracking-artisan h2 {
+
+            margin:
+                0
+                0
+                4px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 19px;
+
+        }
+
+
+        .tracking-artisan p {
+
+            margin: 0;
+
+            color: #88766b;
+
+            font-size: 9px;
+
+        }
+
+
+        .status-pill {
+
+            padding:
+                8px
+                12px;
+
+            border-radius: 999px;
+
+            background: #e3eee6;
+
+            color: #39705a;
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+            letter-spacing: .07em;
+
+            text-transform: uppercase;
+
+        }
+
+
+        /* =====================================================
+           PRODUCT SUMMARY
+        ===================================================== */
+
+        .product-summary {
+
+            display: grid;
+
+            grid-template-columns:
+                72px
+                1fr
+                auto;
+
+            gap: 14px;
+
+            align-items: center;
+
+            margin: 22px 25px;
+
+            padding: 15px;
+
+            border:
+                1px solid
+                #eadcca;
+
+            border-radius: 14px;
+
+            background: #f8efe5;
+
+        }
+
+
+        .product-icon {
+
+            width: 72px;
+
+            height: 72px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #d5c29f,
+                    #c7a875
+                );
+
+            font-size: 30px;
+
+        }
+
+
+        .product-summary small {
+
+            display: block;
+
+            margin-bottom: 4px;
+
+            color: #9a877b;
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+            letter-spacing: .08em;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .product-summary h3 {
+
+            margin:
+                0
+                0
+                4px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 19px;
+
+        }
+
+
+        .product-summary p {
+
+            margin: 0;
+
+            color: #79675d;
+
+            font-size: 9px;
+
+        }
+
+
+        .product-price {
+
+            text-align: right;
+
+        }
+
+
+        .product-price small {
+
+            margin-bottom: 3px;
+
+        }
+
+
+        .product-price strong {
+
+            color: #a95338;
+
+            font-size: 18px;
+
+        }
+
+
+        /* =====================================================
+           TRACKING TIMELINE
+        ===================================================== */
+
+        .tracking-section {
+
+            padding:
+                0
+                25px
+                28px;
+
+        }
+
+
+        .tracking-section h3 {
+
+            margin:
+                0
+                0
+                20px;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            letter-spacing: .07em;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .tracking-timeline {
+
+            position: relative;
+
+            display: grid;
+
+            gap: 0;
+
+        }
+
+
+        .tracking-line {
+
+            position: absolute;
+
+            left: 15px;
+
+            top: 16px;
+
+            bottom: 16px;
+
+            width: 2px;
+
+            background: #ded0be;
+
+        }
+
+
+        .tracking-line-progress {
+
+            position: absolute;
+
+            left: 15px;
+
+            top: 16px;
+
+            width: 2px;
+
+            height: 0;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    #c96f4a,
+                    #3e7c59
+                );
+
+            transition:
+                height 1s ease;
+
+        }
+
+
+        .tracking-step {
+
+            position: relative;
+
+            display: grid;
+
+            grid-template-columns:
+                32px
+                1fr
+                auto;
+
+            gap: 12px;
+
+            min-height: 78px;
+
+        }
+
+
+        .step-circle {
+
+            position: relative;
+
+            z-index: 2;
+
+            width: 32px;
+
+            height: 32px;
+
+            display: grid;
+
+            place-items: center;
+
+            border:
+                2px solid
+                #d7c5ad;
+
+            border-radius: 50%;
+
+            background: #fff9f0;
+
+            color: #a18d7d;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+        }
+
+
+        .tracking-step.completed
+        .step-circle {
+
+            border-color: #3e7c59;
+
+            background: #3e7c59;
+
+            color: white;
+
+        }
+
+
+        .tracking-step.current
+        .step-circle {
+
+            border-color: #c96f4a;
+
+            background: #c96f4a;
+
+            color: white;
+
+            box-shadow:
+                0
+                0
+                0
+                5px
+                rgba(201,111,74,.10);
+
+        }
+
+
+        .step-content {
+
+            padding-top: 2px;
+
+        }
+
+
+        .step-content h4 {
+
+            margin:
+                0
+                0
+                4px;
+
+            font-size: 11px;
+
+        }
+
+
+        .step-content p {
+
+            margin: 0;
+
+            color: #907d72;
+
+            font-size: 9px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .step-date {
+
+            padding-top: 4px;
+
+            color: #a08d81;
+
+            font-size: 8px;
+
+            white-space: nowrap;
+
+        }
+
+
+        .tracking-step.current
+        .step-content h4 {
+
+            color: #a95338;
+
+        }
+
+
+        /* =====================================================
+           DELIVERY CARD
+        ===================================================== */
+
+        .delivery-card {
+
+            margin:
+                0
+                25px
+                25px;
+
+            padding:
+                18px;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e1ebe1,
+                    #d9e4d8
+                );
+
+        }
+
+
+        .delivery-card small {
+
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: #648063;
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+            letter-spacing: .09em;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .delivery-card strong {
+
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: #3e5940;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 20px;
+
+        }
+
+
+        .delivery-card p {
+
+            margin: 0;
+
+            color: #5f705b;
+
+            font-size: 9px;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .order-sidebar {
+
+            display: grid;
+
+            gap: 13px;
+
+        }
+
+
+        .side-card {
+
+            padding: 21px;
+
+            border:
+                1px solid
+                #e1d0b9;
+
+            border-radius: 19px;
+
+            background: #fff9f0;
+
+            box-shadow:
+                0
+                8px
+                25px
+                rgba(59,41,34,.045);
+
+        }
+
+
+        .side-card h3 {
+
+            margin:
+                0
+                0
+                15px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 20px;
+
+        }
+
+
+        /* =====================================================
+           DETAILS
+        ===================================================== */
+
+        .detail-list {
+
+            display: grid;
+
+            gap: 11px;
+
+        }
+
+
+        .detail-item {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding-bottom: 10px;
+
+            border-bottom:
+                1px solid
+                #eee2d3;
+
+        }
+
+
+        .detail-item:last-child {
+
+            padding-bottom: 0;
+
+            border-bottom: 0;
+
+        }
+
+
+        .detail-item span {
+
+            color: #917e73;
+
+            font-size: 9px;
+
+        }
+
+
+        .detail-item strong {
+
+            color: #54433a;
+
+            font-size: 9px;
+
+            text-align: right;
+
+        }
+
+
+        /* =====================================================
+           PAYMENT
+        ===================================================== */
+
+        .payment-card {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #f0e7f1,
+                    #e7dfeb
+                );
+
+        }
+
+
+        .payment-card h3 {
+
+            color: #654c73;
+
+        }
+
+
+        .payment-status {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .payment-check {
+
+            width: 28px;
+
+            height: 28px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 50%;
+
+            background: #d6e7d9;
+
+            color: #3e7c59;
+
+            font-weight: 900;
+
+        }
+
+
+        .payment-status strong {
+
+            display: block;
+
+            color: #594967;
+
+            font-size: 10px;
+
+        }
+
+
+        .payment-status span {
+
+            display: block;
+
+            margin-top: 2px;
+
+            color: #88778d;
+
+            font-size: 8px;
+
+        }
+
+
+        .payment-card p {
+
+            margin: 0;
+
+            color: #74647a;
+
+            font-size: 9px;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* =====================================================
+           ACTIONS
+        ===================================================== */
+
+        .order-actions {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 8px;
+
+            margin-top: 15px;
+
+        }
+
+
+        .order-button {
+
+            min-height: 42px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            font-family:
+                "DM Sans",
+                sans-serif;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+        }
+
+
+        .primary-order {
+
+            border: 0;
+
+            background: #3b2922;
+
+            color: white;
+
+        }
+
+
+        .secondary-order {
+
+            border:
+                1px solid
+                #d8c4aa;
+
+            background: transparent;
+
+            color: #5d4b41;
+
+        }
+
+
+        /* =====================================================
+           EMPTY STATE
+        ===================================================== */
+
+        .orders-empty {
+
+            display: none;
+
+            max-width: 600px;
+
+            margin: 20px auto 100px;
+
+            padding: 70px 25px;
+
+            border:
+                1px dashed
+                #d6c0a4;
+
+            border-radius: 23px;
+
+            background: #fff9f0;
+
+            text-align: center;
+
+        }
+
+
+        .orders-empty.show {
+
+            display: block;
+
+        }
+
+
+        .orders-empty-icon {
+
+            margin-bottom: 12px;
+
+            font-size: 45px;
+
+        }
+
+
+        .orders-empty h2 {
+
+            margin:
+                0
+                0
+                8px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 30px;
+
+        }
+
+
+        .orders-empty p {
+
+            max-width: 430px;
+
+            margin:
+                0
+                auto
+                20px;
+
+            color: #806d63;
+
+            font-size: 11px;
+
+            line-height: 1.7;
+
+        }
+
+
+        .orders-empty a {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            min-height: 43px;
+
+            padding:
+                0
+                17px;
+
+            border-radius: 10px;
+
+            background: #3b2922;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+        }
+
+
+        /* =====================================================
+           TRACKING TOAST
+        ===================================================== */
+
+        .tracking-toast {
+
+            position: fixed;
+
+            z-index: 10000;
+
+            right: 22px;
+
+            bottom: 22px;
+
+            max-width: 340px;
+
+            padding:
+                14px
+                16px;
+
+            border:
+                1px solid
+                #dfccb5;
+
+            border-radius: 13px;
+
+            background: #fff9f0;
+
+            box-shadow:
+                0
+                15px
+                45px
+                rgba(42,29,24,.16);
+
+            color: #5b4940;
+
+            font-size: 10px;
+
+            line-height: 1.5;
+
+            transform:
+                translateY(20px);
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transition:
+                opacity .25s ease,
+                transform .25s ease;
+
+        }
+
+
+        .tracking-toast.show {
+
+            opacity: 1;
+
+            transform:
+                translateY(0);
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .orders-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .order-sidebar {
+
+                grid-template-columns:
+                    1fr
+                    1fr;
+
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .orders-header {
+
+                padding:
+                    105px
+                    20px
+                    30px;
+
+            }
+
+
+            .orders-content {
+
+                padding:
+                    0
+                    15px
+                    70px;
+
+            }
+
+
+            .orders-heading {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+            }
+
+
+            .order-number {
+
+                width: 100%;
+
+                box-sizing: border-box;
+
+            }
+
+
+            .tracking-top {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+            }
+
+
+            .product-summary {
+
+                grid-template-columns:
+                    58px
+                    1fr;
+
+            }
+
+
+            .product-icon {
+
+                width: 58px;
+
+                height: 58px;
+
+                font-size: 25px;
+
+            }
+
+
+            .product-price {
+
+                grid-column: 2;
+
+                text-align: left;
+
+            }
+
+
+            .tracking-section {
+
+                padding:
+                    0
+                    18px
+                    22px;
+
+            }
+
+
+            .delivery-card {
+
+                margin:
+                    0
+                    18px
+                    18px;
+
+            }
+
+
+            .order-sidebar {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .tracking-step {
+
+                grid-template-columns:
+                    32px
+                    1fr;
+
+            }
+
+
+            .step-date {
+
+                grid-column: 2;
+
+                padding-top: 0;
+
+                padding-bottom: 15px;
+
+            }
+
+        }
+
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .tracking-line-progress,
+            .tracking-toast {
+
+                transition: none;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="orders-page">
+
+
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
+
+    <header class="site-header">
+
+        <nav class="navbar">
+
+
+            <a
+                href="../index.html"
+                class="brand-logo-link"
+                aria-label="Taana-Baana Home"
+            >
+
+                <img
+                    src="../assets/logo.png"
+                    alt="Taana-Baana — From Hands to Markets"
+                    class="brand-logo"
+                >
+
+            </a>
+
+
+            <div class="nav-links">
+
+
+                <div class="nav-dropdown">
+
+                    <button
+                        class="nav-dropdown-toggle"
+                        type="button"
+                    >
+                        Features
+                        <span>⌄</span>
+                    </button>
+
+
+                    <div class="nav-dropdown-menu">
+
+                        <a href="studio.html">
+                            AI Product Studio
+                        </a>
+
+                        <a href="catalog.html">
+                            Voice-to-Catalogue
+                        </a>
+
+                        <a href="pricing.html">
+                            Smart Pricing
+                        </a>
+
+                        <a href="artisan.html">
+                            Artisan Identity
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <a href="marketplace.html">
+                    Marketplace
+                </a>
+
+
+                <a
+                    href="b2b.html"
+                    class="active"
+                >
+                    B2B
+                </a>
+
+
+                <a href="how-it-works.html">
+                    How It Works
+                </a>
+
+
+                <a href="about.html">
+                    About
+                </a>
+
+
+            </div>
+
+
+            <div class="nav-actions">
+
+                <a
+                    href="login.html"
+                    class="nav-login"
+                >
+                    Login
+                </a>
+
+
+                <a
+                    href="register.html"
+                    class="nav-cta"
+                >
+                    Get Started
+                </a>
+
+            </div>
+
+
+        </nav>
+
+    </header>
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <main>
+
+
+        <section class="orders-header">
+
+
+            <div class="orders-breadcrumb">
+
+                <a href="buyer-enquiries.html">
+                    My Enquiries
+                </a>
+
+                <span>/</span>
+
+                Orders
+
+            </div>
+
+
+            <div class="orders-heading">
+
+
+                <div>
+
+                    <div class="orders-eyebrow">
+                        B2B ORDER TRACKING
+                    </div>
+
+
+                    <h1>
+                        From
+                        <br>
+                        <em>hands to delivery.</em>
+                    </h1>
+
+
+                    <p>
+                        Follow your artisan order through production,
+                        quality checking, dispatch and delivery —
+                        all in one simple view.
+                    </p>
+
+                </div>
+
+
+                <div class="order-number">
+
+                    <small>
+                        Order number
+                    </small>
+
+                    <strong id="orderNumber">
+                        TB-ORD-DEMO
+
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             CONTENT
+        ================================================== -->
+
+        <section
+            class="orders-content"
+            id="ordersContent"
+        >
+
+
+            <div class="orders-grid">
+
+
+                <!-- =========================================
+                     MAIN
+                ========================================== -->
+
+                <article class="tracking-card">
+
+
+                    <div class="tracking-top">
+
+
+                        <div class="tracking-artisan">
+
+                            <div class="artisan-symbol">
+                                🧵
+                            </div>
+
+
+                            <div>
+
+                                <h2 id="artisanName">
+                                    Sutradhar Collective
+                                </h2>
+
+                                <p id="artisanLocation">
+                                    Handcrafted Jute · West Bengal
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="status-pill">
+                            In production
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- PRODUCT -->
+
+                    <div class="product-summary">
+
+
+                        <div
+                            class="product-icon"
+                            id="productIcon"
+                        >
+                            👜
+                        </div>
+
+
+                        <div>
+
+                            <small>
+                                Order item
+                            </small>
+
+                            <h3 id="productName">
+                                Handcrafted Jute Bags
+                            </h3>
+
+                            <p id="productQuantity">
+                                500 units · Custom branding
+                            </p>
+
+                        </div>
+
+
+                        <div class="product-price">
+
+                            <small>
+                                Order value
+                            </small>
+
+                            <strong id="orderTotal">
+                                ₹1,16,000
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- TRACKING -->
+
+                    <div class="tracking-section">
+
+
+                        <h3>
+                            Production journey
+                        </h3>
+
+
+                        <div class="tracking-timeline">
+
+
+                            <div
+                                class="tracking-line"
+                                aria-hidden="true"
+                            ></div>
+
+
+                            <div
+                                class="tracking-line-progress"
+                                id="trackingProgress"
+                                aria-hidden="true"
+                            ></div>
+
+
+                            <!-- STEP 1 -->
+
+                            <div
+                                class="tracking-step completed"
+                                data-step="1"
+                            >
+
+                                <div class="step-circle">
+                                    ✓
+                                </div>
+
+
+                                <div class="step-content">
+
+                                    <h4>
+                                        Order confirmed
+                                    </h4>
+
+                                    <p>
+                                        Your quotation was accepted
+                                        and the order was created.
+                                    </p>
+
+                                </div>
+
+
+                                <div class="step-date">
+                                    Sep 19
+                                </div>
+
+                            </div>
+
+
+                            <!-- STEP 2 -->
+
+                            <div
+                                class="tracking-step current"
+                                data-step="2"
+                            >
+
+                                <div class="step-circle">
+                                    2
+                                </div>
+
+
+                                <div class="step-content">
+
+                                    <h4>
+                                        Production underway
+                                    </h4>
+
+                                    <p>
+                                        Artisans are preparing and
+                                        crafting your order.
+                                    </p>
+
+                                </div>
+
+
+                                <div class="step-date">
+                                    In progress
+                                </div>
+
+                            </div>
+
+
+                            <!-- STEP 3 -->
+
+                            <div
+                                class="tracking-step"
+                                data-step="3"
+                            >
+
+                                <div class="step-circle">
+                                    3
+                                </div>
+
+
+                                <div class="step-content">
+
+                                    <h4>
+                                        Quality check
+                                    </h4>
+
+                                    <p>
+                                        Products will be checked for
+                                        finish, quantity and customisation.
+                                    </p>
+
+                                </div>
+
+
+                                <div class="step-date">
+                                    Upcoming
+                                </div>
+
+                            </div>
+
+
+                            <!-- STEP 4 -->
+
+                            <div
+                                class="tracking-step"
+                                data-step="4"
+                            >
+
+                                <div class="step-circle">
+                                    4
+                                </div>
+
+
+                                <div class="step-content">
+
+                                    <h4>
+                                        Dispatched
+                                    </h4>
+
+                                    <p>
+                                        The completed order will be
+                                        handed to the delivery partner.
+                                    </p>
+
+                                </div>
+
+
+                                <div class="step-date">
+                                    Upcoming
+                                </div>
+
+                            </div>
+
+
+                            <!-- STEP 5 -->
+
+                            <div
+                                class="tracking-step"
+                                data-step="5"
+                            >
+
+                                <div class="step-circle">
+                                    5
+                                </div>
+
+
+                                <div class="step-content">
+
+                                    <h4>
+                                        Delivered
+                                    </h4>
+
+                                    <p>
+                                        Order reaches the buyer.
+                                    </p>
+
+                                </div>
+
+
+                                <div class="step-date">
+                                    Upcoming
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DELIVERY -->
+
+                    <div class="delivery-card">
+
+
+                        <small>
+                            Estimated delivery
+                        </small>
+
+
+                        <strong id="deliveryDate">
+                            October 12–16, 2026
+                        </strong>
+
+
+                        <p id="deliveryLocation">
+                            Delivery to Delhi, India ·
+                            Final logistics details will be
+                            confirmed after dispatch.
+                        </p>
+
+
+                    </div>
+
+
+                </article>
+
+
+                <!-- =========================================
+                     SIDEBAR
+                ========================================== -->
+
+                <aside class="order-sidebar">
+
+
+                    <!-- ORDER DETAILS -->
+
+                    <div class="side-card">
+
+
+                        <h3>
+                            Order details
+                        </h3>
+
+
+                        <div class="detail-list">
+
+
+                            <div class="detail-item">
+
+                                <span>
+                                    Category
+                                </span>
+
+                                <strong id="category">
+                                    Handcrafted Textiles
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-item">
+
+                                <span>
+                                    Quantity
+                                </span>
+
+                                <strong id="quantity">
+                                    500 units
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-item">
+
+                                <span>
+                                    Unit price
+                                </span>
+
+                                <strong id="unitPrice">
+                                    ₹210
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-item">
+
+                                <span>
+                                    Production
+                                </span>
+
+                                <strong>
+                                    18–22 days
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-item">
+
+                                <span>
+                                    Payment terms
+                                </span>
+
+                                <strong>
+                                    50% advance
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-item">
+
+                                <span>
+                                    Delivery
+                                </span>
+
+                                <strong id="sideDelivery">
+                                    Delhi
+                                </strong>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="order-actions">
+
+                            <button
+                                class="order-button secondary-order"
+                                id="contactArtisan"
+                                type="button"
+                            >
+                                Contact Artisan
+                            </button>
+
+
+                            <button
+                                class="order-button primary-order"
+                                id="viewReceipt"
+                                type="button"
+                            >
+                                View Receipt
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PAYMENT -->
+
+                    <div class="side-card payment-card">
+
+
+                        <h3>
+                            Payment
+                        </h3>
+
+
+                        <div class="payment-status">
+
+
+                            <div class="payment-check">
+                                ✓
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Order confirmation recorded
+                                </strong>
+
+                                <span>
+                                    Prototype payment state
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <p>
+                            In the production platform, this section
+                            can connect to a secure payment gateway,
+                            invoices and milestone-based artisan
+                            payments.
+                        </p>
+
+                    </div>
+
+
+                    <!-- AI BUSINESS ASSISTANT -->
+
+                    <div class="side-card">
+
+
+                        <h3>
+                            ✦ AI Business Manager
+                        </h3>
+
+
+                        <p
+                            style="
+                                margin:0;
+                                color:#79675d;
+                                font-size:9px;
+                                line-height:1.7;
+                            "
+                        >
+                            Your order dashboard can later use AI to
+                            detect delays, compare the original deadline
+                            with production progress and alert you when
+                            an action is needed.
+                        </p>
+
+
+                        <button
+                            class="order-button primary-order"
+                            id="aiUpdate"
+                            type="button"
+                            style="
+                                width:100%;
+                                margin-top:15px;
+                            "
+                        >
+                            Check Order Status ✦
+                        </button>
+
+                    </div>
+
+
+                </aside>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             EMPTY
+        ================================================== -->
+
+        <section
+            class="orders-empty"
+            id="ordersEmpty"
+        >
+
+
+            <div class="orders-empty-icon">
+                📦
+            </div>
+
+
+            <h2>
+                No order yet
+            </h2>
+
+
+            <p>
+                Once a quotation is accepted, your confirmed
+                artisan orders will appear here with production
+                and delivery tracking.
+            </p>
+
+
+            <a href="b2b.html">
+                Start a B2B Requirement →
+            </a>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+<!-- =====================================================
+     TOAST
+====================================================== -->
+
+<div
+    class="tracking-toast"
+    id="trackingToast"
+    role="status"
+    aria-live="polite"
+></div>
+
+
+<script src="../js/main.js" defer></script>
+<script src="../js/pages.js" defer></script>
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+
+        /* =================================================
+           GET ORDER
+        ================================================= */
+
+        const orders =
+            JSON.parse(
+                localStorage.getItem(
+                    "taanaBaanaOrders"
+                ) ||
+                "[]"
+            );
+
+
+        let order =
+            orders.length
+                ? orders[orders.length - 1]
+                : null;
+
+
+        /*
+         * Demo fallback.
+         * This keeps the page visually usable even when
+         * opened directly during the hackathon presentation.
+         */
+
+        if (!order) {
+
+            order = {
+
+                id:
+                    "ORDER-DEMO-001",
+
+                quotationId:
+                    "QT-DEMO-001",
+
+                enquiryId:
+                    "ENQ-DEMO-003",
+
+                artisan:
+                    "Sutradhar Collective",
+
+                product:
+                    "Handcrafted Jute Bags",
+
+                quantity:
+                    500,
+
+                unitPrice:
+                    210,
+
+                customisation:
+                    5000,
+
+                packaging:
+                    2500,
+
+                shipping:
+                    3500,
+
+                total:
+                    116000,
+
+                status:
+                    "Confirmed",
+
+                createdAt:
+                    new Date()
+                        .toISOString()
+
+            };
+
+        }
+
+
+        /* =================================================
+           HELPERS
+        ================================================= */
+
+        const money =
+            value =>
+                "₹" +
+                Number(
+                    value || 0
+                ).toLocaleString(
+                    "en-IN"
+                );
+
+
+        const getRequirement =
+            () => {
+
+                const raw =
+                    localStorage.getItem(
+                        "taanaBaanaRequirement"
+                    );
+
+                if (!raw) {
+                    return {};
+                }
+
+                try {
+                    return JSON.parse(raw);
+                } catch {
+                    return {};
+                }
+
+            };
+
+
+        const requirement =
+            getRequirement();
+
+
+        /* =================================================
+           FILL ORDER INFORMATION
+        ================================================= */
+
+        document
+            .getElementById(
+                "orderNumber"
+            )
+            .textContent =
+                order.id ||
+                "TB-ORD-DEMO";
+
+
+        document
+            .getElementById(
+                "artisanName"
+            )
+            .textContent =
+                order.artisan ||
+                "Artisan Collective";
+
+
+        document
+            .getElementById(
+                "artisanLocation"
+            )
+            .textContent =
+                (
+                    requirement.category ||
+                    "Handcrafted Products"
+                ) +
+                " · India";
+
+
+        document
+            .getElementById(
+                "productName"
+            )
+            .textContent =
+                order.product ||
+                "Craft Product";
+
+
+        document
+            .getElementById(
+                "productQuantity"
+            )
+            .textContent =
+                Number(
+                    order.quantity || 0
+                ).toLocaleString(
+                    "en-IN"
+                ) +
+                " units · Custom order";
+
+
+        document
+            .getElementById(
+                "orderTotal"
+            )
+            .textContent =
+                money(
+                    order.total
+                );
+
+
+        document
+            .getElementById(
+                "quantity"
+            )
+            .textContent =
+                Number(
+                    order.quantity || 0
+                ).toLocaleString(
+                    "en-IN"
+                ) +
+                " units";
+
+
+        document
+            .getElementById(
+                "unitPrice"
+            )
+            .textContent =
+                money(
+                    order.unitPrice
+                );
+
+
+        document
+            .getElementById(
+                "category"
+            )
+            .textContent =
+                requirement.category ||
+                "Handcrafted Products";
+
+
+        const location =
+            requirement.deliveryLocation ||
+            "India";
+
+
+        document
+            .getElementById(
+                "sideDelivery"
+            )
+            .textContent =
+                location;
+
+
+        document
+            .getElementById(
+                "deliveryLocation"
+            )
+            .textContent =
+                "Delivery to " +
+                location +
+                " · Final logistics details will be confirmed after dispatch.";
+
+
+        /* =================================================
+           PRODUCT ICON
+        ================================================= */
+
+        const category =
+            (
+                requirement.category ||
+                ""
+            ).toLowerCase();
+
+
+        let icon = "👜";
+
+
+        if (
+            category.includes("textile") ||
+            category.includes("cloth") ||
+            category.includes("weav")
+        ) {
+
+            icon = "🧵";
+
+        } else if (
+            category.includes("pot") ||
+            category.includes("ceramic")
+        ) {
+
+            icon = "🏺";
+
+        } else if (
+            category.includes("jew")
+        ) {
+
+            icon = "💍";
+
+        } else if (
+            category.includes("wood")
+        ) {
+
+            icon = "🪵";
+
+        } else if (
+            category.includes("basket") ||
+            category.includes("fibre")
+        ) {
+
+            icon = "🧺";
+
+        }
+
+
+        document
+            .getElementById(
+                "productIcon"
+            )
+            .textContent =
+                icon;
+
+
+        /* =================================================
+           TRACKING PROGRESS
+        ================================================= */
+
+        const steps =
+            document.querySelectorAll(
+                ".tracking-step"
+            );
+
+
+        const progress =
+            document.getElementById(
+                "trackingProgress"
+            );
+
+
+        /*
+         * Prototype state:
+         *
+         * 1 = confirmed
+         * 2 = production
+         *
+         * Future backend can update this value.
+         */
+
+        let currentStep = 2;
+
+
+        const renderProgress =
+            () => {
+
+                steps.forEach(
+                    (
+                        step,
+                        index
+                    ) => {
+
+                        const number =
+                            index + 1;
+
+
+                        step.classList.remove(
+                            "completed",
+                            "current"
+                        );
+
+
+                        const circle =
+                            step.querySelector(
+                                ".step-circle"
+                            );
+
+
+                        if (
+                            number <
+                            currentStep
+                        ) {
+
+                            step.classList.add(
+                                "completed"
+                            );
+
+                            circle.textContent =
+                                "✓";
+
+                        } else if (
+                            number ===
+                            currentStep
+                        ) {
+
+                            step.classList.add(
+                                "current"
+                            );
+
+                            circle.textContent =
+                                number;
+
+                        } else {
+
+                            circle.textContent =
+                                number;
+
+                        }
+
+                    }
+                );
+
+
+                const progressPercentage =
+                    (
+                        (currentStep - 1) /
+                        (steps.length - 1)
+                    ) *
+                    100;
+
+
+                progress.style.height =
+                    progressPercentage +
+                    "%";
+
+            };
+
+
+        renderProgress();
+
+
+        /* =================================================
+           TOAST
+        ================================================= */
+
+        const toast =
+            document.getElementById(
+                "trackingToast"
+            );
+
+
+        let toastTimer;
+
+
+        const showToast =
+            message => {
+
+                toast.textContent =
+                    message;
+
+
+                toast.classList.add(
+                    "show"
+                );
+
+
+                clearTimeout(
+                    toastTimer
+                );
+
+
+                toastTimer =
+                    setTimeout(
+                        () => {
+
+                            toast.classList.remove(
+                                "show"
+                            );
+
+                        },
+                        3200
+                    );
+
+            };
+
+
+        /* =================================================
+           CONTACT ARTISAN
+        ================================================= */
+
+        document
+            .getElementById(
+                "contactArtisan"
+            )
+            .addEventListener(
+                "click",
+                () => {
+
+                    showToast(
+                        "Message workspace ready — artisan chat integration can be connected here."
+                    );
+
+                }
+            );
+
+
+        /* =================================================
+           VIEW RECEIPT
+        ================================================= */
+
+        document
+            .getElementById(
+                "viewReceipt"
+            )
+            .addEventListener(
+                "click",
+                () => {
+
+                    showToast(
+                        "Digital receipt generated for prototype order " +
+                        (
+                            order.id ||
+                            "TB-ORD-DEMO"
+                        ) +
+                        "."
+                    );
+
+                }
+            );
+
+
+        /* =================================================
+           AI STATUS
+        ================================================= */
+
+        document
+            .getElementById(
+                "aiUpdate"
+            )
+            .addEventListener(
+                "click",
+                () => {
+
+                    showToast(
+                        "✦ AI analysis: production is currently marked as on schedule in this prototype."
+                    );
+
+                }
+            );
+
+
+        /* =================================================
+           OPTIONAL DEMO CONTROL
+        ================================================= */
+
+        /*
+         * Double-clicking the status pill during a presentation
+         * advances the demo to the next stage.
+         *
+         * This does NOT represent real backend tracking.
+         */
+
+        const statusPill =
+            document.querySelector(
+                ".status-pill"
+            );
+
+
+        statusPill.title =
+            "Double-click to advance demo tracking";
+
+
+        statusPill.addEventListener(
+            "dblclick",
+            () => {
+
+                if (
+                    currentStep <
+                    steps.length
+                ) {
+
+                    currentStep += 1;
+
+
+                    renderProgress();
+
+
+                    const labels = [
+
+                        "Order confirmed",
+
+                        "Production underway",
+
+                        "Quality check",
+
+                        "Dispatched",
+
+                        "Delivered"
+
+                    ];
+
+
+                    statusPill.textContent =
+                        labels[
+                            currentStep - 1
+                        ];
+
+
+                    showToast(
+                        "Demo tracking advanced to: " +
+                        labels[
+                            currentStep - 1
+                        ]
+                    );
+
+                } else {
+
+                    showToast(
+                        "This demo order is already marked as delivered."
+                    );
+
+                }
+
+            }
+        );
+
+
+    }
+
+);
+
+</script>
+
+
+</body>
+</html>

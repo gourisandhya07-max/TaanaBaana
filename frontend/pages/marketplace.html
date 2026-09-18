@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Marketplace — Taana-Baana</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/pages.css"
+    >
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="../index.html" class="brand">
+
+            <img
+                src="../assets/logo.png"
+                class="brand-logo"
+                alt="Taana-Baana"
+            >
+
+        </a>
+
+        <nav class="nav-links">
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <div class="nav-dropdown">
+
+                <button class="nav-dropdown-toggle">
+                    Features <span>⌄</span>
+                </button>
+
+                <div class="nav-dropdown-menu">
+
+                    <a href="studio.html">
+                        ✨ AI Product Studio
+                    </a>
+
+                    <a href="catalog.html">
+                        🎙️ Speak-to-Sell
+                    </a>
+
+                    <a href="pricing.html">
+                        💰 Smart Pricing
+                    </a>
+
+                    <a href="marketplace.html">
+                        🛍️ Marketplace
+                    </a>
+
+                    <a href="dashboard.html">
+                        📊 Business Manager
+                    </a>
+
+                </div>
+
+            </div>
+
+            <a href="../index.html#how-it-works">
+                How It Works
+            </a>
+
+            <a href="about.html">
+                About
+            </a>
+
+        </nav>
+
+        <div class="nav-actions">
+
+            <a
+                href="catalog.html"
+                class="nav-cta"
+            >
+                Sell Your Craft
+            </a>
+
+            <button class="mobile-menu-btn">
+                ☰
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="app-shell">
+
+<div class="container">
+
+    <div class="app-header reveal">
+
+        <div>
+
+            <div class="eyebrow">
+                Digital Market
+            </div>
+
+            <h1 class="app-title">
+                Discover the
+                <span>hands behind India.</span>
+            </h1>
+
+            <p class="app-subtitle">
+                Explore handmade products and discover
+                the artisans and stories behind them.
+            </p>
+
+        </div>
+
+        <div class="app-actions">
+
+            <span>
+                🛍️ <span class="cart-count">0</span>
+                items
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <section class="panel">
+
+        <div class="marketplace-toolbar">
+
+            <div class="search-box">
+
+                <span class="search-icon">
+                    🔎
+                </span>
+
+                <input
+                    id="productSearch"
+                    placeholder="Search crafts, artisans, materials..."
+                >
+
+            </div>
+
+
+            <div class="filter-row">
+
+                <button
+                    class="filter-button active"
+                    data-filter="all"
+                >
+                    All
+                </button>
+
+                <button
+                    class="filter-button"
+                    data-filter="textile"
+                >
+                    Textile
+                </button>
+
+                <button
+                    class="filter-button"
+                    data-filter="pottery"
+                >
+                    Pottery
+                </button>
+
+                <button
+                    class="filter-button"
+                    data-filter="wood"
+                >
+                    Wood
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="productGrid"
+            class="product-grid"
+        >
+
+
+            <article
+                class="product-card"
+                data-name="Handwoven Kasavu Saree"
+                data-category="textile"
+            >
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=85"
+                        alt="Handwoven textile"
+                    >
+
+                    <button
+                        class="favorite-button"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-category">
+                        Textile
+                    </div>
+
+                    <h3 class="product-name">
+                        Handwoven Kasavu Saree
+                    </h3>
+
+                    <p class="product-artisan">
+                        Anjali Weaves · Kerala
+                    </p>
+
+                    <div class="product-bottom">
+
+                        <span class="product-price">
+                            ₹2,850
+                        </span>
+
+                        <button class="add-cart">
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article
+                class="product-card"
+                data-name="Terracotta Heritage Pot"
+                data-category="pottery"
+            >
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=800&q=85"
+                        alt="Terracotta pottery"
+                    >
+
+                    <button
+                        class="favorite-button"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-category">
+                        Pottery
+                    </div>
+
+                    <h3 class="product-name">
+                        Terracotta Heritage Pot
+                    </h3>
+
+                    <p class="product-artisan">
+                        Maya Clay Studio · West Bengal
+                    </p>
+
+                    <div class="product-bottom">
+
+                        <span class="product-price">
+                            ₹780
+                        </span>
+
+                        <button class="add-cart">
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article
+                class="product-card"
+                data-name="Carved Wooden Elephant"
+                data-category="wood"
+            >
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1590845947676-fa2576f401d2?auto=format&fit=crop&w=800&q=85"
+                        alt="Wooden craft"
+                    >
+
+                    <button
+                        class="favorite-button"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-category">
+                        Wood
+                    </div>
+
+                    <h3 class="product-name">
+                        Carved Wooden Elephant
+                    </h3>
+
+                    <p class="product-artisan">
+                        Ramesh Crafts · Rajasthan
+                    </p>
+
+                    <div class="product-bottom">
+
+                        <span class="product-price">
+                            ₹1,250
+                        </span>
+
+                        <button class="add-cart">
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article
+                class="product-card"
+                data-name="Hand Embroidered Textile"
+                data-category="textile"
+            >
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1601924928379-9b1b3d4d6a6e?auto=format&fit=crop&w=800&q=85"
+                        alt="Embroidery"
+                    >
+
+                    <button
+                        class="favorite-button"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-category">
+                        Textile
+                    </div>
+
+                    <h3 class="product-name">
+                        Hand Embroidered Textile
+                    </h3>
+
+                    <p class="product-artisan">
+                        Noor Handcrafts · Kashmir
+                    </p>
+
+                    <div class="product-bottom">
+
+                        <span class="product-price">
+                            ₹1,950
+                        </span>
+
+                        <button class="add-cart">
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+</div>
+
+</main>
+
+
+<!-- =====================================================
+     PRODUCT MODAL
+====================================================== -->
+
+<div
+    class="modal"
+    id="productModal"
+>
+
+    <div class="modal-box">
+
+        <button class="modal-close">
+            ✕
+        </button>
+
+        <img
+            class="product-modal-image"
+            src=""
+            alt=""
+            style="
+                width:100%;
+                height:300px;
+                object-fit:cover;
+                border-radius:20px;
+                margin-bottom:20px;
+            "
+        >
+
+        <h2
+            class="product-modal-name"
+            style="
+                font-family:'Playfair Display',serif;
+                font-size:2rem;
+            "
+        >
+            Product
+        </h2>
+
+        <p class="product-modal-artisan">
+            Artisan
+        </p>
+
+        <div
+            class="product-modal-price"
+            style="
+                font-size:1.5rem;
+                font-weight:800;
+                margin:15px 0;
+            "
+        >
+            ₹0
+        </div>
+
+        <p style="color:var(--brown-soft);">
+            A handcrafted product carrying the story,
+            skill and cultural heritage of its maker.
+        </p>
+
+        <br>
+
+        <button
+            class="btn-primary"
+            onclick="showToast('Product added to enquiry basket 🛍️')"
+        >
+            Add to Basket
+        </button>
+
+    </div>
+
+</div>
+
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 Taana-Baana
+            </span>
+
+            <a href="../index.html">
+                ← Home
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="../js/main.js"></script>
+<script src="../js/pages.js"></script>
+
+</body>
+</html>

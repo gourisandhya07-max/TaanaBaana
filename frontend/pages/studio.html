@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Taana-Baana AI Product Studio — turn artisan photographs and stories into professional digital products."
+    >
+
+    <title>AI Product Studio | Taana-Baana</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+    <link rel="stylesheet" href="../css/ai-studio.css">
+</head>
+
+<body class="ai-page studio-page">
+
+<div class="top-thread"></div>
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<header class="site-header">
+
+    <a href="../index.html" class="brand">
+
+        <div class="brand-mark">
+            त
+        </div>
+
+        <div>
+            <strong>taana-baana</strong>
+            <span>From Hands to Markets</span>
+        </div>
+
+    </a>
+
+    <nav>
+
+        <a href="../index.html">
+            Home
+        </a>
+
+        <a href="studio.html" class="active">
+            AI Studio
+        </a>
+
+        <a href="catalog.html">
+            Catalog
+        </a>
+
+        <a href="pricing.html">
+            Pricing
+        </a>
+
+        <a href="marketplace.html">
+            Marketplace
+        </a>
+
+    </nav>
+
+    <a href="dashboard.html" class="header-cta">
+        My Workspace
+    </a>
+
+</header>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<main>
+
+<section class="studio-hero">
+
+    <div>
+
+        <p class="eyebrow">
+            AI PRODUCT STUDIO · कारीगर से डिजिटल बाज़ार तक
+        </p>
+
+        <h1>
+            Turn your craft into a
+            <em>professional story.</em>
+        </h1>
+
+        <p class="hero-copy">
+            Upload one photograph, tell us about your creation in your
+            own language, and let Taana-Baana help prepare it for the
+            digital marketplace.
+        </p>
+
+        <div class="hero-pills">
+
+            <span>
+                📸 AI Photo Developer
+            </span>
+
+            <span>
+                🎙 Voice-to-Catalog
+            </span>
+
+            <span>
+                🌏 Multilingual
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-note">
+
+        <span>
+            OUR PHILOSOPHY
+        </span>
+
+        <p>
+            The artisan creates.
+            <br>
+            AI handles the digital complexity.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     MAIN AI WORKSPACE
+========================================================= -->
+
+<section class="workspace-grid">
+
+
+<!-- =====================================================
+     LEFT — PRODUCT INPUT
+===================================================== -->
+
+<div class="tool-panel">
+
+    <div class="panel-heading">
+
+        <div>
+
+            <p class="eyebrow">
+                STEP 01
+            </p>
+
+            <h2>
+                Tell us about your craft
+            </h2>
+
+        </div>
+
+        <span class="status-dot">
+            ● AI READY
+        </span>
+
+    </div>
+
+
+    <!-- PHOTO UPLOAD -->
+
+    <label class="field-label">
+        Product photograph
+    </label>
+
+    <div
+        class="upload-zone"
+        id="uploadZone"
+    >
+
+        <input
+            type="file"
+            id="productImage"
+            accept="image/*"
+            hidden
+        >
+
+        <div class="upload-icon">
+            ✦
+        </div>
+
+        <strong>
+            Upload your product
+        </strong>
+
+        <span>
+            or drag & drop your photograph here
+        </span>
+
+        <small>
+            JPG / PNG / WEBP · Recommended 1200px+
+        </small>
+
+    </div>
+
+
+    <!-- PRODUCT INFORMATION -->
+
+    <div class="field-row">
+
+        <div>
+
+            <label class="field-label">
+                Craft category
+            </label>
+
+            <select id="craftCategory">
+
+                <option value="">
+                    Select category
+                </option>
+
+                <option>
+                    Handloom & Textiles
+                </option>
+
+                <option>
+                    Pottery & Ceramics
+                </option>
+
+                <option>
+                    Wood Craft
+                </option>
+
+                <option>
+                    Metal Craft
+                </option>
+
+                <option>
+                    Jewellery
+                </option>
+
+                <option>
+                    Embroidery
+                </option>
+
+                <option>
+                    Basketry
+                </option>
+
+                <option>
+                    Painting
+                </option>
+
+                <option>
+                    Other
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div>
+
+            <label class="field-label">
+                Region
+            </label>
+
+            <input
+                type="text"
+                id="craftRegion"
+                placeholder="Kerala, Rajasthan..."
+            >
+
+        </div>
+
+    </div>
+
+
+    <!-- VOICE AREA -->
+
+    <div class="voice-box">
+
+        <div class="voice-top">
+
+            <div>
+
+                <span class="mic">
+                    🎙
+                </span>
+
+                <strong>
+                    Speak your story
+                </strong>
+
+            </div>
+
+            <select id="voiceLanguage">
+
+                <option value="Malayalam">
+                    മലയാളം · Malayalam
+                </option>
+
+                <option value="Hindi">
+                    हिन्दी · Hindi
+                </option>
+
+                <option value="Tamil">
+                    தமிழ் · Tamil
+                </option>
+
+                <option value="Telugu">
+                    తెలుగు · Telugu
+                </option>
+
+                <option value="Kannada">
+                    ಕನ್ನಡ · Kannada
+                </option>
+
+                <option value="Bengali">
+                    বাংলা · Bengali
+                </option>
+
+                <option value="Marathi">
+                    मराठी · Marathi
+                </option>
+
+                <option value="English">
+                    English
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <textarea
+            id="artisanStory"
+            rows="6"
+            placeholder="Tell us naturally about your product...
+
+Example:
+I made this basket using locally sourced bamboo.
+It took me three days to complete and I use
+traditional weaving techniques..."
+        ></textarea>
+
+
+        <div class="voice-actions">
+
+            <button
+                type="button"
+                class="voice-btn"
+                id="startVoice"
+            >
+                🎙 Start Speaking
+            </button>
+
+            <button
+                type="button"
+                class="ghost-btn"
+                id="clearVoice"
+            >
+                Clear
+            </button>
+
+        </div>
+
+        <p class="helper">
+
+            No need to know English.
+            Speak naturally in your preferred language.
+
+        </p>
+
+    </div>
+
+
+    <!-- AI GENERATE -->
+
+    <div class="ai-action-card">
+
+        <div class="spark">
+            ✦
+        </div>
+
+        <div>
+
+            <strong>
+                Let Taana-Baana develop your product
+            </strong>
+
+            <p>
+                We'll prepare the image, understand your story,
+                and create a digital-ready product listing.
+            </p>
+
+        </div>
+
+        <button
+            type="button"
+            class="primary-btn"
+            id="developProduct"
+        >
+            Develop Product →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     RIGHT — PHOTO STUDIO
+===================================================== -->
+
+<div class="visual-panel">
+
+    <div class="visual-toolbar">
+
+        <div>
+
+            <p class="eyebrow">
+                STEP 02
+            </p>
+
+            <h2>
+                AI Photo Developer
+            </h2>
+
+        </div>
+
+        <span>
+            DIGITAL STUDIO
+        </span>
+
+    </div>
+
+
+    <div class="canvas-wrap" id="photoCanvas">
+
+        <canvas id="imageCanvas"></canvas>
+
+        <div
+            class="empty-photo"
+            id="emptyPhoto"
+        >
+
+            <div class="woven-symbol">
+                ✣
+            </div>
+
+            <strong>
+                Your product will appear here
+            </strong>
+
+            <span>
+                Upload a photograph to begin
+            </span>
+
+        </div>
+
+
+        <div
+            class="processing"
+            id="photoProcessing"
+        >
+
+            <div>
+
+                <div class="spinner"></div>
+
+                <strong>
+                    Developing your photograph...
+                </strong>
+
+                <span>
+                    Cleaning background · balancing light ·
+                    preparing studio frame
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PHOTO STYLE -->
+
+    <div class="photo-controls">
+
+        <button
+            class="control-chip active"
+            data-style="natural"
+        >
+            Natural
+        </button>
+
+        <button
+            class="control-chip"
+            data-style="studio"
+        >
+            Studio
+        </button>
+
+        <button
+            class="control-chip"
+            data-style="heritage"
+        >
+            Heritage
+        </button>
+
+        <button
+            class="control-chip"
+            data-style="minimal"
+        >
+            Minimal
+        </button>
+
+        <button
+            class="control-chip"
+            data-style="warm"
+        >
+            Warm Craft
+        </button>
+
+    </div>
+
+
+    <!-- SLIDERS -->
+
+    <div class="slider-row">
+
+        <label>
+
+            Brightness
+
+            <input
+                type="range"
+                id="brightness"
+                min="50"
+                max="150"
+                value="100"
+            >
+
+        </label>
+
+
+        <label>
+
+            Sharpness
+
+            <input
+                type="range"
+                id="sharpness"
+                min="0"
+                max="100"
+                value="50"
+            >
+
+        </label>
+
+    </div>
+
+
+    <div class="photo-actions">
+
+        <button
+            class="primary-btn"
+            id="enhancePhoto"
+        >
+            ✦ Develop Photo
+        </button>
+
+        <button
+            class="outline-btn"
+            id="resetPhoto"
+        >
+            Reset
+        </button>
+
+    </div>
+
+
+    <!-- BEFORE AFTER -->
+
+    <div class="before-after">
+
+        <div>
+
+            <span>
+                ORIGINAL
+            </span>
+
+            <div class="mini">
+                Your photo
+            </div>
+
+        </div>
+
+        <div class="arrow">
+            →
+        </div>
+
+        <div>
+
+            <span>
+                DEVELOPED
+            </span>
+
+            <div class="mini after">
+                AI studio
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     MULTILINGUAL SECTION
+========================================================= -->
+
+<section class="language-studio">
+
+    <div class="section-intro">
+
+        <p class="eyebrow">
+            VOICE-FIRST COMMERCE
+        </p>
+
+        <h2>
+            Your language.
+            <em>Your story.</em>
+        </h2>
+
+        <p>
+            Taana-Baana is designed so artisans don't have to
+            change the way they speak just to enter the digital economy.
+        </p>
+
+    </div>
+
+
+    <div class="language-grid">
+
+        <article class="language-card">
+
+            <span class="card-number">
+                01
+            </span>
+
+            <h3>
+                Speak
+            </h3>
+
+            <p>
+                Describe your product naturally in your
+                regional language.
+            </p>
+
+            <div class="language-checks">
+
+                <label>
+                    <input type="checkbox" checked>
+                    Malayalam
+                </label>
+
+                <label>
+                    <input type="checkbox" checked>
+                    Hindi
+                </label>
+
+                <label>
+                    <input type="checkbox" checked>
+                    Tamil
+                </label>
+
+            </div>
+
+        </article>
+
+
+        <article class="language-card">
+
+            <span class="card-number">
+                02
+            </span>
+
+            <h3>
+                Understand
+            </h3>
+
+            <p>
+                AI identifies the product, craft,
+                materials and important details.
+            </p>
+
+            <div class="ai-understands">
+
+                <span>
+                    Material
+                </span>
+
+                <span>
+                    Technique
+                </span>
+
+                <span>
+                    Region
+                </span>
+
+                <span>
+                    Usage
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <article class="language-card">
+
+            <span class="card-number">
+                03
+            </span>
+
+            <h3>
+                Sell
+            </h3>
+
+            <p>
+                Receive a professional catalog in multiple
+                languages, ready for buyers.
+            </p>
+
+            <select>
+
+                <option>
+                    English + Hindi
+                </option>
+
+                <option>
+                    English + Malayalam
+                </option>
+
+                <option>
+                    English + Tamil
+                </option>
+
+                <option>
+                    English + Telugu
+                </option>
+
+            </select>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     GENERATED LISTING
+========================================================= -->
+
+<section class="generated-section">
+
+    <div class="section-heading-row">
+
+        <div>
+
+            <p class="eyebrow">
+                AI OUTPUT
+            </p>
+
+            <h2>
+                Your digital product story
+            </h2>
+
+        </div>
+
+        <span class="ai-badge">
+            AI GENERATED · REVIEW BEFORE PUBLISHING
+        </span>
+
+    </div>
+
+
+    <div class="listing-grid">
+
+        <div class="listing-main">
+
+            <div class="generated-title" id="generatedTitle">
+                Handwoven Heritage Basket
+            </div>
+
+            <p
+                class="generated-copy"
+                id="generatedDescription"
+            >
+                A beautifully handcrafted basket inspired by
+                traditional Indian weaving practices. Created
+                using natural materials and careful hand-weaving,
+                this piece combines everyday functionality with
+                the character and warmth of handmade craft.
+            </p>
+
+
+            <div class="keyword-row">
+
+                <span>
+                    Handcrafted
+                </span>
+
+                <span>
+                    Sustainable
+                </span>
+
+                <span>
+                    Traditional Craft
+                </span>
+
+                <span>
+                    Handmade India
+                </span>
+
+                <span>
+                    Artisan Made
+                </span>
+
+            </div>
+
+
+            <div class="listing-footer">
+
+                <button
+                    class="primary-btn"
+                    id="approveListing"
+                >
+                    ✓ Approve Listing
+                </button>
+
+                <button
+                    class="outline-btn"
+                    id="regenerateListing"
+                >
+                    ↻ Regenerate
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <aside class="listing-side">
+
+            <div class="language-output">
+
+                <div>
+
+                    <span>
+                        EN
+                    </span>
+
+                    <strong>
+                        English
+                    </strong>
+
+                </div>
+
+                <p>
+                    Handwoven Heritage Basket
+                </p>
+
+            </div>
+
+
+            <div class="language-output">
+
+                <div>
+
+                    <span>
+                        HI
+                    </span>
+
+                    <strong>
+                        हिन्दी
+                    </strong>
+
+                </div>
+
+                <p>
+                    पारंपरिक हाथ से बुनी टोकरी
+                </p>
+
+            </div>
+
+
+            <div class="language-output">
+
+                <div>
+
+                    <span>
+                        ML
+                    </span>
+
+                    <strong>
+                        മലയാളം
+                    </strong>
+
+                </div>
+
+                <p>
+                    കൈകൊണ്ട് നെയ്ത പാരമ്പര്യ കൊട്ട
+                </p>
+
+            </div>
+
+
+            <div class="language-output">
+
+                <div>
+
+                    <span>
+                        AI
+                    </span>
+
+                    <strong>
+                        Keywords
+                    </strong>
+
+                </div>
+
+                <p>
+                    bamboo basket · handmade ·
+                    traditional weaving · sustainable
+                </p>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<div
+    class="toast"
+    id="toast"
+>
+    Product updated successfully.
+</div>
+
+
+<script src="../js/main.js" defer></script>
+<script src="../js/pages.js" defer></script>
+<script src="../js/ai-studio.js" defer></script>
+
+</body>
+</html>

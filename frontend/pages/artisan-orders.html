@@ -1,0 +1,2069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Manage artisan orders, production progress, deliveries and customer orders on Taana-Baana."
+    >
+
+    <title>My Orders | Taana-Baana</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Tiro+Devanagari+Sanskrit&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+
+    <style>
+
+        :root {
+            --tb-ivory: #FCF6EA;
+            --tb-cream: #FFF9F0;
+            --tb-brown: #3B2922;
+            --tb-deep: #2A1D18;
+            --tb-terracotta: #C96F4A;
+            --tb-burnt: #A95338;
+            --tb-sage: #879B76;
+            --tb-olive: #687557;
+            --tb-gold: #C9A65B;
+            --tb-sand: #E8D7BC;
+            --tb-light-sage: #DCE2D2;
+            --tb-soft-terra: #EBC5B5;
+            --tb-indigo: #274C77;
+            --tb-rani: #C43D73;
+            --tb-marigold: #E9A23B;
+            --tb-peacock: #0F7C78;
+            --tb-green: #3E7C59;
+            --tb-plum: #6D3B63;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background:
+                radial-gradient(
+                    circle at 7% 10%,
+                    rgba(201,166,91,.10),
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 94% 35%,
+                    rgba(15,124,120,.07),
+                    transparent 27%
+                ),
+                var(--tb-ivory);
+            color: var(--tb-brown);
+        }
+
+        .artisan-orders-page {
+            min-height: 100vh;
+            padding-bottom: 90px;
+        }
+
+        .artisan-orders-container {
+            width: min(1320px, calc(100% - 48px));
+            margin: 0 auto;
+        }
+
+        /* =====================================================
+           BREADCRUMB
+           ===================================================== */
+
+        .orders-breadcrumb {
+            padding-top: 34px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: #806f65;
+        }
+
+        .orders-breadcrumb a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .orders-breadcrumb a:hover {
+            color: var(--tb-terracotta);
+        }
+
+        .orders-breadcrumb span {
+            opacity: .5;
+        }
+
+        /* =====================================================
+           HERO
+           ===================================================== */
+
+        .orders-hero {
+            margin-top: 25px;
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .orders-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 7px 12px;
+            border: 1px solid rgba(201,166,91,.35);
+            border-radius: 999px;
+            background: rgba(255,249,240,.8);
+            color: var(--tb-olive);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .orders-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--tb-green);
+            box-shadow: 0 0 0 4px rgba(62,124,89,.10);
+        }
+
+        .orders-hero h1 {
+            max-width: 730px;
+            margin: 14px 0 0;
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: clamp(40px,5vw,64px);
+            line-height: .98;
+            letter-spacing: -.035em;
+            color: var(--tb-deep);
+        }
+
+        .orders-hero h1 em {
+            font-family: "Tiro Devanagari Sanskrit", serif;
+            font-style: normal;
+            color: var(--tb-terracotta);
+        }
+
+        .orders-hero p {
+            max-width: 650px;
+            margin: 18px 0 0;
+            color: #74645b;
+            font-size: 15px;
+            line-height: 1.75;
+        }
+
+        .orders-revenue-chip {
+            flex-shrink: 0;
+            min-width: 220px;
+            padding: 18px 20px;
+            border-radius: 19px;
+            background: var(--tb-deep);
+            color: white;
+            box-shadow: 0 15px 35px rgba(42,29,24,.13);
+        }
+
+        .orders-revenue-chip small {
+            display: block;
+            color: #cdbeb6;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .10em;
+            text-transform: uppercase;
+        }
+
+        .orders-revenue-chip strong {
+            display: block;
+            margin-top: 6px;
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: 30px;
+        }
+
+        .orders-revenue-chip span {
+            display: block;
+            margin-top: 3px;
+            color: #d8cbc4;
+            font-size: 11px;
+        }
+
+        /* =====================================================
+           STATS
+           ===================================================== */
+
+        .order-stats {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .order-stat {
+            min-height: 120px;
+            padding: 21px;
+            border: 1px solid rgba(59,41,34,.08);
+            border-radius: 20px;
+            background: rgba(255,249,240,.92);
+            box-shadow: 0 10px 30px rgba(59,41,34,.045);
+        }
+
+        .order-stat:nth-child(2) {
+            background: #E9F0E5;
+        }
+
+        .order-stat:nth-child(3) {
+            background: #F7EACF;
+        }
+
+        .order-stat:nth-child(4) {
+            background: #E6E7F0;
+        }
+
+        .order-stat-label {
+            display: block;
+            color: #88776d;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .10em;
+            text-transform: uppercase;
+        }
+
+        .order-stat-value {
+            display: block;
+            margin-top: 8px;
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: 32px;
+            color: var(--tb-deep);
+        }
+
+        .order-stat-note {
+            display: block;
+            margin-top: 3px;
+            color: #8b796f;
+            font-size: 11px;
+        }
+
+        /* =====================================================
+           TOOLBAR
+           ===================================================== */
+
+        .orders-toolbar {
+            margin-top: 35px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid rgba(59,41,34,.08);
+            border-radius: 20px;
+            background: rgba(255,249,240,.92);
+            box-shadow: 0 10px 30px rgba(59,41,34,.04);
+        }
+
+        .orders-search {
+            position: relative;
+            flex: 1;
+        }
+
+        .orders-search span {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8a786e;
+        }
+
+        .orders-search input {
+            width: 100%;
+            height: 47px;
+            padding: 0 17px 0 44px;
+            border: 1px solid rgba(59,41,34,.12);
+            border-radius: 13px;
+            outline: none;
+            background: #fffdf9;
+            color: var(--tb-brown);
+            font: 500 13px "DM Sans", sans-serif;
+        }
+
+        .orders-search input:focus {
+            border-color: var(--tb-terracotta);
+            box-shadow: 0 0 0 4px rgba(201,111,74,.10);
+        }
+
+        .orders-filter {
+            height: 47px;
+            padding: 0 14px;
+            border: 1px solid rgba(59,41,34,.12);
+            border-radius: 13px;
+            outline: none;
+            background: #fffdf9;
+            color: var(--tb-brown);
+            font: 600 12px "DM Sans", sans-serif;
+        }
+
+        /* =====================================================
+           HEADING
+           ===================================================== */
+
+        .orders-heading {
+            margin: 32px 0 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .orders-heading h2 {
+            margin: 0;
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: 28px;
+            color: var(--tb-deep);
+        }
+
+        .orders-heading span {
+            font-size: 12px;
+            color: #85746a;
+        }
+
+        /* =====================================================
+           ORDER CARDS
+           ===================================================== */
+
+        .orders-list {
+            display: grid;
+            gap: 17px;
+        }
+
+        .artisan-order-card {
+            overflow: hidden;
+            border: 1px solid rgba(59,41,34,.09);
+            border-radius: 22px;
+            background: rgba(255,249,240,.96);
+            box-shadow: 0 10px 30px rgba(59,41,34,.045);
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease;
+        }
+
+        .artisan-order-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 19px 40px rgba(59,41,34,.09);
+        }
+
+        .order-card-main {
+            display: grid;
+            grid-template-columns: 90px minmax(0,1fr) auto;
+            gap: 19px;
+            align-items: center;
+            padding: 19px;
+        }
+
+        .order-art {
+            width: 90px;
+            height: 90px;
+            display: grid;
+            place-items: center;
+            border-radius: 17px;
+            background: #EAD8D0;
+            font-size: 42px;
+        }
+
+        .artisan-order-card:nth-child(2) .order-art {
+            background: #E2E8D8;
+        }
+
+        .artisan-order-card:nth-child(3) .order-art {
+            background: #E5E1EE;
+        }
+
+        .artisan-order-card:nth-child(4) .order-art {
+            background: #F1E1CA;
+        }
+
+        .order-info {
+            min-width: 0;
+        }
+
+        .order-topline {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .order-id {
+            color: #917f74;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .08em;
+        }
+
+        .order-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 9px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .order-status.production {
+            color: #8b641e;
+            background: #F7EAC8;
+        }
+
+        .order-status.quality {
+            color: var(--tb-indigo);
+            background: #DDE8F3;
+        }
+
+        .order-status.dispatched {
+            color: var(--tb-peacock);
+            background: #D8ECEA;
+        }
+
+        .order-status.delivered {
+            color: var(--tb-green);
+            background: #DFECDD;
+        }
+
+        .order-status::before {
+            content: "";
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .order-info h3 {
+            margin: 7px 0 4px;
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: 21px;
+            color: var(--tb-deep);
+        }
+
+        .order-buyer {
+            margin: 0;
+            color: #75655b;
+            font-size: 12px;
+        }
+
+        .order-details {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px 18px;
+        }
+
+        .order-detail {
+            font-size: 11px;
+            color: #88776d;
+        }
+
+        .order-detail strong {
+            color: var(--tb-brown);
+        }
+
+        .order-total {
+            min-width: 115px;
+            text-align: right;
+        }
+
+        .order-total small {
+            display: block;
+            color: #8e7d73;
+            font-size: 10px;
+        }
+
+        .order-total strong {
+            display: block;
+            margin-top: 5px;
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: 25px;
+            color: var(--tb-deep);
+        }
+
+        .order-card-actions {
+            padding: 0 19px 19px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .order-button {
+            height: 40px;
+            padding: 0 14px;
+            border: 1px solid rgba(59,41,34,.12);
+            border-radius: 11px;
+            background: transparent;
+            color: var(--tb-brown);
+            font: 700 11px "DM Sans", sans-serif;
+            cursor: pointer;
+            transition:
+                transform .2s ease,
+                background .2s ease,
+                border .2s ease;
+        }
+
+        .order-button:hover {
+            transform: translateY(-2px);
+            border-color: var(--tb-terracotta);
+            background: rgba(201,111,74,.08);
+        }
+
+        .order-button.primary {
+            background: var(--tb-brown);
+            border-color: var(--tb-brown);
+            color: white;
+        }
+
+        .order-button.primary:hover {
+            background: var(--tb-terracotta);
+            border-color: var(--tb-terracotta);
+        }
+
+        /* =====================================================
+           PROGRESS
+           ===================================================== */
+
+        .order-progress {
+            padding: 18px 21px 21px;
+            border-top: 1px solid rgba(59,41,34,.08);
+            background: rgba(248,241,231,.60);
+        }
+
+        .progress-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .progress-top strong {
+            font-size: 11px;
+            color: var(--tb-brown);
+        }
+
+        .progress-top span {
+            font-size: 10px;
+            color: #8b796f;
+        }
+
+        .progress-track {
+            position: relative;
+            height: 5px;
+            margin-top: 14px;
+            border-radius: 999px;
+            background: #E1D8CC;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: inherit;
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--tb-terracotta),
+                    var(--tb-gold),
+                    var(--tb-peacock)
+                );
+        }
+
+        .progress-steps {
+            margin-top: 11px;
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 8px;
+        }
+
+        .progress-step {
+            font-size: 9px;
+            color: #97857b;
+        }
+
+        .progress-step.active {
+            color: var(--tb-brown);
+            font-weight: 700;
+        }
+
+        /* =====================================================
+           EMPTY
+           ===================================================== */
+
+        .orders-empty {
+            display: none;
+            padding: 60px 20px;
+            text-align: center;
+            border: 1px dashed rgba(59,41,34,.18);
+            border-radius: 22px;
+            background: rgba(255,249,240,.7);
+        }
+
+        .orders-empty div {
+            font-size: 42px;
+        }
+
+        .orders-empty h3 {
+            margin: 12px 0 5px;
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: 25px;
+            color: var(--tb-deep);
+        }
+
+        .orders-empty p {
+            margin: 0;
+            color: #7b6a60;
+            font-size: 13px;
+        }
+
+        /* =====================================================
+           BOTTOM TOOLS
+           ===================================================== */
+
+        .orders-tools {
+            margin-top: 36px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 17px;
+        }
+
+        .order-tool-card {
+            position: relative;
+            overflow: hidden;
+            min-height: 185px;
+            padding: 26px;
+            border-radius: 23px;
+            border: 1px solid rgba(59,41,34,.08);
+            background: var(--tb-cream);
+        }
+
+        .order-tool-card.dark {
+            background: var(--tb-deep);
+            color: white;
+        }
+
+        .order-tool-card.dark::after {
+            content: "";
+            position: absolute;
+            width: 170px;
+            height: 170px;
+            right: -70px;
+            top: -75px;
+            border: 1px solid rgba(201,166,91,.40);
+            border-radius: 50%;
+        }
+
+        .tool-label {
+            display: block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .11em;
+            text-transform: uppercase;
+            color: var(--tb-terracotta);
+        }
+
+        .dark .tool-label {
+            color: var(--tb-gold);
+        }
+
+        .order-tool-card h2 {
+            margin: 8px 0 7px;
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: 26px;
+            color: var(--tb-deep);
+        }
+
+        .dark h2 {
+            color: white;
+        }
+
+        .order-tool-card p {
+            max-width: 550px;
+            margin: 0;
+            color: #78675d;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .dark p {
+            color: #d2c5be;
+        }
+
+        .tool-button {
+            margin-top: 18px;
+            height: 41px;
+            padding: 0 14px;
+            border: 1px solid rgba(59,41,34,.13);
+            border-radius: 11px;
+            background: transparent;
+            color: var(--tb-brown);
+            font: 700 11px "DM Sans", sans-serif;
+            cursor: pointer;
+        }
+
+        .tool-button.primary {
+            background: var(--tb-brown);
+            border-color: var(--tb-brown);
+            color: white;
+        }
+
+        .dark .tool-button {
+            color: white;
+            border-color: rgba(255,255,255,.18);
+            background: rgba(255,255,255,.07);
+        }
+
+        .dark .tool-button.primary {
+            background: var(--tb-gold);
+            border-color: var(--tb-gold);
+            color: var(--tb-deep);
+        }
+
+        /* =====================================================
+           TOAST
+           ===================================================== */
+
+        .orders-toast {
+            position: fixed;
+            z-index: 10000;
+            right: 23px;
+            bottom: 23px;
+            max-width: 370px;
+            padding: 14px 17px;
+            border-radius: 14px;
+            background: #fffdf9;
+            border: 1px solid rgba(59,41,34,.10);
+            box-shadow: 0 18px 45px rgba(42,29,24,.16);
+            color: var(--tb-brown);
+            font-size: 13px;
+            opacity: 0;
+            transform: translateY(15px);
+            pointer-events: none;
+            transition: .25s ease;
+        }
+
+        .orders-toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 1000px) {
+
+            .order-stats {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .order-card-main {
+                grid-template-columns: 78px minmax(0,1fr);
+            }
+
+            .order-art {
+                width: 78px;
+                height: 78px;
+            }
+
+            .order-total {
+                grid-column: 2;
+                text-align: left;
+                margin-top: -8px;
+            }
+
+            .orders-tools {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 720px) {
+
+            .artisan-orders-container {
+                width: min(100% - 28px,1320px);
+            }
+
+            .orders-hero {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .orders-revenue-chip {
+                min-width: 0;
+            }
+
+            .orders-toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .orders-filter {
+                width: 100%;
+            }
+
+            .order-card-main {
+                grid-template-columns: 1fr;
+            }
+
+            .order-art {
+                width: 100%;
+                height: 120px;
+            }
+
+            .order-total {
+                grid-column: auto;
+                margin: 0;
+            }
+
+            .order-total strong {
+                font-size: 28px;
+            }
+
+            .order-card-actions {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .order-button {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .order-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .order-card-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .progress-steps {
+                grid-template-columns: repeat(2,1fr);
+                row-gap: 9px;
+            }
+
+            .orders-toast {
+                left: 14px;
+                right: 14px;
+                bottom: 14px;
+                max-width: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<main class="artisan-orders-page">
+
+    <div class="artisan-orders-container">
+
+        <!-- Breadcrumb -->
+
+        <div class="orders-breadcrumb">
+
+            <a href="artisan-dashboard.html">
+                Artisan Dashboard
+            </a>
+
+            <span>→</span>
+
+            <strong>
+                My Orders
+            </strong>
+
+        </div>
+
+
+        <!-- =====================================================
+             HERO
+             ===================================================== -->
+
+        <section class="orders-hero">
+
+            <div>
+
+                <div class="orders-eyebrow">
+                    <span class="orders-dot"></span>
+                    Your craft in motion
+                </div>
+
+                <h1>
+                    From order to
+                    <em>delivery.</em>
+                </h1>
+
+                <p>
+                    Keep track of what you're making, what's ready to
+                    ship and what has reached your buyers. One simple
+                    place for your growing craft business.
+                </p>
+
+            </div>
+
+
+            <div class="orders-revenue-chip">
+
+                <small>
+                    This month's order value
+                </small>
+
+                <strong>
+                    ₹1,84,650
+                </strong>
+
+                <span>
+                    14 completed + active orders
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             STATS
+             ===================================================== -->
+
+        <section class="order-stats">
+
+            <article class="order-stat">
+
+                <span class="order-stat-label">
+                    Total Orders
+                </span>
+
+                <strong class="order-stat-value">
+                    32
+                </strong>
+
+                <span class="order-stat-note">
+                    All-time orders
+                </span>
+
+            </article>
+
+
+            <article class="order-stat">
+
+                <span class="order-stat-label">
+                    In Production
+                </span>
+
+                <strong class="order-stat-value">
+                    7
+                </strong>
+
+                <span class="order-stat-note">
+                    Currently being made
+                </span>
+
+            </article>
+
+
+            <article class="order-stat">
+
+                <span class="order-stat-label">
+                    To Dispatch
+                </span>
+
+                <strong class="order-stat-value">
+                    4
+                </strong>
+
+                <span class="order-stat-note">
+                    Ready for shipping
+                </span>
+
+            </article>
+
+
+            <article class="order-stat">
+
+                <span class="order-stat-label">
+                    Delivered
+                </span>
+
+                <strong class="order-stat-value">
+                    21
+                </strong>
+
+                <span class="order-stat-note">
+                    Successfully completed
+                </span>
+
+            </article>
+
+        </section>
+
+
+        <!-- =====================================================
+             TOOLBAR
+             ===================================================== -->
+
+        <section class="orders-toolbar">
+
+            <div class="orders-search">
+
+                <span>⌕</span>
+
+                <input
+                    id="orderSearch"
+                    type="search"
+                    placeholder="Search order ID, buyer or product..."
+                    aria-label="Search orders"
+                >
+
+            </div>
+
+
+            <select
+                class="orders-filter"
+                id="orderStatus"
+                aria-label="Filter orders by status"
+            >
+
+                <option value="all">
+                    All statuses
+                </option>
+
+                <option value="production">
+                    In production
+                </option>
+
+                <option value="quality">
+                    Quality check
+                </option>
+
+                <option value="dispatched">
+                    Dispatched
+                </option>
+
+                <option value="delivered">
+                    Delivered
+                </option>
+
+            </select>
+
+
+            <select
+                class="orders-filter"
+                id="orderPeriod"
+                aria-label="Filter orders by period"
+            >
+
+                <option value="all">
+                    All time
+                </option>
+
+                <option value="month">
+                    This month
+                </option>
+
+                <option value="older">
+                    Older orders
+                </option>
+
+            </select>
+
+        </section>
+
+
+        <!-- =====================================================
+             ORDERS
+             ===================================================== -->
+
+        <section>
+
+            <div class="orders-heading">
+
+                <h2>
+                    Recent orders
+                </h2>
+
+                <span id="ordersCount">
+                    Showing 4 orders
+                </span>
+
+            </div>
+
+
+            <div
+                class="orders-list"
+                id="ordersList"
+            >
+
+
+                <!-- =================================================
+                     ORDER 1
+                     ================================================= -->
+
+                <article
+                    class="artisan-order-card"
+                    data-status="production"
+                    data-period="month"
+                    data-search="TB-1048 arya sustainable ventures handcrafted jute bags"
+                >
+
+                    <div class="order-card-main">
+
+                        <div class="order-art">
+                            👜
+                        </div>
+
+
+                        <div class="order-info">
+
+                            <div class="order-topline">
+
+                                <span class="order-id">
+                                    TB-1048
+                                </span>
+
+                                <span class="order-status production">
+                                    In production
+                                </span>
+
+                            </div>
+
+                            <h3>
+                                Handcrafted Jute Bags
+                            </h3>
+
+                            <p class="order-buyer">
+                                Arya Sustainable Ventures
+                            </p>
+
+                            <div class="order-details">
+
+                                <span class="order-detail">
+                                    Quantity:
+                                    <strong>500 pieces</strong>
+                                </span>
+
+                                <span class="order-detail">
+                                    Delivery:
+                                    <strong>Bengaluru</strong>
+                                </span>
+
+                                <span class="order-detail">
+                                    Due:
+                                    <strong>28 Sep 2026</strong>
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="order-total">
+
+                            <small>
+                                Order value
+                            </small>
+
+                            <strong>
+                                ₹1,37,500
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="order-card-actions">
+
+                        <button
+                            class="order-button"
+                            type="button"
+                            data-action="message"
+                        >
+                            Message Buyer
+                        </button>
+
+                        <button
+                            class="order-button primary"
+                            type="button"
+                            data-action="details"
+                        >
+                            Order Details
+                        </button>
+
+                    </div>
+
+
+                    <div class="order-progress">
+
+                        <div class="progress-top">
+
+                            <strong>
+                                Production progress
+                            </strong>
+
+                            <span>
+                                48% complete
+                            </span>
+
+                        </div>
+
+                        <div class="progress-track">
+
+                            <div
+                                class="progress-fill"
+                                style="width:48%"
+                            ></div>
+
+                        </div>
+
+                        <div class="progress-steps">
+
+                            <span class="progress-step active">
+                                Order confirmed
+                            </span>
+
+                            <span class="progress-step active">
+                                Making
+                            </span>
+
+                            <span class="progress-step">
+                                Quality check
+                            </span>
+
+                            <span class="progress-step">
+                                Dispatch
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     ORDER 2
+                     ================================================= -->
+
+                <article
+                    class="artisan-order-card"
+                    data-status="quality"
+                    data-period="month"
+                    data-search="TB-1039 mitti studio terracotta tableware"
+                >
+
+                    <div class="order-card-main">
+
+                        <div class="order-art">
+                            🏺
+                        </div>
+
+
+                        <div class="order-info">
+
+                            <div class="order-topline">
+
+                                <span class="order-id">
+                                    TB-1039
+                                </span>
+
+                                <span class="order-status quality">
+                                    Quality check
+                                </span>
+
+                            </div>
+
+                            <h3>
+                                Terracotta Tableware Set
+                            </h3>
+
+                            <p class="order-buyer">
+                                Mitti Studio
+                            </p>
+
+                            <div class="order-details">
+
+                                <span class="order-detail">
+                                    Quantity:
+                                    <strong>80 sets</strong>
+                                </span>
+
+                                <span class="order-detail">
+                                    Delivery:
+                                    <strong>Delhi</strong>
+                                </span>
+
+                                <span class="order-detail">
+                                    Due:
+                                    <strong>25 Sep 2026</strong>
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="order-total">
+
+                            <small>
+                                Order value
+                            </small>
+
+                            <strong>
+                                ₹64,000
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="order-card-actions">
+
+                        <button
+                            class="order-button"
+                            type="button"
+                            data-action="message"
+                        >
+                            Message Buyer
+                        </button>
+
+                        <button
+                            class="order-button primary"
+                            type="button"
+                            data-action="details"
+                        >
+                            Order Details
+                        </button>
+
+                    </div>
+
+
+                    <div class="order-progress">
+
+                        <div class="progress-top">
+
+                            <strong>
+                                Production progress
+                            </strong>
+
+                            <span>
+                                82% complete
+                            </span>
+
+                        </div>
+
+                        <div class="progress-track">
+
+                            <div
+                                class="progress-fill"
+                                style="width:82%"
+                            ></div>
+
+                        </div>
+
+                        <div class="progress-steps">
+
+                            <span class="progress-step active">
+                                Order confirmed
+                            </span>
+
+                            <span class="progress-step active">
+                                Making
+                            </span>
+
+                            <span class="progress-step active">
+                                Quality check
+                            </span>
+
+                            <span class="progress-step">
+                                Dispatch
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     ORDER 3
+                     ================================================= -->
+
+                <article
+                    class="artisan-order-card"
+                    data-status="dispatched"
+                    data-period="month"
+                    data-search="TB-1027 green home collective bamboo storage baskets"
+                >
+
+                    <div class="order-card-main">
+
+                        <div class="order-art">
+                            🧺
+                        </div>
+
+
+                        <div class="order-info">
+
+                            <div class="order-topline">
+
+                                <span class="order-id">
+                                    TB-1027
+                                </span>
+
+                                <span class="order-status dispatched">
+                                    Dispatched
+                                </span>
+
+                            </div>
+
+                            <h3>
+                                Bamboo Storage Baskets
+                            </h3>
+
+                            <p class="order-buyer">
+                                Green Home Collective
+                            </p>
+
+                            <div class="order-details">
+
+                                <span class="order-detail">
+                                    Quantity:
+                                    <strong>40 pieces</strong>
+                                </span>
+
+                                <span class="order-detail">
+                                    Delivery:
+                                    <strong>Kochi</strong>
+                                </span>
+
+                                <span class="order-detail">
+                                    Tracking:
+                                    <strong>TBX-483921</strong>
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="order-total">
+
+                            <small>
+                                Order value
+                            </small>
+
+                            <strong>
+                                ₹31,200
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="order-card-actions">
+
+                        <button
+                            class="order-button"
+                            type="button"
+                            data-action="message"
+                        >
+                            Message Buyer
+                        </button>
+
+                        <button
+                            class="order-button primary"
+                            type="button"
+                            data-action="details"
+                        >
+                            Track Delivery
+                        </button>
+
+                    </div>
+
+
+                    <div class="order-progress">
+
+                        <div class="progress-top">
+
+                            <strong>
+                                Delivery progress
+                            </strong>
+
+                            <span>
+                                75% complete
+                            </span>
+
+                        </div>
+
+                        <div class="progress-track">
+
+                            <div
+                                class="progress-fill"
+                                style="width:75%"
+                            ></div>
+
+                        </div>
+
+                        <div class="progress-steps">
+
+                            <span class="progress-step active">
+                                Order confirmed
+                            </span>
+
+                            <span class="progress-step active">
+                                Making
+                            </span>
+
+                            <span class="progress-step active">
+                                Dispatched
+                            </span>
+
+                            <span class="progress-step">
+                                Delivered
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     ORDER 4
+                     ================================================= -->
+
+                <article
+                    class="artisan-order-card"
+                    data-status="delivered"
+                    data-period="older"
+                    data-search="TB-0984 meera studios handwoven cotton scarves"
+                >
+
+                    <div class="order-card-main">
+
+                        <div class="order-art">
+                            🧣
+                        </div>
+
+
+                        <div class="order-info">
+
+                            <div class="order-topline">
+
+                                <span class="order-id">
+                                    TB-0984
+                                </span>
+
+                                <span class="order-status delivered">
+                                    Delivered
+                                </span>
+
+                            </div>
+
+                            <h3>
+                                Handwoven Cotton Scarves
+                            </h3>
+
+                            <p class="order-buyer">
+                                Meera Studios
+                            </p>
+
+                            <div class="order-details">
+
+                                <span class="order-detail">
+                                    Quantity:
+                                    <strong>120 pieces</strong>
+                                </span>
+
+                                <span class="order-detail">
+                                    Delivered:
+                                    <strong>09 Sep 2026</strong>
+                                </span>
+
+                                <span class="order-detail">
+                                    Destination:
+                                    <strong>Mumbai</strong>
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="order-total">
+
+                            <small>
+                                Order value
+                            </small>
+
+                            <strong>
+                                ₹96,000
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="order-card-actions">
+
+                        <button
+                            class="order-button"
+                            type="button"
+                            data-action="message"
+                        >
+                            Message Buyer
+                        </button>
+
+                        <button
+                            class="order-button primary"
+                            type="button"
+                            data-action="details"
+                        >
+                            View Receipt
+                        </button>
+
+                    </div>
+
+
+                    <div class="order-progress">
+
+                        <div class="progress-top">
+
+                            <strong>
+                                Order completed
+                            </strong>
+
+                            <span>
+                                100%
+                            </span>
+
+                        </div>
+
+                        <div class="progress-track">
+
+                            <div
+                                class="progress-fill"
+                                style="width:100%"
+                            ></div>
+
+                        </div>
+
+                        <div class="progress-steps">
+
+                            <span class="progress-step active">
+                                Confirmed
+                            </span>
+
+                            <span class="progress-step active">
+                                Made
+                            </span>
+
+                            <span class="progress-step active">
+                                Dispatched
+                            </span>
+
+                            <span class="progress-step active">
+                                Delivered
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+
+            <div
+                class="orders-empty"
+                id="ordersEmpty"
+            >
+
+                <div>🧵</div>
+
+                <h3>
+                    No matching orders
+                </h3>
+
+                <p>
+                    Try changing your search or filters.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             TOOLS
+             ===================================================== -->
+
+        <section class="orders-tools">
+
+            <article class="order-tool-card">
+
+                <span class="tool-label">
+                    Production assistant
+                </span>
+
+                <h2>
+                    Need help planning a bulk order?
+                </h2>
+
+                <p>
+                    AI can eventually break a large order into production
+                    stages, estimate material requirements and help you
+                    organize your making schedule.
+                </p>
+
+                <button
+                    class="tool-button primary"
+                    id="productionButton"
+                    type="button"
+                >
+                    ✦ Plan production
+                </button>
+
+            </article>
+
+
+            <article class="order-tool-card dark">
+
+                <span class="tool-label">
+                    Business snapshot
+                </span>
+
+                <h2>
+                    See where your craft business is going.
+                </h2>
+
+                <p>
+                    Your order history can feed into the Taana-Baana
+                    business dashboard to understand sales, costs,
+                    profit and repeat-buyer activity.
+                </p>
+
+                <button
+                    class="tool-button primary"
+                    id="earningsButton"
+                    type="button"
+                >
+                    View earnings →
+                </button>
+
+            </article>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<!-- =============================================================
+     TOAST
+     ============================================================= -->
+
+<div
+    class="orders-toast"
+    id="ordersToast"
+    role="status"
+    aria-live="polite"
+></div>
+
+
+<script src="../js/main.js" defer></script>
+<script src="../js/pages.js" defer></script>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const search =
+        document.getElementById("orderSearch");
+
+    const status =
+        document.getElementById("orderStatus");
+
+    const period =
+        document.getElementById("orderPeriod");
+
+    const cards =
+        [...document.querySelectorAll(".artisan-order-card")];
+
+    const count =
+        document.getElementById("ordersCount");
+
+    const empty =
+        document.getElementById("ordersEmpty");
+
+    const toast =
+        document.getElementById("ordersToast");
+
+
+    /* =====================================================
+       TOAST
+       ===================================================== */
+
+    function showToast(message) {
+
+        toast.textContent = message;
+
+        toast.classList.add("show");
+
+        clearTimeout(window.taanaOrdersToast);
+
+        window.taanaOrdersToast =
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 2800);
+    }
+
+
+    /* =====================================================
+       FILTER
+       ===================================================== */
+
+    function filterOrders() {
+
+        const query =
+            search.value.trim().toLowerCase();
+
+        const selectedStatus =
+            status.value;
+
+        const selectedPeriod =
+            period.value;
+
+        let visible = 0;
+
+        cards.forEach(card => {
+
+            const searchable =
+                card.dataset.search || "";
+
+            const cardStatus =
+                card.dataset.status;
+
+            const cardPeriod =
+                card.dataset.period;
+
+            const matchesSearch =
+                !query ||
+                searchable.includes(query);
+
+            const matchesStatus =
+                selectedStatus === "all" ||
+                cardStatus === selectedStatus;
+
+            const matchesPeriod =
+                selectedPeriod === "all" ||
+                cardPeriod === selectedPeriod;
+
+            const shouldShow =
+                matchesSearch &&
+                matchesStatus &&
+                matchesPeriod;
+
+            card.style.display =
+                shouldShow ? "" : "none";
+
+            if (shouldShow) {
+                visible++;
+            }
+
+        });
+
+        count.textContent =
+            `Showing ${visible} ${visible === 1 ? "order" : "orders"}`;
+
+        empty.style.display =
+            visible === 0 ? "block" : "none";
+    }
+
+
+    search.addEventListener(
+        "input",
+        filterOrders
+    );
+
+    status.addEventListener(
+        "change",
+        filterOrders
+    );
+
+    period.addEventListener(
+        "change",
+        filterOrders
+    );
+
+
+    /* =====================================================
+       ORDER ACTIONS
+       ===================================================== */
+
+    cards.forEach(card => {
+
+        const buttons =
+            card.querySelectorAll("[data-action]");
+
+        buttons.forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const action =
+                        button.dataset.action;
+
+                    const orderId =
+                        card
+                            .querySelector(".order-id")
+                            ?.textContent
+                            .trim();
+
+                    const product =
+                        card
+                            .querySelector("h3")
+                            ?.textContent
+                            .trim();
+
+                    if (action === "message") {
+
+                        showToast(
+                            `Opening conversation with the buyer for ${orderId}.`
+                        );
+
+                        return;
+                    }
+
+
+                    if (action === "details") {
+
+                        localStorage.setItem(
+                            "taanaBaanaSelectedArtisanOrder",
+                            JSON.stringify({
+
+                                orderId,
+
+                                product,
+
+                                status:
+                                    card.dataset.status,
+
+                                buyer:
+                                    card
+                                        .querySelector(".order-buyer")
+                                        ?.textContent
+                                        .trim(),
+
+                                selectedAt:
+                                    new Date().toISOString()
+
+                            })
+                        );
+
+                        showToast(
+                            `${product} — order details are ready.`
+                        );
+
+                    }
+
+                }
+            );
+
+        });
+
+    });
+
+
+    /* =====================================================
+       PRODUCTION ASSISTANT
+       ===================================================== */
+
+    document
+        .getElementById("productionButton")
+        .addEventListener(
+            "click",
+            () => {
+
+                showToast(
+                    "Production planner prototype: AI can help divide bulk orders into manageable production stages."
+                );
+
+            }
+        );
+
+
+    /* =====================================================
+       EARNINGS
+       ===================================================== */
+
+    document
+        .getElementById("earningsButton")
+        .addEventListener(
+            "click",
+            () => {
+
+                window.location.href =
+                    "artisan-earnings.html";
+
+            }
+        );
+
+
+    /* =====================================================
+       REMEMBER PAGE
+       ===================================================== */
+
+    try {
+
+        localStorage.setItem(
+            "taanaBaanaLastArtisanPage",
+            "artisan-orders"
+        );
+
+    } catch (error) {
+        /* Storage unavailable */
+    }
+
+
+    filterOrders();
+
+});
+
+</script>
+
+</body>
+</html>

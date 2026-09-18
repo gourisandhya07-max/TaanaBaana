@@ -1,0 +1,3000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Taana-Baana AI-powered artisan matching for B2B buyers."
+    >
+
+    <title>AI Matches — Taana-Baana</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+
+    <style>
+
+        /* =====================================================
+           TAANA-BAANA
+           AI BUYER → ARTISAN MATCHING
+           New page styles only
+        ===================================================== */
+
+        .matching-page {
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 5% 8%,
+                    rgba(196,61,115,.08),
+                    transparent 24%
+                ),
+                radial-gradient(
+                    circle at 94% 18%,
+                    rgba(15,124,120,.08),
+                    transparent 25%
+                ),
+                #fcf6ea;
+
+            color: #3b2922;
+        }
+
+
+        /* =========================================
+           PAGE INTRO
+        ========================================= */
+
+        .matching-header {
+            max-width: 1220px;
+
+            margin: 0 auto;
+
+            padding:
+                125px
+                30px
+                35px;
+        }
+
+
+        .matching-breadcrumb {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 28px;
+
+            font-size: 11px;
+
+            color: #927e72;
+        }
+
+
+        .matching-breadcrumb a {
+            color: #927e72;
+
+            text-decoration: none;
+        }
+
+
+        .matching-breadcrumb span {
+            color: #c96f4a;
+        }
+
+
+        .matching-topline {
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: space-between;
+
+            gap: 30px;
+        }
+
+
+        .matching-eyebrow {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            padding:
+                9px
+                15px;
+
+            border-radius: 999px;
+
+            background: #e4eeee;
+
+            color: #0f7c78;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: .14em;
+
+            text-transform: uppercase;
+        }
+
+
+        .matching-eyebrow span {
+            width: 7px;
+
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #0f7c78;
+
+            animation: livePulse 1.5s infinite;
+        }
+
+
+        @keyframes livePulse {
+
+            0%,
+            100% {
+                box-shadow:
+                    0 0 0 0 rgba(15,124,120,.25);
+            }
+
+            50% {
+                box-shadow:
+                    0 0 0 7px rgba(15,124,120,0);
+            }
+
+        }
+
+
+        .matching-header h1 {
+            margin:
+                20px
+                0
+                10px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(42px, 6vw, 70px);
+
+            line-height: .98;
+
+            letter-spacing: -.045em;
+        }
+
+
+        .matching-header h1 em {
+            color: #c96f4a;
+
+            font-weight: 500;
+        }
+
+
+        .matching-header p {
+            max-width: 650px;
+
+            margin: 0;
+
+            color: #78665d;
+
+            line-height: 1.7;
+
+            font-size: 14px;
+        }
+
+
+        .requirement-id {
+            padding:
+                13px
+                16px;
+
+            border-radius: 14px;
+
+            background: #fff9f0;
+
+            border: 1px solid #e2d1ba;
+
+            text-align: right;
+
+            flex-shrink: 0;
+        }
+
+
+        .requirement-id small {
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: #99877c;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            letter-spacing: .1em;
+
+            text-transform: uppercase;
+        }
+
+
+        .requirement-id strong {
+            font-size: 12px;
+
+            color: #a95338;
+        }
+
+
+        /* =========================================
+           REQUIREMENT SUMMARY
+        ========================================= */
+
+        .requirement-summary {
+            max-width: 1160px;
+
+            margin:
+                0
+                auto
+                35px;
+
+            padding:
+                0
+                30px;
+        }
+
+
+        .summary-card {
+            display: grid;
+
+            grid-template-columns:
+                1.5fr
+                repeat(4, 1fr);
+
+            gap: 0;
+
+            overflow: hidden;
+
+            border:
+                1px solid
+                #e1d0b9;
+
+            border-radius: 22px;
+
+            background: #fff9f0;
+
+            box-shadow:
+                0
+                15px
+                40px
+                rgba(59,41,34,.06);
+        }
+
+
+        .summary-main {
+            padding: 24px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff9f0,
+                    #f7e9d9
+                );
+        }
+
+
+        .summary-main small,
+        .summary-item small {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #9b887d;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            letter-spacing: .11em;
+
+            text-transform: uppercase;
+        }
+
+
+        .summary-main strong {
+            display: block;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 21px;
+        }
+
+
+        .summary-main span {
+            display: block;
+
+            margin-top: 5px;
+
+            color: #7e6c62;
+
+            font-size: 11px;
+        }
+
+
+        .summary-item {
+            padding:
+                24px
+                18px;
+
+            border-left:
+                1px solid
+                #eadcca;
+        }
+
+
+        .summary-item strong {
+            font-size: 13px;
+
+            word-break: break-word;
+        }
+
+
+        /* =========================================
+           MATCH CONTENT
+        ========================================= */
+
+        .matches-section {
+            max-width: 1160px;
+
+            margin: 0 auto;
+
+            padding:
+                15px
+                30px
+                100px;
+        }
+
+
+        .matches-toolbar {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .matches-count strong {
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 25px;
+        }
+
+
+        .matches-count span {
+            margin-left: 7px;
+
+            color: #8a786d;
+
+            font-size: 12px;
+        }
+
+
+        .sort-select {
+            padding:
+                10px
+                13px;
+
+            border:
+                1px solid
+                #dfccb5;
+
+            border-radius: 11px;
+
+            background: #fff9f0;
+
+            color: #5f4d44;
+
+            font-family:
+                "DM Sans",
+                sans-serif;
+
+            font-size: 11px;
+
+            outline: none;
+        }
+
+
+        /* =========================================
+           MATCH CARD
+        ========================================= */
+
+        .match-list {
+            display: grid;
+
+            gap: 16px;
+        }
+
+
+        .match-card {
+            display: grid;
+
+            grid-template-columns:
+                210px
+                1fr
+                180px;
+
+            min-height: 260px;
+
+            overflow: hidden;
+
+            border:
+                1px solid
+                #e2d1ba;
+
+            border-radius: 24px;
+
+            background: #fff9f0;
+
+            box-shadow:
+                0
+                12px
+                35px
+                rgba(59,41,34,.055);
+
+            transition:
+                transform .3s ease,
+                box-shadow .3s ease,
+                border-color .3s ease;
+        }
+
+
+        .match-card:hover {
+            transform:
+                translateY(-4px);
+
+            box-shadow:
+                0
+                22px
+                50px
+                rgba(59,41,34,.1);
+
+            border-color:
+                #d5b994;
+        }
+
+
+        /* =========================================
+           ARTISAN VISUAL
+        ========================================= */
+
+        .artisan-visual {
+            position: relative;
+
+            min-height: 260px;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .artisan-visual.one {
+            background:
+                linear-gradient(
+                    145deg,
+                    #d7a78e,
+                    #b76b50
+                );
+        }
+
+
+        .artisan-visual.two {
+            background:
+                linear-gradient(
+                    145deg,
+                    #b8c8aa,
+                    #718665
+                );
+        }
+
+
+        .artisan-visual.three {
+            background:
+                linear-gradient(
+                    145deg,
+                    #9db9c4,
+                    #517b8c
+                );
+        }
+
+
+        .artisan-visual.four {
+            background:
+                linear-gradient(
+                    145deg,
+                    #d6b2ca,
+                    #8c577c
+                );
+        }
+
+
+        .craft-pattern {
+            position: absolute;
+
+            inset: 0;
+
+            opacity: .3;
+
+            background-image:
+                repeating-linear-gradient(
+                    45deg,
+                    transparent 0 12px,
+                    rgba(255,255,255,.35)
+                    12px 14px
+                );
+        }
+
+
+        .craft-symbol {
+            position: relative;
+
+            z-index: 2;
+
+            width: 105px;
+
+            height: 105px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,249,240,.9);
+
+            border:
+                1px solid
+                rgba(255,255,255,.7);
+
+            box-shadow:
+                0
+                15px
+                35px
+                rgba(42,29,24,.16);
+
+            font-size: 45px;
+        }
+
+
+        .verified-badge {
+            position: absolute;
+
+            z-index: 3;
+
+            left: 15px;
+
+            bottom: 15px;
+
+            padding:
+                7px
+                10px;
+
+            border-radius: 999px;
+
+            background:
+                rgba(255,249,240,.94);
+
+            color: #3e7c59;
+
+            font-size: 9px;
+
+            font-weight: 800;
+        }
+
+
+        /* =========================================
+           ARTISAN INFO
+        ========================================= */
+
+        .match-info {
+            padding:
+                28px
+                25px;
+        }
+
+
+        .match-label {
+            display: inline-block;
+
+            padding:
+                6px
+                9px;
+
+            border-radius: 999px;
+
+            background: #f3e3d3;
+
+            color: #a95338;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            letter-spacing: .08em;
+
+            text-transform: uppercase;
+        }
+
+
+        .match-info h2 {
+            margin:
+                12px
+                0
+                5px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 25px;
+        }
+
+
+        .artisan-location {
+            display: flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            color: #8a786d;
+
+            font-size: 11px;
+        }
+
+
+        .artisan-description {
+            margin:
+                17px
+                0;
+
+            color: #736158;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+
+            max-width: 570px;
+        }
+
+
+        .match-tags {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 7px;
+        }
+
+
+        .match-tag {
+            padding:
+                7px
+                9px;
+
+            border-radius: 8px;
+
+            background: #f4eee5;
+
+            color: #6e5c53;
+
+            font-size: 10px;
+        }
+
+
+        /* =========================================
+           MATCH SCORE
+        ========================================= */
+
+        .match-score {
+            padding:
+                25px
+                20px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
+            border-left:
+                1px solid
+                #eadcca;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #fff9f0,
+                    #f8eee2
+                );
+        }
+
+
+        .score-ring {
+            position: relative;
+
+            width: 95px;
+
+            height: 95px;
+
+            display: grid;
+
+            place-items: center;
+        }
+
+
+        .score-ring svg {
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            transform:
+                rotate(-90deg);
+        }
+
+
+        .score-ring circle {
+            fill: none;
+
+            stroke-width: 7;
+        }
+
+
+        .score-bg {
+            stroke: #eadcca;
+        }
+
+
+        .score-progress {
+            stroke: #c96f4a;
+
+            stroke-linecap: round;
+
+            stroke-dasharray: 251;
+
+            stroke-dashoffset: 251;
+
+            transition:
+                stroke-dashoffset
+                1.4s
+                cubic-bezier(.16,1,.3,1);
+        }
+
+
+        .score-number {
+            position: relative;
+
+            z-index: 2;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 25px;
+
+            font-weight: 600;
+        }
+
+
+        .score-label {
+            margin-top: 7px;
+
+            color: #a95338;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            letter-spacing: .12em;
+
+            text-transform: uppercase;
+        }
+
+
+        .connect-button {
+            width: 100%;
+
+            margin-top: 18px;
+
+            min-height: 42px;
+
+            border: 0;
+
+            border-radius: 11px;
+
+            background: #3b2922;
+
+            color: #fff9f0;
+
+            cursor: pointer;
+
+            font-family:
+                "DM Sans",
+                sans-serif;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            transition:
+                transform .2s ease,
+                background .2s ease;
+        }
+
+
+        .connect-button:hover {
+            transform:
+                translateY(-2px);
+
+            background: #a95338;
+        }
+
+
+        .view-profile {
+            margin-top: 9px;
+
+            color: #8b766a;
+
+            font-size: 10px;
+
+            text-decoration: none;
+        }
+
+
+        /* =========================================
+           WHY MATCHED
+        ========================================= */
+
+        .match-reasons {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 6px;
+
+            margin-top: 13px;
+        }
+
+
+        .match-reason {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 4px;
+
+            color: #3e7c59;
+
+            font-size: 10px;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================================
+           EMPTY / FALLBACK
+        ========================================= */
+
+        .no-requirement {
+            display: none;
+
+            padding:
+                70px
+                30px;
+
+            text-align: center;
+
+            border:
+                1px dashed
+                #d7c1a5;
+
+            border-radius: 25px;
+
+            background: #fff9f0;
+        }
+
+
+        .no-requirement.show {
+            display: block;
+        }
+
+
+        .no-requirement-icon {
+            font-size: 45px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .no-requirement h2 {
+            margin: 0 0 8px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 30px;
+        }
+
+
+        .no-requirement p {
+            max-width: 500px;
+
+            margin:
+                0
+                auto
+                20px;
+
+            color: #7b685e;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        .no-requirement a {
+            display: inline-flex;
+
+            align-items: center;
+
+            min-height: 45px;
+
+            padding:
+                0
+                18px;
+
+            border-radius: 11px;
+
+            background: #3b2922;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 11px;
+
+            font-weight: 800;
+        }
+
+
+        /* =========================================
+           ENQUIRY MODAL
+        ========================================= */
+
+        .enquiry-overlay {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 9999;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(42,29,24,.72);
+
+            backdrop-filter:
+                blur(8px);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition:
+                opacity .25s ease,
+                visibility .25s ease;
+        }
+
+
+        .enquiry-overlay.show {
+            opacity: 1;
+
+            visibility: visible;
+        }
+
+
+        .enquiry-modal {
+            width:
+                min(520px,100%);
+
+            padding: 32px;
+
+            border-radius: 25px;
+
+            background: #fff9f0;
+
+            box-shadow:
+                0
+                30px
+                80px
+                rgba(0,0,0,.25);
+
+            transform:
+                translateY(20px);
+
+            transition:
+                transform .3s ease;
+        }
+
+
+        .enquiry-overlay.show .enquiry-modal {
+            transform:
+                translateY(0);
+        }
+
+
+        .modal-header {
+            display: flex;
+
+            align-items: flex-start;
+
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+
+        .modal-header h2 {
+            margin: 0;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 27px;
+        }
+
+
+        .modal-close {
+            width: 35px;
+
+            height: 35px;
+
+            border: 0;
+
+            border-radius: 50%;
+
+            background: #f0e3d5;
+
+            color: #5d4b42;
+
+            cursor: pointer;
+
+            font-size: 17px;
+        }
+
+
+        .modal-subtitle {
+            margin:
+                7px
+                0
+                25px;
+
+            color: #806e64;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+
+        .enquiry-form {
+            display: grid;
+
+            gap: 14px;
+        }
+
+
+        .enquiry-form label {
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: #6d5a51;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: .07em;
+
+            text-transform: uppercase;
+        }
+
+
+        .enquiry-form input,
+        .enquiry-form textarea {
+            width: 100%;
+
+            box-sizing: border-box;
+
+            padding:
+                13px;
+
+            border:
+                1px solid
+                #ddc9b1;
+
+            border-radius: 11px;
+
+            background: #fffdf9;
+
+            color: #3b2922;
+
+            outline: none;
+
+            font-family:
+                "DM Sans",
+                sans-serif;
+
+            font-size: 12px;
+        }
+
+
+        .enquiry-form textarea {
+            min-height: 100px;
+
+            resize: vertical;
+        }
+
+
+        .enquiry-form input:focus,
+        .enquiry-form textarea:focus {
+            border-color: #c96f4a;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(201,111,74,.1);
+        }
+
+
+        .send-enquiry {
+            min-height: 48px;
+
+            margin-top: 4px;
+
+            border: 0;
+
+            border-radius: 12px;
+
+            background: #3b2922;
+
+            color: white;
+
+            cursor: pointer;
+
+            font-family:
+                "DM Sans",
+                sans-serif;
+
+            font-weight: 800;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================================
+           TOAST
+        ========================================= */
+
+        .matching-toast {
+            position: fixed;
+
+            z-index: 10000;
+
+            right: 22px;
+
+            bottom: 22px;
+
+            max-width: 360px;
+
+            padding:
+                15px
+                18px;
+
+            border-radius: 14px;
+
+            background: #3b2922;
+
+            color: #fff9f0;
+
+            box-shadow:
+                0
+                18px
+                40px
+                rgba(0,0,0,.2);
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            opacity: 0;
+
+            transform:
+                translateY(15px);
+
+            pointer-events: none;
+
+            transition:
+                opacity .25s ease,
+                transform .25s ease;
+        }
+
+
+        .matching-toast.show {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 950px) {
+
+            .summary-card {
+                grid-template-columns:
+                    1fr
+                    1fr;
+            }
+
+
+            .summary-main {
+                grid-column:
+                    1 / -1;
+            }
+
+
+            .summary-item {
+                border-top:
+                    1px solid
+                    #eadcca;
+
+                border-left: 0;
+            }
+
+
+            .match-card {
+                grid-template-columns:
+                    170px
+                    1fr;
+            }
+
+
+            .match-score {
+                grid-column:
+                    1 / -1;
+
+                flex-direction: row;
+
+                justify-content:
+                    space-between;
+
+                border-left: 0;
+
+                border-top:
+                    1px solid
+                    #eadcca;
+
+                padding:
+                    18px
+                    25px;
+            }
+
+
+            .score-label {
+                margin-top: 0;
+            }
+
+
+            .connect-button {
+                width: 180px;
+
+                margin-top: 0;
+            }
+
+
+            .view-profile {
+                margin-top: 0;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .matching-header {
+                padding:
+                    105px
+                    20px
+                    30px;
+            }
+
+
+            .matching-topline {
+                flex-direction: column;
+
+                align-items:
+                    flex-start;
+            }
+
+
+            .requirement-id {
+                text-align: left;
+            }
+
+
+            .requirement-summary {
+                padding:
+                    0
+                    15px;
+            }
+
+
+            .summary-card {
+                grid-template-columns:
+                    1fr
+                    1fr;
+            }
+
+
+            .matches-section {
+                padding:
+                    15px
+                    15px
+                    70px;
+            }
+
+
+            .matches-toolbar {
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+            }
+
+
+            .match-card {
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .artisan-visual {
+                min-height: 210px;
+            }
+
+
+            .match-info {
+                padding:
+                    23px
+                    20px;
+            }
+
+
+            .match-score {
+                flex-wrap: wrap;
+
+                gap: 15px;
+            }
+
+
+            .connect-button {
+                width: 100%;
+            }
+
+        }
+
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .matching-eyebrow span {
+                animation: none;
+            }
+
+            .score-progress {
+                transition: none;
+            }
+
+            .match-card {
+                transition: none;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="matching-page">
+
+
+    <!-- ==========================================
+         NAVIGATION
+    =========================================== -->
+
+    <header class="site-header">
+
+        <nav class="navbar">
+
+            <a
+                href="../index.html"
+                class="brand-logo-link"
+                aria-label="Taana-Baana Home"
+            >
+
+                <img
+                    src="../assets/logo.png"
+                    alt="Taana-Baana — From Hands to Markets"
+                    class="brand-logo"
+                >
+
+            </a>
+
+
+            <div class="nav-links">
+
+                <div class="nav-dropdown">
+
+                    <button
+                        class="nav-dropdown-toggle"
+                        type="button"
+                    >
+                        Features
+                        <span>⌄</span>
+                    </button>
+
+
+                    <div class="nav-dropdown-menu">
+
+                        <a href="studio.html">
+                            AI Product Studio
+                        </a>
+
+                        <a href="catalog.html">
+                            Voice-to-Catalogue
+                        </a>
+
+                        <a href="pricing.html">
+                            Smart Pricing
+                        </a>
+
+                        <a href="artisan.html">
+                            Artisan Identity
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <a href="marketplace.html">
+                    Marketplace
+                </a>
+
+
+                <a
+                    href="b2b.html"
+                    class="active"
+                >
+                    B2B
+                </a>
+
+
+                <a href="how-it-works.html">
+                    How It Works
+                </a>
+
+
+                <a href="about.html">
+                    About
+                </a>
+
+            </div>
+
+
+            <div class="nav-actions">
+
+                <a
+                    href="login.html"
+                    class="nav-login"
+                >
+                    Login
+                </a>
+
+
+                <a
+                    href="register.html"
+                    class="nav-cta"
+                >
+                    Get Started
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ==========================================
+         HEADER
+    =========================================== -->
+
+    <main>
+
+        <section class="matching-header">
+
+            <div class="matching-breadcrumb">
+
+                <a href="b2b.html">
+                    B2B Marketplace
+                </a>
+
+                <span>
+                    /
+                </span>
+
+                AI Matches
+
+            </div>
+
+
+            <div class="matching-topline">
+
+                <div>
+
+                    <div class="matching-eyebrow">
+
+                        <span></span>
+
+                        AI MATCHING COMPLETE
+
+                    </div>
+
+
+                    <h1>
+                        Makers that
+                        <br>
+                        <em>fit your brief.</em>
+                    </h1>
+
+
+                    <p>
+                        These prototype matches are based on craft,
+                        capacity, indicative pricing, location and
+                        the preferences in your sourcing requirement.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="requirement-id"
+                    id="requirementId"
+                >
+
+                    <small>
+                        Requirement ID
+                    </small>
+
+                    <strong>
+                        Loading...
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             REQUIREMENT SUMMARY
+        =========================================== -->
+
+        <section class="requirement-summary">
+
+            <div class="summary-card">
+
+                <div class="summary-main">
+
+                    <small>
+                        YOUR REQUIREMENT
+                    </small>
+
+                    <strong id="summaryProduct">
+                        Loading requirement...
+                    </strong>
+
+                    <span id="summaryCraft">
+                        —
+                    </span>
+
+                </div>
+
+
+                <div class="summary-item">
+
+                    <small>
+                        Quantity
+                    </small>
+
+                    <strong id="summaryQuantity">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-item">
+
+                    <small>
+                        Target / unit
+                    </small>
+
+                    <strong id="summaryBudget">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-item">
+
+                    <small>
+                        Delivery
+                    </small>
+
+                    <strong id="summaryLocation">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-item">
+
+                    <small>
+                        Required by
+                    </small>
+
+                    <strong id="summaryDeadline">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             MATCHES
+        =========================================== -->
+
+        <section class="matches-section">
+
+            <div class="matches-toolbar">
+
+                <div class="matches-count">
+
+                    <strong>
+                        Artisan matches
+                    </strong>
+
+                    <span>
+                        4 potential connections
+                    </span>
+
+                </div>
+
+
+                <select
+                    class="sort-select"
+                    id="sortMatches"
+                >
+
+                    <option value="match">
+                        Sort: Match score
+                    </option>
+
+                    <option value="price">
+                        Sort: Price
+                    </option>
+
+                    <option value="capacity">
+                        Sort: Capacity
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div
+                class="match-list"
+                id="matchList"
+            >
+
+
+                <!-- MATCH 1 -->
+
+                <article
+                    class="match-card"
+                    data-score="94"
+                    data-price="210"
+                    data-capacity="1200"
+                >
+
+                    <div class="artisan-visual one">
+
+                        <div class="craft-pattern"></div>
+
+                        <div class="craft-symbol">
+                            👜
+                        </div>
+
+                        <div class="verified-badge">
+                            ✓ VERIFIED MAKER
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-info">
+
+                        <span class="match-label">
+                            JUTE & NATURAL FIBRE
+                        </span>
+
+
+                        <h2>
+                            Sutradhar Collective
+                        </h2>
+
+
+                        <div class="artisan-location">
+                            📍 West Bengal, India
+                        </div>
+
+
+                        <p class="artisan-description">
+                            Artisan collective specialising in
+                            handwoven jute products, bags and
+                            sustainable packaging solutions.
+                        </p>
+
+
+                        <div class="match-tags">
+
+                            <span class="match-tag">
+                                1,200+ unit capacity
+                            </span>
+
+                            <span class="match-tag">
+                                Natural materials
+                            </span>
+
+                            <span class="match-tag">
+                                Custom branding
+                            </span>
+
+                            <span class="match-tag">
+                                Bulk orders
+                            </span>
+
+                        </div>
+
+
+                        <div class="match-reasons">
+
+                            <span class="match-reason">
+                                ✓ Craft fit
+                            </span>
+
+                            <span class="match-reason">
+                                ✓ Capacity fit
+                            </span>
+
+                            <span class="match-reason">
+                                ✓ Budget fit
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-score">
+
+                        <div>
+
+                            <div class="score-ring">
+
+                                <svg viewBox="0 0 100 100">
+
+                                    <circle
+                                        class="score-bg"
+                                        cx="50"
+                                        cy="50"
+                                        r="40"
+                                    ></circle>
+
+                                    <circle
+                                        class="score-progress"
+                                        data-score="94"
+                                        cx="50"
+                                        cy="50"
+                                        r="40"
+                                    ></circle>
+
+                                </svg>
+
+
+                                <div class="score-number">
+                                    94%
+                                </div>
+
+                            </div>
+
+
+                            <div class="score-label">
+                                Match
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            <button
+                                class="connect-button"
+                                data-artisan="Sutradhar Collective"
+                            >
+                                Send Enquiry →
+                            </button>
+
+                            <a
+                                href="artisan.html"
+                                class="view-profile"
+                            >
+                                View artisan profile
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- MATCH 2 -->
+
+                <article
+                    class="match-card"
+                    data-score="89"
+                    data-price="235"
+                    data-capacity="900"
+                >
+
+                    <div class="artisan-visual two">
+
+                        <div class="craft-pattern"></div>
+
+                        <div class="craft-symbol">
+                            🧺
+                        </div>
+
+                        <div class="verified-badge">
+                            ✓ VERIFIED MAKER
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-info">
+
+                        <span class="match-label">
+                            BASKETRY
+                        </span>
+
+
+                        <h2>
+                            Mitti & Fibre Studio
+                        </h2>
+
+
+                        <div class="artisan-location">
+                            📍 Odisha, India
+                        </div>
+
+
+                        <p class="artisan-description">
+                            A women-led artisan group creating
+                            handwoven utility products using
+                            locally sourced natural fibres.
+                        </p>
+
+
+                        <div class="match-tags">
+
+                            <span class="match-tag">
+                                900 unit capacity
+                            </span>
+
+                            <span class="match-tag">
+                                Women-led
+                            </span>
+
+                            <span class="match-tag">
+                                Natural fibre
+                            </span>
+
+                            <span class="match-tag">
+                                Custom sizes
+                            </span>
+
+                        </div>
+
+
+                        <div class="match-reasons">
+
+                            <span class="match-reason">
+                                ✓ Craft fit
+                            </span>
+
+                            <span class="match-reason">
+                                ✓ Sustainable
+                            </span>
+
+                            <span class="match-reason">
+                                ✓ Bulk capable
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-score">
+
+                        <div>
+
+                            <div class="score-ring">
+
+                                <svg viewBox="0 0 100 100">
+
+                                    <circle
+                                        class="score-bg"
+                                        cx="50"
+                                        cy="50"
+                                        r="40"
+                                    ></circle>
+
+                                    <circle
+                                        class="score-progress"
+                                        data-score="89"
+                                        cx="50"
+                                        cy="50"
+                                        r="40"
+                                    ></circle>
+
+                                </svg>
+
+
+                                <div class="score-number">
+                                    89%
+                                </div>
+
+                            </div>
+
+
+                            <div class="score-label">
+                                Match
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            <button
+                                class="connect-button"
+                                data-artisan="Mitti & Fibre Studio"
+                            >
+                                Send Enquiry →
+                            </button>
+
+                            <a
+                                href="artisan.html"
+                                class="view-profile"
+                            >
+                                View artisan profile
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- MATCH 3 -->
+
+                <article
+                    class="match-card"
+                    data-score="84"
+                    data-price="245"
+                    data-capacity="700"
+                >
+
+                    <div class="artisan-visual three">
+
+                        <div class="craft-pattern"></div>
+
+                        <div class="craft-symbol">
+                            🎒
+                        </div>
+
+                        <div class="verified-badge">
+                            ✓ VERIFIED MAKER
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-info">
+
+                        <span class="match-label">
+                            HANDCRAFTED TEXTILES
+                        </span>
+
+
+                        <h2>
+                            Rang Sutra Makers
+                        </h2>
+
+
+                        <div class="artisan-location">
+                            📍 Rajasthan, India
+                        </div>
+
+
+                        <p class="artisan-description">
+                            Textile artisans producing hand-stitched
+                            bags, pouches and fabric accessories
+                            inspired by regional craft traditions.
+                        </p>
+
+
+                        <div class="match-tags">
+
+                            <span class="match-tag">
+                                700 unit capacity
+                            </span>
+
+                            <span class="match-tag">
+                                Hand stitched
+                            </span>
+
+                            <span class="match-tag">
+                                Custom colours
+                            </span>
+
+                            <span class="match-tag">
+                                B2B supply
+                            </span>
+
+                        </div>
+
+
+                        <div class="match-reasons">
+
+                            <span class="match-reason">
+                                ✓ Craft compatibility
+                            </span>
+
+                            <span class="match-reason">
+                                ✓ Customisation
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-score">
+
+                        <div>
+
+                            <div class="score-ring">
+
+                                <svg viewBox="0 0 100 100">
+
+                                    <circle
+                                        class="score-bg"
+                                        cx="50"
+                                        cy="50"
+                                        r="40"
+                                    ></circle>
+
+                                    <circle
+                                        class="score-progress"
+                                        data-score="84"
+                                        cx="50"
+                                        cy="50"
+                                        r="40"
+                                    ></circle>
+
+                                </svg>
+
+
+                                <div class="score-number">
+                                    84%
+                                </div>
+
+                            </div>
+
+
+                            <div class="score-label">
+                                Match
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            <button
+                                class="connect-button"
+                                data-artisan="Rang Sutra Makers"
+                            >
+                                Send Enquiry →
+                            </button>
+
+                            <a
+                                href="artisan.html"
+                                class="view-profile"
+                            >
+                                View artisan profile
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- MATCH 4 -->
+
+                <article
+                    class="match-card"
+                    data-score="78"
+                    data-price="250"
+                    data-capacity="500"
+                >
+
+                    <div class="artisan-visual four">
+
+                        <div class="craft-pattern"></div>
+
+                        <div class="craft-symbol">
+                            🧵
+                        </div>
+
+                        <div class="verified-badge">
+                            ✓ VERIFIED MAKER
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-info">
+
+                        <span class="match-label">
+                            TEXTILES
+                        </span>
+
+
+                        <h2>
+                            Loom Stories Cluster
+                        </h2>
+
+
+                        <div class="artisan-location">
+                            📍 Kerala, India
+                        </div>
+
+
+                        <p class="artisan-description">
+                            A small weaving cluster producing
+                            handcrafted fabric accessories and
+                            customised textile products.
+                        </p>
+
+
+                        <div class="match-tags">
+
+                            <span class="match-tag">
+                                500 unit capacity
+                            </span>
+
+                            <span class="match-tag">
+                                Handwoven
+                            </span>
+
+                            <span class="match-tag">
+                                Custom orders
+                            </span>
+
+                            <span class="match-tag">
+                                Artisan cluster
+                            </span>
+
+                        </div>
+
+
+                        <div class="match-reasons">
+
+                            <span class="match-reason">
+                                ✓ Regional proximity
+                            </span>
+
+                            <span class="match-reason">
+                                ✓ Handmade
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-score">
+
+                        <div>
+
+                            <div class="score-ring">
+
+                                <svg viewBox="0 0 100 100">
+
+                                    <circle
+                                        class="score-bg"
+                                        cx="50"
+                                        cy="50"
+                                        r="40"
+                                    ></circle>
+
+                                    <circle
+                                        class="score-progress"
+                                        data-score="78"
+                                        cx="50"
+                                        cy="50"
+                                        r="40"
+                                    ></circle>
+
+                                </svg>
+
+
+                                <div class="score-number">
+                                    78%
+                                </div>
+
+                            </div>
+
+
+                            <div class="score-label">
+                                Match
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            <button
+                                class="connect-button"
+                                data-artisan="Loom Stories Cluster"
+                            >
+                                Send Enquiry →
+                            </button>
+
+                            <a
+                                href="artisan.html"
+                                class="view-profile"
+                            >
+                                View artisan profile
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- ======================================
+                 NO REQUIREMENT
+            ======================================= -->
+
+            <div
+                class="no-requirement"
+                id="noRequirement"
+            >
+
+                <div class="no-requirement-icon">
+                    🧵
+                </div>
+
+                <h2>
+                    No sourcing brief yet
+                </h2>
+
+                <p>
+                    Create a B2B requirement first and
+                    we'll show you suitable artisan matches.
+                </p>
+
+                <a href="post-requirement.html">
+                    Create Requirement →
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ==========================================
+     ENQUIRY MODAL
+=========================================== -->
+
+<div
+    class="enquiry-overlay"
+    id="enquiryOverlay"
+>
+
+    <div class="enquiry-modal">
+
+        <div class="modal-header">
+
+            <h2>
+                Send an enquiry
+            </h2>
+
+            <button
+                class="modal-close"
+                id="closeEnquiry"
+                type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <p
+            class="modal-subtitle"
+            id="enquirySubtitle"
+        >
+            Introduce your requirement to the artisan.
+        </p>
+
+
+        <form
+            class="enquiry-form"
+            id="enquiryForm"
+        >
+
+            <div>
+
+                <label for="buyerName">
+                    Your name / business
+                </label>
+
+                <input
+                    type="text"
+                    id="buyerName"
+                    placeholder="Example: GreenLeaf Organics"
+                    required
+                >
+
+            </div>
+
+
+            <div>
+
+                <label for="buyerEmail">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="buyerEmail"
+                    placeholder="business@example.com"
+                    required
+                >
+
+            </div>
+
+
+            <div>
+
+                <label for="enquiryMessage">
+                    Message
+                </label>
+
+                <textarea
+                    id="enquiryMessage"
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="send-enquiry"
+            >
+                Send Enquiry →
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<div
+    class="matching-toast"
+    id="matchingToast"
+></div>
+
+
+<script src="../js/main.js" defer></script>
+<script src="../js/pages.js" defer></script>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+
+    /* ==========================================
+       LOAD REQUIREMENT
+    ========================================== */
+
+    const storedRequirement =
+        localStorage.getItem(
+            "taanaBaanaRequirement"
+        );
+
+
+    const matchList =
+        document.getElementById("matchList");
+
+
+    const noRequirement =
+        document.getElementById("noRequirement");
+
+
+    if (!storedRequirement) {
+
+        matchList.style.display = "none";
+
+        noRequirement.classList.add("show");
+
+        return;
+
+    }
+
+
+    let requirement;
+
+
+    try {
+
+        requirement =
+            JSON.parse(storedRequirement);
+
+    } catch (error) {
+
+        matchList.style.display = "none";
+
+        noRequirement.classList.add("show");
+
+        return;
+
+    }
+
+
+    /* ==========================================
+       SUMMARY
+    ========================================== */
+
+    document
+        .getElementById("requirementId")
+        .querySelector("strong")
+        .textContent =
+            requirement.id || "REQ-DEMO";
+
+
+    document
+        .getElementById("summaryProduct")
+        .textContent =
+            requirement.productName ||
+            "Product requirement";
+
+
+    document
+        .getElementById("summaryCraft")
+        .textContent =
+            [
+                requirement.category,
+                requirement.craftPreference
+            ]
+            .filter(Boolean)
+            .join(" · ") ||
+            "Craft requirement";
+
+
+    document
+        .getElementById("summaryQuantity")
+        .textContent =
+            requirement.quantity
+                ? Number(requirement.quantity).toLocaleString("en-IN")
+                  + " units"
+                : "—";
+
+
+    document
+        .getElementById("summaryBudget")
+        .textContent =
+            requirement.budget
+                ? "₹" +
+                  Number(requirement.budget)
+                    .toLocaleString("en-IN")
+                : "—";
+
+
+    document
+        .getElementById("summaryLocation")
+        .textContent =
+            requirement.deliveryLocation ||
+            "—";
+
+
+    document
+        .getElementById("summaryDeadline")
+        .textContent =
+            requirement.deadline
+                ? new Date(
+                    requirement.deadline +
+                    "T00:00:00"
+                ).toLocaleDateString(
+                    "en-IN",
+                    {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric"
+                    }
+                )
+                : "—";
+
+
+    /* ==========================================
+       SCORE ANIMATION
+    ========================================== */
+
+    setTimeout(() => {
+
+        document
+            .querySelectorAll(".score-progress")
+            .forEach(circle => {
+
+                const score =
+                    Number(
+                        circle.dataset.score
+                    );
+
+
+                const circumference =
+                    2 * Math.PI * 40;
+
+
+                const offset =
+                    circumference -
+                    (
+                        score / 100
+                    ) * circumference;
+
+
+                circle.style.strokeDashoffset =
+                    offset;
+
+            });
+
+    }, 350);
+
+
+    /* ==========================================
+       SORTING
+    ========================================== */
+
+    const sortSelect =
+        document.getElementById(
+            "sortMatches"
+        );
+
+
+    sortSelect.addEventListener(
+        "change",
+        () => {
+
+            const cards =
+                Array.from(
+                    matchList.querySelectorAll(
+                        ".match-card"
+                    )
+                );
+
+
+            const sortType =
+                sortSelect.value;
+
+
+            cards.sort((a, b) => {
+
+                if (sortType === "price") {
+
+                    return Number(
+                        a.dataset.price
+                    ) -
+                    Number(
+                        b.dataset.price
+                    );
+
+                }
+
+
+                if (sortType === "capacity") {
+
+                    return Number(
+                        b.dataset.capacity
+                    ) -
+                    Number(
+                        a.dataset.capacity
+                    );
+
+                }
+
+
+                return Number(
+                    b.dataset.score
+                ) -
+                Number(
+                    a.dataset.score
+                );
+
+            });
+
+
+            cards.forEach(card => {
+
+                matchList.appendChild(card);
+
+            });
+
+        }
+    );
+
+
+    /* ==========================================
+       ENQUIRY MODAL
+    ========================================== */
+
+    const overlay =
+        document.getElementById(
+            "enquiryOverlay"
+        );
+
+
+    const closeButton =
+        document.getElementById(
+            "closeEnquiry"
+        );
+
+
+    const enquiryForm =
+        document.getElementById(
+            "enquiryForm"
+        );
+
+
+    const enquiryMessage =
+        document.getElementById(
+            "enquiryMessage"
+        );
+
+
+    const enquirySubtitle =
+        document.getElementById(
+            "enquirySubtitle"
+        );
+
+
+    let selectedArtisan = "";
+
+
+    document
+        .querySelectorAll(".connect-button")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    selectedArtisan =
+                        button.dataset.artisan;
+
+
+                    enquirySubtitle.textContent =
+                        `Send your sourcing brief to ${selectedArtisan}.`;
+
+
+                    enquiryMessage.value =
+                        `Hello ${selectedArtisan},
+
+I am interested in discussing a bulk requirement for ${requirement.productName || "your products"}.
+
+Quantity: ${requirement.quantity || "To be discussed"} units
+Target price: ₹${requirement.budget || "To be discussed"} per unit
+Delivery location: ${requirement.deliveryLocation || "To be discussed"}
+
+Customisation:
+${requirement.customisation || "Please share your available customisation options."}
+
+Please let me know your capacity, quotation and expected delivery timeline.
+
+Thank you.`;
+
+
+                    overlay.classList.add(
+                        "show"
+                    );
+
+                }
+            );
+
+        });
+
+
+    /* ==========================================
+       CLOSE MODAL
+    ========================================== */
+
+    closeButton.addEventListener(
+        "click",
+        () => {
+
+            overlay.classList.remove(
+                "show"
+            );
+
+        }
+    );
+
+
+    overlay.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target === overlay
+            ) {
+
+                overlay.classList.remove(
+                    "show"
+                );
+
+            }
+
+        }
+    );
+
+
+    /* ==========================================
+       SEND ENQUIRY
+    ========================================== */
+
+    enquiryForm.addEventListener(
+        "submit",
+        event => {
+
+            event.preventDefault();
+
+
+            const enquiry = {
+
+                id:
+                    "ENQ-" +
+                    Date.now(),
+
+                artisan:
+                    selectedArtisan,
+
+                buyer:
+                    document
+                        .getElementById(
+                            "buyerName"
+                        )
+                        .value
+                        .trim(),
+
+                email:
+                    document
+                        .getElementById(
+                            "buyerEmail"
+                        )
+                        .value
+                        .trim(),
+
+                message:
+                    enquiryMessage
+                        .value
+                        .trim(),
+
+                requirement:
+                    requirement,
+
+                createdAt:
+                    new Date().toISOString(),
+
+                status:
+                    "Sent"
+
+            };
+
+
+            /* ==================================
+               SAVE ENQUIRY
+            =================================== */
+
+            const existing =
+                JSON.parse(
+                    localStorage.getItem(
+                        "taanaBaanaEnquiries"
+                    ) || "[]"
+                );
+
+
+            existing.push(enquiry);
+
+
+            localStorage.setItem(
+                "taanaBaanaEnquiries",
+                JSON.stringify(existing)
+            );
+
+
+            overlay.classList.remove(
+                "show"
+            );
+
+
+            enquiryForm.reset();
+
+
+            showToast(
+                `Enquiry sent to ${selectedArtisan} ✓`
+            );
+
+        }
+    );
+
+
+    /* ==========================================
+       TOAST
+    ========================================== */
+
+    const toast =
+        document.getElementById(
+            "matchingToast"
+        );
+
+
+    function showToast(message) {
+
+        toast.textContent =
+            message;
+
+        toast.classList.add(
+            "show"
+        );
+
+
+        setTimeout(() => {
+
+            toast.classList.remove(
+                "show"
+            );
+
+        }, 3500);
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

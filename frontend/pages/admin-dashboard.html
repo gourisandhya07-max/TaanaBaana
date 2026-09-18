@@ -1,0 +1,3736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Taana-Baana Admin Dashboard"
+    >
+
+    <title>Admin Dashboard — Taana-Baana</title>
+
+    <!-- =====================================================
+         FONTS
+    ====================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         EXISTING PROJECT STYLES
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/pages.css"
+    >
+
+
+    <style>
+
+        /* =====================================================
+           ADMIN ROOT
+        ===================================================== */
+
+        .admin-page {
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 10% 5%,
+                    rgba(201,166,91,.12),
+                    transparent 27%
+                ),
+                radial-gradient(
+                    circle at 90% 15%,
+                    rgba(196,61,115,.08),
+                    transparent 28%
+                ),
+                #f8f1e6;
+
+            color: #3b2922;
+
+            font-family:
+                "DM Sans",
+                sans-serif;
+
+        }
+
+
+        /* =====================================================
+           TOP BAR
+        ===================================================== */
+
+        .admin-topbar {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            min-height: 74px;
+
+            padding:
+                0 4vw;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            background:
+                rgba(252,246,234,.94);
+
+            backdrop-filter:
+                blur(18px);
+
+            border-bottom:
+                1px solid
+                rgba(59,41,34,.09);
+
+        }
+
+
+        .admin-brand {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            text-decoration: none;
+
+        }
+
+
+        .admin-brand img {
+
+            width: 145px;
+
+            height: auto;
+
+            display: block;
+
+        }
+
+
+        .admin-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-left: auto;
+
+            margin-right: 25px;
+
+        }
+
+
+        .admin-title-label {
+
+            font-size: 11px;
+
+            letter-spacing:
+                .14em;
+
+            text-transform:
+                uppercase;
+
+            color: #8b766b;
+
+            font-weight: 700;
+
+        }
+
+
+        .admin-title-badge {
+
+            padding:
+                6px 10px;
+
+            border-radius:
+                20px;
+
+            background:
+                #e6dded;
+
+            color:
+                #674a67;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+        }
+
+
+        .admin-profile {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+
+        .admin-avatar {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 50%;
+
+            display: grid;
+
+            place-items: center;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #3b2922,
+                    #a95338
+                );
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+        }
+
+
+        .admin-profile-text strong {
+
+            display: block;
+
+            font-size: 12px;
+
+        }
+
+
+        .admin-profile-text span {
+
+            display: block;
+
+            margin-top: 2px;
+
+            font-size: 10px;
+
+            color: #8c7c72;
+
+        }
+
+
+        /* =====================================================
+           LAYOUT
+        ====================================================== */
+
+        .admin-layout {
+
+            width:
+                min(1500px, 94%);
+
+            margin:
+                0 auto;
+
+            padding:
+                34px 0 80px;
+
+            display: grid;
+
+            grid-template-columns:
+                220px 1fr;
+
+            gap: 28px;
+
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ====================================================== */
+
+        .admin-sidebar {
+
+            position: sticky;
+
+            top: 105px;
+
+            align-self:
+                start;
+
+            padding:
+                18px;
+
+            border-radius:
+                24px;
+
+            background:
+                rgba(255,255,255,.72);
+
+            border:
+                1px solid
+                rgba(59,41,34,.08);
+
+            box-shadow:
+                0 18px 45px
+                rgba(59,41,34,.06);
+
+        }
+
+
+        .admin-sidebar-label {
+
+            margin:
+                6px 10px 12px;
+
+            color:
+                #9b887d;
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+
+            letter-spacing:
+                .14em;
+
+        }
+
+
+        .admin-sidebar a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            min-height: 44px;
+
+            padding:
+                0 12px;
+
+            margin-bottom:
+                5px;
+
+            border-radius:
+                12px;
+
+            color:
+                #6c5b52;
+
+            text-decoration:
+                none;
+
+            font-size:
+                12px;
+
+            font-weight:
+                600;
+
+            transition:
+                background .25s ease,
+                color .25s ease,
+                transform .25s ease;
+
+        }
+
+
+        .admin-sidebar a:hover {
+
+            background:
+                #f3e6d6;
+
+            color:
+                #a95338;
+
+            transform:
+                translateX(2px);
+
+        }
+
+
+        .admin-sidebar a.active {
+
+            background:
+                #3b2922;
+
+            color:
+                #fffaf2;
+
+        }
+
+
+        .admin-sidebar-icon {
+
+            width:
+                28px;
+
+            height:
+                28px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border-radius:
+                9px;
+
+            background:
+                rgba(255,255,255,.4);
+
+            font-size:
+                14px;
+
+        }
+
+
+        .admin-sidebar-divider {
+
+            height:
+                1px;
+
+            margin:
+                15px 8px;
+
+            background:
+                rgba(59,41,34,.08);
+
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ====================================================== */
+
+        .admin-content {
+
+            min-width:
+                0;
+
+        }
+
+
+        .admin-heading {
+
+            display:
+                flex;
+
+            align-items:
+                flex-end;
+
+            justify-content:
+                space-between;
+
+            gap:
+                20px;
+
+            margin-bottom:
+                25px;
+
+        }
+
+
+        .admin-heading-eyebrow {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+
+            color:
+                #a95338;
+
+            font-size:
+                10px;
+
+            font-weight:
+                700;
+
+            letter-spacing:
+                .14em;
+
+        }
+
+
+        .admin-heading-eyebrow span {
+
+            width:
+                24px;
+
+            height:
+                2px;
+
+            background:
+                #c96f4a;
+
+        }
+
+
+        .admin-heading h1 {
+
+            margin:
+                8px 0 0;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(30px,4vw,48px);
+
+            line-height:
+                1.05;
+
+            color:
+                #3b2922;
+
+        }
+
+
+        .admin-heading p {
+
+            max-width:
+                550px;
+
+            margin:
+                10px 0 0;
+
+            color:
+                #827269;
+
+            font-size:
+                13px;
+
+            line-height:
+                1.7;
+
+        }
+
+
+        .admin-date {
+
+            padding:
+                11px 15px;
+
+            border-radius:
+                12px;
+
+            background:
+                rgba(255,255,255,.7);
+
+            border:
+                1px solid
+                rgba(59,41,34,.08);
+
+            color:
+                #75655b;
+
+            font-size:
+                11px;
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        /* =====================================================
+           STAT CARDS
+        ====================================================== */
+
+        .admin-stats {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(4,1fr);
+
+            gap:
+                15px;
+
+            margin-bottom:
+                20px;
+
+        }
+
+
+        .admin-stat {
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+            padding:
+                22px;
+
+            min-height:
+                145px;
+
+            border-radius:
+                20px;
+
+            background:
+                rgba(255,255,255,.78);
+
+            border:
+                1px solid
+                rgba(59,41,34,.08);
+
+            transition:
+                transform .3s ease,
+                box-shadow .3s ease;
+
+        }
+
+
+        .admin-stat:hover {
+
+            transform:
+                translateY(-4px);
+
+            box-shadow:
+                0 18px 40px
+                rgba(59,41,34,.08);
+
+        }
+
+
+        .admin-stat::after {
+
+            content: "";
+
+            position:
+                absolute;
+
+            width:
+                90px;
+
+            height:
+                90px;
+
+            border-radius:
+                50%;
+
+            right:
+                -30px;
+
+            bottom:
+                -35px;
+
+            background:
+                rgba(201,166,91,.1);
+
+        }
+
+
+        .admin-stat:nth-child(2)::after {
+            background:
+                rgba(15,124,120,.09);
+        }
+
+
+        .admin-stat:nth-child(3)::after {
+            background:
+                rgba(196,61,115,.09);
+        }
+
+
+        .admin-stat:nth-child(4)::after {
+            background:
+                rgba(63,124,89,.1);
+        }
+
+
+        .admin-stat-top {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+        }
+
+
+        .admin-stat-icon {
+
+            width:
+                40px;
+
+            height:
+                40px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border-radius:
+                12px;
+
+            background:
+                #f1e1d0;
+
+            font-size:
+                18px;
+
+        }
+
+
+        .admin-stat:nth-child(2)
+        .admin-stat-icon {
+
+            background:
+                #dce9e7;
+
+        }
+
+
+        .admin-stat:nth-child(3)
+        .admin-stat-icon {
+
+            background:
+                #f0dbe4;
+
+        }
+
+
+        .admin-stat:nth-child(4)
+        .admin-stat-icon {
+
+            background:
+                #dce7d9;
+
+        }
+
+
+        .admin-stat-change {
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+
+            padding:
+                5px 7px;
+
+            border-radius:
+                20px;
+
+            background:
+                #e1ebdc;
+
+            color:
+                #4b7048;
+
+        }
+
+
+        .admin-stat-number {
+
+            display:
+                block;
+
+            margin-top:
+                17px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                29px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .admin-stat-label {
+
+            display:
+                block;
+
+            margin-top:
+                2px;
+
+            color:
+                #83736a;
+
+            font-size:
+                11px;
+
+        }
+
+
+        /* =====================================================
+           MAIN GRID
+        ====================================================== */
+
+        .admin-main-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1.5fr 1fr;
+
+            gap:
+                18px;
+
+        }
+
+
+        .admin-card {
+
+            padding:
+                23px;
+
+            border-radius:
+                22px;
+
+            background:
+                rgba(255,255,255,.78);
+
+            border:
+                1px solid
+                rgba(59,41,34,.08);
+
+            box-shadow:
+                0 10px 35px
+                rgba(59,41,34,.04);
+
+        }
+
+
+        .admin-card-heading {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            margin-bottom:
+                20px;
+
+        }
+
+
+        .admin-card-heading h2 {
+
+            margin:
+                0;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                21px;
+
+        }
+
+
+        .admin-card-heading p {
+
+            margin:
+                4px 0 0;
+
+            color:
+                #8b7a70;
+
+            font-size:
+                10px;
+
+        }
+
+
+        .admin-link {
+
+            color:
+                #a95338;
+
+            text-decoration:
+                none;
+
+            font-size:
+                11px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        /* =====================================================
+           ACTIVITY
+        ====================================================== */
+
+        .activity-item {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                13px;
+
+            padding:
+                13px 0;
+
+            border-bottom:
+                1px solid
+                rgba(59,41,34,.07);
+
+        }
+
+
+        .activity-item:last-child {
+            border-bottom:
+                none;
+        }
+
+
+        .activity-avatar {
+
+            width:
+                43px;
+
+            height:
+                43px;
+
+            flex-shrink:
+                0;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border-radius:
+                13px;
+
+            background:
+                #f0dfcc;
+
+            font-size:
+                19px;
+
+        }
+
+
+        .activity-item:nth-child(2)
+        .activity-avatar {
+
+            background:
+                #e1e8df;
+
+        }
+
+
+        .activity-item:nth-child(3)
+        .activity-avatar {
+
+            background:
+                #eadde9;
+
+        }
+
+
+        .activity-item:nth-child(4)
+        .activity-avatar {
+
+            background:
+                #e2e6ef;
+
+        }
+
+
+        .activity-info {
+
+            flex:
+                1;
+
+        }
+
+
+        .activity-info strong {
+
+            display:
+                block;
+
+            font-size:
+                12px;
+
+        }
+
+
+        .activity-info span {
+
+            display:
+                block;
+
+            margin-top:
+                4px;
+
+            color:
+                #8b7b71;
+
+            font-size:
+                10px;
+
+            line-height:
+                1.4;
+
+        }
+
+
+        .activity-time {
+
+            color:
+                #9a8a80;
+
+            font-size:
+                9px;
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        /* =====================================================
+           ANALYTICS
+        ====================================================== */
+
+        .chart {
+
+            height:
+                205px;
+
+            display:
+                flex;
+
+            align-items:
+                flex-end;
+
+            gap:
+                12px;
+
+            padding:
+                20px 5px 0;
+
+            border-bottom:
+                1px solid
+                rgba(59,41,34,.1);
+
+        }
+
+
+        .chart-column {
+
+            flex:
+                1;
+
+            height:
+                100%;
+
+            display:
+                flex;
+
+            align-items:
+                flex-end;
+
+            justify-content:
+                center;
+
+        }
+
+
+        .chart-bar {
+
+            width:
+                min(28px,70%);
+
+            height:
+                var(--height);
+
+            border-radius:
+                8px 8px 3px 3px;
+
+            background:
+                linear-gradient(
+                    to top,
+                    #a95338,
+                    #e3a17f
+                );
+
+            transform-origin:
+                bottom;
+
+            animation:
+                chartGrow .9s ease both;
+
+        }
+
+
+        .chart-column:nth-child(2)
+        .chart-bar {
+
+            background:
+                linear-gradient(
+                    to top,
+                    #274c77,
+                    #7398ba
+                );
+
+        }
+
+
+        .chart-column:nth-child(3)
+        .chart-bar {
+
+            background:
+                linear-gradient(
+                    to top,
+                    #687557,
+                    #a9b99f
+                );
+
+        }
+
+
+        .chart-column:nth-child(4)
+        .chart-bar {
+
+            background:
+                linear-gradient(
+                    to top,
+                    #c43d73,
+                    #df91ae
+                );
+
+        }
+
+
+        .chart-column:nth-child(5)
+        .chart-bar {
+
+            background:
+                linear-gradient(
+                    to top,
+                    #c99b35,
+                    #e9c976
+                );
+
+        }
+
+
+        .chart-column:nth-child(6)
+        .chart-bar {
+
+            background:
+                linear-gradient(
+                    to top,
+                    #0f7c78,
+                    #69aaa7
+                );
+
+        }
+
+
+        .chart-labels {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(6,1fr);
+
+            gap:
+                12px;
+
+            padding-top:
+                9px;
+
+            text-align:
+                center;
+
+            color:
+                #96867c;
+
+            font-size:
+                9px;
+
+        }
+
+
+        @keyframes chartGrow {
+
+            from {
+                transform:
+                    scaleY(0);
+            }
+
+            to {
+                transform:
+                    scaleY(1);
+            }
+
+        }
+
+
+        /* =====================================================
+           USER TABLE
+        ====================================================== */
+
+        .admin-table-wrapper {
+
+            overflow-x:
+                auto;
+
+        }
+
+
+        .admin-table {
+
+            width:
+                100%;
+
+            min-width:
+                600px;
+
+            border-collapse:
+                collapse;
+
+        }
+
+
+        .admin-table th {
+
+            text-align:
+                left;
+
+            padding:
+                11px 10px;
+
+            color:
+                #927f73;
+
+            font-size:
+                9px;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                .08em;
+
+            border-bottom:
+                1px solid
+                rgba(59,41,34,.09);
+
+        }
+
+
+        .admin-table td {
+
+            padding:
+                14px 10px;
+
+            font-size:
+                11px;
+
+            border-bottom:
+                1px solid
+                rgba(59,41,34,.06);
+
+        }
+
+
+        .admin-table tr:last-child td {
+
+            border-bottom:
+                none;
+
+        }
+
+
+        .table-user {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                9px;
+
+        }
+
+
+        .table-avatar {
+
+            width:
+                32px;
+
+            height:
+                32px;
+
+            border-radius:
+                50%;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            background:
+                #ead9c5;
+
+            font-size:
+                14px;
+
+        }
+
+
+        .table-user strong {
+
+            display:
+                block;
+
+            font-size:
+                11px;
+
+        }
+
+
+        .table-user span {
+
+            display:
+                block;
+
+            color:
+                #918077;
+
+            font-size:
+                9px;
+
+            margin-top:
+                2px;
+
+        }
+
+
+        .role-pill,
+        .status-pill {
+
+            display:
+                inline-flex;
+
+            padding:
+                5px 8px;
+
+            border-radius:
+                20px;
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .role-artisan {
+
+            background:
+                #f1dfcf;
+
+            color:
+                #925436;
+
+        }
+
+
+        .role-buyer {
+
+            background:
+                #dce8ef;
+
+            color:
+                #3d6176;
+
+        }
+
+
+        .status-active {
+
+            background:
+                #dce9d9;
+
+            color:
+                #4b7048;
+
+        }
+
+
+        .status-review {
+
+            background:
+                #f3e5c6;
+
+            color:
+                #86672d;
+
+        }
+
+
+        /* =====================================================
+           MODERATION
+        ====================================================== */
+
+        .moderation-list {
+
+            display:
+                grid;
+
+            gap:
+                11px;
+
+        }
+
+
+        .moderation-item {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                12px;
+
+            padding:
+                13px;
+
+            border-radius:
+                14px;
+
+            background:
+                #fbf7f0;
+
+            border:
+                1px solid
+                rgba(59,41,34,.06);
+
+        }
+
+
+        .moderation-icon {
+
+            width:
+                39px;
+
+            height:
+                39px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border-radius:
+                11px;
+
+            background:
+                #efe0cf;
+
+        }
+
+
+        .moderation-info {
+
+            flex:
+                1;
+
+        }
+
+
+        .moderation-info strong {
+
+            display:
+                block;
+
+            font-size:
+                11px;
+
+        }
+
+
+        .moderation-info span {
+
+            display:
+                block;
+
+            margin-top:
+                3px;
+
+            color:
+                #8c7b72;
+
+            font-size:
+                9px;
+
+        }
+
+
+        .moderation-button {
+
+            border:
+                none;
+
+            padding:
+                8px 11px;
+
+            border-radius:
+                9px;
+
+            cursor:
+                pointer;
+
+            background:
+                #3b2922;
+
+            color:
+                #fffaf2;
+
+            font-family:
+                "DM Sans",
+                sans-serif;
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .moderation-button:hover {
+
+            background:
+                #a95338;
+
+        }
+
+
+        /* =====================================================
+           QUICK ACTIONS
+        ====================================================== */
+
+        .quick-actions {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(2,1fr);
+
+            gap:
+                10px;
+
+        }
+
+
+        .quick-action {
+
+            min-height:
+                85px;
+
+            padding:
+                15px;
+
+            border:
+                1px solid
+                rgba(59,41,34,.08);
+
+            border-radius:
+                14px;
+
+            background:
+                #fffaf2;
+
+            cursor:
+                pointer;
+
+            text-align:
+                left;
+
+            transition:
+                transform .25s ease,
+                background .25s ease;
+
+        }
+
+
+        .quick-action:hover {
+
+            transform:
+                translateY(-3px);
+
+            background:
+                #f4e7d6;
+
+        }
+
+
+        .quick-action-icon {
+
+            font-size:
+                18px;
+
+        }
+
+
+        .quick-action strong {
+
+            display:
+                block;
+
+            margin-top:
+                9px;
+
+            font-size:
+                10px;
+
+        }
+
+
+        .quick-action span {
+
+            display:
+                block;
+
+            margin-top:
+                3px;
+
+            color:
+                #918178;
+
+            font-size:
+                8px;
+
+        }
+
+
+        /* =====================================================
+           PLATFORM HEALTH
+        ====================================================== */
+
+        .health-list {
+
+            display:
+                grid;
+
+            gap:
+                15px;
+
+        }
+
+
+        .health-row {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                110px 1fr 40px;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+        }
+
+
+        .health-row label {
+
+            font-size:
+                10px;
+
+            color:
+                #76665c;
+
+        }
+
+
+        .health-track {
+
+            height:
+                7px;
+
+            overflow:
+                hidden;
+
+            border-radius:
+                20px;
+
+            background:
+                #eadfd2;
+
+        }
+
+
+        .health-fill {
+
+            width:
+                var(--width);
+
+            height:
+                100%;
+
+            border-radius:
+                inherit;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #a95338,
+                    #c99b35
+                );
+
+        }
+
+
+        .health-value {
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+
+            text-align:
+                right;
+
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        .admin-footer {
+
+            margin-top:
+                35px;
+
+            padding-top:
+                22px;
+
+            border-top:
+                1px solid
+                rgba(59,41,34,.08);
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            color:
+                #8d7d73;
+
+            font-size:
+                10px;
+
+        }
+
+
+        .admin-footer strong {
+
+            color:
+                #3b2922;
+
+        }
+
+
+        /* =====================================================
+           TOAST
+        ====================================================== */
+
+        .admin-toast {
+
+            position:
+                fixed;
+
+            left:
+                50%;
+
+            bottom:
+                28px;
+
+            z-index:
+                999;
+
+            transform:
+                translate(-50%,20px);
+
+            padding:
+                12px 18px;
+
+            border-radius:
+                12px;
+
+            background:
+                #3b2922;
+
+            color:
+                #fffaf2;
+
+            font-size:
+                11px;
+
+            box-shadow:
+                0 15px 35px
+                rgba(0,0,0,.2);
+
+            opacity:
+                0;
+
+            pointer-events:
+                none;
+
+            transition:
+                opacity .25s ease,
+                transform .25s ease;
+
+        }
+
+
+        .admin-toast.show {
+
+            opacity:
+                1;
+
+            transform:
+                translate(-50%,0);
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 1150px) {
+
+            .admin-layout {
+
+                grid-template-columns:
+                    185px 1fr;
+
+            }
+
+            .admin-stats {
+
+                grid-template-columns:
+                    repeat(2,1fr);
+
+            }
+
+            .admin-main-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+        }
+
+
+        @media (max-width: 800px) {
+
+            .admin-layout {
+
+                display:
+                    block;
+
+                width:
+                    92%;
+
+            }
+
+            .admin-sidebar {
+
+                position:
+                    static;
+
+                display:
+                    flex;
+
+                overflow-x:
+                    auto;
+
+                gap:
+                    5px;
+
+                margin-bottom:
+                    22px;
+
+                padding:
+                    10px;
+
+            }
+
+            .admin-sidebar-label,
+            .admin-sidebar-divider {
+
+                display:
+                    none;
+
+            }
+
+            .admin-sidebar a {
+
+                flex:
+                    0 0 auto;
+
+                margin:
+                    0;
+
+            }
+
+            .admin-sidebar a span:last-child {
+
+                display:
+                    none;
+
+            }
+
+            .admin-sidebar-icon {
+
+                width:
+                    35px;
+
+                height:
+                    35px;
+
+            }
+
+            .admin-title {
+
+                display:
+                    none;
+
+            }
+
+            .admin-heading {
+
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+
+            }
+
+            .admin-date {
+
+                align-self:
+                    flex-start;
+
+            }
+
+        }
+
+
+        @media (max-width: 520px) {
+
+            .admin-topbar {
+
+                min-height:
+                    65px;
+
+                padding:
+                    0 4vw;
+
+            }
+
+            .admin-brand img {
+
+                width:
+                    125px;
+
+            }
+
+            .admin-profile-text {
+
+                display:
+                    none;
+
+            }
+
+            .admin-layout {
+
+                width:
+                    94%;
+
+                padding-top:
+                    22px;
+
+            }
+
+            .admin-stats {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+            .admin-card {
+
+                padding:
+                    18px;
+
+            }
+
+            .quick-actions {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
+            .health-row {
+
+                grid-template-columns:
+                    80px 1fr 32px;
+
+            }
+
+            .admin-footer {
+
+                flex-direction:
+                    column;
+
+                gap:
+                    8px;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           REDUCED MOTION
+        ====================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+
+                animation-duration:
+                    .01ms !important;
+
+                transition-duration:
+                    .01ms !important;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="admin-page">
+
+
+    <!-- =====================================================
+         TOPBAR
+    ====================================================== -->
+
+    <header class="admin-topbar">
+
+
+        <a
+            href="../index.html"
+            class="admin-brand"
+        >
+
+            <img
+                src="../assets/logo.png"
+                alt="Taana-Baana — From Hands to Markets"
+            >
+
+        </a>
+
+
+        <div class="admin-title">
+
+            <span class="admin-title-label">
+                Platform Control
+            </span>
+
+            <span class="admin-title-badge">
+                ADMIN
+            </span>
+
+        </div>
+
+
+        <div class="admin-profile">
+
+            <div class="admin-avatar">
+                AD
+            </div>
+
+            <div class="admin-profile-text">
+
+                <strong>
+                    Taana-Baana Admin
+                </strong>
+
+                <span>
+                    Platform Administrator
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         LAYOUT
+    ====================================================== -->
+
+    <div class="admin-layout">
+
+
+        <!-- =================================================
+             SIDEBAR
+        ================================================== -->
+
+        <aside class="admin-sidebar">
+
+
+            <div class="admin-sidebar-label">
+                CONTROL CENTER
+            </div>
+
+
+            <a
+                href="#overview"
+                class="active"
+            >
+
+                <span class="admin-sidebar-icon">
+                    ◈
+                </span>
+
+                <span>
+                    Overview
+                </span>
+
+            </a>
+
+
+            <a href="#users">
+
+                <span class="admin-sidebar-icon">
+                    ♙
+                </span>
+
+                <span>
+                    Users
+                </span>
+
+            </a>
+
+
+            <a href="#products">
+
+                <span class="admin-sidebar-icon">
+                    ◇
+                </span>
+
+                <span>
+                    Products
+                </span>
+
+            </a>
+
+
+            <a href="#moderation">
+
+                <span class="admin-sidebar-icon">
+                    ✓
+                </span>
+
+                <span>
+                    Moderation
+                </span>
+
+            </a>
+
+
+            <a href="#orders">
+
+                <span class="admin-sidebar-icon">
+                    □
+                </span>
+
+                <span>
+                    Orders
+                </span>
+
+            </a>
+
+
+            <a href="#reports">
+
+                <span class="admin-sidebar-icon">
+                    !
+                </span>
+
+                <span>
+                    Reports
+                </span>
+
+            </a>
+
+
+            <div class="admin-sidebar-divider"></div>
+
+
+            <div class="admin-sidebar-label">
+                PLATFORM
+            </div>
+
+
+            <a href="#analytics">
+
+                <span class="admin-sidebar-icon">
+                    ↗
+                </span>
+
+                <span>
+                    Analytics
+                </span>
+
+            </a>
+
+
+            <a href="#settings">
+
+                <span class="admin-sidebar-icon">
+                    ⚙
+                </span>
+
+                <span>
+                    Settings
+                </span>
+
+            </a>
+
+
+            <a
+                href="../index.html"
+                id="adminLogout"
+            >
+
+                <span class="admin-sidebar-icon">
+                    ↪
+                </span>
+
+                <span>
+                    Exit Admin
+                </span>
+
+            </a>
+
+
+        </aside>
+
+
+
+        <!-- =================================================
+             CONTENT
+        ================================================== -->
+
+        <main class="admin-content">
+
+
+            <!-- =============================================
+                 HEADING
+            ============================================== -->
+
+            <section
+                id="overview"
+                class="admin-heading reveal"
+            >
+
+                <div>
+
+                    <div class="admin-heading-eyebrow">
+
+                        <span></span>
+
+                        TAANA-BAANA CONTROL CENTER
+
+                    </div>
+
+
+                    <h1>
+                        Platform at a glance.
+                    </h1>
+
+
+                    <p>
+                        Monitor artisans, buyers, products,
+                        enquiries and marketplace activity
+                        from one simple workspace.
+                    </p>
+
+                </div>
+
+
+                <div class="admin-date">
+
+                    Prototype data · September 2026
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =============================================
+                 STATS
+            ============================================== -->
+
+            <section class="admin-stats">
+
+
+                <article class="admin-stat reveal">
+
+                    <div class="admin-stat-top">
+
+                        <div class="admin-stat-icon">
+                            🧵
+                        </div>
+
+                        <span class="admin-stat-change">
+                            +8.4%
+                        </span>
+
+                    </div>
+
+
+                    <span class="admin-stat-number">
+                        1,248
+                    </span>
+
+                    <span class="admin-stat-label">
+                        Total Artisans
+                    </span>
+
+                </article>
+
+
+
+                <article class="admin-stat reveal">
+
+                    <div class="admin-stat-top">
+
+                        <div class="admin-stat-icon">
+                            🛍
+                        </div>
+
+                        <span class="admin-stat-change">
+                            +12.1%
+                        </span>
+
+                    </div>
+
+
+                    <span class="admin-stat-number">
+                        3,682
+                    </span>
+
+                    <span class="admin-stat-label">
+                        Registered Buyers
+                    </span>
+
+                </article>
+
+
+
+                <article class="admin-stat reveal">
+
+                    <div class="admin-stat-top">
+
+                        <div class="admin-stat-icon">
+                            ◇
+                        </div>
+
+                        <span class="admin-stat-change">
+                            +6.7%
+                        </span>
+
+                    </div>
+
+
+                    <span class="admin-stat-number">
+                        5,914
+                    </span>
+
+                    <span class="admin-stat-label">
+                        Published Products
+                    </span>
+
+                </article>
+
+
+
+                <article class="admin-stat reveal">
+
+                    <div class="admin-stat-top">
+
+                        <div class="admin-stat-icon">
+                            ₹
+                        </div>
+
+                        <span class="admin-stat-change">
+                            +15.3%
+                        </span>
+
+                    </div>
+
+
+                    <span class="admin-stat-number">
+                        ₹8.42L
+                    </span>
+
+                    <span class="admin-stat-label">
+                        Marketplace Value
+                    </span>
+
+                </article>
+
+
+            </section>
+
+
+
+            <!-- =============================================
+                 MAIN GRID
+            ============================================== -->
+
+            <section class="admin-main-grid">
+
+
+                <!-- =========================================
+                     ACTIVITY
+                ========================================== -->
+
+                <article
+                    class="admin-card reveal"
+                    id="orders"
+                >
+
+                    <div class="admin-card-heading">
+
+                        <div>
+
+                            <h2>
+                                Recent activity
+                            </h2>
+
+                            <p>
+                                Latest platform events
+                            </p>
+
+                        </div>
+
+                        <a
+                            href="#"
+                            class="admin-link"
+                        >
+                            View all →
+                        </a>
+
+                    </div>
+
+
+                    <div class="activity-item">
+
+                        <div class="activity-avatar">
+                            🧺
+                        </div>
+
+                        <div class="activity-info">
+
+                            <strong>
+                                New artisan product submitted
+                            </strong>
+
+                            <span>
+                                Maya Crafts · Bamboo Storage Basket
+                            </span>
+
+                        </div>
+
+                        <span class="activity-time">
+                            8 min
+                        </span>
+
+                    </div>
+
+
+                    <div class="activity-item">
+
+                        <div class="activity-avatar">
+                            🛍
+                        </div>
+
+                        <div class="activity-info">
+
+                            <strong>
+                                New buyer registration
+                            </strong>
+
+                            <span>
+                                Buyer profile created from Kerala
+                            </span>
+
+                        </div>
+
+                        <span class="activity-time">
+                            21 min
+                        </span>
+
+                    </div>
+
+
+                    <div class="activity-item">
+
+                        <div class="activity-avatar">
+                            💌
+                        </div>
+
+                        <div class="activity-info">
+
+                            <strong>
+                                B2B enquiry received
+                            </strong>
+
+                            <span>
+                                Corporate gifting · 250 units
+                            </span>
+
+                        </div>
+
+                        <span class="activity-time">
+                            43 min
+                        </span>
+
+                    </div>
+
+
+                    <div class="activity-item">
+
+                        <div class="activity-avatar">
+                            ✓
+                        </div>
+
+                        <div class="activity-info">
+
+                            <strong>
+                                Product approved
+                            </strong>
+
+                            <span>
+                                Meera Weaves · Handloom Cotton Stole
+                            </span>
+
+                        </div>
+
+                        <span class="activity-time">
+                            1 hr
+                        </span>
+
+                    </div>
+
+
+                </article>
+
+
+
+                <!-- =========================================
+                     ANALYTICS
+                ========================================== -->
+
+                <article
+                    class="admin-card reveal"
+                    id="analytics"
+                >
+
+                    <div class="admin-card-heading">
+
+                        <div>
+
+                            <h2>
+                                Marketplace activity
+                            </h2>
+
+                            <p>
+                                Illustrative monthly volume
+                            </p>
+
+                        </div>
+
+                        <span class="admin-link">
+                            6 months
+                        </span>
+
+                    </div>
+
+
+                    <div class="chart">
+
+
+                        <div class="chart-column">
+
+                            <div
+                                class="chart-bar"
+                                style="--height:48%"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="chart-column">
+
+                            <div
+                                class="chart-bar"
+                                style="--height:62%"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="chart-column">
+
+                            <div
+                                class="chart-bar"
+                                style="--height:54%"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="chart-column">
+
+                            <div
+                                class="chart-bar"
+                                style="--height:76%"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="chart-column">
+
+                            <div
+                                class="chart-bar"
+                                style="--height:68%"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="chart-column">
+
+                            <div
+                                class="chart-bar"
+                                style="--height:88%"
+                            ></div>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="chart-labels">
+
+                        <span>
+                            Apr
+                        </span>
+
+                        <span>
+                            May
+                        </span>
+
+                        <span>
+                            Jun
+                        </span>
+
+                        <span>
+                            Jul
+                        </span>
+
+                        <span>
+                            Aug
+                        </span>
+
+                        <span>
+                            Sep
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+            </section>
+
+
+
+            <!-- =============================================
+                 USERS
+            ============================================== -->
+
+            <section
+                class="admin-card reveal"
+                id="users"
+                style="margin-top:18px;"
+            >
+
+                <div class="admin-card-heading">
+
+                    <div>
+
+                        <h2>
+                            User overview
+                        </h2>
+
+                        <p>
+                            Recent artisan and buyer accounts
+                        </p>
+
+                    </div>
+
+                    <a
+                        href="#"
+                        class="admin-link"
+                    >
+                        Manage users →
+                    </a>
+
+                </div>
+
+
+                <div class="admin-table-wrapper">
+
+                    <table class="admin-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    User
+                                </th>
+
+                                <th>
+                                    Role
+                                </th>
+
+                                <th>
+                                    Region
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Joined
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+
+                            <tr>
+
+                                <td>
+
+                                    <div class="table-user">
+
+                                        <div class="table-avatar">
+                                            👩🏽‍🎨
+                                        </div>
+
+                                        <div>
+
+                                            <strong>
+                                                Meera Weaves
+                                            </strong>
+
+                                            <span>
+                                                meera@example.demo
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+
+                                <td>
+
+                                    <span
+                                        class="role-pill role-artisan"
+                                    >
+                                        Artisan
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+                                    Kerala
+                                </td>
+
+
+                                <td>
+
+                                    <span
+                                        class="status-pill status-active"
+                                    >
+                                        Active
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+                                    18 Sep
+                                </td>
+
+                            </tr>
+
+
+
+                            <tr>
+
+                                <td>
+
+                                    <div class="table-user">
+
+                                        <div class="table-avatar">
+                                            🧑🏽
+                                        </div>
+
+                                        <div>
+
+                                            <strong>
+                                                Arjun Traders
+                                            </strong>
+
+                                            <span>
+                                                arjun@example.demo
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+
+                                <td>
+
+                                    <span
+                                        class="role-pill role-buyer"
+                                    >
+                                        Buyer
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+                                    Karnataka
+                                </td>
+
+
+                                <td>
+
+                                    <span
+                                        class="status-pill status-active"
+                                    >
+                                        Active
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+                                    17 Sep
+                                </td>
+
+                            </tr>
+
+
+
+                            <tr>
+
+                                <td>
+
+                                    <div class="table-user">
+
+                                        <div class="table-avatar">
+                                            👨🏽‍🎨
+                                        </div>
+
+                                        <div>
+
+                                            <strong>
+                                                Earth & Clay
+                                            </strong>
+
+                                            <span>
+                                                clay@example.demo
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+
+                                <td>
+
+                                    <span
+                                        class="role-pill role-artisan"
+                                    >
+                                        Artisan
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+                                    Rajasthan
+                                </td>
+
+
+                                <td>
+
+                                    <span
+                                        class="status-pill status-review"
+                                    >
+                                        Review
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+                                    17 Sep
+                                </td>
+
+                            </tr>
+
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =============================================
+                 MODERATION + QUICK ACTIONS
+            ============================================== -->
+
+            <section
+                class="admin-main-grid"
+                style="margin-top:18px;"
+            >
+
+
+                <!-- MODERATION -->
+
+                <article
+                    class="admin-card reveal"
+                    id="moderation"
+                >
+
+                    <div class="admin-card-heading">
+
+                        <div>
+
+                            <h2>
+                                Needs attention
+                            </h2>
+
+                            <p>
+                                Items awaiting admin review
+                            </p>
+
+                        </div>
+
+                        <span class="admin-link">
+                            4 pending
+                        </span>
+
+                    </div>
+
+
+                    <div class="moderation-list">
+
+
+                        <div class="moderation-item">
+
+                            <div class="moderation-icon">
+                                🧺
+                            </div>
+
+                            <div class="moderation-info">
+
+                                <strong>
+                                    Bamboo Storage Basket
+                                </strong>
+
+                                <span>
+                                    New product · Maya Crafts
+                                </span>
+
+                            </div>
+
+                            <button
+                                class="moderation-button"
+                                data-action="product"
+                            >
+                                Review
+                            </button>
+
+                        </div>
+
+
+                        <div class="moderation-item">
+
+                            <div class="moderation-icon">
+                                👤
+                            </div>
+
+                            <div class="moderation-info">
+
+                                <strong>
+                                    Artisan profile
+                                </strong>
+
+                                <span>
+                                    Profile information update
+                                </span>
+
+                            </div>
+
+                            <button
+                                class="moderation-button"
+                                data-action="profile"
+                            >
+                                Review
+                            </button>
+
+                        </div>
+
+
+                        <div class="moderation-item">
+
+                            <div class="moderation-icon">
+                                ⚑
+                            </div>
+
+                            <div class="moderation-info">
+
+                                <strong>
+                                    Marketplace report
+                                </strong>
+
+                                <span>
+                                    Buyer-submitted report
+                                </span>
+
+                            </div>
+
+                            <button
+                                class="moderation-button"
+                                data-action="report"
+                            >
+                                Review
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- QUICK ACTIONS -->
+
+                <article
+                    class="admin-card reveal"
+                    id="products"
+                >
+
+                    <div class="admin-card-heading">
+
+                        <div>
+
+                            <h2>
+                                Quick actions
+                            </h2>
+
+                            <p>
+                                Common admin tasks
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="quick-actions">
+
+
+                        <button
+                            class="quick-action"
+                            data-quick="users"
+                        >
+
+                            <div class="quick-action-icon">
+                                ♙
+                            </div>
+
+                            <strong>
+                                Manage Users
+                            </strong>
+
+                            <span>
+                                View accounts
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            class="quick-action"
+                            data-quick="products"
+                        >
+
+                            <div class="quick-action-icon">
+                                ◇
+                            </div>
+
+                            <strong>
+                                Products
+                            </strong>
+
+                            <span>
+                                Review listings
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            class="quick-action"
+                            data-quick="reports"
+                        >
+
+                            <div class="quick-action-icon">
+                                !
+                            </div>
+
+                            <strong>
+                                Reports
+                            </strong>
+
+                            <span>
+                                Safety & issues
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            class="quick-action"
+                            data-quick="analytics"
+                        >
+
+                            <div class="quick-action-icon">
+                                ↗
+                            </div>
+
+                            <strong>
+                                Analytics
+                            </strong>
+
+                            <span>
+                                Platform insights
+                            </span>
+
+                        </button>
+
+
+                    </div>
+
+                </article>
+
+
+            </section>
+
+
+
+            <!-- =============================================
+                 PLATFORM HEALTH
+            ============================================== -->
+
+            <section
+                class="admin-card reveal"
+                id="reports"
+                style="margin-top:18px;"
+            >
+
+                <div class="admin-card-heading">
+
+                    <div>
+
+                        <h2>
+                            Platform health
+                        </h2>
+
+                        <p>
+                            Prototype operational indicators
+                        </p>
+
+                    </div>
+
+                    <span class="admin-link">
+                        System status
+                    </span>
+
+                </div>
+
+
+                <div class="health-list">
+
+
+                    <div class="health-row">
+
+                        <label>
+                            Listings
+                        </label>
+
+                        <div class="health-track">
+
+                            <div
+                                class="health-fill"
+                                style="--width:92%"
+                            ></div>
+
+                        </div>
+
+                        <span class="health-value">
+                            92%
+                        </span>
+
+                    </div>
+
+
+                    <div class="health-row">
+
+                        <label>
+                            AI processing
+                        </label>
+
+                        <div class="health-track">
+
+                            <div
+                                class="health-fill"
+                                style="--width:87%"
+                            ></div>
+
+                        </div>
+
+                        <span class="health-value">
+                            87%
+                        </span>
+
+                    </div>
+
+
+                    <div class="health-row">
+
+                        <label>
+                            Enquiries
+                        </label>
+
+                        <div class="health-track">
+
+                            <div
+                                class="health-fill"
+                                style="--width:79%"
+                            ></div>
+
+                        </div>
+
+                        <span class="health-value">
+                            79%
+                        </span>
+
+                    </div>
+
+
+                    <div class="health-row">
+
+                        <label>
+                            Response flow
+                        </label>
+
+                        <div class="health-track">
+
+                            <div
+                                class="health-fill"
+                                style="--width:84%"
+                            ></div>
+
+                        </div>
+
+                        <span class="health-value">
+                            84%
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =============================================
+                 FOOTER
+            ============================================== -->
+
+            <footer class="admin-footer">
+
+                <div>
+
+                    <strong>
+                        TAANA-BAANA
+                    </strong>
+
+                    · From Hands to Markets.
+
+                </div>
+
+
+                <div>
+
+                    Admin prototype · Mock data only
+
+                </div>
+
+            </footer>
+
+
+        </main>
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div
+    class="admin-toast"
+    id="adminToast"
+></div>
+
+
+<!-- =========================================================
+     EXISTING PROJECT JS
+========================================================= -->
+
+<script
+    src="../js/main.js"
+    defer
+></script>
+
+<script
+    src="../js/pages.js"
+    defer
+></script>
+
+
+<!-- =========================================================
+     ADMIN INTERACTIONS
+========================================================= -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+
+        /* =================================================
+           TOAST
+        ================================================== */
+
+        const toast =
+            document.getElementById(
+                "adminToast"
+            );
+
+
+        let toastTimer;
+
+
+        function showAdminToast(message) {
+
+            if (!toast) {
+                return;
+            }
+
+
+            toast.textContent =
+                message;
+
+
+            toast.classList.add(
+                "show"
+            );
+
+
+            clearTimeout(
+                toastTimer
+            );
+
+
+            toastTimer =
+                setTimeout(
+                    () => {
+
+                        toast.classList.remove(
+                            "show"
+                        );
+
+                    },
+                    2400
+                );
+
+        }
+
+
+
+        /* =================================================
+           MODERATION BUTTONS
+        ================================================== */
+
+        document
+            .querySelectorAll(
+                ".moderation-button"
+            )
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            const action =
+                                button.dataset.action;
+
+
+                            if (
+                                action === "product"
+                            ) {
+
+                                showAdminToast(
+                                    "Product review opened."
+                                );
+
+                            }
+
+                            else if (
+                                action === "profile"
+                            ) {
+
+                                showAdminToast(
+                                    "Artisan profile review opened."
+                                );
+
+                            }
+
+                            else {
+
+                                showAdminToast(
+                                    "Report review opened."
+                                );
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+
+
+        /* =================================================
+           QUICK ACTIONS
+        ================================================== */
+
+        document
+            .querySelectorAll(
+                ".quick-action"
+            )
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            const target =
+                                button.dataset.quick;
+
+
+                            const section =
+                                document.getElementById(
+                                    target
+                                );
+
+
+                            if (section) {
+
+                                section.scrollIntoView(
+                                    {
+                                        behavior:
+                                            "smooth",
+                                        block:
+                                            "start"
+                                    }
+                                );
+
+                            }
+
+                            else {
+
+                                showAdminToast(
+                                    "Admin module ready for backend connection."
+                                );
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+
+
+        /* =================================================
+           SIDEBAR ACTIVE STATE
+        ================================================== */
+
+        const sidebarLinks =
+            document.querySelectorAll(
+                ".admin-sidebar a[href^='#']"
+            );
+
+
+        sidebarLinks.forEach(
+            link => {
+
+                link.addEventListener(
+                    "click",
+                    () => {
+
+                        sidebarLinks.forEach(
+                            item =>
+                                item.classList.remove(
+                                    "active"
+                                )
+                        );
+
+
+                        link.classList.add(
+                            "active"
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+
+        /* =================================================
+           LOGOUT / EXIT
+        ================================================== */
+
+        const logout =
+            document.getElementById(
+                "adminLogout"
+            );
+
+
+        if (logout) {
+
+            logout.addEventListener(
+                "click",
+                event => {
+
+                    event.preventDefault();
+
+
+                    showAdminToast(
+                        "Leaving admin workspace..."
+                    );
+
+
+                    setTimeout(
+                        () => {
+
+                            window.location.href =
+                                "../index.html";
+
+                        },
+                        700
+                    );
+
+                }
+            );
+
+        }
+
+
+    }
+);
+
+</script>
+
+
+</body>
+</html>

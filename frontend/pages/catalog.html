@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Taana-Baana multilingual AI catalog developer."
+    >
+
+    <title>AI Catalog Developer | Taana-Baana</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Tiro+Devanagari+Sanskrit&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/pages.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/ai-studio.css"
+    >
+
+</head>
+
+
+<body class="ai-page catalog-page">
+
+<div class="top-thread"></div>
+
+
+<header class="site-header">
+
+    <a
+        href="../index.html"
+        class="brand"
+    >
+
+        <div class="brand-mark">
+            त
+        </div>
+
+        <div>
+
+            <strong>
+                taana-baana
+            </strong>
+
+            <span>
+                From Hands to Markets
+            </span>
+
+        </div>
+
+    </a>
+
+
+    <nav>
+
+        <a href="../index.html">
+            Home
+        </a>
+
+        <a href="studio.html">
+            AI Studio
+        </a>
+
+        <a
+            href="catalog.html"
+            class="active"
+        >
+            Catalog
+        </a>
+
+        <a href="pricing.html">
+            Pricing
+        </a>
+
+        <a href="marketplace.html">
+            Marketplace
+        </a>
+
+    </nav>
+
+
+    <a
+        href="dashboard.html"
+        class="header-cta"
+    >
+        My Workspace
+    </a>
+
+</header>
+
+
+<main>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="catalog-hero">
+
+    <div>
+
+        <p class="eyebrow">
+            MULTILINGUAL AI CATALOG
+        </p>
+
+        <h1>
+            Speak once.
+            <em>Sell everywhere.</em>
+        </h1>
+
+        <p>
+            Convert an artisan's natural voice into a polished,
+            multilingual product catalog — without requiring
+            professional writing skills.
+        </p>
+
+        <div class="hero-pills">
+
+            <span>
+                🎙 Voice-first
+            </span>
+
+            <span>
+                🌏 Regional languages
+            </span>
+
+            <span>
+                ✦ AI generated
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="language-orbit">
+
+        <div>
+
+            <strong>
+                भाषा
+            </strong>
+
+            <br>
+
+            <small>
+                One story · many markets
+            </small>
+
+        </div>
+
+        <span>
+            മലയാളം
+        </span>
+
+        <span>
+            हिन्दी
+        </span>
+
+        <span>
+            தமிழ்
+        </span>
+
+        <span>
+            తెలుగు
+        </span>
+
+        <span>
+            English
+        </span>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     BUILDER
+========================================================= -->
+
+<section class="catalog-builder">
+
+
+    <!-- INPUT -->
+
+    <div>
+
+        <div class="panel-heading">
+
+            <div>
+
+                <p class="eyebrow">
+                    YOUR STORY
+                </p>
+
+                <h2>
+                    Tell the AI
+                </h2>
+
+            </div>
+
+            <span class="status-dot">
+                ● READY
+            </span>
+
+        </div>
+
+
+        <div class="input-language-row">
+
+            <label>
+
+                I speak
+
+                <select id="catalogLanguage">
+
+                    <option>
+                        Malayalam · മലയാളം
+                    </option>
+
+                    <option>
+                        Hindi · हिन्दी
+                    </option>
+
+                    <option>
+                        Tamil · தமிழ்
+                    </option>
+
+                    <option>
+                        Telugu · తెలుగు
+                    </option>
+
+                    <option>
+                        Kannada · ಕನ್ನಡ
+                    </option>
+
+                    <option>
+                        Bengali · বাংলা
+                    </option>
+
+                    <option>
+                        Marathi · मराठी
+                    </option>
+
+                    <option>
+                        English
+                    </option>
+
+                </select>
+
+            </label>
+
+        </div>
+
+
+        <div class="builder-input">
+
+            <textarea
+                id="catalogStory"
+                placeholder="Describe your product naturally...
+
+Example:
+This is a handloom saree made using
+cotton thread. I designed the pattern
+inspired by the traditional motifs of
+my village..."
+            ></textarea>
+
+        </div>
+
+
+        <div class="quick-context">
+
+            <input
+                id="catalogMaterial"
+                placeholder="Material"
+            >
+
+            <input
+                id="catalogRegion"
+                placeholder="Region"
+            >
+
+            <input
+                id="catalogUse"
+                placeholder="Usage"
+            >
+
+        </div>
+
+
+        <button
+            class="primary-btn large"
+            id="generateCatalog"
+        >
+            ✦ Generate Multilingual Catalog
+        </button>
+
+
+        <p class="helper">
+            AI-generated content should be reviewed and
+            approved by the artisan before publishing.
+        </p>
+
+    </div>
+
+
+    <!-- OUTPUT -->
+
+    <div>
+
+        <div class="output-top">
+
+            <div>
+
+                <p class="eyebrow">
+                    AI RESULT
+                </p>
+
+                <h2>
+                    Product Catalog
+                </h2>
+
+            </div>
+
+            <span class="ai-badge">
+                GENERATED
+            </span>
+
+        </div>
+
+
+        <div class="product-paper">
+
+            <div class="paper-image">
+
+                ✣
+
+                <span>
+                    PRODUCT PHOTO
+                </span>
+
+            </div>
+
+
+            <div class="paper-content">
+
+                <span class="craft-label">
+                    HANDCRAFTED · INDIA
+                </span>
+
+                <h2 id="catalogTitle">
+                    Handwoven Heritage Saree
+                </h2>
+
+                <p id="catalogDescription">
+
+                    A handcrafted textile that brings together
+                    traditional weaving knowledge, natural
+                    materials and contemporary everyday elegance.
+
+                </p>
+
+
+                <div class="product-meta">
+
+                    <span>
+                        Handmade
+                    </span>
+
+                    <span>
+                        Traditional
+                    </span>
+
+                    <span>
+                        Artisan Made
+                    </span>
+
+                    <span>
+                        Sustainable
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TRANSLATIONS -->
+
+        <div class="translation-tabs">
+
+            <button
+                class="lang-tab active"
+                data-language="english"
+            >
+                English
+            </button>
+
+            <button
+                class="lang-tab"
+                data-language="hindi"
+            >
+                हिन्दी
+            </button>
+
+            <button
+                class="lang-tab"
+                data-language="malayalam"
+            >
+                മലയാളം
+            </button>
+
+        </div>
+
+
+        <div
+            class="translation-box"
+            id="translationBox"
+        >
+
+            <h3>
+                English
+            </h3>
+
+            <p>
+                Handwoven Heritage Saree crafted using
+                traditional weaving techniques and carefully
+                selected materials.
+            </p>
+
+        </div>
+
+
+        <div class="listing-footer">
+
+            <button
+                class="primary-btn"
+                id="approveCatalog"
+            >
+                ✓ Approve & Save
+            </button>
+
+            <button
+                class="outline-btn"
+                id="copyCatalog"
+            >
+                Copy Catalog
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FEATURES
+========================================================= -->
+
+<section class="catalog-features">
+
+    <article>
+
+        <span>
+            01
+        </span>
+
+        <h3>
+            Voice-to-Text
+        </h3>
+
+        <p>
+            Speak naturally instead of typing complicated
+            product information.
+        </p>
+
+    </article>
+
+
+    <article>
+
+        <span>
+            02
+        </span>
+
+        <h3>
+            Translation
+        </h3>
+
+        <p>
+            Convert regional stories into buyer-friendly
+            English and Hindi catalogs.
+        </p>
+
+    </article>
+
+
+    <article>
+
+        <span>
+            03
+        </span>
+
+        <h3>
+            AI Description
+        </h3>
+
+        <p>
+            Generate structured product descriptions,
+            titles and catalog information.
+        </p>
+
+    </article>
+
+
+    <article>
+
+        <span>
+            04
+        </span>
+
+        <h3>
+            SEO Keywords
+        </h3>
+
+        <p>
+            Create searchable keywords to help buyers
+            discover handmade products.
+        </p>
+
+    </article>
+
+</section>
+
+
+</main>
+
+
+<div
+    class="toast"
+    id="toast"
+>
+    Catalog generated successfully.
+</div>
+
+
+<script src="../js/main.js" defer></script>
+<script src="../js/pages.js" defer></script>
+<script src="../js/ai-studio.js" defer></script>
+
+</body>
+
+</html>

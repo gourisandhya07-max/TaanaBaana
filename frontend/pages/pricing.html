@@ -1,0 +1,2655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Pricing | Taana-Baana</title>
+
+    <meta
+        name="description"
+        content="Taana-Baana Smart Pricing Assistant — calculate sustainable, recommended and premium prices for handmade products."
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- YOUR EXISTING SHARED CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+
+    <style>
+
+        /* =========================================================
+           TAANA-BAANA PRICING PAGE
+        ========================================================= */
+
+        :root {
+            --tb-bg: #fcf6ea;
+            --tb-card: #fffaf2;
+            --tb-white: #ffffff;
+            --tb-brown: #3b2922;
+            --tb-dark: #2a1d18;
+            --tb-muted: #76665d;
+            --tb-border: rgba(59, 41, 34, 0.13);
+
+            --tb-terracotta: #c96f4a;
+            --tb-burnt: #a95338;
+            --tb-sage: #879b76;
+            --tb-light-sage: #dce2d2;
+            --tb-gold: #c9a65b;
+            --tb-sand: #e8d7bc;
+
+            --tb-indigo: #274c77;
+            --tb-peacock: #0f7c78;
+            --tb-pink: #c43d73;
+            --tb-marigold: #e9a23b;
+
+            --tb-shadow:
+                0 24px 70px rgba(59, 41, 34, 0.09);
+        }
+
+        .pricing-page {
+            min-height: 100vh;
+            background:
+                radial-gradient(
+                    circle at 8% 15%,
+                    rgba(201, 166, 91, 0.13),
+                    transparent 24%
+                ),
+                radial-gradient(
+                    circle at 92% 35%,
+                    rgba(15, 124, 120, 0.08),
+                    transparent 25%
+                ),
+                var(--tb-bg);
+
+            color: var(--tb-brown);
+            overflow: hidden;
+        }
+
+
+        /* =========================================================
+           BACKGROUND WEAVE
+        ========================================================= */
+
+        .pricing-page::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+
+            pointer-events: none;
+
+            opacity: 0.25;
+
+            background-image:
+                repeating-linear-gradient(
+                    90deg,
+                    transparent 0,
+                    transparent 28px,
+                    rgba(59, 41, 34, 0.035) 29px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent 0,
+                    transparent 28px,
+                    rgba(59, 41, 34, 0.025) 29px
+                );
+
+            z-index: 0;
+        }
+
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
+
+        .pricing-topbar {
+            position: relative;
+            z-index: 5;
+
+            max-width: 1280px;
+            margin: 0 auto;
+
+            padding: 22px 28px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .pricing-brand {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .pricing-brand img {
+            width: 155px;
+            height: auto;
+            display: block;
+        }
+
+        .pricing-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 10px 15px;
+
+            border: 1px solid var(--tb-border);
+            border-radius: 999px;
+
+            background: rgba(255, 255, 255, 0.55);
+
+            color: var(--tb-brown);
+
+            font-size: 12px;
+            font-weight: 700;
+
+            text-decoration: none;
+
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .pricing-back:hover {
+            transform: translateY(-2px);
+            background: var(--tb-white);
+            box-shadow: 0 10px 25px rgba(59, 41, 34, 0.08);
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .pricing-hero {
+            position: relative;
+            z-index: 1;
+
+            max-width: 1280px;
+            margin: 0 auto;
+
+            padding: 65px 28px 85px;
+
+            display: grid;
+            grid-template-columns: 1fr 0.85fr;
+
+            gap: 70px;
+
+            align-items: center;
+        }
+
+        .pricing-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 8px 14px;
+
+            border-radius: 999px;
+            border: 1px solid rgba(201, 166, 91, 0.45);
+
+            background: rgba(255, 255, 255, 0.5);
+
+            font-size: 10px;
+            font-weight: 700;
+
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+
+            color: var(--tb-sage);
+        }
+
+        .pricing-eyebrow-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--tb-terracotta);
+
+            box-shadow:
+                0 0 0 5px rgba(201, 111, 74, 0.12);
+        }
+
+        .pricing-title {
+            margin: 23px 0 0;
+
+            max-width: 700px;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: clamp(52px, 6.4vw, 88px);
+
+            font-weight: 500;
+
+            line-height: 0.98;
+
+            letter-spacing: -0.045em;
+        }
+
+        .pricing-title em {
+            color: var(--tb-terracotta);
+            font-style: italic;
+        }
+
+        .pricing-subtitle {
+            max-width: 650px;
+
+            margin: 28px 0 0;
+
+            font-size: 17px;
+
+            line-height: 1.75;
+
+            color: var(--tb-muted);
+        }
+
+        .pricing-note {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            margin-top: 25px;
+
+            font-size: 12px;
+            font-weight: 600;
+
+            color: var(--tb-sage);
+        }
+
+        .pricing-note span {
+            color: var(--tb-gold);
+            font-size: 17px;
+        }
+
+
+        /* =========================================================
+           HERO VISUAL
+        ========================================================= */
+
+        .pricing-visual {
+            position: relative;
+
+            min-height: 430px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .orbit {
+            position: absolute;
+
+            width: 370px;
+            height: 370px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(201, 166, 91, 0.35);
+
+            animation:
+                pricingRotate 18s linear infinite;
+        }
+
+        .orbit::before,
+        .orbit::after {
+            content: "";
+
+            position: absolute;
+
+            width: 11px;
+            height: 11px;
+
+            border-radius: 50%;
+        }
+
+        .orbit::before {
+            top: 30px;
+            left: 78px;
+
+            background: var(--tb-terracotta);
+
+            box-shadow:
+                0 0 0 8px rgba(201, 111, 74, 0.11);
+        }
+
+        .orbit::after {
+            right: 38px;
+            bottom: 75px;
+
+            background: var(--tb-peacock);
+
+            box-shadow:
+                0 0 0 8px rgba(15, 124, 120, 0.10);
+        }
+
+        @keyframes pricingRotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .visual-card {
+            position: relative;
+            z-index: 2;
+
+            width: min(400px, 88%);
+
+            padding: 34px;
+
+            border-radius: 30px;
+
+            background: rgba(255, 255, 255, 0.83);
+
+            border: 1px solid rgba(59, 41, 34, 0.10);
+
+            box-shadow: var(--tb-shadow);
+
+            backdrop-filter: blur(14px);
+        }
+
+        .visual-label {
+            font-size: 10px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.15em;
+
+            text-transform: uppercase;
+
+            color: var(--tb-sage);
+        }
+
+        .visual-main-price {
+            margin-top: 12px;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 57px;
+
+            line-height: 1;
+
+            color: var(--tb-dark);
+        }
+
+        .visual-main-price small {
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 22px;
+        }
+
+        .visual-description {
+            margin-top: 7px;
+
+            font-size: 12px;
+
+            color: var(--tb-muted);
+        }
+
+        .visual-costs {
+            margin-top: 25px;
+
+            display: grid;
+
+            gap: 11px;
+        }
+
+        .visual-cost {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding-bottom: 9px;
+
+            border-bottom: 1px dashed rgba(59, 41, 34, 0.12);
+
+            font-size: 12px;
+        }
+
+        .visual-cost strong {
+            color: var(--tb-brown);
+        }
+
+
+        /* =========================================================
+           MAIN WORKSPACE
+        ========================================================= */
+
+        .pricing-main {
+            position: relative;
+            z-index: 1;
+
+            max-width: 1280px;
+
+            margin: 0 auto;
+
+            padding: 20px 28px 100px;
+        }
+
+        .section-kicker {
+            display: block;
+
+            margin-bottom: 10px;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.16em;
+
+            text-transform: uppercase;
+
+            color: var(--tb-terracotta);
+        }
+
+        .section-title {
+            margin: 0;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: clamp(35px, 4vw, 53px);
+
+            font-weight: 500;
+
+            line-height: 1.05;
+        }
+
+        .section-description {
+            max-width: 680px;
+
+            margin: 14px 0 32px;
+
+            color: var(--tb-muted);
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================================================
+           CALCULATOR
+        ========================================================= */
+
+        .calculator {
+            display: grid;
+
+            grid-template-columns: 0.9fr 1.1fr;
+
+            gap: 22px;
+
+            align-items: stretch;
+        }
+
+        .panel {
+            background: rgba(255, 255, 255, 0.72);
+
+            border: 1px solid var(--tb-border);
+
+            border-radius: 28px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 18px 55px rgba(59, 41, 34, 0.065);
+        }
+
+        .panel-heading {
+            padding: 25px 27px;
+
+            border-bottom: 1px solid var(--tb-border);
+
+            background: rgba(255, 249, 240, 0.65);
+        }
+
+        .panel-heading h3 {
+            margin: 0;
+
+            font-size: 18px;
+
+            font-weight: 700;
+        }
+
+        .panel-heading p {
+            margin: 7px 0 0;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+
+            color: var(--tb-muted);
+        }
+
+        .panel-content {
+            padding: 27px;
+        }
+
+
+        /* =========================================================
+           INPUTS
+        ========================================================= */
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .input-label {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 8px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+        .input-label span {
+            color: #9b8c83;
+
+            font-size: 10px;
+
+            font-weight: 500;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .currency {
+            position: absolute;
+
+            left: 15px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: var(--tb-sage);
+
+            font-size: 14px;
+            font-weight: 700;
+
+            pointer-events: none;
+        }
+
+        .cost-input {
+            width: 100%;
+
+            height: 49px;
+
+            padding:
+                0 15px 0 33px;
+
+            border:
+                1px solid rgba(59, 41, 34, 0.14);
+
+            border-radius: 13px;
+
+            outline: none;
+
+            background: #fffdf9;
+
+            color: var(--tb-dark);
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 14px;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .cost-input:focus {
+            border-color: var(--tb-terracotta);
+
+            box-shadow:
+                0 0 0 4px rgba(201, 111, 74, 0.10);
+        }
+
+
+        /* =========================================================
+           PROFIT SLIDER
+        ========================================================= */
+
+        .margin-box {
+            margin-top: 24px;
+
+            padding: 20px;
+
+            border-radius: 18px;
+
+            background: var(--tb-light-sage);
+        }
+
+        .margin-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+        .margin-title {
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+        .margin-value {
+            font-family: "Playfair Display", serif;
+
+            font-size: 26px;
+
+            color: var(--tb-terracotta);
+        }
+
+        #marginSlider {
+            width: 100%;
+
+            margin-top: 12px;
+
+            accent-color: var(--tb-terracotta);
+
+            cursor: pointer;
+        }
+
+        .margin-scale {
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-top: 5px;
+
+            font-size: 9px;
+
+            color: rgba(59, 41, 34, 0.50);
+        }
+
+
+        /* =========================================================
+           RESULTS
+        ========================================================= */
+
+        .cost-summary {
+            padding: 25px 27px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(220, 226, 210, 0.70),
+                    rgba(255, 249, 240, 0.75)
+                );
+
+            border-bottom: 1px solid var(--tb-border);
+        }
+
+        .summary-label {
+            font-size: 10px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.13em;
+
+            text-transform: uppercase;
+
+            color: var(--tb-sage);
+        }
+
+        .base-cost {
+            display: flex;
+
+            align-items: baseline;
+
+            gap: 8px;
+
+            margin-top: 5px;
+        }
+
+        .base-cost-value {
+            font-family: "Playfair Display", serif;
+
+            font-size: 45px;
+
+            color: var(--tb-dark);
+        }
+
+        .base-cost-unit {
+            font-size: 11px;
+
+            color: var(--tb-muted);
+        }
+
+        .breakdown {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 9px;
+
+            margin-top: 20px;
+        }
+
+        .breakdown-item {
+            padding: 12px;
+
+            border-radius: 12px;
+
+            background: rgba(255, 255, 255, 0.65);
+
+            border: 1px solid rgba(59, 41, 34, 0.07);
+        }
+
+        .breakdown-item span {
+            display: block;
+
+            margin-bottom: 3px;
+
+            font-size: 9px;
+
+            color: var(--tb-muted);
+        }
+
+        .breakdown-item strong {
+            font-size: 13px;
+        }
+
+        .results {
+            padding: 27px;
+        }
+
+        .results-heading {
+            margin-bottom: 17px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.13em;
+
+            text-transform: uppercase;
+        }
+
+        .price-options {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 11px;
+        }
+
+        .price-option {
+            position: relative;
+
+            min-height: 200px;
+
+            padding: 20px 16px;
+
+            border:
+                1px solid rgba(59, 41, 34, 0.11);
+
+            border-radius: 19px;
+
+            background: #fffdf9;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .price-option:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 15px 35px rgba(59, 41, 34, 0.09);
+        }
+
+        .price-option.recommended {
+            border:
+                2px solid var(--tb-terracotta);
+
+            background:
+                linear-gradient(
+                    155deg,
+                    rgba(235, 197, 181, 0.40),
+                    #fffdf9
+                );
+        }
+
+        .recommended-tag {
+            position: absolute;
+
+            left: 50%;
+            top: -11px;
+
+            transform: translateX(-50%);
+
+            padding: 5px 10px;
+
+            border-radius: 999px;
+
+            background: var(--tb-terracotta);
+
+            color: white;
+
+            font-size: 8px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.10em;
+
+            white-space: nowrap;
+        }
+
+        .option-label {
+            font-size: 9px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.13em;
+
+            text-transform: uppercase;
+
+            color: var(--tb-sage);
+        }
+
+        .option-price {
+            margin-top: 12px;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 31px;
+
+            line-height: 1;
+
+            color: var(--tb-dark);
+        }
+
+        .option-profit {
+            margin-top: 7px;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            color: var(--tb-sage);
+        }
+
+        .option-description {
+            margin-top: 15px;
+
+            font-size: 10px;
+
+            line-height: 1.55;
+
+            color: var(--tb-muted);
+        }
+
+
+        /* =========================================================
+           EXPLANATION
+        ========================================================= */
+
+        .explanation {
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 22px;
+
+            padding: 17px;
+
+            border-left:
+                3px solid var(--tb-indigo);
+
+            border-radius: 0 15px 15px 0;
+
+            background:
+                rgba(39, 76, 119, 0.055);
+        }
+
+        .explanation-icon {
+            flex-shrink: 0;
+
+            color: var(--tb-indigo);
+
+            font-size: 15px;
+        }
+
+        .explanation h4 {
+            margin: 0 0 5px;
+
+            font-size: 11px;
+        }
+
+        .explanation p {
+            margin: 0;
+
+            font-size: 11px;
+
+            line-height: 1.65;
+
+            color: var(--tb-muted);
+        }
+
+
+        /* =========================================================
+           DON'T UNDERPRICE ME
+        ========================================================= */
+
+        .underprice-section {
+            position: relative;
+
+            margin-top: 25px;
+
+            padding: 50px;
+
+            border-radius: 30px;
+
+            overflow: hidden;
+
+            color: white;
+
+            background:
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(233, 162, 59, 0.22),
+                    transparent 27%
+                ),
+                radial-gradient(
+                    circle at 8% 90%,
+                    rgba(15, 124, 120, 0.20),
+                    transparent 28%
+                ),
+                var(--tb-dark);
+        }
+
+        .underprice-section::before {
+            content: "";
+
+            position: absolute;
+
+            width: 320px;
+            height: 320px;
+
+            right: -150px;
+            bottom: -190px;
+
+            border:
+                1px solid rgba(255,255,255,0.13);
+
+            border-radius: 50%;
+        }
+
+        .underprice-grid {
+            position: relative;
+            z-index: 1;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 50px;
+
+            align-items: center;
+        }
+
+        .underprice-kicker {
+            font-size: 10px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.17em;
+
+            text-transform: uppercase;
+
+            color: #e9c98a;
+        }
+
+        .underprice-title {
+            margin: 11px 0 0;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: clamp(36px, 4vw, 55px);
+
+            line-height: 1.05;
+
+            font-weight: 500;
+        }
+
+        .underprice-title em {
+            color: var(--tb-marigold);
+        }
+
+        .underprice-copy {
+            margin-top: 17px;
+
+            max-width: 560px;
+
+            color: rgba(255,255,255,0.66);
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+        .worth-factors {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 11px;
+        }
+
+        .worth-factor {
+            padding: 18px;
+
+            border:
+                1px solid rgba(255,255,255,0.11);
+
+            border-radius: 17px;
+
+            background:
+                rgba(255,255,255,0.045);
+        }
+
+        .worth-factor strong {
+            display: block;
+
+            margin-bottom: 5px;
+
+            font-size: 12px;
+        }
+
+        .worth-factor span {
+            font-size: 10px;
+
+            line-height: 1.55;
+
+            color: rgba(255,255,255,0.52);
+        }
+
+
+        /* =========================================================
+           TIPS
+        ========================================================= */
+
+        .tips {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-top: 25px;
+        }
+
+        .tip {
+            padding: 25px;
+
+            border:
+                1px solid var(--tb-border);
+
+            border-radius: 22px;
+
+            background:
+                rgba(255,255,255,0.65);
+        }
+
+        .tip-number {
+            display: inline-flex;
+
+            width: 34px;
+            height: 34px;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: var(--tb-sand);
+
+            color: var(--tb-burnt);
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+        .tip h4 {
+            margin: 16px 0 7px;
+
+            font-size: 14px;
+        }
+
+        .tip p {
+            margin: 0;
+
+            font-size: 11px;
+
+            line-height: 1.65;
+
+            color: var(--tb-muted);
+        }
+
+
+        /* =========================================================
+           ACTION BUTTONS
+        ========================================================= */
+
+        .pricing-actions {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 11px;
+
+            margin-top: 30px;
+
+            flex-wrap: wrap;
+        }
+
+        .pricing-button {
+            min-height: 47px;
+
+            padding: 0 21px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 13px;
+
+            border:
+                1px solid var(--tb-border);
+
+            background: white;
+
+            color: var(--tb-brown);
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease;
+        }
+
+        .pricing-button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 25px rgba(59,41,34,0.10);
+        }
+
+        .pricing-button.primary {
+            border-color: var(--tb-terracotta);
+
+            background: var(--tb-terracotta);
+
+            color: white;
+        }
+
+
+        /* =========================================================
+           TOAST
+        ========================================================= */
+
+        .pricing-toast {
+            position: fixed;
+
+            right: 22px;
+            bottom: 22px;
+
+            max-width: 350px;
+
+            padding: 14px 18px;
+
+            border-radius: 14px;
+
+            background: var(--tb-dark);
+
+            color: white;
+
+            font-size: 12px;
+
+            box-shadow:
+                0 20px 45px rgba(0,0,0,0.18);
+
+            opacity: 0;
+
+            transform: translateY(25px);
+
+            pointer-events: none;
+
+            transition:
+                opacity 0.3s ease,
+                transform 0.3s ease;
+
+            z-index: 9999;
+        }
+
+        .pricing-toast.show {
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 1000px) {
+
+            .pricing-hero {
+                grid-template-columns: 1fr;
+
+                gap: 25px;
+
+                padding-top: 45px;
+            }
+
+            .pricing-visual {
+                min-height: 350px;
+            }
+
+            .calculator {
+                grid-template-columns: 1fr;
+            }
+
+            .underprice-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .pricing-topbar {
+                padding:
+                    17px 18px;
+            }
+
+            .pricing-brand img {
+                width: 125px;
+            }
+
+            .pricing-back {
+                font-size: 10px;
+            }
+
+            .pricing-hero,
+            .pricing-main {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .pricing-title {
+                font-size: 50px;
+            }
+
+            .pricing-subtitle {
+                font-size: 14px;
+            }
+
+            .pricing-visual {
+                min-height: 315px;
+            }
+
+            .orbit {
+                width: 285px;
+                height: 285px;
+            }
+
+            .visual-card {
+                padding: 25px;
+            }
+
+            .breakdown {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .price-options {
+                grid-template-columns: 1fr;
+            }
+
+            .price-option {
+                min-height: auto;
+            }
+
+            .underprice-section {
+                padding: 32px 23px;
+            }
+
+            .worth-factors {
+                grid-template-columns: 1fr;
+            }
+
+            .tips {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 430px) {
+
+            .pricing-title {
+                font-size: 43px;
+            }
+
+            .breakdown {
+                grid-template-columns: 1fr;
+            }
+
+            .panel-content,
+            .results {
+                padding: 20px;
+            }
+
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .orbit {
+                animation: none;
+            }
+
+            .price-option,
+            .pricing-button,
+            .pricing-back {
+                transition: none;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="pricing-page">
+
+    <!-- =========================================================
+         TOP BAR
+    ========================================================== -->
+
+    <header class="pricing-topbar">
+
+        <a
+            href="../index.html"
+            class="pricing-brand"
+            aria-label="Taana-Baana Home"
+        >
+            <img
+                src="../assets/logo.png"
+                alt="Taana-Baana — From Hands to Markets"
+            >
+        </a>
+
+        <a
+            href="artisan-dashboard.html"
+            class="pricing-back"
+        >
+            ← Artisan Dashboard
+        </a>
+
+    </header>
+
+
+    <!-- =========================================================
+         HERO
+    ========================================================== -->
+
+    <section class="pricing-hero">
+
+        <div class="pricing-hero-content">
+
+            <div class="pricing-eyebrow">
+                <span class="pricing-eyebrow-dot"></span>
+                SMART PRICING ASSISTANT
+            </div>
+
+            <h1 class="pricing-title">
+                Know your
+                <em>worth.</em>
+            </h1>
+
+            <p class="pricing-subtitle">
+                Your craft has a cost.
+                Your skill has a value.
+                Taana-Baana helps you understand both before
+                you put a price on your work.
+            </p>
+
+            <div class="pricing-note">
+                <span>✦</span>
+                Transparent calculation. Artisan-controlled pricing.
+            </div>
+
+        </div>
+
+
+        <!-- HERO CALCULATION VISUAL -->
+
+        <div class="pricing-visual">
+
+            <div class="orbit"></div>
+
+            <div class="visual-card">
+
+                <div class="visual-label">
+                    Example smart calculation
+                </div>
+
+                <div class="visual-main-price">
+                    <small>₹</small> 899
+                </div>
+
+                <div class="visual-description">
+                    Suggested selling price
+                </div>
+
+                <div class="visual-costs">
+
+                    <div class="visual-cost">
+                        <span>Material</span>
+                        <strong>₹300</strong>
+                    </div>
+
+                    <div class="visual-cost">
+                        <span>Labour</span>
+                        <strong>₹300</strong>
+                    </div>
+
+                    <div class="visual-cost">
+                        <span>Packaging</span>
+                        <strong>₹30</strong>
+                    </div>
+
+                    <div class="visual-cost">
+                        <span>Transport</span>
+                        <strong>₹50</strong>
+                    </div>
+
+                    <div class="visual-cost">
+                        <span>Platform fee</span>
+                        <strong>₹20</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         MAIN
+    ========================================================== -->
+
+    <main class="pricing-main">
+
+        <span class="section-kicker">
+            01 / Build your price
+        </span>
+
+        <h2 class="section-title">
+            Start with what your craft actually costs.
+        </h2>
+
+        <p class="section-description">
+            Enter your expenses below. The pricing assistant calculates
+            your estimated production cost and gives you three pricing
+            levels to consider.
+        </p>
+
+
+        <!-- =====================================================
+             CALCULATOR
+        ====================================================== -->
+
+        <section class="calculator">
+
+
+            <!-- =================================================
+                 INPUT PANEL
+            ================================================== -->
+
+            <div class="panel">
+
+                <div class="panel-heading">
+
+                    <h3>
+                        Cost of making one product
+                    </h3>
+
+                    <p>
+                        Add the approximate cost for one unit.
+                        You can adjust these values anytime.
+                    </p>
+
+                </div>
+
+
+                <div class="panel-content">
+
+
+                    <!-- MATERIAL -->
+
+                    <div class="input-group">
+
+                        <label
+                            class="input-label"
+                            for="materialCost"
+                        >
+                            Material Cost
+                            <span>Raw materials</span>
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="currency">₹</span>
+
+                            <input
+                                id="materialCost"
+                                class="cost-input"
+                                type="number"
+                                min="0"
+                                step="1"
+                                value="300"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LABOUR -->
+
+                    <div class="input-group">
+
+                        <label
+                            class="input-label"
+                            for="labourCost"
+                        >
+                            Labour
+                            <span>Time + skill</span>
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="currency">₹</span>
+
+                            <input
+                                id="labourCost"
+                                class="cost-input"
+                                type="number"
+                                min="0"
+                                step="1"
+                                value="300"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PACKAGING -->
+
+                    <div class="input-group">
+
+                        <label
+                            class="input-label"
+                            for="packagingCost"
+                        >
+                            Packaging
+                            <span>Wrap + box + labels</span>
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="currency">₹</span>
+
+                            <input
+                                id="packagingCost"
+                                class="cost-input"
+                                type="number"
+                                min="0"
+                                step="1"
+                                value="30"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TRANSPORT -->
+
+                    <div class="input-group">
+
+                        <label
+                            class="input-label"
+                            for="transportCost"
+                        >
+                            Transport
+                            <span>Estimated per unit</span>
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="currency">₹</span>
+
+                            <input
+                                id="transportCost"
+                                class="cost-input"
+                                type="number"
+                                min="0"
+                                step="1"
+                                value="50"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PLATFORM -->
+
+                    <div class="input-group">
+
+                        <label
+                            class="input-label"
+                            for="platformFee"
+                        >
+                            Platform Fee
+                            <span>Marketplace / payment</span>
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="currency">₹</span>
+
+                            <input
+                                id="platformFee"
+                                class="cost-input"
+                                type="number"
+                                min="0"
+                                step="1"
+                                value="20"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PROFIT MARGIN -->
+
+                    <div class="margin-box">
+
+                        <div class="margin-header">
+
+                            <div class="margin-title">
+                                Desired Profit Margin
+                            </div>
+
+                            <div
+                                class="margin-value"
+                                id="marginValue"
+                            >
+                                28%
+                            </div>
+
+                        </div>
+
+                        <input
+                            id="marginSlider"
+                            type="range"
+                            min="5"
+                            max="80"
+                            value="28"
+                        >
+
+                        <div class="margin-scale">
+                            <span>5%</span>
+                            <span>Balanced</span>
+                            <span>80%</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 RESULTS PANEL
+            ================================================== -->
+
+            <div class="panel">
+
+                <!-- BASE COST -->
+
+                <div class="cost-summary">
+
+                    <div class="summary-label">
+                        Estimated base cost
+                    </div>
+
+                    <div class="base-cost">
+
+                        <span
+                            class="base-cost-value"
+                            id="baseCost"
+                        >
+                            ₹700
+                        </span>
+
+                        <span class="base-cost-unit">
+                            per product
+                        </span>
+
+                    </div>
+
+
+                    <div class="breakdown">
+
+                        <div class="breakdown-item">
+                            <span>Material</span>
+                            <strong id="breakMaterial">
+                                ₹300
+                            </strong>
+                        </div>
+
+                        <div class="breakdown-item">
+                            <span>Labour</span>
+                            <strong id="breakLabour">
+                                ₹300
+                            </strong>
+                        </div>
+
+                        <div class="breakdown-item">
+                            <span>Packaging</span>
+                            <strong id="breakPackaging">
+                                ₹30
+                            </strong>
+                        </div>
+
+                        <div class="breakdown-item">
+                            <span>Transport</span>
+                            <strong id="breakTransport">
+                                ₹50
+                            </strong>
+                        </div>
+
+                        <div class="breakdown-item">
+                            <span>Platform</span>
+                            <strong id="breakPlatform">
+                                ₹20
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PRICE OPTIONS -->
+
+                <div class="results">
+
+                    <div class="results-heading">
+                        Suggested price levels
+                    </div>
+
+
+                    <div class="price-options">
+
+
+                        <!-- MINIMUM -->
+
+                        <article class="price-option">
+
+                            <div class="option-label">
+                                Minimum
+                            </div>
+
+                            <div
+                                class="option-price"
+                                id="minimumPrice"
+                            >
+                                ₹749
+                            </div>
+
+                            <div
+                                class="option-profit"
+                                id="minimumProfit"
+                            >
+                                + ₹49 margin
+                            </div>
+
+                            <p class="option-description">
+                                A protective floor that keeps
+                                your selling price above the
+                                estimated production cost.
+                            </p>
+
+                        </article>
+
+
+                        <!-- RECOMMENDED -->
+
+                        <article
+                            class="price-option recommended"
+                        >
+
+                            <div class="recommended-tag">
+                                RECOMMENDED
+                            </div>
+
+                            <div class="option-label">
+                                Recommended
+                            </div>
+
+                            <div
+                                class="option-price"
+                                id="recommendedPrice"
+                            >
+                                ₹896
+                            </div>
+
+                            <div
+                                class="option-profit"
+                                id="recommendedProfit"
+                            >
+                                + ₹196 margin
+                            </div>
+
+                            <p class="option-description">
+                                Uses your selected profit margin
+                                to create a balanced selling
+                                price.
+                            </p>
+
+                        </article>
+
+
+                        <!-- PREMIUM -->
+
+                        <article class="price-option">
+
+                            <div class="option-label">
+                                Premium
+                            </div>
+
+                            <div
+                                class="option-price"
+                                id="premiumPrice"
+                            >
+                                ₹1,075
+                            </div>
+
+                            <div
+                                class="option-profit"
+                                id="premiumProfit"
+                            >
+                                + ₹375 margin
+                            </div>
+
+                            <p class="option-description">
+                                A higher positioning option when
+                                craftsmanship, customisation or
+                                presentation supports it.
+                            </p>
+
+                        </article>
+
+                    </div>
+
+
+                    <!-- EXPLANATION -->
+
+                    <div class="explanation">
+
+                        <div class="explanation-icon">
+                            ✦
+                        </div>
+
+                        <div>
+
+                            <h4>
+                                Why this recommendation?
+                            </h4>
+
+                            <p id="explanationText">
+                                Your recommended price is calculated
+                                from your estimated production cost
+                                and selected profit margin.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             DON'T UNDERPRICE ME
+        ====================================================== -->
+
+        <section class="underprice-section">
+
+            <div class="underprice-grid">
+
+                <div>
+
+                    <div class="underprice-kicker">
+                        02 / Don't Underprice Me
+                    </div>
+
+                    <h2 class="underprice-title">
+                        Your craft has a cost.<br>
+                        Your skill has a
+                        <em>value.</em>
+                    </h2>
+
+                    <p class="underprice-copy">
+                        Handmade products are more than their raw
+                        materials. The hours you spend making them,
+                        the skill you have developed and the costs
+                        involved in getting them ready for buyers
+                        all matter.
+                    </p>
+
+                </div>
+
+
+                <div class="worth-factors">
+
+                    <div class="worth-factor">
+
+                        <strong>
+                            Material
+                        </strong>
+
+                        <span>
+                            Raw materials and components used
+                            to make your product.
+                        </span>
+
+                    </div>
+
+
+                    <div class="worth-factor">
+
+                        <strong>
+                            Labour
+                        </strong>
+
+                        <span>
+                            Your time, experience, skill and
+                            effort are part of the cost.
+                        </span>
+
+                    </div>
+
+
+                    <div class="worth-factor">
+
+                        <strong>
+                            Overheads
+                        </strong>
+
+                        <span>
+                            Packaging, transport and platform
+                            costs can affect your real margin.
+                        </span>
+
+                    </div>
+
+
+                    <div class="worth-factor">
+
+                        <strong>
+                            Profit
+                        </strong>
+
+                        <span>
+                            A sustainable margin helps turn
+                            craftsmanship into a viable business.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             TIPS
+        ====================================================== -->
+
+        <section class="tips">
+
+
+            <article class="tip">
+
+                <span class="tip-number">
+                    01
+                </span>
+
+                <h4>
+                    Count your time
+                </h4>
+
+                <p>
+                    Include the time spent preparing, making,
+                    finishing and packaging the product.
+                </p>
+
+            </article>
+
+
+            <article class="tip">
+
+                <span class="tip-number">
+                    02
+                </span>
+
+                <h4>
+                    Include hidden costs
+                </h4>
+
+                <p>
+                    Packaging, transport and platform-related
+                    costs can change your actual profit.
+                </p>
+
+            </article>
+
+
+            <article class="tip">
+
+                <span class="tip-number">
+                    03
+                </span>
+
+                <h4>
+                    You stay in control
+                </h4>
+
+                <p>
+                    Taana-Baana provides suggestions. The artisan
+                    always decides the final selling price.
+                </p>
+
+            </article>
+
+        </section>
+
+
+        <!-- =====================================================
+             ACTIONS
+        ====================================================== -->
+
+        <div class="pricing-actions">
+
+            <a
+                href="catalog.html"
+                class="pricing-button"
+            >
+                ← Back to Catalog
+            </a>
+
+            <button
+                type="button"
+                class="pricing-button primary"
+                id="savePricing"
+            >
+                Save Pricing →
+            </button>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     TOAST
+========================================================== -->
+
+<div
+    class="pricing-toast"
+    id="pricingToast"
+    role="status"
+    aria-live="polite"
+></div>
+
+
+<!-- =========================================================
+     EXISTING PROJECT JAVASCRIPT
+========================================================== -->
+
+<script src="../js/main.js" defer></script>
+<script src="../js/pages.js" defer></script>
+
+
+<!-- =========================================================
+     PRICING PAGE JAVASCRIPT
+========================================================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const materialInput =
+        document.getElementById("materialCost");
+
+    const labourInput =
+        document.getElementById("labourCost");
+
+    const packagingInput =
+        document.getElementById("packagingCost");
+
+    const transportInput =
+        document.getElementById("transportCost");
+
+    const platformInput =
+        document.getElementById("platformFee");
+
+    const marginSlider =
+        document.getElementById("marginSlider");
+
+    const marginValue =
+        document.getElementById("marginValue");
+
+    const baseCost =
+        document.getElementById("baseCost");
+
+    const minimumPrice =
+        document.getElementById("minimumPrice");
+
+    const recommendedPrice =
+        document.getElementById("recommendedPrice");
+
+    const premiumPrice =
+        document.getElementById("premiumPrice");
+
+    const minimumProfit =
+        document.getElementById("minimumProfit");
+
+    const recommendedProfit =
+        document.getElementById("recommendedProfit");
+
+    const premiumProfit =
+        document.getElementById("premiumProfit");
+
+    const explanationText =
+        document.getElementById("explanationText");
+
+    const saveButton =
+        document.getElementById("savePricing");
+
+    const toast =
+        document.getElementById("pricingToast");
+
+
+    /* =========================================================
+       FORMAT MONEY
+    ========================================================= */
+
+    function formatMoney(value) {
+
+        return "₹" + Math.round(value).toLocaleString("en-IN");
+
+    }
+
+
+    /* =========================================================
+       SAFE NUMBER
+    ========================================================= */
+
+    function numberValue(input) {
+
+        const value = Number(input.value);
+
+        if (!Number.isFinite(value)) {
+            return 0;
+        }
+
+        if (value < 0) {
+            return 0;
+        }
+
+        return value;
+
+    }
+
+
+    /* =========================================================
+       CALCULATE
+    ========================================================= */
+
+    function calculatePricing() {
+
+        const material =
+            numberValue(materialInput);
+
+        const labour =
+            numberValue(labourInput);
+
+        const packaging =
+            numberValue(packagingInput);
+
+        const transport =
+            numberValue(transportInput);
+
+        const platform =
+            numberValue(platformInput);
+
+        const margin =
+            Number(marginSlider.value);
+
+
+        /*
+         * BASE COST
+         *
+         * Material
+         * + Labour
+         * + Packaging
+         * + Transport
+         * + Platform Fee
+         */
+
+        const totalCost =
+            material +
+            labour +
+            packaging +
+            transport +
+            platform;
+
+
+        /*
+         * MINIMUM
+         *
+         * Small protective margin above cost.
+         */
+
+        const minimum =
+            totalCost * 1.07;
+
+
+        /*
+         * RECOMMENDED
+         *
+         * Selected artisan profit margin.
+         */
+
+        const recommended =
+            totalCost * (1 + margin / 100);
+
+
+        /*
+         * PREMIUM
+         *
+         * Premium positioning above recommended.
+         */
+
+        const premium =
+            recommended * 1.20;
+
+
+        /* =====================================================
+           UPDATE BASE COST
+        ====================================================== */
+
+        baseCost.textContent =
+            formatMoney(totalCost);
+
+
+        /* =====================================================
+           UPDATE BREAKDOWN
+        ====================================================== */
+
+        document.getElementById(
+            "breakMaterial"
+        ).textContent = formatMoney(material);
+
+        document.getElementById(
+            "breakLabour"
+        ).textContent = formatMoney(labour);
+
+        document.getElementById(
+            "breakPackaging"
+        ).textContent = formatMoney(packaging);
+
+        document.getElementById(
+            "breakTransport"
+        ).textContent = formatMoney(transport);
+
+        document.getElementById(
+            "breakPlatform"
+        ).textContent = formatMoney(platform);
+
+
+        /* =====================================================
+           UPDATE PRICES
+        ====================================================== */
+
+        minimumPrice.textContent =
+            formatMoney(minimum);
+
+        recommendedPrice.textContent =
+            formatMoney(recommended);
+
+        premiumPrice.textContent =
+            formatMoney(premium);
+
+
+        /* =====================================================
+           UPDATE PROFIT
+        ====================================================== */
+
+        minimumProfit.textContent =
+            "+ " +
+            formatMoney(minimum - totalCost) +
+            " margin";
+
+        recommendedProfit.textContent =
+            "+ " +
+            formatMoney(recommended - totalCost) +
+            " margin";
+
+        premiumProfit.textContent =
+            "+ " +
+            formatMoney(premium - totalCost) +
+            " margin";
+
+
+        /* =====================================================
+           UPDATE MARGIN
+        ====================================================== */
+
+        marginValue.textContent =
+            margin + "%";
+
+
+        /* =====================================================
+           EXPLANATION
+        ====================================================== */
+
+        if (totalCost === 0) {
+
+            explanationText.textContent =
+                "Enter your production costs to generate your pricing suggestions.";
+
+            return;
+
+        }
+
+
+        explanationText.textContent =
+            "Your estimated production cost is " +
+            formatMoney(totalCost) +
+            " per product. With your selected " +
+            margin +
+            "% profit margin, the calculated recommended price is " +
+            formatMoney(recommended) +
+            ". The minimum and premium values give you additional pricing options.";
+
+    }
+
+
+    /* =========================================================
+       INPUT EVENTS
+    ====================================================== */
+
+    const inputs = [
+        materialInput,
+        labourInput,
+        packagingInput,
+        transportInput,
+        platformInput
+    ];
+
+
+    inputs.forEach(function (input) {
+
+        input.addEventListener(
+            "input",
+            calculatePricing
+        );
+
+    });
+
+
+    marginSlider.addEventListener(
+        "input",
+        calculatePricing
+    );
+
+
+    /* =========================================================
+       SAVE PRICING
+    ====================================================== */
+
+    saveButton.addEventListener(
+        "click",
+        function () {
+
+            const pricingData = {
+
+                materialCost:
+                    numberValue(materialInput),
+
+                labourCost:
+                    numberValue(labourInput),
+
+                packagingCost:
+                    numberValue(packagingInput),
+
+                transportCost:
+                    numberValue(transportInput),
+
+                platformFee:
+                    numberValue(platformInput),
+
+                profitMargin:
+                    Number(marginSlider.value),
+
+                savedAt:
+                    new Date().toISOString()
+
+            };
+
+
+            localStorage.setItem(
+                "taanaBaanaPricing",
+                JSON.stringify(pricingData)
+            );
+
+
+            showToast(
+                "✓ Pricing saved successfully."
+            );
+
+        }
+    );
+
+
+    /* =========================================================
+       TOAST
+    ====================================================== */
+
+    function showToast(message) {
+
+        toast.textContent =
+            message;
+
+        toast.classList.add("show");
+
+
+        setTimeout(function () {
+
+            toast.classList.remove("show");
+
+        }, 3000);
+
+    }
+
+
+    /* =========================================================
+       LOAD SAVED PRICING
+    ====================================================== */
+
+    try {
+
+        const saved =
+            JSON.parse(
+                localStorage.getItem(
+                    "taanaBaanaPricing"
+                )
+            );
+
+
+        if (saved) {
+
+            if (
+                saved.materialCost !== undefined
+            ) {
+
+                materialInput.value =
+                    saved.materialCost;
+
+            }
+
+
+            if (
+                saved.labourCost !== undefined
+            ) {
+
+                labourInput.value =
+                    saved.labourCost;
+
+            }
+
+
+            if (
+                saved.packagingCost !== undefined
+            ) {
+
+                packagingInput.value =
+                    saved.packagingCost;
+
+            }
+
+
+            if (
+                saved.transportCost !== undefined
+            ) {
+
+                transportInput.value =
+                    saved.transportCost;
+
+            }
+
+
+            if (
+                saved.platformFee !== undefined
+            ) {
+
+                platformInput.value =
+                    saved.platformFee;
+
+            }
+
+
+            if (
+                saved.profitMargin !== undefined
+            ) {
+
+                marginSlider.value =
+                    saved.profitMargin;
+
+            }
+
+        }
+
+    } catch (error) {
+
+        console.warn(
+            "Saved pricing could not be loaded.",
+            error
+        );
+
+    }
+
+
+    /* =========================================================
+       INITIAL CALCULATION
+    ====================================================== */
+
+    calculatePricing();
+
+});
+
+</script>
+
+</body>
+</html>

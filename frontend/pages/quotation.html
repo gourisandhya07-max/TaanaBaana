@@ -1,0 +1,2931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Review artisan quotations and B2B order details on Taana-Baana."
+    >
+
+    <title>Quotation — Taana-Baana</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+
+    <style>
+
+        /* =====================================================
+           TAANA-BAANA
+           B2B QUOTATION PAGE
+        ===================================================== */
+
+        .quotation-page {
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 4% 8%,
+                    rgba(196,61,115,.08),
+                    transparent 24%
+                ),
+                radial-gradient(
+                    circle at 95% 15%,
+                    rgba(15,124,120,.08),
+                    transparent 25%
+                ),
+                #fcf6ea;
+
+            color: #3b2922;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .quotation-header {
+            max-width: 1180px;
+
+            margin: 0 auto;
+
+            padding:
+                125px
+                30px
+                30px;
+        }
+
+
+        .quotation-breadcrumb {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 25px;
+
+            color: #927e72;
+
+            font-size: 11px;
+        }
+
+
+        .quotation-breadcrumb a {
+            color: #927e72;
+
+            text-decoration: none;
+        }
+
+
+        .quotation-breadcrumb span {
+            color: #c96f4a;
+        }
+
+
+        .quotation-heading {
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: space-between;
+
+            gap: 30px;
+        }
+
+
+        .quotation-eyebrow {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding:
+                8px
+                13px;
+
+            border-radius: 999px;
+
+            background: #e8e3f0;
+
+            color: #6d557f;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            letter-spacing: .13em;
+
+            text-transform: uppercase;
+        }
+
+
+        .quotation-eyebrow::before {
+            content: "";
+
+            width: 6px;
+
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: #8b63a3;
+        }
+
+
+        .quotation-header h1 {
+            margin:
+                18px
+                0
+                9px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(42px, 6vw, 66px);
+
+            line-height: 1;
+
+            letter-spacing: -.045em;
+        }
+
+
+        .quotation-header h1 em {
+            color: #c96f4a;
+
+            font-weight: 500;
+        }
+
+
+        .quotation-header p {
+            max-width: 610px;
+
+            margin: 0;
+
+            color: #78665d;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+
+        .quote-id-box {
+            flex-shrink: 0;
+
+            padding:
+                15px
+                18px;
+
+            border:
+                1px solid
+                #dfccb5;
+
+            border-radius: 15px;
+
+            background: #fff9f0;
+
+            text-align: right;
+        }
+
+
+        .quote-id-box small {
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: #98857a;
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+            letter-spacing: .1em;
+
+            text-transform: uppercase;
+        }
+
+
+        .quote-id-box strong {
+            color: #a95338;
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           MAIN CONTENT
+        ===================================================== */
+
+        .quotation-content {
+            max-width: 1120px;
+
+            margin: 0 auto;
+
+            padding:
+                0
+                30px
+                100px;
+        }
+
+
+        .quotation-layout {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                330px;
+
+            gap: 18px;
+
+            align-items: start;
+        }
+
+
+        /* =====================================================
+           QUOTATION CARD
+        ===================================================== */
+
+        .quotation-card {
+            overflow: hidden;
+
+            border:
+                1px solid
+                #e1d0b9;
+
+            border-radius: 23px;
+
+            background: #fff9f0;
+
+            box-shadow:
+                0
+                15px
+                45px
+                rgba(59,41,34,.06);
+        }
+
+
+        .quote-card-top {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding:
+                23px
+                25px;
+
+            border-bottom:
+                1px solid
+                #eadcca;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff9f0,
+                    #f7e9d9
+                );
+        }
+
+
+        .maker-profile {
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+        }
+
+
+        .maker-avatar {
+            width: 53px;
+
+            height: 53px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 15px;
+
+            background: #f0d2c4;
+
+            font-size: 25px;
+        }
+
+
+        .maker-profile h2 {
+            margin: 0 0 3px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 20px;
+        }
+
+
+        .maker-profile p {
+            margin: 0;
+
+            color: #88766b;
+
+            font-size: 10px;
+        }
+
+
+        .quote-status {
+            padding:
+                8px
+                11px;
+
+            border-radius: 999px;
+
+            background: #e3efeb;
+
+            color: #397467;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            letter-spacing: .06em;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =====================================================
+           PRODUCT
+        ===================================================== */
+
+        .quoted-product {
+            margin:
+                23px
+                25px;
+
+            padding:
+                17px;
+
+            border-radius: 14px;
+
+            background: #f7eee4;
+
+            border:
+                1px solid
+                #eadcca;
+        }
+
+
+        .quoted-product small {
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: #9a877b;
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+            letter-spacing: .1em;
+
+            text-transform: uppercase;
+        }
+
+
+        .quoted-product strong {
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 21px;
+        }
+
+
+        /* =====================================================
+           BREAKDOWN
+        ===================================================== */
+
+        .quote-section {
+            padding:
+                0
+                25px
+                25px;
+        }
+
+
+        .quote-section h3 {
+            margin:
+                0
+                0
+                14px;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            letter-spacing: .06em;
+
+            text-transform: uppercase;
+        }
+
+
+        .price-table {
+            overflow: hidden;
+
+            border:
+                1px solid
+                #e5d7c5;
+
+            border-radius: 13px;
+        }
+
+
+        .price-row {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding:
+                13px
+                15px;
+
+            border-bottom:
+                1px solid
+                #eee2d3;
+
+            font-size: 11px;
+        }
+
+
+        .price-row:last-child {
+            border-bottom: 0;
+        }
+
+
+        .price-row span {
+            color: #77645a;
+        }
+
+
+        .price-row strong {
+            color: #4f3e35;
+        }
+
+
+        .price-row.total {
+            background: #f4e8da;
+        }
+
+
+        .price-row.total span,
+        .price-row.total strong {
+            color: #3b2922;
+
+            font-weight: 800;
+        }
+
+
+        .price-row.total strong {
+            font-size: 15px;
+        }
+
+
+        /* =====================================================
+           ORDER DETAILS
+        ===================================================== */
+
+        .order-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2,1fr);
+
+            gap: 10px;
+        }
+
+
+        .order-detail {
+            padding:
+                13px;
+
+            border-radius: 11px;
+
+            background: #f8f1e8;
+        }
+
+
+        .order-detail small {
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: #9b887c;
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+            letter-spacing: .08em;
+
+            text-transform: uppercase;
+        }
+
+
+        .order-detail strong {
+            color: #59483f;
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           ARTISAN MESSAGE
+        ===================================================== */
+
+        .artisan-message {
+            padding:
+                15px;
+
+            border-left:
+                3px solid
+                #c96f4a;
+
+            border-radius:
+                0
+                11px
+                11px
+                0;
+
+            background: #f8efe4;
+
+            color: #6d5a50;
+
+            font-size: 11px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           ACTIONS
+        ===================================================== */
+
+        .quote-actions {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 9px;
+
+            padding:
+                20px
+                25px;
+
+            border-top:
+                1px solid
+                #eadcca;
+        }
+
+
+        .quote-action {
+            min-height: 45px;
+
+            border-radius: 11px;
+
+            cursor: pointer;
+
+            font-family:
+                "DM Sans",
+                sans-serif;
+
+            font-size: 10px;
+
+            font-weight: 800;
+        }
+
+
+        .accept-quote {
+            border: 0;
+
+            background: #3b2922;
+
+            color: #fff9f0;
+        }
+
+
+        .accept-quote:hover {
+            background: #a95338;
+        }
+
+
+        .change-quote {
+            border:
+                1px solid
+                #d9c4aa;
+
+            background: transparent;
+
+            color: #5e4d43;
+        }
+
+
+        /* =====================================================
+           SIDE PANEL
+        ===================================================== */
+
+        .quote-sidebar {
+            display: grid;
+
+            gap: 13px;
+        }
+
+
+        .sidebar-card {
+            padding:
+                21px;
+
+            border:
+                1px solid
+                #e1d0b9;
+
+            border-radius: 19px;
+
+            background: #fff9f0;
+
+            box-shadow:
+                0
+                8px
+                25px
+                rgba(59,41,34,.045);
+        }
+
+
+        .sidebar-card h3 {
+            margin:
+                0
+                0
+                15px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 20px;
+        }
+
+
+        /* =====================================================
+           TIMELINE
+        ===================================================== */
+
+        .timeline {
+            position: relative;
+
+            display: grid;
+
+            gap: 20px;
+        }
+
+
+        .timeline::before {
+            content: "";
+
+            position: absolute;
+
+            top: 5px;
+
+            bottom: 5px;
+
+            left: 7px;
+
+            width: 1px;
+
+            background: #ddc9b0;
+        }
+
+
+        .timeline-item {
+            position: relative;
+
+            display: grid;
+
+            grid-template-columns: 15px 1fr;
+
+            gap: 11px;
+        }
+
+
+        .timeline-dot {
+            position: relative;
+
+            z-index: 2;
+
+            width: 15px;
+
+            height: 15px;
+
+            border-radius: 50%;
+
+            background: #fff9f0;
+
+            border:
+                3px solid
+                #d6c1a6;
+        }
+
+
+        .timeline-item.active
+        .timeline-dot {
+            border-color:
+                #c96f4a;
+
+            background:
+                #c96f4a;
+        }
+
+
+        .timeline-item h4 {
+            margin:
+                -2px
+                0
+                3px;
+
+            font-size: 10px;
+        }
+
+
+        .timeline-item p {
+            margin: 0;
+
+            color: #927e72;
+
+            font-size: 9px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           INFO CARD
+        ===================================================== */
+
+        .info-card {
+            background:
+                linear-gradient(
+                    145deg,
+                    #e6eee3,
+                    #dce2d2
+                );
+        }
+
+
+        .info-card h3 {
+            color: #3e5940;
+        }
+
+
+        .info-card p {
+            margin: 0;
+
+            color: #566651;
+
+            font-size: 10px;
+
+            line-height: 1.7;
+        }
+
+
+        .info-points {
+            display: grid;
+
+            gap: 9px;
+
+            margin-top: 15px;
+        }
+
+
+        .info-point {
+            display: flex;
+
+            gap: 8px;
+
+            color: #4f604b;
+
+            font-size: 9px;
+
+            line-height: 1.5;
+        }
+
+
+        .info-point span {
+            color: #3e7c59;
+
+            font-weight: 900;
+        }
+
+
+        /* =====================================================
+           AI NOTE
+        ===================================================== */
+
+        .ai-note {
+            background:
+                linear-gradient(
+                    145deg,
+                    #f1e8f2,
+                    #e8e3f0
+                );
+        }
+
+
+        .ai-note h3 {
+            color: #654c73;
+        }
+
+
+        .ai-note p {
+            margin: 0;
+
+            color: #6f6075;
+
+            font-size: 10px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           EMPTY STATE
+        ===================================================== */
+
+        .quote-empty {
+            display: none;
+
+            max-width: 600px;
+
+            margin: 0 auto;
+
+            padding:
+                70px
+                25px;
+
+            text-align: center;
+
+            border:
+                1px dashed
+                #d7c1a5;
+
+            border-radius: 23px;
+
+            background: #fff9f0;
+        }
+
+
+        .quote-empty.show {
+            display: block;
+        }
+
+
+        .quote-empty-icon {
+            margin-bottom: 13px;
+
+            font-size: 45px;
+        }
+
+
+        .quote-empty h2 {
+            margin:
+                0
+                0
+                8px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 30px;
+        }
+
+
+        .quote-empty p {
+            margin:
+                0
+                auto
+                20px;
+
+            max-width: 450px;
+
+            color: #806d63;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+
+        .quote-empty a {
+            display: inline-flex;
+
+            align-items: center;
+
+            min-height: 43px;
+
+            padding:
+                0
+                16px;
+
+            border-radius: 10px;
+
+            background: #3b2922;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 10px;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           CHANGE REQUEST MODAL
+        ===================================================== */
+
+        .quote-overlay {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 9999;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(42,29,24,.72);
+
+            backdrop-filter:
+                blur(8px);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition:
+                opacity .25s ease,
+                visibility .25s ease;
+        }
+
+
+        .quote-overlay.show {
+            opacity: 1;
+
+            visibility: visible;
+        }
+
+
+        .change-modal {
+            width:
+                min(520px,100%);
+
+            padding: 30px;
+
+            border-radius: 23px;
+
+            background: #fff9f0;
+
+            box-shadow:
+                0
+                30px
+                80px
+                rgba(0,0,0,.25);
+
+            transform:
+                translateY(20px);
+
+            transition:
+                transform .3s ease;
+        }
+
+
+        .quote-overlay.show
+        .change-modal {
+            transform:
+                translateY(0);
+        }
+
+
+        .modal-top {
+            display: flex;
+
+            align-items: flex-start;
+
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+
+        .modal-top h2 {
+            margin: 0;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 27px;
+        }
+
+
+        .modal-top p {
+            margin:
+                6px
+                0
+                0;
+
+            color: #87746a;
+
+            font-size: 10px;
+        }
+
+
+        .modal-close {
+            width: 35px;
+
+            height: 35px;
+
+            border: 0;
+
+            border-radius: 50%;
+
+            background: #f0e2d4;
+
+            color: #5b4940;
+
+            cursor: pointer;
+
+            font-size: 17px;
+        }
+
+
+        .change-form {
+            display: grid;
+
+            gap: 14px;
+
+            margin-top: 24px;
+        }
+
+
+        .change-form label {
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: #6d5a51;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            letter-spacing: .07em;
+
+            text-transform: uppercase;
+        }
+
+
+        .change-form input,
+        .change-form textarea {
+            width: 100%;
+
+            box-sizing: border-box;
+
+            padding:
+                12px;
+
+            border:
+                1px solid
+                #ddc9b1;
+
+            border-radius: 10px;
+
+            background: #fffdf9;
+
+            color: #3b2922;
+
+            outline: none;
+
+            font-family:
+                "DM Sans",
+                sans-serif;
+
+            font-size: 11px;
+        }
+
+
+        .change-form textarea {
+            min-height: 105px;
+
+            resize: vertical;
+        }
+
+
+        .change-form input:focus,
+        .change-form textarea:focus {
+            border-color: #c96f4a;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(201,111,74,.1);
+        }
+
+
+        .submit-change {
+            min-height: 45px;
+
+            border: 0;
+
+            border-radius: 11px;
+
+            background: #3b2922;
+
+            color: white;
+
+            cursor: pointer;
+
+            font-family:
+                "DM Sans",
+                sans-serif;
+
+            font-size: 10px;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           SUCCESS MODAL
+        ===================================================== */
+
+        .success-overlay {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 10000;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(42,29,24,.72);
+
+            backdrop-filter:
+                blur(8px);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition:
+                opacity .25s ease,
+                visibility .25s ease;
+        }
+
+
+        .success-overlay.show {
+            opacity: 1;
+
+            visibility: visible;
+        }
+
+
+        .success-card {
+            width:
+                min(440px,100%);
+
+            padding:
+                38px
+                30px;
+
+            border-radius: 25px;
+
+            background: #fff9f0;
+
+            text-align: center;
+
+            box-shadow:
+                0
+                30px
+                80px
+                rgba(0,0,0,.25);
+
+            transform:
+                scale(.95);
+
+            transition:
+                transform .3s ease;
+        }
+
+
+        .success-overlay.show
+        .success-card {
+            transform:
+                scale(1);
+        }
+
+
+        .success-icon {
+            width: 68px;
+
+            height: 68px;
+
+            display: grid;
+
+            place-items: center;
+
+            margin:
+                0
+                auto
+                18px;
+
+            border-radius: 50%;
+
+            background: #dce9df;
+
+            color: #3e7c59;
+
+            font-size: 28px;
+        }
+
+
+        .success-card h2 {
+            margin:
+                0
+                0
+                8px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 28px;
+        }
+
+
+        .success-card p {
+            margin:
+                0
+                auto
+                22px;
+
+            max-width: 350px;
+
+            color: #7d6a60;
+
+            font-size: 11px;
+
+            line-height: 1.7;
+        }
+
+
+        .success-close {
+            min-height: 43px;
+
+            padding:
+                0
+                20px;
+
+            border: 0;
+
+            border-radius: 10px;
+
+            background: #3b2922;
+
+            color: white;
+
+            cursor: pointer;
+
+            font-family:
+                "DM Sans",
+                sans-serif;
+
+            font-size: 10px;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .quotation-layout {
+                grid-template-columns: 1fr;
+            }
+
+
+            .quote-sidebar {
+                grid-template-columns:
+                    1fr
+                    1fr;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .quotation-header {
+                padding:
+                    105px
+                    20px
+                    30px;
+            }
+
+
+            .quotation-content {
+                padding:
+                    0
+                    15px
+                    70px;
+            }
+
+
+            .quotation-heading {
+                flex-direction: column;
+
+                align-items:
+                    flex-start;
+            }
+
+
+            .quote-id-box {
+                text-align: left;
+            }
+
+
+            .quote-card-top {
+                flex-direction: column;
+
+                align-items:
+                    flex-start;
+            }
+
+
+            .quote-status {
+                align-self:
+                    flex-start;
+            }
+
+
+            .quote-section {
+                padding:
+                    0
+                    18px
+                    20px;
+            }
+
+
+            .quoted-product {
+                margin:
+                    18px;
+            }
+
+
+            .quote-actions {
+                grid-template-columns: 1fr;
+
+                padding:
+                    18px;
+            }
+
+
+            .quote-sidebar {
+                grid-template-columns: 1fr;
+            }
+
+
+            .order-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .quote-overlay,
+            .success-overlay,
+            .change-modal,
+            .success-card {
+                transition: none;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="quotation-page">
+
+
+    <!-- ==========================================
+         NAVIGATION
+    =========================================== -->
+
+    <header class="site-header">
+
+        <nav class="navbar">
+
+            <a
+                href="../index.html"
+                class="brand-logo-link"
+                aria-label="Taana-Baana Home"
+            >
+
+                <img
+                    src="../assets/logo.png"
+                    alt="Taana-Baana — From Hands to Markets"
+                    class="brand-logo"
+                >
+
+            </a>
+
+
+            <div class="nav-links">
+
+                <div class="nav-dropdown">
+
+                    <button
+                        class="nav-dropdown-toggle"
+                        type="button"
+                    >
+                        Features
+                        <span>⌄</span>
+                    </button>
+
+
+                    <div class="nav-dropdown-menu">
+
+                        <a href="studio.html">
+                            AI Product Studio
+                        </a>
+
+                        <a href="catalog.html">
+                            Voice-to-Catalogue
+                        </a>
+
+                        <a href="pricing.html">
+                            Smart Pricing
+                        </a>
+
+                        <a href="artisan.html">
+                            Artisan Identity
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <a href="marketplace.html">
+                    Marketplace
+                </a>
+
+
+                <a
+                    href="b2b.html"
+                    class="active"
+                >
+                    B2B
+                </a>
+
+
+                <a href="how-it-works.html">
+                    How It Works
+                </a>
+
+
+                <a href="about.html">
+                    About
+                </a>
+
+            </div>
+
+
+            <div class="nav-actions">
+
+                <a
+                    href="login.html"
+                    class="nav-login"
+                >
+                    Login
+                </a>
+
+
+                <a
+                    href="register.html"
+                    class="nav-cta"
+                >
+                    Get Started
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ==========================================
+         HEADER
+    =========================================== -->
+
+    <main>
+
+        <section class="quotation-header">
+
+            <div class="quotation-breadcrumb">
+
+                <a href="buyer-enquiries.html">
+                    My Enquiries
+                </a>
+
+                <span>/</span>
+
+                Quotation
+
+            </div>
+
+
+            <div class="quotation-heading">
+
+                <div>
+
+                    <div class="quotation-eyebrow">
+                        QUOTATION REVIEW
+                    </div>
+
+
+                    <h1>
+                        Let's turn a
+                        <br>
+                        <em>brief into a deal.</em>
+                    </h1>
+
+
+                    <p>
+                        Review the artisan's indicative quotation,
+                        production details and message before deciding
+                        how you'd like to proceed.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="quote-id-box"
+                    id="quoteIdBox"
+                >
+
+                    <small>
+                        Quotation ID
+                    </small>
+
+                    <strong>
+                        QT-DEMO-001
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             CONTENT
+        =========================================== -->
+
+        <section
+            class="quotation-content"
+            id="quotationContent"
+        >
+
+            <div class="quotation-layout">
+
+
+                <!-- ======================================
+                     QUOTATION
+                ======================================= -->
+
+                <article class="quotation-card">
+
+
+                    <div class="quote-card-top">
+
+                        <div class="maker-profile">
+
+                            <div class="maker-avatar">
+                                👜
+                            </div>
+
+
+                            <div>
+
+                                <h2 id="artisanName">
+                                    Sutradhar Collective
+                                </h2>
+
+                                <p id="artisanLocation">
+                                    Jute & Natural Fibre · West Bengal
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="quote-status">
+                            Quotation received
+                        </div>
+
+                    </div>
+
+
+                    <div class="quoted-product">
+
+                        <small>
+                            Quotation for
+                        </small>
+
+                        <strong id="productName">
+                            Handcrafted Jute Bags
+                        </strong>
+
+                    </div>
+
+
+                    <!-- PRICE -->
+
+                    <div class="quote-section">
+
+                        <h3>
+                            Price breakdown
+                        </h3>
+
+
+                        <div class="price-table">
+
+                            <div class="price-row">
+
+                                <span>
+                                    Unit price
+                                </span>
+
+                                <strong id="unitPrice">
+                                    ₹210
+                                </strong>
+
+                            </div>
+
+
+                            <div class="price-row">
+
+                                <span>
+                                    Quantity
+                                </span>
+
+                                <strong id="quantity">
+                                    500 units
+                                </strong>
+
+                            </div>
+
+
+                            <div class="price-row">
+
+                                <span>
+                                    Customisation
+                                </span>
+
+                                <strong id="customisationPrice">
+                                    ₹5,000
+                                </strong>
+
+                            </div>
+
+
+                            <div class="price-row">
+
+                                <span>
+                                    Packaging
+                                </span>
+
+                                <strong id="packagingPrice">
+                                    ₹2,500
+                                </strong>
+
+                            </div>
+
+
+                            <div class="price-row">
+
+                                <span>
+                                    Estimated shipping
+                                </span>
+
+                                <strong id="shippingPrice">
+                                    ₹3,500
+                                </strong>
+
+                            </div>
+
+
+                            <div class="price-row total">
+
+                                <span>
+                                    Estimated total
+                                </span>
+
+                                <strong id="totalPrice">
+                                    ₹1,16,000
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ORDER DETAILS -->
+
+                    <div class="quote-section">
+
+                        <h3>
+                            Production details
+                        </h3>
+
+
+                        <div class="order-grid">
+
+                            <div class="order-detail">
+
+                                <small>
+                                    Production time
+                                </small>
+
+                                <strong id="productionTime">
+                                    18–22 days
+                                </strong>
+
+                            </div>
+
+
+                            <div class="order-detail">
+
+                                <small>
+                                    Minimum order
+                                </small>
+
+                                <strong id="minimumOrder">
+                                    100 units
+                                </strong>
+
+                            </div>
+
+
+                            <div class="order-detail">
+
+                                <small>
+                                    Payment terms
+                                </small>
+
+                                <strong id="paymentTerms">
+                                    50% advance
+                                </strong>
+
+                            </div>
+
+
+                            <div class="order-detail">
+
+                                <small>
+                                    Delivery
+                                </small>
+
+                                <strong id="deliveryTime">
+                                    5–7 days after production
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MESSAGE -->
+
+                    <div class="quote-section">
+
+                        <h3>
+                            Artisan's message
+                        </h3>
+
+
+                        <div
+                            class="artisan-message"
+                            id="artisanMessage"
+                        >
+                            Thank you for considering our artisan
+                            collective. We can produce the requested
+                            quantity with custom branding and natural
+                            packaging. We would be happy to discuss
+                            samples before beginning the bulk order.
+                        </div>
+
+                    </div>
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="quote-actions">
+
+                        <button
+                            class="quote-action change-quote"
+                            id="changeQuote"
+                            type="button"
+                        >
+                            Request Changes
+                        </button>
+
+
+                        <button
+                            class="quote-action accept-quote"
+                            id="acceptQuote"
+                            type="button"
+                        >
+                            Accept Quotation →
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ======================================
+                     SIDEBAR
+                ======================================= -->
+
+                <aside class="quote-sidebar">
+
+
+                    <!-- TIMELINE -->
+
+                    <div class="sidebar-card">
+
+                        <h3>
+                            Order journey
+                        </h3>
+
+
+                        <div class="timeline">
+
+                            <div class="timeline-item active">
+
+                                <div class="timeline-dot"></div>
+
+                                <div>
+
+                                    <h4>
+                                        Requirement shared
+                                    </h4>
+
+                                    <p>
+                                        Your sourcing brief was sent.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="timeline-item active">
+
+                                <div class="timeline-dot"></div>
+
+                                <div>
+
+                                    <h4>
+                                        Artisan connected
+                                    </h4>
+
+                                    <p>
+                                        The maker responded to your enquiry.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="timeline-item active">
+
+                                <div class="timeline-dot"></div>
+
+                                <div>
+
+                                    <h4>
+                                        Quotation received
+                                    </h4>
+
+                                    <p>
+                                        Review the proposed order terms.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="timeline-item">
+
+                                <div class="timeline-dot"></div>
+
+                                <div>
+
+                                    <h4>
+                                        Order confirmed
+                                    </h4>
+
+                                    <p>
+                                        Confirm after reviewing the quotation.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="timeline-item">
+
+                                <div class="timeline-dot"></div>
+
+                                <div>
+
+                                    <h4>
+                                        Production & delivery
+                                    </h4>
+
+                                    <p>
+                                        Track the order after confirmation.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BUYER PROTECTION -->
+
+                    <div class="sidebar-card info-card">
+
+                        <h3>
+                            Before you confirm
+                        </h3>
+
+
+                        <p>
+                            Take a moment to verify the terms
+                            with the artisan before proceeding.
+                        </p>
+
+
+                        <div class="info-points">
+
+                            <div class="info-point">
+
+                                <span>✓</span>
+
+                                Confirm quantity and customisation.
+
+                            </div>
+
+
+                            <div class="info-point">
+
+                                <span>✓</span>
+
+                                Confirm production timeline.
+
+                            </div>
+
+
+                            <div class="info-point">
+
+                                <span>✓</span>
+
+                                Confirm final shipping cost.
+
+                            </div>
+
+
+                            <div class="info-point">
+
+                                <span>✓</span>
+
+                                Request a sample when appropriate.
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- AI -->
+
+                    <div class="sidebar-card ai-note">
+
+                        <h3>
+                            ✦ Taana-Baana AI
+                        </h3>
+
+
+                        <p>
+                            This prototype can later analyse quotation
+                            terms against the original sourcing brief
+                            and highlight price, quantity or delivery
+                            differences for the buyer.
+                        </p>
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             EMPTY
+        =========================================== -->
+
+        <section
+            class="quote-empty"
+            id="quoteEmpty"
+        >
+
+            <div class="quote-empty-icon">
+                📄
+            </div>
+
+
+            <h2>
+                No quotation selected
+            </h2>
+
+
+            <p>
+                Open a quotation from your enquiry workspace
+                to review the artisan's proposed terms.
+            </p>
+
+
+            <a href="buyer-enquiries.html">
+                Back to Enquiries →
+            </a>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ==========================================
+     CHANGE REQUEST MODAL
+========================================== -->
+
+<div
+    class="quote-overlay"
+    id="changeOverlay"
+>
+
+    <div class="change-modal">
+
+        <div class="modal-top">
+
+            <div>
+
+                <h2>
+                    Request changes
+                </h2>
+
+                <p>
+                    Send the artisan the terms you'd like
+                    to discuss.
+                </p>
+
+            </div>
+
+
+            <button
+                class="modal-close"
+                id="closeChange"
+                type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form
+            class="change-form"
+            id="changeForm"
+        >
+
+            <div>
+
+                <label for="requestedPrice">
+                    Target unit price
+                </label>
+
+                <input
+                    type="number"
+                    id="requestedPrice"
+                    min="0"
+                    placeholder="Example: 200"
+                >
+
+            </div>
+
+
+            <div>
+
+                <label for="requestedQuantity">
+                    Quantity
+                </label>
+
+                <input
+                    type="number"
+                    id="requestedQuantity"
+                    min="1"
+                    placeholder="Example: 500"
+                >
+
+            </div>
+
+
+            <div>
+
+                <label for="changeMessage">
+                    What would you like to change?
+                </label>
+
+                <textarea
+                    id="changeMessage"
+                    required
+                    placeholder="Example: Could you provide a revised quotation with eco-friendly packaging and a 500-unit order?"
+                ></textarea>
+
+            </div>
+
+
+            <button
+                class="submit-change"
+                type="submit"
+            >
+                Send Change Request →
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ==========================================
+     SUCCESS
+========================================== -->
+
+<div
+    class="success-overlay"
+    id="successOverlay"
+>
+
+    <div class="success-card">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+
+        <h2 id="successTitle">
+            Quotation accepted
+        </h2>
+
+
+        <p id="successMessage">
+            Your confirmation has been recorded in this
+            prototype. The next step would be order creation
+            and payment integration.
+        </p>
+
+
+        <button
+            class="success-close"
+            id="successClose"
+            type="button"
+        >
+            Back to Enquiries
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="../js/main.js" defer></script>
+<script src="../js/pages.js" defer></script>
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+
+        /* ==========================================
+           LOAD SELECTED ENQUIRY
+        ========================================== */
+
+        const stored =
+            localStorage.getItem(
+                "taanaBaanaSelectedEnquiry"
+            );
+
+
+        const quotationContent =
+            document.getElementById(
+                "quotationContent"
+            );
+
+
+        const quoteEmpty =
+            document.getElementById(
+                "quoteEmpty"
+            );
+
+
+        let enquiry = null;
+
+
+        if (stored) {
+
+            try {
+
+                enquiry =
+                    JSON.parse(stored);
+
+            } catch (error) {
+
+                enquiry = null;
+
+            }
+
+        }
+
+
+        /* ==========================================
+           DEMO QUOTATION
+        ========================================== */
+
+        if (!enquiry) {
+
+            enquiry = {
+
+                id:
+                    "ENQ-DEMO-003",
+
+                artisan:
+                    "Rang Sutra Makers",
+
+                requirement: {
+
+                    productName:
+                        "Custom Textile Bags",
+
+                    quantity:
+                        200,
+
+                    budget:
+                        300,
+
+                    deliveryLocation:
+                        "Delhi",
+
+                    category:
+                        "Handcrafted Textiles"
+
+                },
+
+                message:
+`Hello Rang Sutra Makers,
+
+We are interested in customised handcrafted textile bags for a corporate gifting requirement.
+
+Please share your quotation for the requested quantity.`,
+
+                status:
+                    "Quotation"
+
+            };
+
+        }
+
+
+        /* ==========================================
+           QUOTATION DATA
+        ========================================== */
+
+        const requirement =
+            enquiry.requirement ||
+            {};
+
+
+        const quantity =
+            Number(
+                requirement.quantity ||
+                500
+            );
+
+
+        /*
+         * Demo quotation calculation.
+         *
+         * This is prototype data and is intentionally
+         * transparent so it can later be replaced by
+         * backend-generated artisan quotations.
+         */
+
+        const unitPrice =
+            quantity <= 200
+                ? 275
+                : quantity <= 500
+                    ? 210
+                    : 195;
+
+
+        const customisation =
+            Math.round(
+                quantity * 10
+            );
+
+
+        const packaging =
+            Math.round(
+                quantity * 5
+            );
+
+
+        const shipping =
+            quantity >= 500
+                ? 3500
+                : 2500;
+
+
+        const productTotal =
+            unitPrice *
+            quantity;
+
+
+        const total =
+            productTotal +
+            customisation +
+            packaging +
+            shipping;
+
+
+        /* ==========================================
+           FILL PAGE
+        ========================================== */
+
+        document
+            .getElementById(
+                "quoteIdBox"
+            )
+            .querySelector("strong")
+            .textContent =
+                "QT-" +
+                (
+                    enquiry.id ||
+                    "DEMO"
+                )
+                .replace(
+                    "ENQ-",
+                    ""
+                );
+
+
+        document
+            .getElementById(
+                "artisanName"
+            )
+            .textContent =
+                enquiry.artisan ||
+                "Artisan Collective";
+
+
+        document
+            .getElementById(
+                "artisanLocation"
+            )
+            .textContent =
+                (
+                    requirement.category ||
+                    "Handcrafted Products"
+                ) +
+                " · India";
+
+
+        document
+            .getElementById(
+                "productName"
+            )
+            .textContent =
+                requirement.productName ||
+                "Craft Product";
+
+
+        document
+            .getElementById(
+                "unitPrice"
+            )
+            .textContent =
+                "₹" +
+                unitPrice.toLocaleString(
+                    "en-IN"
+                );
+
+
+        document
+            .getElementById(
+                "quantity"
+            )
+            .textContent =
+                quantity.toLocaleString(
+                    "en-IN"
+                ) +
+                " units";
+
+
+        document
+            .getElementById(
+                "customisationPrice"
+            )
+            .textContent =
+                "₹" +
+                customisation.toLocaleString(
+                    "en-IN"
+                );
+
+
+        document
+            .getElementById(
+                "packagingPrice"
+            )
+            .textContent =
+                "₹" +
+                packaging.toLocaleString(
+                    "en-IN"
+                );
+
+
+        document
+            .getElementById(
+                "shippingPrice"
+            )
+            .textContent =
+                "₹" +
+                shipping.toLocaleString(
+                    "en-IN"
+                );
+
+
+        document
+            .getElementById(
+                "totalPrice"
+            )
+            .textContent =
+                "₹" +
+                total.toLocaleString(
+                    "en-IN"
+                );
+
+
+        document
+            .getElementById(
+                "artisanMessage"
+            )
+            .textContent =
+                `Thank you for considering ${enquiry.artisan || "our artisan collective"}.
+
+We can discuss the requested quantity and customisation requirements. We would be happy to share a sample before beginning the bulk order.`;
+
+
+        /* ==========================================
+           REQUEST CHANGES
+        ========================================== */
+
+        const changeOverlay =
+            document.getElementById(
+                "changeOverlay"
+            );
+
+
+        const changeButton =
+            document.getElementById(
+                "changeQuote"
+            );
+
+
+        const closeChange =
+            document.getElementById(
+                "closeChange"
+            );
+
+
+        changeButton.addEventListener(
+            "click",
+            () => {
+
+                document
+                    .getElementById(
+                        "requestedPrice"
+                    )
+                    .value =
+                        unitPrice;
+
+
+                document
+                    .getElementById(
+                        "requestedQuantity"
+                    )
+                    .value =
+                        quantity;
+
+
+                changeOverlay.classList.add(
+                    "show"
+                );
+
+            }
+        );
+
+
+        closeChange.addEventListener(
+            "click",
+            () => {
+
+                changeOverlay.classList.remove(
+                    "show"
+                );
+
+            }
+        );
+
+
+        changeOverlay.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    event.target ===
+                    changeOverlay
+                ) {
+
+                    changeOverlay.classList.remove(
+                        "show"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* ==========================================
+           SEND CHANGE REQUEST
+        ========================================== */
+
+        document
+            .getElementById(
+                "changeForm"
+            )
+            .addEventListener(
+                "submit",
+                event => {
+
+                    event.preventDefault();
+
+
+                    const changeRequest = {
+
+                        id:
+                            "CHANGE-" +
+                            Date.now(),
+
+                        enquiryId:
+                            enquiry.id,
+
+                        artisan:
+                            enquiry.artisan,
+
+                        requestedPrice:
+                            Number(
+                                document
+                                    .getElementById(
+                                        "requestedPrice"
+                                    )
+                                    .value
+                            ),
+
+                        requestedQuantity:
+                            Number(
+                                document
+                                    .getElementById(
+                                        "requestedQuantity"
+                                    )
+                                    .value
+                            ),
+
+                        message:
+                            document
+                                .getElementById(
+                                    "changeMessage"
+                                )
+                                .value
+                                .trim(),
+
+                        createdAt:
+                            new Date()
+                                .toISOString(),
+
+                        status:
+                            "Change Requested"
+
+                    };
+
+
+                    const existing =
+                        JSON.parse(
+                            localStorage.getItem(
+                                "taanaBaanaChangeRequests"
+                            ) ||
+                            "[]"
+                        );
+
+
+                    existing.push(
+                        changeRequest
+                    );
+
+
+                    localStorage.setItem(
+                        "taanaBaanaChangeRequests",
+                        JSON.stringify(
+                            existing
+                        )
+                    );
+
+
+                    changeOverlay.classList.remove(
+                        "show"
+                    );
+
+
+                    document
+                        .getElementById(
+                            "successTitle"
+                        )
+                        .textContent =
+                            "Change request sent";
+
+
+                    document
+                        .getElementById(
+                            "successMessage"
+                        )
+                        .textContent =
+                            `Your requested changes have been recorded for ${enquiry.artisan || "the artisan"}. In the full platform, the artisan would receive the request and return a revised quotation.`;
+
+
+                    document
+                        .getElementById(
+                            "successOverlay"
+                        )
+                        .classList.add(
+                            "show"
+                        );
+
+                }
+            );
+
+
+        /* ==========================================
+           ACCEPT QUOTATION
+        ========================================== */
+
+        document
+            .getElementById(
+                "acceptQuote"
+            )
+            .addEventListener(
+                "click",
+                () => {
+
+
+                    const acceptedOrder = {
+
+                        id:
+                            "ORDER-" +
+                            Date.now(),
+
+                        quotationId:
+                            document
+                                .getElementById(
+                                    "quoteIdBox"
+                                )
+                                .querySelector(
+                                    "strong"
+                                )
+                                .textContent,
+
+                        enquiryId:
+                            enquiry.id,
+
+                        artisan:
+                            enquiry.artisan,
+
+                        product:
+                            requirement.productName,
+
+                        quantity:
+                            quantity,
+
+                        unitPrice:
+                            unitPrice,
+
+                        customisation:
+                            customisation,
+
+                        packaging:
+                            packaging,
+
+                        shipping:
+                            shipping,
+
+                        total:
+                            total,
+
+                        status:
+                            "Confirmed",
+
+                        createdAt:
+                            new Date()
+                                .toISOString()
+
+                    };
+
+
+                    const existing =
+                        JSON.parse(
+                            localStorage.getItem(
+                                "taanaBaanaOrders"
+                            ) ||
+                            "[]"
+                        );
+
+
+                    existing.push(
+                        acceptedOrder
+                    );
+
+
+                    localStorage.setItem(
+                        "taanaBaanaOrders",
+                        JSON.stringify(
+                            existing
+                        )
+                    );
+
+
+                    document
+                        .getElementById(
+                            "successTitle"
+                        )
+                        .textContent =
+                            "Quotation accepted";
+
+
+                    document
+                        .getElementById(
+                            "successMessage"
+                        )
+                        .textContent =
+                            `Your order with ${enquiry.artisan || "the artisan"} has been recorded in this prototype. In the full platform, this step would create an order, generate payment details and begin production tracking.`;
+
+
+                    document
+                        .getElementById(
+                            "successOverlay"
+                        )
+                        .classList.add(
+                            "show"
+                        );
+
+                }
+            );
+
+
+        /* ==========================================
+           SUCCESS CLOSE
+        ========================================== */
+
+        document
+            .getElementById(
+                "successClose"
+            )
+            .addEventListener(
+                "click",
+                () => {
+
+                    window.location.href =
+                        "buyer-enquiries.html";
+
+                }
+            );
+
+    }
+
+);
+
+</script>
+
+</body>
+</html>

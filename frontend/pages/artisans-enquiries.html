@@ -1,0 +1,2179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Manage buyer enquiries, conversations, quotations and bulk-order opportunities on Taana-Baana."
+    >
+
+    <title>Buyer Enquiries | Taana-Baana</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Tiro+Devanagari+Sanskrit&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+
+    <style>
+
+        :root {
+            --tb-ivory: #FCF6EA;
+            --tb-cream: #FFF9F0;
+            --tb-brown: #3B2922;
+            --tb-deep: #2A1D18;
+            --tb-terracotta: #C96F4A;
+            --tb-burnt: #A95338;
+            --tb-sage: #879B76;
+            --tb-olive: #687557;
+            --tb-gold: #C9A65B;
+            --tb-sand: #E8D7BC;
+            --tb-light-sage: #DCE2D2;
+            --tb-soft-terra: #EBC5B5;
+            --tb-indigo: #274C77;
+            --tb-rani: #C43D73;
+            --tb-marigold: #E9A23B;
+            --tb-peacock: #0F7C78;
+            --tb-green: #3E7C59;
+            --tb-plum: #6D3B63;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background:
+                radial-gradient(
+                    circle at 8% 12%,
+                    rgba(201,166,91,.10),
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 92% 28%,
+                    rgba(15,124,120,.07),
+                    transparent 27%
+                ),
+                var(--tb-ivory);
+            color: var(--tb-brown);
+        }
+
+        .artisan-enquiries-page {
+            min-height: 100vh;
+            padding-bottom: 90px;
+        }
+
+        .artisan-enquiries-container {
+            width: min(1320px, calc(100% - 48px));
+            margin: auto;
+        }
+
+        /* =====================================================
+           BREADCRUMB
+           ===================================================== */
+
+        .enquiry-breadcrumb {
+            padding-top: 34px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            font-size: 13px;
+            color: #806f65;
+        }
+
+        .enquiry-breadcrumb a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .enquiry-breadcrumb a:hover {
+            color: var(--tb-terracotta);
+        }
+
+        .enquiry-breadcrumb span {
+            opacity: .5;
+        }
+
+        /* =====================================================
+           HERO
+           ===================================================== */
+
+        .enquiry-hero {
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 30px;
+        }
+
+        .enquiry-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 7px 12px;
+            border: 1px solid rgba(201,166,91,.35);
+            border-radius: 999px;
+            background: rgba(255,249,240,.8);
+            color: var(--tb-olive);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .enquiry-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--tb-peacock);
+            box-shadow: 0 0 0 4px rgba(15,124,120,.10);
+        }
+
+        .enquiry-hero h1 {
+            max-width: 720px;
+            margin: 14px 0 0;
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: clamp(40px,5vw,64px);
+            line-height: .98;
+            letter-spacing: -.035em;
+            color: var(--tb-deep);
+        }
+
+        .enquiry-hero h1 em {
+            font-family: "Tiro Devanagari Sanskrit", serif;
+            font-style: normal;
+            color: var(--tb-terracotta);
+        }
+
+        .enquiry-hero p {
+            max-width: 650px;
+            margin: 18px 0 0;
+            color: #74645b;
+            font-size: 15px;
+            line-height: 1.75;
+        }
+
+        .new-enquiry-note {
+            flex-shrink: 0;
+            max-width: 300px;
+            padding: 17px 19px;
+            border-radius: 17px;
+            background: var(--tb-light-sage);
+            border: 1px solid rgba(62,124,89,.13);
+        }
+
+        .new-enquiry-note strong {
+            display: block;
+            font-size: 13px;
+            color: var(--tb-deep);
+        }
+
+        .new-enquiry-note span {
+            display: block;
+            margin-top: 5px;
+            color: #60705b;
+            font-size: 12px;
+            line-height: 1.55;
+        }
+
+        /* =====================================================
+           STATS
+           ===================================================== */
+
+        .enquiry-stats {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 15px;
+        }
+
+        .enquiry-stat {
+            padding: 21px;
+            min-height: 120px;
+            border: 1px solid rgba(59,41,34,.08);
+            border-radius: 20px;
+            background: rgba(255,249,240,.9);
+            box-shadow: 0 10px 30px rgba(59,41,34,.045);
+        }
+
+        .enquiry-stat:nth-child(2) {
+            background: #F3EEE2;
+        }
+
+        .enquiry-stat:nth-child(3) {
+            background: #E9F0E5;
+        }
+
+        .enquiry-stat:nth-child(4) {
+            background: #F4E3E8;
+        }
+
+        .enquiry-stat-label {
+            display: block;
+            color: #88776d;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .10em;
+            text-transform: uppercase;
+        }
+
+        .enquiry-stat-value {
+            display: block;
+            margin-top: 8px;
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: 32px;
+            color: var(--tb-deep);
+        }
+
+        .enquiry-stat-note {
+            display: block;
+            margin-top: 3px;
+            font-size: 11px;
+            color: #8c7b71;
+        }
+
+        /* =====================================================
+           TOOLBAR
+           ===================================================== */
+
+        .enquiry-toolbar {
+            margin-top: 35px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid rgba(59,41,34,.08);
+            border-radius: 20px;
+            background: rgba(255,249,240,.92);
+            box-shadow: 0 10px 30px rgba(59,41,34,.04);
+        }
+
+        .enquiry-search {
+            position: relative;
+            flex: 1;
+        }
+
+        .enquiry-search span {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8a786e;
+        }
+
+        .enquiry-search input {
+            width: 100%;
+            height: 47px;
+            padding: 0 17px 0 44px;
+            border: 1px solid rgba(59,41,34,.12);
+            border-radius: 13px;
+            outline: none;
+            background: #fffdf9;
+            color: var(--tb-brown);
+            font: 500 13px "DM Sans", sans-serif;
+        }
+
+        .enquiry-search input:focus {
+            border-color: var(--tb-terracotta);
+            box-shadow: 0 0 0 4px rgba(201,111,74,.10);
+        }
+
+        .enquiry-filter {
+            height: 47px;
+            padding: 0 14px;
+            border: 1px solid rgba(59,41,34,.12);
+            border-radius: 13px;
+            outline: none;
+            background: #fffdf9;
+            color: var(--tb-brown);
+            font: 600 12px "DM Sans", sans-serif;
+        }
+
+        /* =====================================================
+           SECTION HEADER
+           ===================================================== */
+
+        .enquiries-heading {
+            margin: 32px 0 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .enquiries-heading h2 {
+            margin: 0;
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: 28px;
+            color: var(--tb-deep);
+        }
+
+        .enquiries-heading span {
+            font-size: 12px;
+            color: #85746a;
+        }
+
+        /* =====================================================
+           ENQUIRY LIST
+           ===================================================== */
+
+        .enquiries-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .enquiry-card {
+            display: grid;
+            grid-template-columns: 90px minmax(0,1fr) auto;
+            gap: 19px;
+            align-items: center;
+            padding: 19px;
+            border: 1px solid rgba(59,41,34,.09);
+            border-radius: 21px;
+            background: rgba(255,249,240,.96);
+            box-shadow: 0 10px 30px rgba(59,41,34,.045);
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease;
+        }
+
+        .enquiry-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 38px rgba(59,41,34,.09);
+        }
+
+        .enquiry-art {
+            width: 90px;
+            height: 90px;
+            display: grid;
+            place-items: center;
+            border-radius: 17px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #ead7bf,
+                    #f5e9d9
+                );
+            font-size: 42px;
+        }
+
+        .enquiry-card:nth-child(2) .enquiry-art {
+            background: #E5E7D9;
+        }
+
+        .enquiry-card:nth-child(3) .enquiry-art {
+            background: #EAD8D0;
+        }
+
+        .enquiry-card:nth-child(4) .enquiry-art {
+            background: #DCE7E4;
+        }
+
+        .enquiry-main {
+            min-width: 0;
+        }
+
+        .enquiry-topline {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 9px;
+        }
+
+        .enquiry-id {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .08em;
+            color: #917f74;
+        }
+
+        .enquiry-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 9px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .enquiry-status.new {
+            color: #8b641e;
+            background: #F7EAC8;
+        }
+
+        .enquiry-status.discussion {
+            color: var(--tb-indigo);
+            background: #DDE8F3;
+        }
+
+        .enquiry-status.quote {
+            color: var(--tb-peacock);
+            background: #D8ECEA;
+        }
+
+        .enquiry-status.accepted {
+            color: var(--tb-green);
+            background: #DFECDD;
+        }
+
+        .enquiry-status::before {
+            content: "";
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .enquiry-main h3 {
+            margin: 7px 0 4px;
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: 21px;
+            color: var(--tb-deep);
+        }
+
+        .buyer-name {
+            margin: 0;
+            font-size: 12px;
+            color: #74645a;
+        }
+
+        .enquiry-details {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px 18px;
+        }
+
+        .enquiry-detail {
+            font-size: 11px;
+            color: #88776d;
+        }
+
+        .enquiry-detail strong {
+            color: var(--tb-brown);
+        }
+
+        .enquiry-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .enquiry-button {
+            height: 41px;
+            padding: 0 14px;
+            border: 1px solid rgba(59,41,34,.12);
+            border-radius: 11px;
+            background: transparent;
+            color: var(--tb-brown);
+            font: 700 11px "DM Sans", sans-serif;
+            cursor: pointer;
+            white-space: nowrap;
+            transition:
+                transform .2s ease,
+                background .2s ease,
+                border .2s ease;
+        }
+
+        .enquiry-button:hover {
+            transform: translateY(-2px);
+            border-color: var(--tb-terracotta);
+            background: rgba(201,111,74,.08);
+        }
+
+        .enquiry-button.primary {
+            border-color: var(--tb-brown);
+            background: var(--tb-brown);
+            color: white;
+        }
+
+        .enquiry-button.primary:hover {
+            border-color: var(--tb-terracotta);
+            background: var(--tb-terracotta);
+        }
+
+        /* =====================================================
+           QUICK RESPONSE
+           ===================================================== */
+
+        .quick-response {
+            margin-top: 35px;
+            display: grid;
+            grid-template-columns: minmax(0,1.4fr) minmax(280px,.6fr);
+            gap: 18px;
+        }
+
+        .response-card {
+            padding: 27px;
+            border-radius: 23px;
+            border: 1px solid rgba(59,41,34,.08);
+            background: var(--tb-cream);
+        }
+
+        .response-card.dark {
+            position: relative;
+            overflow: hidden;
+            background: var(--tb-deep);
+            color: white;
+        }
+
+        .response-card.dark::after {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            right: -70px;
+            top: -85px;
+            border: 1px solid rgba(201,166,91,.4);
+            border-radius: 50%;
+        }
+
+        .response-label {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .11em;
+            text-transform: uppercase;
+            color: var(--tb-terracotta);
+        }
+
+        .response-card.dark .response-label {
+            color: var(--tb-gold);
+        }
+
+        .response-card h2 {
+            margin: 8px 0 7px;
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: 27px;
+            color: var(--tb-deep);
+        }
+
+        .response-card.dark h2 {
+            color: white;
+        }
+
+        .response-card p {
+            max-width: 620px;
+            margin: 0;
+            font-size: 12px;
+            line-height: 1.7;
+            color: #796960;
+        }
+
+        .response-card.dark p {
+            color: #d5c9c2;
+        }
+
+        .response-buttons {
+            margin-top: 19px;
+            display: flex;
+            gap: 9px;
+            flex-wrap: wrap;
+        }
+
+        .response-button {
+            height: 42px;
+            padding: 0 14px;
+            border-radius: 11px;
+            border: 1px solid rgba(59,41,34,.13);
+            background: transparent;
+            color: var(--tb-brown);
+            font: 700 11px "DM Sans", sans-serif;
+            cursor: pointer;
+        }
+
+        .response-button.primary {
+            background: var(--tb-brown);
+            border-color: var(--tb-brown);
+            color: white;
+        }
+
+        .response-card.dark .response-button {
+            border-color: rgba(255,255,255,.18);
+            color: white;
+            background: rgba(255,255,255,.07);
+        }
+
+        .response-card.dark .response-button.primary {
+            background: var(--tb-gold);
+            border-color: var(--tb-gold);
+            color: var(--tb-deep);
+        }
+
+        /* =====================================================
+           MODAL
+           ===================================================== */
+
+        .message-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(42,29,24,.62);
+            backdrop-filter: blur(8px);
+        }
+
+        .message-modal.active {
+            display: flex;
+        }
+
+        .message-modal-card {
+            width: min(590px,100%);
+            max-height: 90vh;
+            overflow: auto;
+            border-radius: 24px;
+            background: var(--tb-cream);
+            box-shadow: 0 30px 80px rgba(42,29,24,.25);
+            animation: messageModalIn .25s ease both;
+        }
+
+        @keyframes messageModalIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(.97);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .message-modal-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 21px 23px;
+            border-bottom: 1px solid rgba(59,41,34,.08);
+        }
+
+        .message-modal-header h2 {
+            margin: 0;
+            font-family: "Playfair Display", Georgia, serif;
+            color: var(--tb-deep);
+        }
+
+        .message-close {
+            width: 37px;
+            height: 37px;
+            border: 0;
+            border-radius: 50%;
+            background: rgba(59,41,34,.07);
+            color: var(--tb-brown);
+            font-size: 19px;
+            cursor: pointer;
+        }
+
+        .message-modal-body {
+            padding: 23px;
+        }
+
+        .conversation-preview {
+            padding: 17px;
+            border-radius: 16px;
+            background: #F2E9DD;
+        }
+
+        .conversation-preview small {
+            color: #8a786e;
+        }
+
+        .conversation-preview p {
+            margin: 8px 0 0;
+            font-size: 13px;
+            line-height: 1.65;
+            color: var(--tb-brown);
+        }
+
+        .message-form {
+            margin-top: 15px;
+        }
+
+        .message-form textarea {
+            width: 100%;
+            min-height: 115px;
+            resize: vertical;
+            padding: 13px;
+            border: 1px solid rgba(59,41,34,.12);
+            border-radius: 13px;
+            outline: none;
+            background: white;
+            color: var(--tb-brown);
+            font: 13px/1.6 "DM Sans", sans-serif;
+        }
+
+        .message-form textarea:focus {
+            border-color: var(--tb-terracotta);
+            box-shadow: 0 0 0 4px rgba(201,111,74,.10);
+        }
+
+        .message-form-footer {
+            margin-top: 12px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        /* =====================================================
+           TOAST
+           ===================================================== */
+
+        .enquiry-toast {
+            position: fixed;
+            right: 23px;
+            bottom: 23px;
+            z-index: 10000;
+            max-width: 370px;
+            padding: 14px 17px;
+            border-radius: 14px;
+            background: #fffdf9;
+            border: 1px solid rgba(59,41,34,.10);
+            box-shadow: 0 18px 45px rgba(42,29,24,.16);
+            font-size: 13px;
+            color: var(--tb-brown);
+            opacity: 0;
+            transform: translateY(15px);
+            pointer-events: none;
+            transition: .25s ease;
+        }
+
+        .enquiry-toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 1000px) {
+
+            .enquiry-stats {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .quick-response {
+                grid-template-columns: 1fr;
+            }
+
+            .enquiry-card {
+                grid-template-columns: 78px minmax(0,1fr);
+            }
+
+            .enquiry-art {
+                width: 78px;
+                height: 78px;
+            }
+
+            .enquiry-actions {
+                grid-column: 1 / -1;
+                padding-top: 3px;
+            }
+        }
+
+        @media (max-width: 720px) {
+
+            .artisan-enquiries-container {
+                width: min(100% - 28px,1320px);
+            }
+
+            .enquiry-hero {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .new-enquiry-note {
+                max-width: none;
+            }
+
+            .enquiry-toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .enquiry-filter {
+                width: 100%;
+            }
+
+            .enquiry-card {
+                grid-template-columns: 1fr;
+            }
+
+            .enquiry-art {
+                width: 100%;
+                height: 125px;
+            }
+
+            .enquiry-actions {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .enquiry-button {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .enquiry-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .enquiry-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .response-card {
+                padding: 22px;
+            }
+
+            .response-buttons {
+                display: grid;
+            }
+
+            .response-button {
+                width: 100%;
+            }
+
+            .enquiry-toast {
+                left: 14px;
+                right: 14px;
+                bottom: 14px;
+                max-width: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<main class="artisan-enquiries-page">
+
+    <div class="artisan-enquiries-container">
+
+        <!-- Breadcrumb -->
+
+        <div class="enquiry-breadcrumb">
+            <a href="artisan-dashboard.html">
+                Artisan Dashboard
+            </a>
+
+            <span>→</span>
+
+            <strong>
+                Buyer Enquiries
+            </strong>
+        </div>
+
+
+        <!-- =====================================================
+             HERO
+             ===================================================== -->
+
+        <section class="enquiry-hero">
+
+            <div>
+
+                <div class="enquiry-eyebrow">
+                    <span class="enquiry-dot"></span>
+                    Buyer conversations
+                </div>
+
+                <h1>
+                    Opportunities are
+                    <em>knocking.</em>
+                </h1>
+
+                <p>
+                    See what buyers are looking for, respond to enquiries,
+                    discuss custom orders and turn conversations into
+                    meaningful craft-business opportunities.
+                </p>
+
+            </div>
+
+            <div class="new-enquiry-note">
+
+                <strong>
+                    ✦ New enquiry received
+                </strong>
+
+                <span>
+                    A buyer is looking for 500 handcrafted jute bags
+                    for a corporate order.
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             STATS
+             ===================================================== -->
+
+        <section class="enquiry-stats">
+
+            <article class="enquiry-stat">
+
+                <span class="enquiry-stat-label">
+                    Total Enquiries
+                </span>
+
+                <strong class="enquiry-stat-value">
+                    18
+                </strong>
+
+                <span class="enquiry-stat-note">
+                    All buyer conversations
+                </span>
+
+            </article>
+
+
+            <article class="enquiry-stat">
+
+                <span class="enquiry-stat-label">
+                    New
+                </span>
+
+                <strong class="enquiry-stat-value">
+                    4
+                </strong>
+
+                <span class="enquiry-stat-note">
+                    Need your response
+                </span>
+
+            </article>
+
+
+            <article class="enquiry-stat">
+
+                <span class="enquiry-stat-label">
+                    Quotations
+                </span>
+
+                <strong class="enquiry-stat-value">
+                    6
+                </strong>
+
+                <span class="enquiry-stat-note">
+                    Sent to buyers
+                </span>
+
+            </article>
+
+
+            <article class="enquiry-stat">
+
+                <span class="enquiry-stat-label">
+                    Converted
+                </span>
+
+                <strong class="enquiry-stat-value">
+                    3
+                </strong>
+
+                <span class="enquiry-stat-note">
+                    Became orders
+                </span>
+
+            </article>
+
+        </section>
+
+
+        <!-- =====================================================
+             TOOLBAR
+             ===================================================== -->
+
+        <section class="enquiry-toolbar">
+
+            <div class="enquiry-search">
+
+                <span>⌕</span>
+
+                <input
+                    id="enquirySearch"
+                    type="search"
+                    placeholder="Search buyers, products or enquiry IDs..."
+                    aria-label="Search enquiries"
+                >
+
+            </div>
+
+
+            <select
+                class="enquiry-filter"
+                id="enquiryStatus"
+                aria-label="Filter enquiries"
+            >
+
+                <option value="all">
+                    All enquiries
+                </option>
+
+                <option value="new">
+                    New
+                </option>
+
+                <option value="discussion">
+                    In discussion
+                </option>
+
+                <option value="quote">
+                    Quotation sent
+                </option>
+
+                <option value="accepted">
+                    Converted
+                </option>
+
+            </select>
+
+
+            <select
+                class="enquiry-filter"
+                id="enquiryType"
+                aria-label="Filter enquiry type"
+            >
+
+                <option value="all">
+                    All order types
+                </option>
+
+                <option value="bulk">
+                    Bulk / B2B
+                </option>
+
+                <option value="custom">
+                    Custom
+                </option>
+
+                <option value="retail">
+                    Retail
+                </option>
+
+            </select>
+
+        </section>
+
+
+        <!-- =====================================================
+             ENQUIRIES
+             ===================================================== -->
+
+        <section>
+
+            <div class="enquiries-heading">
+
+                <h2>
+                    Recent enquiries
+                </h2>
+
+                <span id="enquiryCount">
+                    Showing 5 enquiries
+                </span>
+
+            </div>
+
+
+            <div
+                class="enquiries-list"
+                id="enquiriesList"
+            >
+
+
+                <!-- =================================================
+                     ENQUIRY 1
+                     ================================================= -->
+
+                <article
+                    class="enquiry-card"
+                    data-status="new"
+                    data-type="bulk"
+                    data-search="REQ-2841 handcrafted jute bags arya sustainable ventures"
+                >
+
+                    <div class="enquiry-art">
+                        👜
+                    </div>
+
+                    <div class="enquiry-main">
+
+                        <div class="enquiry-topline">
+
+                            <span class="enquiry-id">
+                                REQ-2841
+                            </span>
+
+                            <span class="enquiry-status new">
+                                New
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            Handcrafted Jute Bags
+                        </h3>
+
+                        <p class="buyer-name">
+                            Arya Sustainable Ventures
+                        </p>
+
+                        <div class="enquiry-details">
+
+                            <span class="enquiry-detail">
+                                Quantity:
+                                <strong>500 pieces</strong>
+                            </span>
+
+                            <span class="enquiry-detail">
+                                Budget:
+                                <strong>₹1.2L – ₹1.5L</strong>
+                            </span>
+
+                            <span class="enquiry-detail">
+                                Delivery:
+                                <strong>Bengaluru</strong>
+                            </span>
+
+                            <span class="enquiry-detail">
+                                Type:
+                                <strong>B2B</strong>
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="enquiry-actions">
+
+                        <button
+                            class="enquiry-button"
+                            type="button"
+                            data-action="message"
+                        >
+                            Message
+                        </button>
+
+                        <button
+                            class="enquiry-button primary"
+                            type="button"
+                            data-action="quote"
+                        >
+                            Send Quote
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     ENQUIRY 2
+                     ================================================= -->
+
+                <article
+                    class="enquiry-card"
+                    data-status="discussion"
+                    data-type="custom"
+                    data-search="REQ-2798 handwoven cotton scarves meera studios custom"
+                >
+
+                    <div class="enquiry-art">
+                        🧣
+                    </div>
+
+                    <div class="enquiry-main">
+
+                        <div class="enquiry-topline">
+
+                            <span class="enquiry-id">
+                                REQ-2798
+                            </span>
+
+                            <span class="enquiry-status discussion">
+                                In discussion
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            Handwoven Cotton Scarves
+                        </h3>
+
+                        <p class="buyer-name">
+                            Meera Studios
+                        </p>
+
+                        <div class="enquiry-details">
+
+                            <span class="enquiry-detail">
+                                Quantity:
+                                <strong>120 pieces</strong>
+                            </span>
+
+                            <span class="enquiry-detail">
+                                Budget:
+                                <strong>₹850 / piece</strong>
+                            </span>
+
+                            <span class="enquiry-detail">
+                                Delivery:
+                                <strong>Mumbai</strong>
+                            </span>
+
+                            <span class="enquiry-detail">
+                                Type:
+                                <strong>Custom</strong>
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="enquiry-actions">
+
+                        <button
+                            class="enquiry-button"
+                            type="button"
+                            data-action="message"
+                        >
+                            Continue Chat
+                        </button>
+
+                        <button
+                            class="enquiry-button primary"
+                            type="button"
+                            data-action="quote"
+                        >
+                            View Quote
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     ENQUIRY 3
+                     ================================================= -->
+
+                <article
+                    class="enquiry-card"
+                    data-status="quote"
+                    data-type="bulk"
+                    data-search="REQ-2744 terracotta tableware mitti studio quotation"
+                >
+
+                    <div class="enquiry-art">
+                        🏺
+                    </div>
+
+                    <div class="enquiry-main">
+
+                        <div class="enquiry-topline">
+
+                            <span class="enquiry-id">
+                                REQ-2744
+                            </span>
+
+                            <span class="enquiry-status quote">
+                                Quotation sent
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            Terracotta Tableware Set
+                        </h3>
+
+                        <p class="buyer-name">
+                            Mitti Studio
+                        </p>
+
+                        <div class="enquiry-details">
+
+                            <span class="enquiry-detail">
+                                Quantity:
+                                <strong>80 sets</strong>
+                            </span>
+
+                            <span class="enquiry-detail">
+                                Quote:
+                                <strong>₹64,000</strong>
+                            </span>
+
+                            <span class="enquiry-detail">
+                                Delivery:
+                                <strong>Delhi</strong>
+                            </span>
+
+                            <span class="enquiry-detail">
+                                Type:
+                                <strong>B2B</strong>
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="enquiry-actions">
+
+                        <button
+                            class="enquiry-button"
+                            type="button"
+                            data-action="message"
+                        >
+                            Message
+                        </button>
+
+                        <button
+                            class="enquiry-button primary"
+                            type="button"
+                            data-action="quote"
+                        >
+                            View Quote
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     ENQUIRY 4
+                     ================================================= -->
+
+                <article
+                    class="enquiry-card"
+                    data-status="accepted"
+                    data-type="retail"
+                    data-search="REQ-2672 bamboo storage baskets green home accepted"
+                >
+
+                    <div class="enquiry-art">
+                        🧺
+                    </div>
+
+                    <div class="enquiry-main">
+
+                        <div class="enquiry-topline">
+
+                            <span class="enquiry-id">
+                                REQ-2672
+                            </span>
+
+                            <span class="enquiry-status accepted">
+                                Converted
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            Bamboo Storage Baskets
+                        </h3>
+
+                        <p class="buyer-name">
+                            Green Home Collective
+                        </p>
+
+                        <div class="enquiry-details">
+
+                            <span class="enquiry-detail">
+                                Quantity:
+                                <strong>40 pieces</strong>
+                            </span>
+
+                            <span class="enquiry-detail">
+                                Order:
+                                <strong>₹31,200</strong>
+                            </span>
+
+                            <span class="enquiry-detail">
+                                Delivery:
+                                <strong>Kochi</strong>
+                            </span>
+
+                            <span class="enquiry-detail">
+                                Type:
+                                <strong>Retail</strong>
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="enquiry-actions">
+
+                        <button
+                            class="enquiry-button"
+                            type="button"
+                            data-action="message"
+                        >
+                            Message
+                        </button>
+
+                        <button
+                            class="enquiry-button primary"
+                            type="button"
+                            data-action="order"
+                        >
+                            View Order
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     ENQUIRY 5
+                     ================================================= -->
+
+                <article
+                    class="enquiry-card"
+                    data-status="discussion"
+                    data-type="bulk"
+                    data-search="REQ-2639 embroidered cushion covers craft collective bulk"
+                >
+
+                    <div class="enquiry-art">
+                        🪡
+                    </div>
+
+                    <div class="enquiry-main">
+
+                        <div class="enquiry-topline">
+
+                            <span class="enquiry-id">
+                                REQ-2639
+                            </span>
+
+                            <span class="enquiry-status discussion">
+                                In discussion
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            Embroidered Cushion Covers
+                        </h3>
+
+                        <p class="buyer-name">
+                            The Craft Collective
+                        </p>
+
+                        <div class="enquiry-details">
+
+                            <span class="enquiry-detail">
+                                Quantity:
+                                <strong>200 pieces</strong>
+                            </span>
+
+                            <span class="enquiry-detail">
+                                Budget:
+                                <strong>₹600 / piece</strong>
+                            </span>
+
+                            <span class="enquiry-detail">
+                                Delivery:
+                                <strong>Hyderabad</strong>
+                            </span>
+
+                            <span class="enquiry-detail">
+                                Type:
+                                <strong>B2B</strong>
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="enquiry-actions">
+
+                        <button
+                            class="enquiry-button"
+                            type="button"
+                            data-action="message"
+                        >
+                            Continue Chat
+                        </button>
+
+                        <button
+                            class="enquiry-button primary"
+                            type="button"
+                            data-action="quote"
+                        >
+                            Prepare Quote
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             BUSINESS TOOLS
+             ===================================================== -->
+
+        <section class="quick-response">
+
+            <article class="response-card">
+
+                <span class="response-label">
+                    Faster responses
+                </span>
+
+                <h2>
+                    Let AI help you prepare the conversation.
+                </h2>
+
+                <p>
+                    Taana-Baana can eventually help translate buyer messages,
+                    summarize requirements, draft replies and prepare quotation
+                    details while keeping the final decision with you.
+                </p>
+
+                <div class="response-buttons">
+
+                    <button
+                        class="response-button primary"
+                        id="translateButton"
+                        type="button"
+                    >
+                        🌐 Translate message
+                    </button>
+
+                    <button
+                        class="response-button"
+                        id="replyButton"
+                        type="button"
+                    >
+                        ✦ Draft a reply
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <article class="response-card dark">
+
+                <span class="response-label">
+                    Bulk opportunity
+                </span>
+
+                <h2>
+                    500 jute bags.
+                </h2>
+
+                <p>
+                    A new buyer requirement is waiting for artisan
+                    responses. Review the quantity, budget and delivery
+                    details before sending your quotation.
+                </p>
+
+                <div class="response-buttons">
+
+                    <button
+                        class="response-button primary"
+                        id="bulkOpportunityButton"
+                        type="button"
+                    >
+                        Review opportunity →
+                    </button>
+
+                </div>
+
+            </article>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<!-- =============================================================
+     MESSAGE MODAL
+     ============================================================= -->
+
+<div
+    class="message-modal"
+    id="messageModal"
+    aria-hidden="true"
+>
+
+    <div
+        class="message-modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="messageTitle"
+    >
+
+        <div class="message-modal-header">
+
+            <h2 id="messageTitle">
+                Buyer conversation
+            </h2>
+
+            <button
+                class="message-close"
+                id="messageClose"
+                type="button"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div class="message-modal-body">
+
+            <div class="conversation-preview">
+
+                <small>
+                    Latest buyer message
+                </small>
+
+                <p id="buyerMessage">
+                    Hello! We are interested in placing a bulk order.
+                    Could you please share your production timeline and
+                    best possible price?
+                </p>
+
+            </div>
+
+            <form
+                class="message-form"
+                id="messageForm"
+            >
+
+                <textarea
+                    id="messageText"
+                    placeholder="Write your response..."
+                    required
+                ></textarea>
+
+                <div class="message-form-footer">
+
+                    <button
+                        class="enquiry-button"
+                        type="button"
+                        id="messageCancel"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        class="enquiry-button primary"
+                        type="submit"
+                    >
+                        Send Message
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Toast -->
+
+<div
+    class="enquiry-toast"
+    id="enquiryToast"
+    role="status"
+    aria-live="polite"
+></div>
+
+
+<script src="../js/main.js" defer></script>
+<script src="../js/pages.js" defer></script>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const search =
+        document.getElementById("enquirySearch");
+
+    const statusFilter =
+        document.getElementById("enquiryStatus");
+
+    const typeFilter =
+        document.getElementById("enquiryType");
+
+    const cards =
+        [...document.querySelectorAll(".enquiry-card")];
+
+    const count =
+        document.getElementById("enquiryCount");
+
+    const modal =
+        document.getElementById("messageModal");
+
+    const closeButton =
+        document.getElementById("messageClose");
+
+    const cancelButton =
+        document.getElementById("messageCancel");
+
+    const messageForm =
+        document.getElementById("messageForm");
+
+    const messageText =
+        document.getElementById("messageText");
+
+    const toast =
+        document.getElementById("enquiryToast");
+
+    let activeBuyer = "";
+
+
+    /* =====================================================
+       TOAST
+       ===================================================== */
+
+    function showToast(message) {
+
+        toast.textContent = message;
+
+        toast.classList.add("show");
+
+        clearTimeout(window.taanaEnquiryToast);
+
+        window.taanaEnquiryToast =
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 2800);
+    }
+
+
+    /* =====================================================
+       FILTERING
+       ===================================================== */
+
+    function filterEnquiries() {
+
+        const query =
+            search.value.trim().toLowerCase();
+
+        const selectedStatus =
+            statusFilter.value;
+
+        const selectedType =
+            typeFilter.value;
+
+        let visible = 0;
+
+        cards.forEach(card => {
+
+            const cardSearch =
+                card.dataset.search || "";
+
+            const cardStatus =
+                card.dataset.status;
+
+            const cardType =
+                card.dataset.type;
+
+            const matchesSearch =
+                !query ||
+                cardSearch.includes(query);
+
+            const matchesStatus =
+                selectedStatus === "all" ||
+                cardStatus === selectedStatus;
+
+            const matchesType =
+                selectedType === "all" ||
+                cardType === selectedType;
+
+            const shouldShow =
+                matchesSearch &&
+                matchesStatus &&
+                matchesType;
+
+            card.style.display =
+                shouldShow ? "" : "none";
+
+            if (shouldShow) {
+                visible++;
+            }
+
+        });
+
+        count.textContent =
+            `Showing ${visible} ${visible === 1 ? "enquiry" : "enquiries"}`;
+    }
+
+
+    search.addEventListener(
+        "input",
+        filterEnquiries
+    );
+
+    statusFilter.addEventListener(
+        "change",
+        filterEnquiries
+    );
+
+    typeFilter.addEventListener(
+        "change",
+        filterEnquiries
+    );
+
+
+    /* =====================================================
+       MESSAGE MODAL
+       ===================================================== */
+
+    function openMessage(card) {
+
+        const buyer =
+            card
+                .querySelector(".buyer-name")
+                ?.textContent
+                .trim() || "Buyer";
+
+        const product =
+            card
+                .querySelector("h3")
+                ?.textContent
+                .trim() || "your product";
+
+        activeBuyer = buyer;
+
+        document.getElementById("messageTitle")
+            .textContent =
+            `Conversation with ${buyer}`;
+
+        document.getElementById("buyerMessage")
+            .textContent =
+            `Hello! We are interested in your ${product}. Could you please share more details about availability, production time and your best possible quotation?`;
+
+        modal.classList.add("active");
+
+        modal.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+        document.body.style.overflow = "hidden";
+
+        setTimeout(() => {
+            messageText.focus();
+        }, 50);
+    }
+
+
+    function closeMessage() {
+
+        modal.classList.remove("active");
+
+        modal.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+        document.body.style.overflow = "";
+
+        messageText.value = "";
+    }
+
+
+    closeButton.addEventListener(
+        "click",
+        closeMessage
+    );
+
+    cancelButton.addEventListener(
+        "click",
+        closeMessage
+    );
+
+
+    modal.addEventListener(
+        "click",
+        event => {
+
+            if (event.target === modal) {
+                closeMessage();
+            }
+
+        }
+    );
+
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Escape" &&
+                modal.classList.contains("active")
+            ) {
+                closeMessage();
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       SEND MESSAGE
+       ===================================================== */
+
+    messageForm.addEventListener(
+        "submit",
+        event => {
+
+            event.preventDefault();
+
+            const message =
+                messageText.value.trim();
+
+            if (!message) {
+                return;
+            }
+
+            const savedMessages =
+                JSON.parse(
+                    localStorage.getItem(
+                        "taanaBaanaArtisanMessages"
+                    ) || "[]"
+                );
+
+            savedMessages.push({
+
+                buyer: activeBuyer,
+
+                message,
+
+                sentAt:
+                    new Date().toISOString()
+
+            });
+
+            localStorage.setItem(
+                "taanaBaanaArtisanMessages",
+                JSON.stringify(savedMessages)
+            );
+
+            closeMessage();
+
+            showToast(
+                `Message sent to ${activeBuyer}.`
+            );
+        }
+    );
+
+
+    /* =====================================================
+       CARD ACTIONS
+       ===================================================== */
+
+    cards.forEach(card => {
+
+        card
+            .querySelectorAll("[data-action]")
+            .forEach(button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        const action =
+                            button.dataset.action;
+
+                        const product =
+                            card
+                                .querySelector("h3")
+                                ?.textContent
+                                .trim();
+
+                        if (action === "message") {
+
+                            openMessage(card);
+
+                            return;
+                        }
+
+                        if (action === "quote") {
+
+                            localStorage.setItem(
+                                "taanaBaanaActiveEnquiry",
+                                JSON.stringify({
+
+                                    id:
+                                        card
+                                            .querySelector(".enquiry-id")
+                                            ?.textContent
+                                            .trim(),
+
+                                    product,
+
+                                    buyer:
+                                        card
+                                            .querySelector(".buyer-name")
+                                            ?.textContent
+                                            .trim(),
+
+                                    quantity:
+                                        card.dataset.type === "bulk"
+                                            ? 500
+                                            : 80
+
+                                })
+                            );
+
+                            window.location.href =
+                                "quotation.html";
+
+                            return;
+                        }
+
+                        if (action === "order") {
+
+                            window.location.href =
+                                "orders.html";
+
+                        }
+
+                    }
+                );
+
+            });
+
+    });
+
+
+    /* =====================================================
+       AI DEMO ACTIONS
+       ===================================================== */
+
+    document
+        .getElementById("translateButton")
+        .addEventListener(
+            "click",
+            () => {
+
+                showToast(
+                    "AI translation demo: buyer messages can be converted into your preferred language."
+                );
+
+            }
+        );
+
+
+    document
+        .getElementById("replyButton")
+        .addEventListener(
+            "click",
+            () => {
+
+                messageText.value =
+                    "Thank you for your enquiry. I would be happy to discuss the quantity, production timeline and pricing with you.";
+
+                openMessage(cards[0]);
+
+                messageText.value =
+                    "Thank you for your enquiry. I would be happy to discuss the quantity, production timeline and pricing with you.";
+
+            }
+        );
+
+
+    document
+        .getElementById("bulkOpportunityButton")
+        .addEventListener(
+            "click",
+            () => {
+
+                localStorage.setItem(
+                    "taanaBaanaActiveEnquiry",
+                    JSON.stringify({
+
+                        id: "REQ-2841",
+
+                        product:
+                            "Handcrafted Jute Bags",
+
+                        buyer:
+                            "Arya Sustainable Ventures",
+
+                        quantity: 500
+
+                    })
+                );
+
+                window.location.href =
+                    "quotation.html";
+
+            }
+        );
+
+
+    /* =====================================================
+       LAST PAGE
+       ===================================================== */
+
+    try {
+
+        localStorage.setItem(
+            "taanaBaanaLastArtisanPage",
+            "artisan-enquiries"
+        );
+
+    } catch (error) {
+        /* Storage may be unavailable. */
+    }
+
+
+    filterEnquiries();
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Artisan Dashboard — Taana-Baana</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+<div class="app-shell">
+
+<aside class="sidebar">
+
+    <div class="sidebar-brand">
+        <a href="../index.html">
+            <img src="../assets/logo.png"
+                 alt="Taana-Baana">
+        </a>
+    </div>
+
+    <div class="sidebar-role">
+        🧵 Artisan Workspace
+    </div>
+
+    <nav class="sidebar-nav">
+
+        <div class="sidebar-section-title">
+            Workspace
+        </div>
+
+        <a class="sidebar-link active"
+           href="artisan-dashboard.html">
+            <span class="icon">⌂</span>
+            <span data-i18n="dashboard">Dashboard</span>
+        </a>
+
+        <a class="sidebar-link"
+           href="studio.html">
+            <span class="icon">📸</span>
+            <span data-i18n="studio">AI Product Studio</span>
+        </a>
+
+        <a class="sidebar-link"
+           href="catalog.html">
+            <span class="icon">✍️</span>
+            <span data-i18n="catalog">AI Catalog</span>
+        </a>
+
+        <a class="sidebar-link"
+           href="pricing.html">
+            <span class="icon">₹</span>
+            <span data-i18n="pricing">Smart Pricing</span>
+        </a>
+
+
+        <div class="sidebar-section-title">
+            Business
+        </div>
+
+        <a class="sidebar-link"
+           href="inventory.html">
+            <span class="icon">📦</span>
+            <span data-i18n="inventory">Inventory</span>
+        </a>
+
+        <a class="sidebar-link"
+           href="artisan-orders.html">
+            <span class="icon">🧾</span>
+            <span data-i18n="orders">Orders</span>
+        </a>
+
+        <a class="sidebar-link"
+           href="enquiries.html">
+            <span class="icon">💬</span>
+            <span data-i18n="enquiries">Enquiries</span>
+        </a>
+
+
+        <div class="sidebar-section-title">
+            Identity
+        </div>
+
+        <a class="sidebar-link"
+           href="artisan-profile.html">
+            <span class="icon">🪪</span>
+            <span data-i18n="profile">My Artisan Identity</span>
+        </a>
+
+        <a class="sidebar-link"
+           href="marketplace.html">
+            <span class="icon">🛍️</span>
+            <span data-i18n="marketplace">Marketplace</span>
+        </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+        <button
+            data-logout
+            class="sidebar-link"
+            style="width:100%;border:0;background:none;"
+        >
+            <span class="icon">↪</span>
+            <span data-i18n="logout">Log out</span>
+        </button>
+
+    </div>
+
+</aside>
+
+
+<main class="app-main">
+
+<header class="topbar">
+
+    <div class="topbar-left">
+
+        <button class="menu-mobile btn-icon btn-secondary">
+            ☰
+        </button>
+
+        <input
+            class="topbar-search"
+            placeholder="Search your workspace..."
+        >
+
+    </div>
+
+
+    <div class="topbar-actions">
+
+        <select
+            class="language-select"
+            data-language-select
+        >
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+            <option value="ml">മലയാളം</option>
+            <option value="ta">தமிழ்</option>
+            <option value="te">తెలుగు</option>
+            <option value="kn">ಕನ್ನಡ</option>
+            <option value="bn">বাংলা</option>
+            <option value="mr">मराठी</option>
+        </select>
+
+
+        <div class="user-pill">
+
+            <div class="avatar">
+                🧵
+            </div>
+
+            Meera Devi
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<div class="page-content">
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <span class="eyebrow">
+                Artisan Workspace
+            </span>
+
+            <h1 class="page-title"
+                style="margin-top:12px;">
+                Welcome back, Meera 🌼
+            </h1>
+
+            <p>
+                Your craft is ready for the digital marketplace.
+            </p>
+
+        </div>
+
+        <a href="studio.html"
+           class="btn btn-primary">
+            + Add New Product
+        </a>
+
+    </div>
+
+
+    <section class="welcome-banner">
+
+        <h2>
+            Let AI handle the digital work.
+        </h2>
+
+        <p style="margin-top:8px;max-width:550px;opacity:.85;">
+            Capture your craft, speak your story,
+            get a transparent price and prepare your
+            product for buyers — all from one workspace.
+        </p>
+
+        <div style="display:flex;gap:10px;margin-top:22px;flex-wrap:wrap;">
+
+            <a href="studio.html"
+               class="btn"
+               style="background:white;color:var(--terracotta);">
+                📸 Open Product Studio
+            </a>
+
+            <a href="catalog.html"
+               class="btn"
+               style="background:rgba(255,255,255,.12);color:white;">
+                🎙️ Speak to Catalog
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <div class="stats">
+
+        <div class="stat-card">
+            <div class="stat-number">24</div>
+            <div class="stat-label">Published Products</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-number">₹48K</div>
+            <div class="stat-label">This Month's Sales</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-number">17</div>
+            <div class="stat-label">Buyer Enquiries</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-number">4.9</div>
+            <div class="stat-label">Average Rating</div>
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-grid">
+
+        <div class="card card-pad">
+
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+
+                <div>
+                    <span class="eyebrow">
+                        Your Digital Business
+                    </span>
+
+                    <h2 style="font-family:Playfair Display;margin-top:10px;">
+                        Business health
+                    </h2>
+                </div>
+
+                <strong style="font-size:32px;color:var(--peacock);">
+                    86%
+                </strong>
+
+            </div>
+
+            <div class="progress"
+                 style="margin-top:20px;">
+                <div class="progress-bar"
+                     style="width:86%;"></div>
+            </div>
+
+            <div class="grid grid-3"
+                 style="margin-top:25px;">
+
+                <div>
+                    <small class="muted">Catalog</small>
+                    <strong style="display:block;">92%</strong>
+                </div>
+
+                <div>
+                    <small class="muted">Pricing</small>
+                    <strong style="display:block;">84%</strong>
+                </div>
+
+                <div>
+                    <small class="muted">Market Reach</small>
+                    <strong style="display:block;">81%</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card card-pad">
+
+            <span class="eyebrow">
+                AI Business Manager
+            </span>
+
+            <h2 style="font-family:Playfair Display;margin-top:10px;">
+                “What should I do today?”
+            </h2>
+
+            <p class="muted"
+               style="font-size:13px;margin-top:8px;">
+                Your AI assistant has 3 suggestions.
+            </p>
+
+            <div style="margin-top:20px;">
+
+                <div class="info-box"
+                     style="margin-bottom:8px;">
+                    📸 Add better photos to 4 listings.
+                </div>
+
+                <div class="info-box"
+                     style="margin-bottom:8px;">
+                    ₹ Consider reviewing 3 prices.
+                </div>
+
+                <div class="info-box">
+                    🛍️ 2 buyers are looking for jute products.
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <section style="margin-top:35px;">
+
+        <div class="section-head">
+            <span class="eyebrow">
+                Quick actions
+            </span>
+
+            <h2 class="section-title"
+                style="margin-top:12px;">
+                Build your digital storefront
+            </h2>
+        </div>
+
+
+        <div class="grid grid-4">
+
+            <a href="studio.html"
+               class="feature-card card">
+                <div class="feature-icon">📸</div>
+                <h3>AI Photoshoot</h3>
+                <p>
+                    Turn ordinary product photos into
+                    clean marketplace-ready images.
+                </p>
+            </a>
+
+
+            <a href="catalog.html"
+               class="feature-card card">
+                <div class="feature-icon">🎙️</div>
+                <h3>Speak → Sell</h3>
+                <p>
+                    Tell your product story in your
+                    regional language.
+                </p>
+            </a>
+
+
+            <a href="pricing.html"
+               class="feature-card card">
+                <div class="feature-icon">₹</div>
+                <h3>Don't Underprice Me</h3>
+                <p>
+                    Understand your material, labour,
+                    costs and sustainable margin.
+                </p>
+            </a>
+
+
+            <a href="artisan-profile.html"
+               class="feature-card card">
+                <div class="feature-icon">🪪</div>
+                <h3>Artisan Identity</h3>
+                <p>
+                    Create a digital identity that
+                    carries your craft story.
+                </p>
+            </a>
+
+        </div>
+
+    </section>
+
+</div>
+
+</main>
+
+</div>
+
+<script src="../js/main.js"></script>
+<script src="../js/pages.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,3937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Taana-Baana Business — Understand your craft business, revenue, orders and growth."
+    >
+
+    <title>Business | Taana-Baana</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Tiro+Devanagari+Sanskrit&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+
+    <style>
+
+        /* =========================================================
+           TAANA-BAANA — ARTISAN BUSINESS
+           Frontend prototype
+           ========================================================= */
+
+        :root {
+            --tb-ivory: #fcf6ea;
+            --tb-cream: #fff9f0;
+            --tb-white: #ffffff;
+
+            --tb-brown: #3b2922;
+            --tb-deep: #2a1d18;
+
+            --tb-terra: #c96f4a;
+            --tb-terra-dark: #a95338;
+
+            --tb-sage: #879b76;
+            --tb-olive: #687557;
+
+            --tb-gold: #c9a65b;
+
+            --tb-indigo: #274c77;
+            --tb-peacock: #0f7c78;
+            --tb-pink: #c43d73;
+            --tb-plum: #6d3b63;
+            --tb-green: #3e7c59;
+            --tb-marigold: #e9a23b;
+
+            --tb-sand: #e8d7bc;
+
+            --tb-shadow:
+                0 18px 55px rgba(59, 41, 34, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+
+            background:
+                radial-gradient(
+                    circle at 4% 10%,
+                    rgba(233, 162, 59, 0.11),
+                    transparent 23rem
+                ),
+                radial-gradient(
+                    circle at 96% 22%,
+                    rgba(15, 124, 120, 0.08),
+                    transparent 25rem
+                ),
+                var(--tb-ivory);
+
+            color: var(--tb-brown);
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .business-page {
+            min-height: 100vh;
+            padding-bottom: 90px;
+        }
+
+        .business-shell {
+            width: min(1400px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        /* =========================================================
+           BREADCRUMB
+           ========================================================= */
+
+        .business-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            padding-top: 28px;
+
+            font-size: 12px;
+            color: rgba(59, 41, 34, 0.52);
+        }
+
+        .business-breadcrumb a {
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .business-breadcrumb a:hover {
+            color: var(--tb-terra);
+        }
+
+        .business-breadcrumb strong {
+            color: var(--tb-brown);
+        }
+
+        /* =========================================================
+           HERO
+           ========================================================= */
+
+        .business-hero {
+            position: relative;
+            overflow: hidden;
+
+            margin-top: 24px;
+            padding: 42px;
+
+            border-radius: 30px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.95),
+                    rgba(255, 249, 240, 0.9)
+                );
+
+            border: 1px solid rgba(59, 41, 34, 0.08);
+
+            box-shadow: var(--tb-shadow);
+        }
+
+        .business-hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 280px;
+            height: 280px;
+
+            right: -110px;
+            top: -150px;
+
+            border: 1px solid rgba(201, 166, 91, 0.28);
+
+            border-radius: 50%;
+        }
+
+        .business-hero::after {
+            content: "";
+
+            position: absolute;
+
+            width: 160px;
+            height: 160px;
+
+            right: 90px;
+            bottom: -120px;
+
+            border: 1px dashed rgba(201, 111, 74, 0.28);
+
+            border-radius: 50%;
+        }
+
+        .business-hero-content {
+            position: relative;
+            z-index: 2;
+
+            max-width: 850px;
+        }
+
+        .business-kicker {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-bottom: 13px;
+
+            color: var(--tb-terra-dark);
+
+            font-size: 10px;
+            font-weight: 700;
+
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .business-kicker::before {
+            content: "✦";
+
+            color: var(--tb-gold);
+
+            font-size: 15px;
+        }
+
+        .business-title {
+            margin: 0;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: clamp(40px, 5.5vw, 68px);
+
+            line-height: 0.98;
+
+            letter-spacing: -0.04em;
+
+            color: var(--tb-deep);
+        }
+
+        .business-title em {
+            color: var(--tb-terra);
+            font-weight: 500;
+        }
+
+        .business-description {
+            max-width: 720px;
+
+            margin: 19px 0 0;
+
+            font-size: 14px;
+            line-height: 1.75;
+
+            color: rgba(59, 41, 34, 0.62);
+        }
+
+        .business-hero-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-top: 28px;
+        }
+
+        .business-period {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            padding: 9px 12px;
+
+            border-radius: 999px;
+
+            background: #f1e7d8;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            color: var(--tb-brown);
+        }
+
+        .business-period::before {
+            content: "";
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--tb-green);
+        }
+
+        .business-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+        }
+
+        .business-btn {
+            border: 0;
+
+            padding: 11px 15px;
+
+            border-radius: 12px;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .business-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .business-btn-primary {
+            color: white;
+            background: var(--tb-brown);
+
+            box-shadow:
+                0 10px 24px rgba(59, 41, 34, 0.13);
+        }
+
+        .business-btn-soft {
+            color: var(--tb-brown);
+            background: var(--tb-pale, #eadfd1);
+        }
+
+        .business-btn-outline {
+            color: var(--tb-brown);
+            background: transparent;
+
+            border: 1px solid rgba(59, 41, 34, 0.13);
+        }
+
+        /* =========================================================
+           STAT CARDS
+           ========================================================= */
+
+        .business-stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(6, minmax(0, 1fr));
+
+            gap: 13px;
+
+            margin-top: 17px;
+        }
+
+        .business-stat {
+            position: relative;
+            overflow: hidden;
+
+            min-height: 148px;
+
+            padding: 20px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(255, 255, 255, 0.83);
+
+            border:
+                1px solid rgba(59, 41, 34, 0.07);
+
+            box-shadow:
+                0 10px 30px rgba(59, 41, 34, 0.045);
+        }
+
+        .business-stat::after {
+            content: "";
+
+            position: absolute;
+
+            width: 65px;
+            height: 65px;
+
+            right: -27px;
+            bottom: -27px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(201, 166, 91, 0.1);
+        }
+
+        .stat-icon {
+            width: 37px;
+            height: 37px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 11px;
+
+            background: #eadfd1;
+
+            font-size: 16px;
+        }
+
+        .business-stat:nth-child(2) .stat-icon {
+            background: #dce2d2;
+        }
+
+        .business-stat:nth-child(3) .stat-icon {
+            background: #e1e7ef;
+        }
+
+        .business-stat:nth-child(4) .stat-icon {
+            background: #f1dfc8;
+        }
+
+        .business-stat:nth-child(5) .stat-icon {
+            background: #ead9e6;
+        }
+
+        .business-stat:nth-child(6) .stat-icon {
+            background: #d8e7e4;
+        }
+
+        .stat-value {
+            margin-top: 15px;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 25px;
+
+            color: var(--tb-deep);
+        }
+
+        .stat-label {
+            margin-top: 3px;
+
+            font-size: 10px;
+
+            color: rgba(59, 41, 34, 0.51);
+        }
+
+        .stat-change {
+            margin-top: 8px;
+
+            font-size: 9px;
+            font-weight: 700;
+
+            color: var(--tb-green);
+        }
+
+        .stat-change.warning {
+            color: #a56b15;
+        }
+
+        /* =========================================================
+           SECTION
+           ========================================================= */
+
+        .business-section {
+            margin-top: 45px;
+        }
+
+        .business-section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+
+            gap: 20px;
+
+            margin-bottom: 17px;
+        }
+
+        .section-kicker {
+            margin: 0 0 5px;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+
+            color: var(--tb-terra-dark);
+        }
+
+        .section-title {
+            margin: 0;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 30px;
+
+            color: var(--tb-deep);
+        }
+
+        .section-description {
+            max-width: 680px;
+
+            margin: 6px 0 0;
+
+            font-size: 12px;
+            line-height: 1.65;
+
+            color: rgba(59, 41, 34, 0.55);
+        }
+
+        /* =========================================================
+           CHART GRID
+           ========================================================= */
+
+        .chart-grid {
+            display: grid;
+
+            grid-template-columns:
+                1.45fr
+                0.9fr;
+
+            gap: 18px;
+        }
+
+        .business-card {
+            padding: 25px;
+
+            border-radius: 24px;
+
+            background:
+                rgba(255, 255, 255, 0.86);
+
+            border:
+                1px solid rgba(59, 41, 34, 0.075);
+
+            box-shadow:
+                0 12px 36px rgba(59, 41, 34, 0.05);
+        }
+
+        .card-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+
+            gap: 15px;
+
+            margin-bottom: 23px;
+        }
+
+        .card-title {
+            margin: 0;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 22px;
+
+            color: var(--tb-deep);
+        }
+
+        .card-note {
+            margin: 5px 0 0;
+
+            font-size: 10px;
+
+            color: rgba(59, 41, 34, 0.48);
+        }
+
+        .chart-total {
+            text-align: right;
+        }
+
+        .chart-total strong {
+            display: block;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 23px;
+
+            color: var(--tb-deep);
+        }
+
+        .chart-total span {
+            display: block;
+
+            margin-top: 3px;
+
+            font-size: 9px;
+
+            color: var(--tb-green);
+            font-weight: 700;
+        }
+
+        /* =========================================================
+           REVENUE CHART
+           ========================================================= */
+
+        .revenue-chart {
+            position: relative;
+
+            height: 270px;
+
+            padding:
+                10px
+                0
+                0
+                42px;
+        }
+
+        .chart-grid-lines {
+            position: absolute;
+
+            left: 42px;
+            right: 0;
+            top: 10px;
+            bottom: 31px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .chart-grid-lines span {
+            width: 100%;
+
+            border-top:
+                1px dashed rgba(59, 41, 34, 0.1);
+        }
+
+        .chart-y-labels {
+            position: absolute;
+
+            left: 0;
+            top: 2px;
+            bottom: 25px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            font-size: 8px;
+
+            color: rgba(59, 41, 34, 0.42);
+        }
+
+        .revenue-bars {
+            position: absolute;
+
+            left: 58px;
+            right: 10px;
+            bottom: 30px;
+            top: 10px;
+
+            display: flex;
+
+            align-items: end;
+            justify-content: space-around;
+
+            gap: 14px;
+        }
+
+        .revenue-column {
+            height: 100%;
+
+            flex: 1;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: end;
+            align-items: center;
+
+            gap: 8px;
+        }
+
+        .revenue-bar {
+            position: relative;
+
+            width: min(42px, 72%);
+
+            min-height: 8px;
+
+            border-radius:
+                9px
+                9px
+                4px
+                4px;
+
+            background:
+                linear-gradient(
+                    to top,
+                    var(--tb-terra-dark),
+                    var(--tb-terra)
+                );
+
+            transform-origin: bottom;
+
+            transition:
+                transform 0.25s ease,
+                filter 0.25s ease;
+        }
+
+        .revenue-column:hover .revenue-bar {
+            transform: scaleX(1.08);
+            filter: brightness(1.08);
+        }
+
+        .revenue-tooltip {
+            position: absolute;
+
+            left: 50%;
+            bottom: calc(100% + 7px);
+
+            transform:
+                translateX(-50%)
+                translateY(4px);
+
+            padding: 5px 7px;
+
+            border-radius: 7px;
+
+            background: var(--tb-brown);
+            color: white;
+
+            font-size: 8px;
+
+            white-space: nowrap;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transition:
+                opacity 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .revenue-column:hover .revenue-tooltip {
+            opacity: 1;
+
+            transform:
+                translateX(-50%)
+                translateY(0);
+        }
+
+        .revenue-month {
+            font-size: 9px;
+
+            color: rgba(59, 41, 34, 0.5);
+        }
+
+        /* =========================================================
+           ORDERS CHART
+           ========================================================= */
+
+        .orders-chart {
+            height: 270px;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+
+            gap: 17px;
+        }
+
+        .orders-month {
+            display: grid;
+
+            grid-template-columns: 30px 1fr 35px;
+
+            align-items: center;
+
+            gap: 9px;
+        }
+
+        .orders-month-label {
+            font-size: 9px;
+
+            color: rgba(59, 41, 34, 0.49);
+        }
+
+        .orders-track {
+            height: 9px;
+
+            overflow: hidden;
+
+            border-radius: 999px;
+
+            background: #eee4d8;
+        }
+
+        .orders-fill {
+            height: 100%;
+
+            border-radius: inherit;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--tb-sage),
+                    var(--tb-olive)
+                );
+        }
+
+        .orders-number {
+            text-align: right;
+
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        /* =========================================================
+           LOWER ANALYTICS
+           ========================================================= */
+
+        .analytics-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr
+                1fr;
+
+            gap: 18px;
+        }
+
+        .product-ranking {
+            display: grid;
+
+            gap: 12px;
+        }
+
+        .product-rank {
+            display: grid;
+
+            grid-template-columns:
+                27px
+                1fr
+                auto;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .rank-number {
+            width: 27px;
+            height: 27px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 9px;
+
+            background: #eee5d8;
+
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .product-rank:nth-child(1) .rank-number {
+            background: #f0d7cb;
+            color: var(--tb-terra-dark);
+        }
+
+        .product-rank:nth-child(2) .rank-number {
+            background: #dce2d2;
+            color: var(--tb-olive);
+        }
+
+        .product-rank:nth-child(3) .rank-number {
+            background: #e3e7ee;
+            color: var(--tb-indigo);
+        }
+
+        .product-rank-name {
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .product-rank-bar {
+            height: 5px;
+
+            margin-top: 5px;
+
+            overflow: hidden;
+
+            border-radius: 99px;
+
+            background: #eee6dc;
+        }
+
+        .product-rank-bar span {
+            display: block;
+
+            height: 100%;
+
+            border-radius: inherit;
+
+            background: var(--tb-terra);
+        }
+
+        .product-rank-value {
+            text-align: right;
+
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        /* =========================================================
+           EXPENSES
+           ========================================================= */
+
+        .expense-list {
+            display: grid;
+
+            gap: 13px;
+        }
+
+        .expense-item {
+            display: grid;
+
+            grid-template-columns:
+                35px
+                1fr
+                auto;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .expense-icon {
+            width: 35px;
+            height: 35px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 10px;
+
+            background: #eee2d7;
+
+            font-size: 14px;
+        }
+
+        .expense-name {
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .expense-progress {
+            height: 4px;
+
+            margin-top: 5px;
+
+            overflow: hidden;
+
+            border-radius: 99px;
+
+            background: #eee7dd;
+        }
+
+        .expense-progress span {
+            display: block;
+
+            height: 100%;
+
+            border-radius: inherit;
+
+            background: var(--tb-gold);
+        }
+
+        .expense-value {
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        /* =========================================================
+           PROFIT CARD
+           ========================================================= */
+
+        .profit-card {
+            position: relative;
+            overflow: hidden;
+
+            background:
+                var(--tb-brown);
+
+            color: white;
+        }
+
+        .profit-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 200px;
+            height: 200px;
+
+            right: -85px;
+            top: -95px;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.12);
+
+            border-radius: 50%;
+        }
+
+        .profit-card::after {
+            content: "✦";
+
+            position: absolute;
+
+            right: 26px;
+            bottom: 22px;
+
+            font-size: 25px;
+
+            color:
+                rgba(255, 255, 255, 0.16);
+        }
+
+        .profit-label {
+            position: relative;
+            z-index: 2;
+
+            font-size: 9px;
+
+            letter-spacing: 0.14em;
+
+            text-transform: uppercase;
+
+            opacity: 0.58;
+        }
+
+        .profit-value {
+            position: relative;
+            z-index: 2;
+
+            margin-top: 14px;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 39px;
+        }
+
+        .profit-description {
+            position: relative;
+            z-index: 2;
+
+            margin-top: 7px;
+
+            font-size: 10px;
+
+            line-height: 1.6;
+
+            opacity: 0.63;
+        }
+
+        .profit-breakdown {
+            position: relative;
+            z-index: 2;
+
+            display: grid;
+
+            gap: 9px;
+
+            margin-top: 24px;
+        }
+
+        .profit-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding-bottom: 9px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.1);
+
+            font-size: 10px;
+        }
+
+        .profit-row:last-child {
+            border-bottom: 0;
+        }
+
+        .profit-row span {
+            opacity: 0.56;
+        }
+
+        .profit-row strong {
+            font-size: 10px;
+        }
+
+        /* =========================================================
+           AI INSIGHT
+           ========================================================= */
+
+        .insight-card {
+            position: relative;
+            overflow: hidden;
+
+            margin-top: 18px;
+
+            padding: 28px;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #274c77,
+                    #45688d
+                );
+
+            color: white;
+
+            box-shadow:
+                0 18px 45px
+                rgba(39, 76, 119, 0.15);
+        }
+
+        .insight-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 260px;
+            height: 260px;
+
+            right: -115px;
+            top: -150px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.12);
+
+            border-radius: 50%;
+        }
+
+        .insight-content {
+            position: relative;
+            z-index: 2;
+
+            max-width: 850px;
+        }
+
+        .insight-label {
+            display: inline-flex;
+
+            padding: 6px 9px;
+
+            border-radius: 999px;
+
+            background:
+                rgba(255,255,255,0.11);
+
+            font-size: 8px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.12em;
+
+            text-transform: uppercase;
+        }
+
+        .insight-title {
+            margin: 13px 0 0;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 26px;
+        }
+
+        .insight-text {
+            max-width: 760px;
+
+            margin: 8px 0 0;
+
+            font-size: 11px;
+
+            line-height: 1.75;
+
+            opacity: 0.76;
+        }
+
+        .insight-points {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            margin-top: 18px;
+        }
+
+        .insight-point {
+            padding: 8px 10px;
+
+            border-radius: 10px;
+
+            background:
+                rgba(255,255,255,0.09);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.1);
+
+            font-size: 9px;
+        }
+
+        /* =========================================================
+           SEASONAL INTELLIGENCE
+           ========================================================= */
+
+        .season-card {
+            position: relative;
+            overflow: hidden;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 25px;
+
+            padding: 29px;
+
+            border-radius: 24px;
+
+            background:
+                #f3e4ce;
+
+            border:
+                1px solid
+                rgba(59,41,34,0.07);
+        }
+
+        .season-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            right: -80px;
+            bottom: -90px;
+
+            border:
+                1px solid
+                rgba(201,111,74,0.2);
+
+            border-radius: 50%;
+        }
+
+        .season-kicker {
+            margin: 0 0 6px;
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.14em;
+
+            text-transform: uppercase;
+
+            color: var(--tb-terra-dark);
+        }
+
+        .season-title {
+            margin: 0;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 27px;
+
+            color: var(--tb-deep);
+        }
+
+        .season-text {
+            margin: 9px 0 0;
+
+            max-width: 520px;
+
+            font-size: 11px;
+
+            line-height: 1.7;
+
+            color:
+                rgba(59,41,34,0.61);
+        }
+
+        .season-options {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 9px;
+
+            align-content: center;
+        }
+
+        .season-option {
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            padding: 11px;
+
+            border-radius: 12px;
+
+            background:
+                rgba(255,255,255,0.64);
+
+            border:
+                1px solid
+                rgba(59,41,34,0.06);
+
+            font-size: 9px;
+
+            font-weight: 700;
+        }
+
+        .season-option span {
+            width: 26px;
+            height: 26px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 8px;
+
+            background: white;
+
+            font-size: 12px;
+        }
+
+        /* =========================================================
+           QUICK ACTIONS
+           ========================================================= */
+
+        .business-quick-actions {
+            display: grid;
+
+            grid-template-columns:
+                repeat(5, 1fr);
+
+            gap: 12px;
+        }
+
+        .quick-card {
+            min-height: 112px;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            padding: 16px;
+
+            border-radius: 17px;
+
+            background:
+                rgba(255,255,255,0.82);
+
+            border:
+                1px solid
+                rgba(59,41,34,0.07);
+
+            text-decoration: none;
+
+            transition:
+                transform 0.22s ease,
+                box-shadow 0.22s ease;
+        }
+
+        .quick-card:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 14px 30px
+                rgba(59,41,34,0.08);
+        }
+
+        .quick-card-icon {
+            width: 34px;
+            height: 34px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 10px;
+
+            background: #eadfd1;
+        }
+
+        .quick-card:nth-child(2)
+            .quick-card-icon {
+            background: #dce2d2;
+        }
+
+        .quick-card:nth-child(3)
+            .quick-card-icon {
+            background: #e2e8ef;
+        }
+
+        .quick-card:nth-child(4)
+            .quick-card-icon {
+            background: #ead9e6;
+        }
+
+        .quick-card:nth-child(5)
+            .quick-card-icon {
+            background: #d9e8e4;
+        }
+
+        .quick-card-name {
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .quick-card-arrow {
+            color:
+                rgba(59,41,34,0.4);
+
+            font-size: 13px;
+        }
+
+        /* =========================================================
+           AI MANAGER FLOATING BUTTON
+           ========================================================= */
+
+        .business-ai-button {
+            position: fixed;
+
+            right: 24px;
+            bottom: 24px;
+
+            z-index: 500;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            padding: 12px 16px;
+
+            border: 0;
+
+            border-radius: 999px;
+
+            background:
+                var(--tb-brown);
+
+            color: white;
+
+            box-shadow:
+                0 16px 38px
+                rgba(59,41,34,0.2);
+
+            font-size: 10px;
+            font-weight: 700;
+
+            transition:
+                transform 0.2s ease;
+        }
+
+        .business-ai-button:hover {
+            transform: translateY(-3px);
+        }
+
+        .ai-pulse {
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: var(--tb-gold);
+
+            box-shadow:
+                0 0 0 5px
+                rgba(201,166,91,0.13);
+        }
+
+        /* =========================================================
+           AI MODAL
+           ========================================================= */
+
+        .business-modal {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 9000;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(42,29,24,0.52);
+
+            backdrop-filter: blur(7px);
+        }
+
+        .business-modal.open {
+            display: flex;
+        }
+
+        .business-modal-box {
+            width: min(520px, 100%);
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            padding: 27px;
+
+            border-radius: 24px;
+
+            background:
+                var(--tb-cream);
+
+            box-shadow:
+                0 30px 80px
+                rgba(0,0,0,0.22);
+
+            animation:
+                businessModalIn
+                0.25s ease;
+        }
+
+        @keyframes businessModalIn {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(15px)
+                    scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+
+        }
+
+        .business-modal-head {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .business-modal-title {
+            margin: 0;
+
+            font-family:
+                "Playfair Display", serif;
+
+            font-size: 26px;
+        }
+
+        .business-modal-close {
+            width: 34px;
+            height: 34px;
+
+            border: 0;
+
+            border-radius: 10px;
+
+            background:
+                #eee4d8;
+
+            font-size: 17px;
+        }
+
+        .ai-conversation {
+            display: grid;
+
+            gap: 11px;
+
+            margin-top: 22px;
+        }
+
+        .ai-message {
+            padding: 12px 14px;
+
+            border-radius: 14px;
+
+            font-size: 11px;
+
+            line-height: 1.6;
+        }
+
+        .ai-message-bot {
+            background:
+                #e7e3e9;
+
+            color: var(--tb-plum);
+        }
+
+        .ai-message-user {
+            justify-self: end;
+
+            max-width: 82%;
+
+            background:
+                var(--tb-brown);
+
+            color: white;
+        }
+
+        .ai-command-list {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 8px;
+
+            margin-top: 17px;
+        }
+
+        .ai-command {
+            padding: 10px;
+
+            border: 1px solid
+                rgba(59,41,34,0.09);
+
+            border-radius: 11px;
+
+            background: white;
+
+            font-size: 9px;
+
+            text-align: left;
+
+            cursor: pointer;
+        }
+
+        .ai-command:hover {
+            border-color:
+                rgba(201,111,74,0.4);
+        }
+
+        /* =========================================================
+           TOAST
+           ========================================================= */
+
+        .business-toast {
+            position: fixed;
+
+            right: 22px;
+            bottom: 82px;
+
+            z-index: 10000;
+
+            max-width: 350px;
+
+            padding: 13px 16px;
+
+            border-radius: 12px;
+
+            background:
+                var(--tb-brown);
+
+            color: white;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+
+            opacity: 0;
+
+            transform:
+                translateY(15px);
+
+            pointer-events: none;
+
+            transition:
+                all 0.25s ease;
+        }
+
+        .business-toast.show {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+        /* =========================================================
+           RESPONSIVE
+           ========================================================= */
+
+        @media (max-width: 1200px) {
+
+            .business-stats {
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+
+            .business-quick-actions {
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+
+        }
+
+        @media (max-width: 950px) {
+
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .analytics-grid {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .season-card {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .business-shell {
+                width:
+                    calc(100% - 24px);
+            }
+
+            .business-hero {
+                padding: 27px;
+
+                border-radius: 23px;
+            }
+
+            .business-title {
+                font-size: 42px;
+            }
+
+            .business-hero-bottom {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .business-actions {
+                width: 100%;
+            }
+
+            .business-btn {
+                flex: 1;
+            }
+
+            .business-stats {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .business-card {
+                padding: 20px;
+            }
+
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .business-quick-actions {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .season-options {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .business-ai-button {
+                right: 14px;
+                bottom: 14px;
+            }
+
+        }
+
+        @media (max-width: 470px) {
+
+            .business-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .business-actions {
+                flex-direction: column;
+            }
+
+            .business-btn {
+                width: 100%;
+            }
+
+            .business-quick-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .business-title {
+                font-size: 37px;
+            }
+
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration:
+                    0.01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    0.01ms !important;
+
+                scroll-behavior:
+                    auto !important;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="business-page">
+
+    <!-- =========================================================
+         NAVIGATION
+         ========================================================= -->
+
+    <header class="site-header">
+
+        <div class="nav-container">
+
+            <a
+                href="../index.html"
+                class="brand-logo-link"
+                aria-label="Taana-Baana Home"
+            >
+
+                <img
+                    src="../assets/logo.png"
+                    alt="Taana-Baana — From Hands to Markets"
+                    class="brand-logo"
+                >
+
+            </a>
+
+
+            <nav
+                class="main-nav"
+                aria-label="Main navigation"
+            >
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+
+                <div class="nav-dropdown">
+
+                    <button
+                        type="button"
+                        class="nav-dropdown-toggle"
+                        aria-expanded="false"
+                    >
+                        Features
+                        <span>⌄</span>
+                    </button>
+
+
+                    <div class="nav-dropdown-menu">
+
+                        <a href="studio.html">
+                            AI Product Studio
+                        </a>
+
+                        <a href="catalog.html">
+                            AI Cataloger
+                        </a>
+
+                        <a href="pricing.html">
+                            Smart Pricing
+                        </a>
+
+                        <a href="marketplace.html">
+                            Marketplace
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <a href="b2b.html">
+                    B2B
+                </a>
+
+                <a href="about.html">
+                    About
+                </a>
+
+            </nav>
+
+
+            <div class="nav-actions">
+
+                <a
+                    href="login.html"
+                    class="nav-login"
+                >
+                    Log In
+                </a>
+
+                <a
+                    href="artisans-dashboard.html"
+                    class="nav-cta"
+                >
+                    Dashboard
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================================
+         MAIN
+         ========================================================= -->
+
+    <main class="business-shell">
+
+
+        <!-- BREADCRUMB -->
+
+        <div class="business-breadcrumb">
+
+            <a href="artisans-dashboard.html">
+                Artisan Dashboard
+            </a>
+
+            <span>›</span>
+
+            <strong>
+                Business
+            </strong>
+
+        </div>
+
+
+        <!-- =====================================================
+             HERO
+             ===================================================== -->
+
+        <section class="business-hero">
+
+            <div class="business-hero-content">
+
+                <div class="business-kicker">
+                    Your craft business
+                </div>
+
+
+                <h1 class="business-title">
+
+                    See the story<br>
+
+                    behind your
+                    <em>numbers.</em>
+
+                </h1>
+
+
+                <p class="business-description">
+
+                    Understand how your products, orders and sales
+                    are moving together. Taana-Baana turns your
+                    business activity into simple insights you can
+                    act on — without making your craft business
+                    feel like a corporate spreadsheet.
+
+                </p>
+
+
+                <div class="business-hero-bottom">
+
+                    <div class="business-period">
+                        September 2026 · Overview
+                    </div>
+
+
+                    <div class="business-actions">
+
+                        <button
+                            type="button"
+                            class="business-btn business-btn-primary"
+                            id="askInsightButton"
+                        >
+                            ✦ Ask Taana-Baana
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="business-btn business-btn-outline"
+                            id="exportBusinessReport"
+                        >
+                            Export Report
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             BUSINESS STATS
+             ===================================================== -->
+
+        <section
+            class="business-stats"
+            aria-label="Business overview"
+        >
+
+            <article class="business-stat">
+
+                <div class="stat-icon">
+                    ₹
+                </div>
+
+                <div class="stat-value">
+                    ₹1.46L
+                </div>
+
+                <div class="stat-label">
+                    Revenue
+                </div>
+
+                <div class="stat-change">
+                    ↑ 12.8% this month
+                </div>
+
+            </article>
+
+
+            <article class="business-stat">
+
+                <div class="stat-icon">
+                    📦
+                </div>
+
+                <div class="stat-value">
+                    48
+                </div>
+
+                <div class="stat-label">
+                    Orders
+                </div>
+
+                <div class="stat-change">
+                    ↑ 8 new orders
+                </div>
+
+            </article>
+
+
+            <article class="business-stat">
+
+                <div class="stat-icon">
+                    ◇
+                </div>
+
+                <div class="stat-value">
+                    17
+                </div>
+
+                <div class="stat-label">
+                    Products
+                </div>
+
+                <div class="stat-change">
+                    3 recently added
+                </div>
+
+            </article>
+
+
+            <article class="business-stat">
+
+                <div class="stat-icon">
+                    ✦
+                </div>
+
+                <div class="stat-value">
+                    ₹91.4K
+                </div>
+
+                <div class="stat-label">
+                    Estimated profit
+                </div>
+
+                <div class="stat-change">
+                    Healthy margin
+                </div>
+
+            </article>
+
+
+            <article class="business-stat">
+
+                <div class="stat-icon">
+                    ✉
+                </div>
+
+                <div class="stat-value">
+                    6
+                </div>
+
+                <div class="stat-label">
+                    Pending enquiries
+                </div>
+
+                <div class="stat-change">
+                    2 need response
+                </div>
+
+            </article>
+
+
+            <article class="business-stat">
+
+                <div class="stat-icon">
+                    !
+                </div>
+
+                <div class="stat-value">
+                    8
+                </div>
+
+                <div class="stat-label">
+                    Low-stock items
+                </div>
+
+                <div class="stat-change warning">
+                    Review inventory
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- =====================================================
+             PERFORMANCE
+             ===================================================== -->
+
+        <section class="business-section">
+
+            <div class="business-section-head">
+
+                <div>
+
+                    <p class="section-kicker">
+                        Business pulse
+                    </p>
+
+                    <h2 class="section-title">
+                        How your business is moving
+                    </h2>
+
+                    <p class="section-description">
+                        A simple view of revenue and order activity
+                        across the last six months.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="chart-grid">
+
+
+                <!-- REVENUE -->
+
+                <article class="business-card">
+
+                    <div class="card-head">
+
+                        <div>
+
+                            <h3 class="card-title">
+                                Revenue
+                            </h3>
+
+                            <p class="card-note">
+                                Monthly sales value · prototype data
+                            </p>
+
+                        </div>
+
+
+                        <div class="chart-total">
+
+                            <strong>
+                                ₹1.46L
+                            </strong>
+
+                            <span>
+                                +12.8%
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="revenue-chart">
+
+                        <div class="chart-grid-lines">
+
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                        </div>
+
+
+                        <div class="chart-y-labels">
+
+                            <span>
+                                ₹1.6L
+                            </span>
+
+                            <span>
+                                ₹1.2L
+                            </span>
+
+                            <span>
+                                ₹80K
+                            </span>
+
+                            <span>
+                                ₹40K
+                            </span>
+
+                            <span>
+                                ₹0
+                            </span>
+
+                        </div>
+
+
+                        <div class="revenue-bars">
+
+
+                            <div class="revenue-column">
+
+                                <div
+                                    class="revenue-bar"
+                                    style="height:47%;"
+                                >
+
+                                    <span class="revenue-tooltip">
+                                        ₹72,000
+                                    </span>
+
+                                </div>
+
+                                <span class="revenue-month">
+                                    Apr
+                                </span>
+
+                            </div>
+
+
+                            <div class="revenue-column">
+
+                                <div
+                                    class="revenue-bar"
+                                    style="height:55%;"
+                                >
+
+                                    <span class="revenue-tooltip">
+                                        ₹86,000
+                                    </span>
+
+                                </div>
+
+                                <span class="revenue-month">
+                                    May
+                                </span>
+
+                            </div>
+
+
+                            <div class="revenue-column">
+
+                                <div
+                                    class="revenue-bar"
+                                    style="height:63%;"
+                                >
+
+                                    <span class="revenue-tooltip">
+                                        ₹98,000
+                                    </span>
+
+                                </div>
+
+                                <span class="revenue-month">
+                                    Jun
+                                </span>
+
+                            </div>
+
+
+                            <div class="revenue-column">
+
+                                <div
+                                    class="revenue-bar"
+                                    style="height:58%;"
+                                >
+
+                                    <span class="revenue-tooltip">
+                                        ₹91,000
+                                    </span>
+
+                                </div>
+
+                                <span class="revenue-month">
+                                    Jul
+                                </span>
+
+                            </div>
+
+
+                            <div class="revenue-column">
+
+                                <div
+                                    class="revenue-bar"
+                                    style="height:76%;"
+                                >
+
+                                    <span class="revenue-tooltip">
+                                        ₹1.18L
+                                    </span>
+
+                                </div>
+
+                                <span class="revenue-month">
+                                    Aug
+                                </span>
+
+                            </div>
+
+
+                            <div class="revenue-column">
+
+                                <div
+                                    class="revenue-bar"
+                                    style="height:91%;"
+                                >
+
+                                    <span class="revenue-tooltip">
+                                        ₹1.46L
+                                    </span>
+
+                                </div>
+
+                                <span class="revenue-month">
+                                    Sep
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ORDERS -->
+
+                <article class="business-card">
+
+                    <div class="card-head">
+
+                        <div>
+
+                            <h3 class="card-title">
+                                Orders
+                            </h3>
+
+                            <p class="card-note">
+                                Completed and active orders
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="orders-chart">
+
+
+                        <div class="orders-month">
+
+                            <span class="orders-month-label">
+                                Apr
+                            </span>
+
+                            <div class="orders-track">
+                                <div
+                                    class="orders-fill"
+                                    style="width:43%;"
+                                ></div>
+                            </div>
+
+                            <span class="orders-number">
+                                18
+                            </span>
+
+                        </div>
+
+
+                        <div class="orders-month">
+
+                            <span class="orders-month-label">
+                                May
+                            </span>
+
+                            <div class="orders-track">
+                                <div
+                                    class="orders-fill"
+                                    style="width:54%;"
+                                ></div>
+                            </div>
+
+                            <span class="orders-number">
+                                23
+                            </span>
+
+                        </div>
+
+
+                        <div class="orders-month">
+
+                            <span class="orders-month-label">
+                                Jun
+                            </span>
+
+                            <div class="orders-track">
+                                <div
+                                    class="orders-fill"
+                                    style="width:63%;"
+                                ></div>
+                            </div>
+
+                            <span class="orders-number">
+                                27
+                            </span>
+
+                        </div>
+
+
+                        <div class="orders-month">
+
+                            <span class="orders-month-label">
+                                Jul
+                            </span>
+
+                            <div class="orders-track">
+                                <div
+                                    class="orders-fill"
+                                    style="width:71%;"
+                                ></div>
+                            </div>
+
+                            <span class="orders-number">
+                                31
+                            </span>
+
+                        </div>
+
+
+                        <div class="orders-month">
+
+                            <span class="orders-month-label">
+                                Aug
+                            </span>
+
+                            <div class="orders-track">
+                                <div
+                                    class="orders-fill"
+                                    style="width:84%;"
+                                ></div>
+                            </div>
+
+                            <span class="orders-number">
+                                39
+                            </span>
+
+                        </div>
+
+
+                        <div class="orders-month">
+
+                            <span class="orders-month-label">
+                                Sep
+                            </span>
+
+                            <div class="orders-track">
+                                <div
+                                    class="orders-fill"
+                                    style="width:100%;"
+                                ></div>
+                            </div>
+
+                            <span class="orders-number">
+                                48
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             ANALYTICS
+             ===================================================== -->
+
+        <section class="business-section">
+
+            <div class="business-section-head">
+
+                <div>
+
+                    <p class="section-kicker">
+                        Deeper view
+                    </p>
+
+                    <h2 class="section-title">
+                        Where the value comes from
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="analytics-grid">
+
+
+                <!-- TOP PRODUCTS -->
+
+                <article class="business-card">
+
+                    <div class="card-head">
+
+                        <div>
+
+                            <h3 class="card-title">
+                                Top products
+                            </h3>
+
+                            <p class="card-note">
+                                Based on prototype sales data
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="product-ranking">
+
+
+                        <div class="product-rank">
+
+                            <div class="rank-number">
+                                1
+                            </div>
+
+                            <div>
+
+                                <div class="product-rank-name">
+                                    Handcrafted Jute Bags
+                                </div>
+
+                                <div class="product-rank-bar">
+                                    <span style="width:91%;"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="product-rank-value">
+                                ₹42.8K
+                            </div>
+
+                        </div>
+
+
+                        <div class="product-rank">
+
+                            <div class="rank-number">
+                                2
+                            </div>
+
+                            <div>
+
+                                <div class="product-rank-name">
+                                    Bamboo Storage Baskets
+                                </div>
+
+                                <div class="product-rank-bar">
+                                    <span
+                                        style="width:76%;"
+                                    ></span>
+                                </div>
+
+                            </div>
+
+                            <div class="product-rank-value">
+                                ₹31.4K
+                            </div>
+
+                        </div>
+
+
+                        <div class="product-rank">
+
+                            <div class="rank-number">
+                                3
+                            </div>
+
+                            <div>
+
+                                <div class="product-rank-name">
+                                    Cotton Handwoven Scarves
+                                </div>
+
+                                <div class="product-rank-bar">
+                                    <span
+                                        style="width:63%;"
+                                    ></span>
+                                </div>
+
+                            </div>
+
+                            <div class="product-rank-value">
+                                ₹24.7K
+                            </div>
+
+                        </div>
+
+
+                        <div class="product-rank">
+
+                            <div class="rank-number">
+                                4
+                            </div>
+
+                            <div>
+
+                                <div class="product-rank-name">
+                                    Terracotta Tableware
+                                </div>
+
+                                <div class="product-rank-bar">
+                                    <span
+                                        style="width:51%;"
+                                    ></span>
+                                </div>
+
+                            </div>
+
+                            <div class="product-rank-value">
+                                ₹18.9K
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- EXPENSES -->
+
+                <article class="business-card">
+
+                    <div class="card-head">
+
+                        <div>
+
+                            <h3 class="card-title">
+                                Expenses
+                            </h3>
+
+                            <p class="card-note">
+                                Current period · prototype data
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="expense-list">
+
+
+                        <div class="expense-item">
+
+                            <div class="expense-icon">
+                                🌿
+                            </div>
+
+                            <div>
+
+                                <div class="expense-name">
+                                    Raw materials
+                                </div>
+
+                                <div class="expense-progress">
+                                    <span
+                                        style="width:78%;"
+                                    ></span>
+                                </div>
+
+                            </div>
+
+                            <div class="expense-value">
+                                ₹29.4K
+                            </div>
+
+                        </div>
+
+
+                        <div class="expense-item">
+
+                            <div class="expense-icon">
+                                📦
+                            </div>
+
+                            <div>
+
+                                <div class="expense-name">
+                                    Packaging
+                                </div>
+
+                                <div class="expense-progress">
+                                    <span
+                                        style="width:34%;"
+                                    ></span>
+                                </div>
+
+                            </div>
+
+                            <div class="expense-value">
+                                ₹7.8K
+                            </div>
+
+                        </div>
+
+
+                        <div class="expense-item">
+
+                            <div class="expense-icon">
+                                🚚
+                            </div>
+
+                            <div>
+
+                                <div class="expense-name">
+                                    Shipping
+                                </div>
+
+                                <div class="expense-progress">
+                                    <span
+                                        style="width:47%;"
+                                    ></span>
+                                </div>
+
+                            </div>
+
+                            <div class="expense-value">
+                                ₹10.2K
+                            </div>
+
+                        </div>
+
+
+                        <div class="expense-item">
+
+                            <div class="expense-icon">
+                                🧵
+                            </div>
+
+                            <div>
+
+                                <div class="expense-name">
+                                    Production
+                                </div>
+
+                                <div class="expense-progress">
+                                    <span
+                                        style="width:59%;"
+                                    ></span>
+                                </div>
+
+                            </div>
+
+                            <div class="expense-value">
+                                ₹14.1K
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PROFIT -->
+
+                <article class="business-card profit-card">
+
+                    <div class="profit-label">
+                        Estimated business profit
+                    </div>
+
+                    <div class="profit-value">
+                        ₹91,430
+                    </div>
+
+                    <p class="profit-description">
+                        A prototype estimate after the displayed
+                        business expenses.
+                    </p>
+
+
+                    <div class="profit-breakdown">
+
+
+                        <div class="profit-row">
+
+                            <span>
+                                Revenue
+                            </span>
+
+                            <strong>
+                                ₹1,46,430
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profit-row">
+
+                            <span>
+                                Expenses
+                            </span>
+
+                            <strong>
+                                − ₹55,000
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profit-row">
+
+                            <span>
+                                Estimated profit
+                            </span>
+
+                            <strong>
+                                ₹91,430
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- =================================================
+                 AI INSIGHT
+                 ================================================= -->
+
+            <article class="insight-card">
+
+                <div class="insight-content">
+
+                    <span class="insight-label">
+                        Taana-Baana Insight
+                    </span>
+
+
+                    <h2 class="insight-title">
+                        Your business is becoming easier to read.
+                    </h2>
+
+
+                    <p class="insight-text">
+
+                        Your prototype data shows stronger order activity
+                        in September, with jute bags and bamboo baskets
+                        contributing a large share of sales. Inventory
+                        attention is currently concentrated around a few
+                        low-stock products.
+
+                    </p>
+
+
+                    <div class="insight-points">
+
+                        <div class="insight-point">
+                            ✦ Jute bags are a leading product
+                        </div>
+
+                        <div class="insight-point">
+                            📦 Review 8 low-stock products
+                        </div>
+
+                        <div class="insight-point">
+                            ✉ 6 enquiries are pending
+                        </div>
+
+                        <div class="insight-point">
+                            💰 Estimated profit ₹91.4K
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- =====================================================
+             SEASONAL INTELLIGENCE
+             ===================================================== -->
+
+        <section class="business-section">
+
+            <div class="season-card">
+
+                <div>
+
+                    <p class="season-kicker">
+                        Seasonal workspace
+                    </p>
+
+
+                    <h2 class="season-title">
+                        Make your craft season-ready.
+                    </h2>
+
+
+                    <p class="season-text">
+
+                        Prepare your catalogue, product photos,
+                        stock and bulk pricing around upcoming
+                        occasions. These are configurable planning
+                        prompts, not predictions of actual demand.
+
+                    </p>
+
+                </div>
+
+
+                <div class="season-options">
+
+
+                    <button
+                        type="button"
+                        class="season-option season-action"
+                        data-action="Onam collection"
+                    >
+
+                        <span>
+                            ✦
+                        </span>
+
+                        Onam Collection
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="season-option season-action"
+                        data-action="Diwali collection"
+                    >
+
+                        <span>
+                            ◇
+                        </span>
+
+                        Diwali Collection
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="season-option season-action"
+                        data-action="Wedding collection"
+                    >
+
+                        <span>
+                            ♢
+                        </span>
+
+                        Wedding Season
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="season-option season-action"
+                        data-action="Corporate gifting"
+                    >
+
+                        <span>
+                            □
+                        </span>
+
+                        Corporate Gifting
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="season-option season-action"
+                        data-action="Catalogue update"
+                    >
+
+                        <span>
+                            ◎
+                        </span>
+
+                        Update Catalogue
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="season-option season-action"
+                        data-action="Bulk pricing"
+                    >
+
+                        <span>
+                            ₹
+                        </span>
+
+                        Bulk Pricing
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             QUICK ACTIONS
+             ===================================================== -->
+
+        <section class="business-section">
+
+            <div class="business-section-head">
+
+                <div>
+
+                    <p class="section-kicker">
+                        Keep building
+                    </p>
+
+                    <h2 class="section-title">
+                        Business tools
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="business-quick-actions">
+
+
+                <a
+                    href="inventory.html"
+                    class="quick-card"
+                >
+
+                    <span class="quick-card-icon">
+                        📦
+                    </span>
+
+                    <span class="quick-card-name">
+                        Inventory
+                    </span>
+
+                    <span class="quick-card-arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="artisan-orders.html"
+                    class="quick-card"
+                >
+
+                    <span class="quick-card-icon">
+                        ◎
+                    </span>
+
+                    <span class="quick-card-name">
+                        Orders
+                    </span>
+
+                    <span class="quick-card-arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="artisans-enquiries.html"
+                    class="quick-card"
+                >
+
+                    <span class="quick-card-icon">
+                        ✉
+                    </span>
+
+                    <span class="quick-card-name">
+                        Enquiries
+                    </span>
+
+                    <span class="quick-card-arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="pricing.html"
+                    class="quick-card"
+                >
+
+                    <span class="quick-card-icon">
+                        ₹
+                    </span>
+
+                    <span class="quick-card-name">
+                        Smart Pricing
+                    </span>
+
+                    <span class="quick-card-arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="artisan-earnings.html"
+                    class="quick-card"
+                >
+
+                    <span class="quick-card-icon">
+                        ↗
+                    </span>
+
+                    <span class="quick-card-name">
+                        Earnings
+                    </span>
+
+                    <span class="quick-card-arrow">
+                        →
+                    </span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- =============================================================
+     AI BUSINESS MANAGER BUTTON
+     ============================================================= -->
+
+<button
+    type="button"
+    class="business-ai-button"
+    id="businessAiButton"
+    aria-label="Ask Taana-Baana"
+>
+
+    <span class="ai-pulse"></span>
+
+    Ask Taana-Baana
+
+</button>
+
+
+<!-- =============================================================
+     AI MODAL
+     ============================================================= -->
+
+<div
+    class="business-modal"
+    id="businessAiModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="businessAiTitle"
+>
+
+    <div class="business-modal-box">
+
+        <div class="business-modal-head">
+
+            <h2
+                class="business-modal-title"
+                id="businessAiTitle"
+            >
+                Ask Taana-Baana
+            </h2>
+
+
+            <button
+                type="button"
+                class="business-modal-close"
+                id="businessAiClose"
+                aria-label="Close AI assistant"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="ai-conversation">
+
+            <div class="ai-message ai-message-bot">
+
+                Namaste! I can help you understand your
+                business and decide what to work on next.
+
+            </div>
+
+
+            <div class="ai-message ai-message-user">
+
+                Which product is doing well?
+
+            </div>
+
+
+            <div class="ai-message ai-message-bot">
+
+                In this prototype, Handcrafted Jute Bags have
+                the highest recorded sales value at ₹42.8K.
+                Bamboo Storage Baskets follow at ₹31.4K.
+
+            </div>
+
+        </div>
+
+
+        <div class="ai-command-list">
+
+            <button
+                type="button"
+                class="ai-command"
+                data-command="Show my orders"
+            >
+                Show my orders
+            </button>
+
+
+            <button
+                type="button"
+                class="ai-command"
+                data-command="Which product sells the most?"
+            >
+                Which product sells the most?
+            </button>
+
+
+            <button
+                type="button"
+                class="ai-command"
+                data-command="How much did I earn?"
+            >
+                How much did I earn?
+            </button>
+
+
+            <button
+                type="button"
+                class="ai-command"
+                data-command="Which products need more stock?"
+            >
+                Which products need more stock?
+            </button>
+
+
+            <button
+                type="button"
+                class="ai-command"
+                data-command="Suggest a price"
+            >
+                Suggest a price
+            </button>
+
+
+            <button
+                type="button"
+                class="ai-command"
+                data-command="Find bulk buyers"
+            >
+                Find bulk buyers
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =============================================================
+     TOAST
+     ============================================================= -->
+
+<div
+    class="business-toast"
+    id="businessToast"
+    role="status"
+    aria-live="polite"
+></div>
+
+
+<!-- =============================================================
+     SHARED SCRIPTS
+     ============================================================= -->
+
+<script src="../js/main.js" defer></script>
+<script src="../js/pages.js" defer></script>
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+
+        /* =====================================================
+           ELEMENTS
+           ===================================================== */
+
+        const aiButton =
+            document.getElementById(
+                "businessAiButton"
+            );
+
+
+        const aiModal =
+            document.getElementById(
+                "businessAiModal"
+            );
+
+
+        const aiClose =
+            document.getElementById(
+                "businessAiClose"
+            );
+
+
+        const toast =
+            document.getElementById(
+                "businessToast"
+            );
+
+
+        const exportButton =
+            document.getElementById(
+                "exportBusinessReport"
+            );
+
+
+        const askInsightButton =
+            document.getElementById(
+                "askInsightButton"
+            );
+
+
+        /* =====================================================
+           TOAST
+           ===================================================== */
+
+        function showToast(message) {
+
+            toast.textContent =
+                message;
+
+            toast.classList.add(
+                "show"
+            );
+
+
+            clearTimeout(
+                window.tbBusinessToast
+            );
+
+
+            window.tbBusinessToast =
+                setTimeout(
+                    () => {
+
+                        toast.classList.remove(
+                            "show"
+                        );
+
+                    },
+                    2800
+                );
+
+        }
+
+
+        /* =====================================================
+           AI MODAL
+           ===================================================== */
+
+        function openAi() {
+
+            aiModal.classList.add(
+                "open"
+            );
+
+            document.body.style.overflow =
+                "hidden";
+
+        }
+
+
+        function closeAi() {
+
+            aiModal.classList.remove(
+                "open"
+            );
+
+            document.body.style.overflow =
+                "";
+
+        }
+
+
+        aiButton.addEventListener(
+            "click",
+            openAi
+        );
+
+
+        askInsightButton.addEventListener(
+            "click",
+            openAi
+        );
+
+
+        aiClose.addEventListener(
+            "click",
+            closeAi
+        );
+
+
+        aiModal.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    event.target === aiModal
+                ) {
+
+                    closeAi();
+
+                }
+
+            }
+        );
+
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Escape" &&
+                    aiModal.classList.contains(
+                        "open"
+                    )
+                ) {
+
+                    closeAi();
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           AI COMMANDS
+           ===================================================== */
+
+        document
+            .querySelectorAll(
+                ".ai-command"
+            )
+            .forEach(
+                command => {
+
+                    command.addEventListener(
+                        "click",
+                        () => {
+
+                            const query =
+                                command.dataset.command;
+
+
+                            const conversation =
+                                document.querySelector(
+                                    ".ai-conversation"
+                                );
+
+
+                            const userMessage =
+                                document.createElement(
+                                    "div"
+                                );
+
+
+                            userMessage.className =
+                                "ai-message ai-message-user";
+
+
+                            userMessage.textContent =
+                                query;
+
+
+                            conversation.appendChild(
+                                userMessage
+                            );
+
+
+                            const botMessage =
+                                document.createElement(
+                                    "div"
+                                );
+
+
+                            botMessage.className =
+                                "ai-message ai-message-bot";
+
+
+                            let response =
+                                "I can help with that. " +
+                                "This prototype is using " +
+                                "demo business data for now.";
+
+
+                            if (
+                                query ===
+                                "Show my orders"
+                            ) {
+
+                                response =
+                                    "You currently have " +
+                                    "48 recorded orders, " +
+                                    "with active orders visible " +
+                                    "in your Orders workspace.";
+
+                            }
+
+
+                            if (
+                                query ===
+                                "Which product sells the most?"
+                            ) {
+
+                                response =
+                                    "Handcrafted Jute Bags " +
+                                    "have the highest recorded " +
+                                    "sales value in this prototype: " +
+                                    "₹42.8K.";
+
+                            }
+
+
+                            if (
+                                query ===
+                                "How much did I earn?"
+                            ) {
+
+                                response =
+                                    "Your prototype dashboard " +
+                                    "shows ₹1.46L revenue and " +
+                                    "an estimated ₹91.4K profit.";
+
+                            }
+
+
+                            if (
+                                query ===
+                                "Which products need more stock?"
+                            ) {
+
+                                response =
+                                    "Your Inventory workspace " +
+                                    "currently flags 8 low-stock " +
+                                    "items for review.";
+
+                            }
+
+
+                            if (
+                                query ===
+                                "Suggest a price"
+                            ) {
+
+                                response =
+                                    "Open Smart Pricing to calculate " +
+                                    "a transparent price using material, " +
+                                    "labour, costs and margin.";
+
+                            }
+
+
+                            if (
+                                query ===
+                                "Find bulk buyers"
+                            ) {
+
+                                response =
+                                    "Open the B2B workspace to create " +
+                                    "a sourcing requirement and explore " +
+                                    "the prototype matching flow.";
+
+                            }
+
+
+                            botMessage.textContent =
+                                response;
+
+
+                            conversation.appendChild(
+                                botMessage
+                            );
+
+
+                            conversation.scrollTop =
+                                conversation.scrollHeight;
+
+                        }
+                    );
+
+                }
+            );
+
+
+        /* =====================================================
+           EXPORT REPORT
+           ===================================================== */
+
+        exportButton.addEventListener(
+            "click",
+            () => {
+
+                const report = {
+
+                    title:
+                        "Taana-Baana Business Report",
+
+                    period:
+                        "September 2026",
+
+                    revenue:
+                        146430,
+
+                    orders:
+                        48,
+
+                    products:
+                        17,
+
+                    estimatedProfit:
+                        91430,
+
+                    pendingEnquiries:
+                        6,
+
+                    lowStockItems:
+                        8,
+
+                    note:
+                        "Prototype demo data"
+
+                };
+
+
+                const blob =
+                    new Blob(
+                        [
+                            JSON.stringify(
+                                report,
+                                null,
+                                2
+                            )
+                        ],
+                        {
+                            type:
+                                "application/json"
+                        }
+                    );
+
+
+                const url =
+                    URL.createObjectURL(
+                        blob
+                    );
+
+
+                const link =
+                    document.createElement(
+                        "a"
+                    );
+
+
+                link.href =
+                    url;
+
+
+                link.download =
+                    "taana-baana-business-report.json";
+
+
+                document.body.appendChild(
+                    link
+                );
+
+
+                link.click();
+
+
+                link.remove();
+
+
+                URL.revokeObjectURL(
+                    url
+                );
+
+
+                showToast(
+                    "Business report exported successfully."
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           SEASONAL ACTIONS
+           ===================================================== */
+
+        document
+            .querySelectorAll(
+                ".season-action"
+            )
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            const action =
+                                button.dataset.action;
+
+
+                            showToast(
+                                `${action} workspace is ready to configure.`
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+        /* =====================================================
+           SIMPLE REVEAL
+           ===================================================== */
+
+        const reduceMotion =
+            window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            ).matches;
+
+
+        if (!reduceMotion) {
+
+            const items =
+                document.querySelectorAll(
+                    ".business-stat, .business-card, .insight-card, .season-card, .quick-card"
+                );
+
+
+            items.forEach(
+                (item, index) => {
+
+                    item.style.opacity =
+                        "0";
+
+                    item.style.transform =
+                        "translateY(14px)";
+
+
+                    item.style.transition =
+                        `opacity .5s ease ${Math.min(index * 35, 300)}ms,
+                         transform .5s ease ${Math.min(index * 35, 300)}ms`;
+
+
+                    requestAnimationFrame(
+                        () => {
+
+                            setTimeout(
+                                () => {
+
+                                    item.style.opacity =
+                                        "1";
+
+                                    item.style.transform =
+                                        "translateY(0)";
+
+                                },
+                                70
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>

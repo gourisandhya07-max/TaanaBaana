@@ -1,0 +1,2984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Taana-Baana Inventory — Simple AI-assisted inventory management for artisans."
+    >
+
+    <title>Inventory | Taana-Baana</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+
+    <style>
+        /* =========================================================
+           TAANA-BAANA — INVENTORY
+           Frontend prototype
+           ========================================================= */
+
+        :root {
+            --tb-ivory: #fcf6ea;
+            --tb-cream: #fff9f0;
+            --tb-brown: #3b2922;
+            --tb-deep: #2a1d18;
+            --tb-terracotta: #c96f4a;
+            --tb-terracotta-dark: #a95338;
+            --tb-sage: #879b76;
+            --tb-olive: #687557;
+            --tb-gold: #c9a65b;
+            --tb-sand: #e8d7bc;
+            --tb-pale-sage: #dce2d2;
+            --tb-pale-terra: #ebc5b5;
+            --tb-indigo: #274c77;
+            --tb-pink: #c43d73;
+            --tb-marigold: #e9a23b;
+            --tb-peacock: #0f7c78;
+            --tb-green: #3e7c59;
+            --tb-plum: #6d3b63;
+            --tb-white: #ffffff;
+            --tb-shadow: 0 18px 50px rgba(59, 41, 34, 0.09);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at 5% 10%, rgba(233, 162, 59, 0.12), transparent 22rem),
+                radial-gradient(circle at 95% 20%, rgba(15, 124, 120, 0.09), transparent 24rem),
+                var(--tb-ivory);
+            color: var(--tb-brown);
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .inventory-page {
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+
+        /* ---------------------------------------------------------
+           PAGE WRAPPER
+           --------------------------------------------------------- */
+
+        .inventory-shell {
+            width: min(1400px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        .inventory-breadcrumb {
+            padding-top: 28px;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 13px;
+            color: rgba(59, 41, 34, 0.58);
+        }
+
+        .inventory-breadcrumb a {
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .inventory-breadcrumb a:hover {
+            color: var(--tb-terracotta);
+        }
+
+        .inventory-breadcrumb span {
+            opacity: 0.45;
+        }
+
+        /* ---------------------------------------------------------
+           HERO
+           --------------------------------------------------------- */
+
+        .inventory-hero {
+            margin-top: 24px;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 360px;
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        .inventory-hero-main {
+            position: relative;
+            overflow: hidden;
+            min-height: 270px;
+            padding: 42px;
+            border-radius: 30px;
+            background:
+                linear-gradient(135deg, rgba(255,255,255,0.94), rgba(255,249,240,0.92)),
+                var(--tb-cream);
+            border: 1px solid rgba(59, 41, 34, 0.08);
+            box-shadow: var(--tb-shadow);
+        }
+
+        .inventory-hero-main::before {
+            content: "";
+            position: absolute;
+            width: 230px;
+            height: 230px;
+            border: 1px solid rgba(201, 166, 91, 0.35);
+            border-radius: 50%;
+            right: -80px;
+            top: -100px;
+        }
+
+        .inventory-hero-main::after {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 1px dashed rgba(201, 111, 74, 0.28);
+            border-radius: 50%;
+            right: 30px;
+            bottom: -95px;
+        }
+
+        .inventory-eyebrow {
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--tb-terracotta-dark);
+        }
+
+        .inventory-eyebrow::before {
+            content: "✦";
+            color: var(--tb-gold);
+            font-size: 15px;
+        }
+
+        .inventory-title {
+            position: relative;
+            z-index: 1;
+            margin: 0;
+            max-width: 720px;
+            font-family: "Playfair Display", serif;
+            font-size: clamp(38px, 5vw, 64px);
+            line-height: 1;
+            letter-spacing: -0.035em;
+            color: var(--tb-deep);
+        }
+
+        .inventory-title em {
+            color: var(--tb-terracotta);
+            font-weight: 500;
+        }
+
+        .inventory-description {
+            position: relative;
+            z-index: 1;
+            max-width: 650px;
+            margin: 20px 0 0;
+            font-size: 15px;
+            line-height: 1.75;
+            color: rgba(59, 41, 34, 0.67);
+        }
+
+        .inventory-actions {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 11px;
+            margin-top: 27px;
+        }
+
+        .inventory-btn {
+            border: 0;
+            border-radius: 13px;
+            padding: 12px 17px;
+            font: inherit;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .inventory-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .inventory-btn-primary {
+            background: var(--tb-brown);
+            color: white;
+            box-shadow: 0 10px 25px rgba(59, 41, 34, 0.15);
+        }
+
+        .inventory-btn-secondary {
+            background: var(--tb-pale-terra);
+            color: var(--tb-brown);
+        }
+
+        .inventory-btn-outline {
+            background: transparent;
+            color: var(--tb-brown);
+            border: 1px solid rgba(59, 41, 34, 0.16);
+        }
+
+        /* ---------------------------------------------------------
+           INVENTORY VALUE CARD
+           --------------------------------------------------------- */
+
+        .inventory-value-card {
+            position: relative;
+            overflow: hidden;
+            padding: 31px;
+            border-radius: 30px;
+            background: var(--tb-brown);
+            color: white;
+            box-shadow: var(--tb-shadow);
+        }
+
+        .inventory-value-card::before {
+            content: "";
+            position: absolute;
+            width: 190px;
+            height: 190px;
+            border: 1px solid rgba(255,255,255,0.13);
+            border-radius: 50%;
+            right: -65px;
+            top: -60px;
+        }
+
+        .inventory-value-card::after {
+            content: "";
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            border: 1px dashed rgba(201, 166, 91, 0.4);
+            border-radius: 50%;
+            right: 40px;
+            bottom: -60px;
+        }
+
+        .value-label {
+            position: relative;
+            z-index: 1;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            opacity: 0.62;
+        }
+
+        .value-amount {
+            position: relative;
+            z-index: 1;
+            margin-top: 13px;
+            font-family: "Playfair Display", serif;
+            font-size: 42px;
+            line-height: 1;
+        }
+
+        .value-note {
+            position: relative;
+            z-index: 1;
+            margin-top: 14px;
+            font-size: 12px;
+            line-height: 1.6;
+            opacity: 0.65;
+        }
+
+        .value-mini-row {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 27px;
+        }
+
+        .value-mini {
+            padding: 13px;
+            border-radius: 15px;
+            background: rgba(255,255,255,0.08);
+        }
+
+        .value-mini strong {
+            display: block;
+            font-size: 17px;
+        }
+
+        .value-mini span {
+            display: block;
+            margin-top: 3px;
+            font-size: 10px;
+            opacity: 0.58;
+        }
+
+        /* ---------------------------------------------------------
+           STATS
+           --------------------------------------------------------- */
+
+        .inventory-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 18px;
+        }
+
+        .inventory-stat {
+            position: relative;
+            overflow: hidden;
+            padding: 23px;
+            border-radius: 21px;
+            background: rgba(255,255,255,0.82);
+            border: 1px solid rgba(59,41,34,0.08);
+            box-shadow: 0 10px 30px rgba(59,41,34,0.05);
+        }
+
+        .inventory-stat::after {
+            content: "";
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            right: -25px;
+            bottom: -25px;
+            background: rgba(201,166,91,0.11);
+        }
+
+        .stat-icon {
+            width: 39px;
+            height: 39px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: var(--tb-pale-sage);
+            font-size: 18px;
+        }
+
+        .inventory-stat:nth-child(2) .stat-icon {
+            background: #f5dfc7;
+        }
+
+        .inventory-stat:nth-child(3) .stat-icon {
+            background: #d8e6e5;
+        }
+
+        .inventory-stat:nth-child(4) .stat-icon {
+            background: #ead9e7;
+        }
+
+        .stat-number {
+            margin-top: 15px;
+            font-family: "Playfair Display", serif;
+            font-size: 31px;
+            color: var(--tb-deep);
+        }
+
+        .stat-label {
+            margin-top: 3px;
+            font-size: 12px;
+            color: rgba(59,41,34,0.56);
+        }
+
+        /* ---------------------------------------------------------
+           SECTION HEADING
+           --------------------------------------------------------- */
+
+        .inventory-section {
+            margin-top: 48px;
+        }
+
+        .inventory-section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 20px;
+            margin-bottom: 18px;
+        }
+
+        .section-kicker {
+            margin: 0 0 6px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            font-weight: 700;
+            color: var(--tb-terracotta-dark);
+        }
+
+        .section-title {
+            margin: 0;
+            font-family: "Playfair Display", serif;
+            font-size: 31px;
+            color: var(--tb-deep);
+        }
+
+        .section-subtitle {
+            margin: 6px 0 0;
+            max-width: 680px;
+            font-size: 13px;
+            line-height: 1.65;
+            color: rgba(59,41,34,0.58);
+        }
+
+        /* ---------------------------------------------------------
+           ALERTS
+           --------------------------------------------------------- */
+
+        .inventory-alert {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 19px 22px;
+            border-radius: 19px;
+            background: #fff1df;
+            border: 1px solid rgba(233,162,59,0.28);
+            margin-bottom: 20px;
+        }
+
+        .alert-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .alert-symbol {
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 13px;
+            background: var(--tb-marigold);
+            color: white;
+            font-size: 19px;
+        }
+
+        .alert-title {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .alert-text {
+            margin: 3px 0 0;
+            font-size: 12px;
+            color: rgba(59,41,34,0.59);
+        }
+
+        .alert-link {
+            flex-shrink: 0;
+            border: 0;
+            background: transparent;
+            color: var(--tb-terracotta-dark);
+            font: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* ---------------------------------------------------------
+           INVENTORY TOOLBAR
+           --------------------------------------------------------- */
+
+        .inventory-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 11px;
+            padding: 15px;
+            margin-bottom: 16px;
+            border-radius: 19px;
+            background: rgba(255,255,255,0.82);
+            border: 1px solid rgba(59,41,34,0.08);
+        }
+
+        .inventory-search {
+            position: relative;
+            flex: 1 1 270px;
+        }
+
+        .inventory-search span {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            opacity: 0.5;
+        }
+
+        .inventory-search input,
+        .inventory-select {
+            width: 100%;
+            height: 44px;
+            border: 1px solid rgba(59,41,34,0.12);
+            border-radius: 12px;
+            background: #fffdf9;
+            color: var(--tb-brown);
+            outline: none;
+            font: inherit;
+            font-size: 12px;
+        }
+
+        .inventory-search input {
+            padding: 0 14px 0 40px;
+        }
+
+        .inventory-search input:focus,
+        .inventory-select:focus {
+            border-color: rgba(201,111,74,0.55);
+            box-shadow: 0 0 0 3px rgba(201,111,74,0.08);
+        }
+
+        .inventory-select {
+            width: 165px;
+            padding: 0 12px;
+        }
+
+        /* ---------------------------------------------------------
+           INVENTORY TABLE
+           --------------------------------------------------------- */
+
+        .inventory-table-wrap {
+            overflow-x: auto;
+            border-radius: 23px;
+            background: rgba(255,255,255,0.88);
+            border: 1px solid rgba(59,41,34,0.08);
+            box-shadow: 0 12px 35px rgba(59,41,34,0.05);
+        }
+
+        .inventory-table {
+            width: 100%;
+            min-width: 950px;
+            border-collapse: collapse;
+        }
+
+        .inventory-table th {
+            padding: 16px 18px;
+            text-align: left;
+            white-space: nowrap;
+            background: rgba(232,215,188,0.24);
+            border-bottom: 1px solid rgba(59,41,34,0.08);
+            color: rgba(59,41,34,0.54);
+            font-size: 10px;
+            letter-spacing: 0.11em;
+            text-transform: uppercase;
+        }
+
+        .inventory-table td {
+            padding: 17px 18px;
+            border-bottom: 1px solid rgba(59,41,34,0.065);
+            font-size: 12px;
+            vertical-align: middle;
+        }
+
+        .inventory-table tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .inventory-table tbody tr {
+            transition: background 0.2s ease;
+        }
+
+        .inventory-table tbody tr:hover {
+            background: rgba(252,246,234,0.75);
+        }
+
+        .product-cell {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 220px;
+        }
+
+        .product-art {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            font-size: 22px;
+            background:
+                linear-gradient(135deg, #e8d7bc, #f4dfca);
+        }
+
+        .product-art.sage {
+            background: #dce2d2;
+        }
+
+        .product-art.blue {
+            background: #d8e4ef;
+        }
+
+        .product-art.pink {
+            background: #ead7df;
+        }
+
+        .product-name {
+            font-weight: 700;
+            color: var(--tb-deep);
+        }
+
+        .product-category {
+            margin-top: 4px;
+            font-size: 10px;
+            color: rgba(59,41,34,0.48);
+        }
+
+        .stock-number {
+            font-weight: 700;
+        }
+
+        .stock-bar {
+            width: 105px;
+            height: 5px;
+            margin-top: 7px;
+            overflow: hidden;
+            border-radius: 99px;
+            background: #eadfd1;
+        }
+
+        .stock-fill {
+            height: 100%;
+            border-radius: inherit;
+            background: var(--tb-sage);
+        }
+
+        .stock-fill.low {
+            background: var(--tb-marigold);
+        }
+
+        .stock-fill.critical {
+            background: var(--tb-pink);
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 10px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .status-pill::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .status-good {
+            color: var(--tb-green);
+            background: #e2eddf;
+        }
+
+        .status-low {
+            color: #a56b15;
+            background: #f8e8c7;
+        }
+
+        .status-critical {
+            color: #a23c61;
+            background: #f4dce5;
+        }
+
+        .row-action {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(59,41,34,0.1);
+            border-radius: 10px;
+            background: white;
+            color: var(--tb-brown);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .row-action:hover {
+            background: var(--tb-brown);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        /* ---------------------------------------------------------
+           LOWER GRID
+           --------------------------------------------------------- */
+
+        .inventory-lower-grid {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 20px;
+        }
+
+        .inventory-card {
+            padding: 26px;
+            border-radius: 24px;
+            background: rgba(255,255,255,0.84);
+            border: 1px solid rgba(59,41,34,0.08);
+            box-shadow: 0 12px 35px rgba(59,41,34,0.05);
+        }
+
+        .card-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+
+        .card-title {
+            margin: 0;
+            font-family: "Playfair Display", serif;
+            font-size: 24px;
+            color: var(--tb-deep);
+        }
+
+        .card-small {
+            margin: 5px 0 0;
+            font-size: 11px;
+            line-height: 1.55;
+            color: rgba(59,41,34,0.53);
+        }
+
+        .ai-badge {
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: #e8e0ed;
+            color: var(--tb-plum);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        /* ---------------------------------------------------------
+           RESTOCK ITEMS
+           --------------------------------------------------------- */
+
+        .restock-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .restock-item {
+            display: grid;
+            grid-template-columns: 44px minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 12px;
+            padding: 13px;
+            border-radius: 15px;
+            background: #fffaf4;
+            border: 1px solid rgba(59,41,34,0.06);
+        }
+
+        .restock-icon {
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: var(--tb-pale-terra);
+            font-size: 19px;
+        }
+
+        .restock-name {
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .restock-reason {
+            margin-top: 4px;
+            font-size: 10px;
+            color: rgba(59,41,34,0.5);
+        }
+
+        .restock-quantity {
+            text-align: right;
+        }
+
+        .restock-quantity strong {
+            display: block;
+            font-size: 13px;
+            color: var(--tb-terracotta-dark);
+        }
+
+        .restock-quantity span {
+            display: block;
+            margin-top: 3px;
+            font-size: 9px;
+            color: rgba(59,41,34,0.45);
+        }
+
+        /* ---------------------------------------------------------
+           RAW MATERIALS
+           --------------------------------------------------------- */
+
+        .material-list {
+            display: grid;
+            gap: 13px;
+        }
+
+        .material-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .material-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .material-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--tb-terracotta);
+        }
+
+        .material-row:nth-child(2) .material-dot {
+            background: var(--tb-indigo);
+        }
+
+        .material-row:nth-child(3) .material-dot {
+            background: var(--tb-gold);
+        }
+
+        .material-row:nth-child(4) .material-dot {
+            background: var(--tb-green);
+        }
+
+        .material-name {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .material-stock {
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .material-progress {
+            grid-column: 1 / -1;
+            height: 7px;
+            overflow: hidden;
+            border-radius: 99px;
+            background: #ece4d9;
+        }
+
+        .material-progress span {
+            display: block;
+            height: 100%;
+            border-radius: inherit;
+            background: var(--tb-sage);
+        }
+
+        .material-row:nth-child(2) .material-progress span {
+            background: var(--tb-indigo);
+        }
+
+        .material-row:nth-child(3) .material-progress span {
+            background: var(--tb-gold);
+        }
+
+        .material-row:nth-child(4) .material-progress span {
+            background: var(--tb-green);
+        }
+
+        /* ---------------------------------------------------------
+           AI INSIGHT
+           --------------------------------------------------------- */
+
+        .inventory-ai-card {
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+            padding: 27px;
+            border-radius: 24px;
+            background:
+                linear-gradient(135deg, #274c77, #3f6389);
+            color: white;
+            box-shadow: 0 18px 45px rgba(39,76,119,0.17);
+        }
+
+        .inventory-ai-card::before {
+            content: "";
+            position: absolute;
+            width: 210px;
+            height: 210px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 50%;
+            right: -80px;
+            top: -110px;
+        }
+
+        .inventory-ai-card::after {
+            content: "✦";
+            position: absolute;
+            right: 38px;
+            bottom: 25px;
+            font-size: 30px;
+            color: rgba(255,255,255,0.2);
+        }
+
+        .ai-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .ai-label {
+            display: inline-flex;
+            padding: 6px 9px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.12);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .ai-title {
+            margin: 14px 0 0;
+            font-family: "Playfair Display", serif;
+            font-size: 27px;
+        }
+
+        .ai-text {
+            margin: 9px 0 0;
+            max-width: 680px;
+            font-size: 12px;
+            line-height: 1.7;
+            opacity: 0.78;
+        }
+
+        .ai-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 18px;
+        }
+
+        .ai-suggestion {
+            padding: 9px 12px;
+            border-radius: 11px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.11);
+            font-size: 10px;
+        }
+
+        /* ---------------------------------------------------------
+           QUICK ACTIONS
+           --------------------------------------------------------- */
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 13px;
+        }
+
+        .quick-action {
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 17px;
+            border-radius: 17px;
+            text-decoration: none;
+            background: rgba(255,255,255,0.82);
+            border: 1px solid rgba(59,41,34,0.08);
+            transition:
+                transform 0.22s ease,
+                box-shadow 0.22s ease;
+        }
+
+        .quick-action:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 13px 30px rgba(59,41,34,0.09);
+        }
+
+        .quick-icon {
+            width: 35px;
+            height: 35px;
+            display: grid;
+            place-items: center;
+            border-radius: 10px;
+            background: var(--tb-pale-terra);
+        }
+
+        .quick-action:nth-child(2) .quick-icon {
+            background: var(--tb-pale-sage);
+        }
+
+        .quick-action:nth-child(3) .quick-icon {
+            background: #e1e7ef;
+        }
+
+        .quick-action:nth-child(4) .quick-icon {
+            background: #eaddea;
+        }
+
+        .quick-name {
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .quick-arrow {
+            color: rgba(59,41,34,0.42);
+            font-size: 15px;
+        }
+
+        /* ---------------------------------------------------------
+           MODAL
+           --------------------------------------------------------- */
+
+        .inventory-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(42,29,24,0.52);
+            backdrop-filter: blur(7px);
+        }
+
+        .inventory-modal.open {
+            display: flex;
+        }
+
+        .modal-box {
+            width: min(520px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 28px;
+            border-radius: 25px;
+            background: var(--tb-cream);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.22);
+            animation: modalIn 0.25s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: translateY(18px) scale(0.97);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            align-items: start;
+        }
+
+        .modal-title {
+            margin: 0;
+            font-family: "Playfair Display", serif;
+            font-size: 27px;
+        }
+
+        .modal-close {
+            width: 35px;
+            height: 35px;
+            border: 0;
+            border-radius: 10px;
+            background: #eee4d8;
+            cursor: pointer;
+            font-size: 17px;
+        }
+
+        .modal-product {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-top: 24px;
+            padding: 15px;
+            border-radius: 15px;
+            background: white;
+        }
+
+        .modal-product-art {
+            width: 55px;
+            height: 55px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            background: var(--tb-pale-terra);
+            font-size: 24px;
+        }
+
+        .modal-product-name {
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .modal-product-stock {
+            margin-top: 4px;
+            font-size: 11px;
+            color: rgba(59,41,34,0.55);
+        }
+
+        .adjust-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 17px;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-field.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-field label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: rgba(59,41,34,0.57);
+        }
+
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            width: 100%;
+            border: 1px solid rgba(59,41,34,0.12);
+            border-radius: 11px;
+            padding: 11px 12px;
+            background: white;
+            color: var(--tb-brown);
+            font: inherit;
+            font-size: 12px;
+            outline: none;
+        }
+
+        .form-field textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 9px;
+            margin-top: 20px;
+        }
+
+        /* ---------------------------------------------------------
+           TOAST
+           --------------------------------------------------------- */
+
+        .inventory-toast {
+            position: fixed;
+            z-index: 10000;
+            right: 22px;
+            bottom: 22px;
+            max-width: 360px;
+            padding: 14px 17px;
+            border-radius: 13px;
+            background: var(--tb-brown);
+            color: white;
+            font-size: 12px;
+            line-height: 1.5;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.18);
+            transform: translateY(20px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.25s ease;
+        }
+
+        .inventory-toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* ---------------------------------------------------------
+           RESPONSIVE
+           --------------------------------------------------------- */
+
+        @media (max-width: 1050px) {
+            .inventory-hero {
+                grid-template-columns: 1fr;
+            }
+
+            .inventory-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .inventory-lower-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .inventory-shell {
+                width: min(100% - 24px, 1400px);
+            }
+
+            .inventory-hero-main,
+            .inventory-value-card {
+                padding: 27px;
+                border-radius: 23px;
+            }
+
+            .inventory-title {
+                font-size: 39px;
+            }
+
+            .inventory-stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .inventory-stat {
+                padding: 17px;
+            }
+
+            .stat-number {
+                font-size: 25px;
+            }
+
+            .inventory-section {
+                margin-top: 35px;
+            }
+
+            .inventory-section-heading {
+                align-items: start;
+                flex-direction: column;
+            }
+
+            .inventory-alert {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .inventory-card {
+                padding: 20px;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .adjust-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-field.full {
+                grid-column: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .inventory-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .inventory-actions {
+                flex-direction: column;
+            }
+
+            .inventory-btn {
+                width: 100%;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .value-mini-row {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="inventory-page">
+
+    <!-- =========================================================
+         NAVIGATION
+         Existing shared navigation styles/scripts remain active.
+         ========================================================= -->
+
+    <header class="site-header">
+        <div class="nav-container">
+
+            <a
+                href="../index.html"
+                class="brand-logo-link"
+                aria-label="Taana-Baana Home"
+            >
+                <img
+                    src="../assets/logo.png"
+                    alt="Taana-Baana — From Hands to Markets"
+                    class="brand-logo"
+                >
+            </a>
+
+            <nav class="main-nav" aria-label="Main navigation">
+
+                <a href="../index.html">Home</a>
+
+                <div class="nav-dropdown">
+                    <button
+                        type="button"
+                        class="nav-dropdown-toggle"
+                        aria-expanded="false"
+                    >
+                        Features
+                        <span>⌄</span>
+                    </button>
+
+                    <div class="nav-dropdown-menu">
+                        <a href="studio.html">AI Product Studio</a>
+                        <a href="catalog.html">AI Cataloger</a>
+                        <a href="pricing.html">Smart Pricing</a>
+                        <a href="marketplace.html">Marketplace</a>
+                    </div>
+                </div>
+
+                <a href="b2b.html">B2B</a>
+                <a href="about.html">About</a>
+
+            </nav>
+
+            <div class="nav-actions">
+                <a href="login.html" class="nav-login">Log In</a>
+                <a href="artisan-dashboard.html" class="nav-cta">
+                    Dashboard
+                </a>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- =========================================================
+         MAIN
+         ========================================================= -->
+
+    <main class="inventory-shell">
+
+        <!-- Breadcrumb -->
+        <div class="inventory-breadcrumb">
+            <a href="artisan-dashboard.html">Artisan Dashboard</a>
+            <span>›</span>
+            <strong>Inventory</strong>
+        </div>
+
+
+        <!-- =====================================================
+             HERO
+             ===================================================== -->
+
+        <section class="inventory-hero">
+
+            <div class="inventory-hero-main">
+
+                <div class="inventory-eyebrow">
+                    Craft business workspace
+                </div>
+
+                <h1 class="inventory-title">
+                    Know what you have.<br>
+                    <em>Plan what comes next.</em>
+                </h1>
+
+                <p class="inventory-description">
+                    Keep products, finished stock and raw materials in one
+                    simple workspace. Taana-Baana helps artisans understand
+                    what is available, what is running low and what may need
+                    to be prepared next.
+                </p>
+
+                <div class="inventory-actions">
+
+                    <button
+                        type="button"
+                        class="inventory-btn inventory-btn-primary"
+                        id="addStockBtn"
+                    >
+                        + Add Stock
+                    </button>
+
+                    <button
+                        type="button"
+                        class="inventory-btn inventory-btn-secondary"
+                        id="adjustStockBtn"
+                    >
+                        Adjust Inventory
+                    </button>
+
+                    <button
+                        type="button"
+                        class="inventory-btn inventory-btn-outline"
+                        id="exportBtn"
+                    >
+                        Export Report
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <aside class="inventory-value-card">
+
+                <div class="value-label">
+                    Estimated inventory value
+                </div>
+
+                <div class="value-amount">
+                    ₹2,84,650
+                </div>
+
+                <p class="value-note">
+                    Approximate value of current finished products and
+                    available stock.
+                </p>
+
+                <div class="value-mini-row">
+
+                    <div class="value-mini">
+                        <strong>₹1.96L</strong>
+                        <span>Finished goods</span>
+                    </div>
+
+                    <div class="value-mini">
+                        <strong>₹88.6K</strong>
+                        <span>Raw materials</span>
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </section>
+
+
+        <!-- =====================================================
+             STATS
+             ===================================================== -->
+
+        <section class="inventory-stats" aria-label="Inventory overview">
+
+            <article class="inventory-stat">
+                <div class="stat-icon">📦</div>
+                <div class="stat-number">126</div>
+                <div class="stat-label">Total units in stock</div>
+            </article>
+
+            <article class="inventory-stat">
+                <div class="stat-icon">⚠️</div>
+                <div class="stat-number">8</div>
+                <div class="stat-label">Low-stock items</div>
+            </article>
+
+            <article class="inventory-stat">
+                <div class="stat-icon">🌿</div>
+                <div class="stat-number">17</div>
+                <div class="stat-label">Raw materials</div>
+            </article>
+
+            <article class="inventory-stat">
+                <div class="stat-icon">🔄</div>
+                <div class="stat-number">24</div>
+                <div class="stat-label">Units reserved for orders</div>
+            </article>
+
+        </section>
+
+
+        <!-- =====================================================
+             CURRENT STOCK
+             ===================================================== -->
+
+        <section class="inventory-section">
+
+            <div class="inventory-section-heading">
+
+                <div>
+                    <p class="section-kicker">Finished products</p>
+
+                    <h2 class="section-title">
+                        Current stock
+                    </h2>
+
+                    <p class="section-subtitle">
+                        A quick view of products currently available,
+                        reserved or approaching their restock level.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- Alert -->
+
+            <div class="inventory-alert">
+
+                <div class="alert-left">
+
+                    <div class="alert-symbol">!</div>
+
+                    <div>
+                        <p class="alert-title">
+                            8 products need attention
+                        </p>
+
+                        <p class="alert-text">
+                            Some products are below the suggested stock level.
+                        </p>
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="alert-link"
+                    id="viewLowStock"
+                >
+                    View low stock →
+                </button>
+
+            </div>
+
+
+            <!-- Toolbar -->
+
+            <div class="inventory-toolbar">
+
+                <div class="inventory-search">
+                    <span>⌕</span>
+
+                    <input
+                        type="search"
+                        id="inventorySearch"
+                        placeholder="Search products..."
+                        aria-label="Search inventory"
+                    >
+                </div>
+
+                <select
+                    class="inventory-select"
+                    id="categoryFilter"
+                    aria-label="Filter by category"
+                >
+                    <option value="all">All categories</option>
+                    <option value="bags">Bags</option>
+                    <option value="textiles">Textiles</option>
+                    <option value="home">Home & Decor</option>
+                    <option value="baskets">Baskets</option>
+                </select>
+
+                <select
+                    class="inventory-select"
+                    id="stockFilter"
+                    aria-label="Filter by stock status"
+                >
+                    <option value="all">All stock levels</option>
+                    <option value="good">Healthy</option>
+                    <option value="low">Low stock</option>
+                    <option value="critical">Critical</option>
+                </select>
+
+            </div>
+
+
+            <!-- Table -->
+
+            <div class="inventory-table-wrap">
+
+                <table class="inventory-table">
+
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Available</th>
+                            <th>Reserved</th>
+                            <th>Unit Value</th>
+                            <th>Total Value</th>
+                            <th>Status</th>
+                            <th>Last Updated</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="inventoryTableBody">
+
+                        <tr
+                            data-category="bags"
+                            data-stock="good"
+                            data-name="Handcrafted Jute Bags"
+                        >
+
+                            <td>
+                                <div class="product-cell">
+
+                                    <div class="product-art">
+                                        👜
+                                    </div>
+
+                                    <div>
+                                        <div class="product-name">
+                                            Handcrafted Jute Bags
+                                        </div>
+
+                                        <div class="product-category">
+                                            Bags · SKU TB-JB-001
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </td>
+
+                            <td>
+                                <strong class="stock-number">42</strong>
+
+                                <div class="stock-bar">
+                                    <div
+                                        class="stock-fill"
+                                        style="width:84%"
+                                    ></div>
+                                </div>
+                            </td>
+
+                            <td>8</td>
+                            <td>₹275</td>
+                            <td>₹11,550</td>
+
+                            <td>
+                                <span class="status-pill status-good">
+                                    Healthy
+                                </span>
+                            </td>
+
+                            <td>Today</td>
+
+                            <td>
+                                <button
+                                    type="button"
+                                    class="row-action adjust-row"
+                                    data-product="Handcrafted Jute Bags"
+                                    data-stock="42"
+                                    aria-label="Adjust Handcrafted Jute Bags"
+                                >
+                                    ↕
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-category="textiles"
+                            data-stock="low"
+                            data-name="Handwoven Cotton Scarves"
+                        >
+
+                            <td>
+                                <div class="product-cell">
+
+                                    <div class="product-art sage">
+                                        🧣
+                                    </div>
+
+                                    <div>
+                                        <div class="product-name">
+                                            Handwoven Cotton Scarves
+                                        </div>
+
+                                        <div class="product-category">
+                                            Textiles · SKU TB-CS-014
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </td>
+
+                            <td>
+                                <strong class="stock-number">12</strong>
+
+                                <div class="stock-bar">
+                                    <div
+                                        class="stock-fill low"
+                                        style="width:32%"
+                                    ></div>
+                                </div>
+                            </td>
+
+                            <td>4</td>
+                            <td>₹650</td>
+                            <td>₹7,800</td>
+
+                            <td>
+                                <span class="status-pill status-low">
+                                    Low stock
+                                </span>
+                            </td>
+
+                            <td>Yesterday</td>
+
+                            <td>
+                                <button
+                                    type="button"
+                                    class="row-action adjust-row"
+                                    data-product="Handwoven Cotton Scarves"
+                                    data-stock="12"
+                                    aria-label="Adjust Handwoven Cotton Scarves"
+                                >
+                                    ↕
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-category="home"
+                            data-stock="good"
+                            data-name="Terracotta Tableware Set"
+                        >
+
+                            <td>
+                                <div class="product-cell">
+
+                                    <div class="product-art pink">
+                                        🏺
+                                    </div>
+
+                                    <div>
+                                        <div class="product-name">
+                                            Terracotta Tableware Set
+                                        </div>
+
+                                        <div class="product-category">
+                                            Home & Decor · SKU TB-TW-021
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </td>
+
+                            <td>
+                                <strong class="stock-number">26</strong>
+
+                                <div class="stock-bar">
+                                    <div
+                                        class="stock-fill"
+                                        style="width:65%"
+                                    ></div>
+                                </div>
+                            </td>
+
+                            <td>6</td>
+                            <td>₹850</td>
+                            <td>₹22,100</td>
+
+                            <td>
+                                <span class="status-pill status-good">
+                                    Healthy
+                                </span>
+                            </td>
+
+                            <td>18 Sep</td>
+
+                            <td>
+                                <button
+                                    type="button"
+                                    class="row-action adjust-row"
+                                    data-product="Terracotta Tableware Set"
+                                    data-stock="26"
+                                    aria-label="Adjust Terracotta Tableware Set"
+                                >
+                                    ↕
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-category="baskets"
+                            data-stock="low"
+                            data-name="Bamboo Storage Baskets"
+                        >
+
+                            <td>
+                                <div class="product-cell">
+
+                                    <div class="product-art blue">
+                                        🧺
+                                    </div>
+
+                                    <div>
+                                        <div class="product-name">
+                                            Bamboo Storage Baskets
+                                        </div>
+
+                                        <div class="product-category">
+                                            Baskets · SKU TB-BS-008
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </td>
+
+                            <td>
+                                <strong class="stock-number">9</strong>
+
+                                <div class="stock-bar">
+                                    <div
+                                        class="stock-fill low"
+                                        style="width:24%"
+                                    ></div>
+                                </div>
+                            </td>
+
+                            <td>6</td>
+                            <td>₹490</td>
+                            <td>₹4,410</td>
+
+                            <td>
+                                <span class="status-pill status-low">
+                                    Low stock
+                                </span>
+                            </td>
+
+                            <td>17 Sep</td>
+
+                            <td>
+                                <button
+                                    type="button"
+                                    class="row-action adjust-row"
+                                    data-product="Bamboo Storage Baskets"
+                                    data-stock="9"
+                                    aria-label="Adjust Bamboo Storage Baskets"
+                                >
+                                    ↕
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-category="bags"
+                            data-stock="critical"
+                            data-name="Palm Leaf Gift Bags"
+                        >
+
+                            <td>
+                                <div class="product-cell">
+
+                                    <div class="product-art">
+                                        🎁
+                                    </div>
+
+                                    <div>
+                                        <div class="product-name">
+                                            Palm Leaf Gift Bags
+                                        </div>
+
+                                        <div class="product-category">
+                                            Bags · SKU TB-PG-011
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </td>
+
+                            <td>
+                                <strong class="stock-number">4</strong>
+
+                                <div class="stock-bar">
+                                    <div
+                                        class="stock-fill critical"
+                                        style="width:10%"
+                                    ></div>
+                                </div>
+                            </td>
+
+                            <td>2</td>
+                            <td>₹320</td>
+                            <td>₹1,280</td>
+
+                            <td>
+                                <span class="status-pill status-critical">
+                                    Critical
+                                </span>
+                            </td>
+
+                            <td>16 Sep</td>
+
+                            <td>
+                                <button
+                                    type="button"
+                                    class="row-action adjust-row"
+                                    data-product="Palm Leaf Gift Bags"
+                                    data-stock="4"
+                                    aria-label="Adjust Palm Leaf Gift Bags"
+                                >
+                                    ↕
+                                </button>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             LOWER INFORMATION
+             ===================================================== -->
+
+        <section class="inventory-section">
+
+            <div class="inventory-lower-grid">
+
+                <!-- AI RESTOCK -->
+
+                <article class="inventory-card">
+
+                    <div class="card-heading">
+
+                        <div>
+                            <h2 class="card-title">
+                                What may need restocking
+                            </h2>
+
+                            <p class="card-small">
+                                Suggestions based on current stock and
+                                recent order activity.
+                            </p>
+                        </div>
+
+                        <span class="ai-badge">
+                            AI suggestion
+                        </span>
+
+                    </div>
+
+
+                    <div class="restock-list">
+
+                        <div class="restock-item">
+
+                            <div class="restock-icon">
+                                🧺
+                            </div>
+
+                            <div>
+                                <div class="restock-name">
+                                    Bamboo Storage Baskets
+                                </div>
+
+                                <div class="restock-reason">
+                                    Stock is below your suggested minimum.
+                                </div>
+                            </div>
+
+                            <div class="restock-quantity">
+                                <strong>+25</strong>
+                                <span>suggested</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="restock-item">
+
+                            <div class="restock-icon">
+                                🧣
+                            </div>
+
+                            <div>
+                                <div class="restock-name">
+                                    Cotton Scarves
+                                </div>
+
+                                <div class="restock-reason">
+                                    4 units already reserved for orders.
+                                </div>
+                            </div>
+
+                            <div class="restock-quantity">
+                                <strong>+20</strong>
+                                <span>suggested</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="restock-item">
+
+                            <div class="restock-icon">
+                                🎁
+                            </div>
+
+                            <div>
+                                <div class="restock-name">
+                                    Palm Leaf Gift Bags
+                                </div>
+
+                                <div class="restock-reason">
+                                    Current stock may not cover the next
+                                    enquiry.
+                                </div>
+                            </div>
+
+                            <div class="restock-quantity">
+                                <strong>+30</strong>
+                                <span>suggested</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- RAW MATERIALS -->
+
+                <article class="inventory-card">
+
+                    <div class="card-heading">
+
+                        <div>
+                            <h2 class="card-title">
+                                Raw materials
+                            </h2>
+
+                            <p class="card-small">
+                                Materials available for upcoming production.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="material-list">
+
+                        <div class="material-row">
+
+                            <div class="material-info">
+                                <span class="material-dot"></span>
+                                <span class="material-name">
+                                    Natural Jute
+                                </span>
+                            </div>
+
+                            <div class="material-stock">
+                                68 kg
+                            </div>
+
+                            <div class="material-progress">
+                                <span style="width:82%"></span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="material-row">
+
+                            <div class="material-info">
+                                <span class="material-dot"></span>
+                                <span class="material-name">
+                                    Bamboo
+                                </span>
+                            </div>
+
+                            <div class="material-stock">
+                                41 pieces
+                            </div>
+
+                            <div class="material-progress">
+                                <span style="width:57%"></span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="material-row">
+
+                            <div class="material-info">
+                                <span class="material-dot"></span>
+                                <span class="material-name">
+                                    Cotton Yarn
+                                </span>
+                            </div>
+
+                            <div class="material-stock">
+                                24 kg
+                            </div>
+
+                            <div class="material-progress">
+                                <span style="width:42%"></span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="material-row">
+
+                            <div class="material-info">
+                                <span class="material-dot"></span>
+                                <span class="material-name">
+                                    Terracotta Clay
+                                </span>
+                            </div>
+
+                            <div class="material-stock">
+                                95 kg
+                            </div>
+
+                            <div class="material-progress">
+                                <span style="width:91%"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- AI BUSINESS INSIGHT -->
+
+            <article class="inventory-ai-card">
+
+                <div class="ai-inner">
+
+                    <span class="ai-label">
+                        Taana-Baana AI
+                    </span>
+
+                    <h2 class="ai-title">
+                        Your inventory tells a story.
+                    </h2>
+
+                    <p class="ai-text">
+                        Your current stock is sufficient for most existing
+                        products. However, bamboo baskets and cotton scarves
+                        are approaching their lower stock levels. Preparing
+                        a small batch before the next bulk enquiry could help
+                        keep production moving.
+                    </p>
+
+                    <div class="ai-suggestions">
+
+                        <div class="ai-suggestion">
+                            🌿 Prepare 25 bamboo baskets
+                        </div>
+
+                        <div class="ai-suggestion">
+                            🧵 Prepare 20 cotton scarves
+                        </div>
+
+                        <div class="ai-suggestion">
+                            📦 Review reserved stock
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- =====================================================
+             QUICK ACTIONS
+             ===================================================== -->
+
+        <section class="inventory-section">
+
+            <div class="inventory-section-heading">
+
+                <div>
+                    <p class="section-kicker">Continue working</p>
+
+                    <h2 class="section-title">
+                        Quick actions
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+                <a
+                    href="artisans-products.html"
+                    class="quick-action"
+                >
+                    <span class="quick-icon">🛍️</span>
+
+                    <span class="quick-name">
+                        Manage Products
+                    </span>
+
+                    <span class="quick-arrow">
+                        →
+                    </span>
+                </a>
+
+
+                <a
+                    href="artisan-orders.html"
+                    class="quick-action"
+                >
+                    <span class="quick-icon">📦</span>
+
+                    <span class="quick-name">
+                        View Orders
+                    </span>
+
+                    <span class="quick-arrow">
+                        →
+                    </span>
+                </a>
+
+
+                <a
+                    href="pricing.html"
+                    class="quick-action"
+                >
+                    <span class="quick-icon">₹</span>
+
+                    <span class="quick-name">
+                        Smart Pricing
+                    </span>
+
+                    <span class="quick-arrow">
+                        →
+                    </span>
+                </a>
+
+
+                <a
+                    href="artisan-earnings.html"
+                    class="quick-action"
+                >
+                    <span class="quick-icon">📈</span>
+
+                    <span class="quick-name">
+                        Earnings
+                    </span>
+
+                    <span class="quick-arrow">
+                        →
+                    </span>
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- =============================================================
+     ADJUST INVENTORY MODAL
+     ============================================================= -->
+
+<div
+    class="inventory-modal"
+    id="inventoryModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="inventoryModalTitle"
+>
+
+    <div class="modal-box">
+
+        <div class="modal-top">
+
+            <div>
+                <h2
+                    class="modal-title"
+                    id="inventoryModalTitle"
+                >
+                    Adjust inventory
+                </h2>
+            </div>
+
+            <button
+                type="button"
+                class="modal-close"
+                id="closeInventoryModal"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-product">
+
+            <div class="modal-product-art">
+                🧺
+            </div>
+
+            <div>
+
+                <div
+                    class="modal-product-name"
+                    id="modalProductName"
+                >
+                    Bamboo Storage Baskets
+                </div>
+
+                <div
+                    class="modal-product-stock"
+                    id="modalProductStock"
+                >
+                    Current available stock: 9 units
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="adjust-grid">
+
+            <div class="form-field">
+
+                <label for="adjustType">
+                    Adjustment
+                </label>
+
+                <select id="adjustType">
+                    <option value="add">Add stock</option>
+                    <option value="remove">Remove stock</option>
+                    <option value="reserve">Reserve stock</option>
+                    <option value="release">Release reserved stock</option>
+                </select>
+
+            </div>
+
+
+            <div class="form-field">
+
+                <label for="adjustQuantity">
+                    Quantity
+                </label>
+
+                <input
+                    type="number"
+                    id="adjustQuantity"
+                    min="1"
+                    value="10"
+                >
+
+            </div>
+
+
+            <div class="form-field full">
+
+                <label for="adjustReason">
+                    Reason
+                </label>
+
+                <textarea
+                    id="adjustReason"
+                    placeholder="Example: New batch completed, order reserved, damaged items..."
+                ></textarea>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                type="button"
+                class="inventory-btn inventory-btn-outline"
+                id="cancelInventoryModal"
+            >
+                Cancel
+            </button>
+
+            <button
+                type="button"
+                class="inventory-btn inventory-btn-primary"
+                id="saveInventoryAdjustment"
+            >
+                Save Adjustment
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Toast -->
+
+<div
+    class="inventory-toast"
+    id="inventoryToast"
+    role="status"
+    aria-live="polite"
+></div>
+
+
+<!-- =============================================================
+     SCRIPTS
+     ============================================================= -->
+
+<script src="../js/main.js" defer></script>
+<script src="../js/pages.js" defer></script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const modal = document.getElementById("inventoryModal");
+    const toast = document.getElementById("inventoryToast");
+
+    const modalProductName =
+        document.getElementById("modalProductName");
+
+    const modalProductStock =
+        document.getElementById("modalProductStock");
+
+    const adjustQuantity =
+        document.getElementById("adjustQuantity");
+
+    const adjustReason =
+        document.getElementById("adjustReason");
+
+    const searchInput =
+        document.getElementById("inventorySearch");
+
+    const categoryFilter =
+        document.getElementById("categoryFilter");
+
+    const stockFilter =
+        document.getElementById("stockFilter");
+
+    let selectedProduct = {
+        name: "Bamboo Storage Baskets",
+        stock: 9
+    };
+
+
+    /* ---------------------------------------------------------
+       TOAST
+       --------------------------------------------------------- */
+
+    function showToast(message) {
+
+        toast.textContent = message;
+        toast.classList.add("show");
+
+        clearTimeout(window.inventoryToastTimer);
+
+        window.inventoryToastTimer =
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 2800);
+    }
+
+
+    /* ---------------------------------------------------------
+       OPEN MODAL
+       --------------------------------------------------------- */
+
+    function openAdjustment(productName, stock) {
+
+        selectedProduct = {
+            name: productName,
+            stock: Number(stock)
+        };
+
+        modalProductName.textContent =
+            productName;
+
+        modalProductStock.textContent =
+            `Current available stock: ${stock} units`;
+
+        adjustQuantity.value = 10;
+        adjustReason.value = "";
+
+        modal.classList.add("open");
+
+        document.body.style.overflow = "hidden";
+
+        setTimeout(() => {
+            adjustQuantity.focus();
+        }, 50);
+    }
+
+
+    /* ---------------------------------------------------------
+       CLOSE MODAL
+       --------------------------------------------------------- */
+
+    function closeAdjustment() {
+
+        modal.classList.remove("open");
+
+        document.body.style.overflow = "";
+
+    }
+
+
+    /* ---------------------------------------------------------
+       EXISTING ROW ACTIONS
+       --------------------------------------------------------- */
+
+    document.querySelectorAll(".adjust-row")
+        .forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                openAdjustment(
+                    button.dataset.product,
+                    button.dataset.stock
+                );
+
+            });
+
+        });
+
+
+    /* ---------------------------------------------------------
+       TOP BUTTONS
+       --------------------------------------------------------- */
+
+    document
+        .getElementById("addStockBtn")
+        .addEventListener("click", () => {
+
+            openAdjustment(
+                "New stock entry",
+                0
+            );
+
+            showToast(
+                "Add the completed quantity and save the inventory adjustment."
+            );
+
+        });
+
+
+    document
+        .getElementById("adjustStockBtn")
+        .addEventListener("click", () => {
+
+            openAdjustment(
+                "Bamboo Storage Baskets",
+                9
+            );
+
+        });
+
+
+    document
+        .getElementById("viewLowStock")
+        .addEventListener("click", () => {
+
+            stockFilter.value = "low";
+
+            filterInventory();
+
+            document
+                .getElementById("inventoryTableBody")
+                .scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+        });
+
+
+    /* ---------------------------------------------------------
+       MODAL CONTROLS
+       --------------------------------------------------------- */
+
+    document
+        .getElementById("closeInventoryModal")
+        .addEventListener("click", closeAdjustment);
+
+
+    document
+        .getElementById("cancelInventoryModal")
+        .addEventListener("click", closeAdjustment);
+
+
+    modal.addEventListener("click", event => {
+
+        if (event.target === modal) {
+            closeAdjustment();
+        }
+
+    });
+
+
+    document.addEventListener("keydown", event => {
+
+        if (
+            event.key === "Escape" &&
+            modal.classList.contains("open")
+        ) {
+            closeAdjustment();
+        }
+
+    });
+
+
+    /* ---------------------------------------------------------
+       SAVE ADJUSTMENT
+       --------------------------------------------------------- */
+
+    document
+        .getElementById("saveInventoryAdjustment")
+        .addEventListener("click", () => {
+
+            const quantity =
+                Number(adjustQuantity.value);
+
+            const type =
+                document.getElementById("adjustType").value;
+
+            if (!quantity || quantity < 1) {
+
+                showToast(
+                    "Please enter a valid quantity."
+                );
+
+                adjustQuantity.focus();
+
+                return;
+            }
+
+
+            const reason =
+                adjustReason.value.trim();
+
+
+            const adjustment = {
+
+                product:
+                    selectedProduct.name,
+
+                currentStock:
+                    selectedProduct.stock,
+
+                adjustment:
+                    type,
+
+                quantity,
+
+                reason,
+
+                createdAt:
+                    new Date().toISOString()
+
+            };
+
+
+            /*
+             * Frontend prototype storage.
+             * Backend/database can replace this later.
+             */
+
+            const existing =
+                JSON.parse(
+                    localStorage.getItem(
+                        "taanaBaanaInventoryAdjustments"
+                    ) || "[]"
+                );
+
+
+            existing.push(adjustment);
+
+
+            localStorage.setItem(
+                "taanaBaanaInventoryAdjustments",
+                JSON.stringify(existing)
+            );
+
+
+            closeAdjustment();
+
+
+            showToast(
+                "Inventory adjustment saved successfully."
+            );
+
+        });
+
+
+    /* ---------------------------------------------------------
+       SEARCH + FILTER
+       --------------------------------------------------------- */
+
+    function filterInventory() {
+
+        const search =
+            searchInput.value
+                .trim()
+                .toLowerCase();
+
+        const category =
+            categoryFilter.value;
+
+        const stock =
+            stockFilter.value;
+
+
+        document
+            .querySelectorAll(
+                "#inventoryTableBody tr"
+            )
+            .forEach(row => {
+
+                const name =
+                    (row.dataset.name || "")
+                        .toLowerCase();
+
+                const rowCategory =
+                    row.dataset.category;
+
+                const rowStock =
+                    row.dataset.stock;
+
+
+                const matchesSearch =
+                    !search ||
+                    name.includes(search);
+
+                const matchesCategory =
+                    category === "all" ||
+                    rowCategory === category;
+
+                const matchesStock =
+                    stock === "all" ||
+                    rowStock === stock;
+
+
+                row.style.display =
+                    matchesSearch &&
+                    matchesCategory &&
+                    matchesStock
+                        ? ""
+                        : "none";
+
+            });
+
+    }
+
+
+    searchInput.addEventListener(
+        "input",
+        filterInventory
+    );
+
+
+    categoryFilter.addEventListener(
+        "change",
+        filterInventory
+    );
+
+
+    stockFilter.addEventListener(
+        "change",
+        filterInventory
+    );
+
+
+    /* ---------------------------------------------------------
+       EXPORT DEMO
+       --------------------------------------------------------- */
+
+    document
+        .getElementById("exportBtn")
+        .addEventListener("click", () => {
+
+            const report = {
+
+                title:
+                    "Taana-Baana Inventory Report",
+
+                generatedAt:
+                    new Date().toISOString(),
+
+                totalUnits:
+                    126,
+
+                inventoryValue:
+                    284650,
+
+                lowStockItems:
+                    8,
+
+                rawMaterials:
+                    17
+
+            };
+
+
+            const blob =
+                new Blob(
+                    [
+                        JSON.stringify(
+                            report,
+                            null,
+                            2
+                        )
+                    ],
+                    {
+                        type: "application/json"
+                    }
+                );
+
+
+            const url =
+                URL.createObjectURL(blob);
+
+            const link =
+                document.createElement("a");
+
+            link.href = url;
+
+            link.download =
+                "taana-baana-inventory-report.json";
+
+            document.body.appendChild(link);
+
+            link.click();
+
+            link.remove();
+
+            URL.revokeObjectURL(url);
+
+
+            showToast(
+                "Inventory report exported."
+            );
+
+        });
+
+
+    /* ---------------------------------------------------------
+       SMALL PAGE REVEAL
+       --------------------------------------------------------- */
+
+    const revealItems =
+        document.querySelectorAll(
+            ".inventory-stat, .inventory-card, .inventory-alert, .inventory-ai-card, .quick-action"
+        );
+
+
+    if (
+        !window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches
+    ) {
+
+        revealItems.forEach((item, index) => {
+
+            item.style.opacity = "0";
+            item.style.transform =
+                "translateY(14px)";
+
+            item.style.transition =
+                `opacity .55s ease ${Math.min(index * 45, 350)}ms,
+                 transform .55s ease ${Math.min(index * 45, 350)}ms`;
+
+            requestAnimationFrame(() => {
+
+                setTimeout(() => {
+
+                    item.style.opacity = "1";
+
+                    item.style.transform =
+                        "translateY(0)";
+
+                }, 80);
+
+            });
+
+        });
+
+    }
+
+});
+</script>
+
+</body>
+</html>
