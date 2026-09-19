@@ -526,47 +526,13 @@ function initAuthFlow() {
    ============================================================ */
 
 function initIntro() {
-
     const intro = document.querySelector(".intro-screen");
-
-    if (!intro) {
-        return;
-    }
-
-    const enterButton =
-        document.querySelector(".intro-enter");
-
-    /*
-       During development, the intro appears every time.
-
-       When the website is ready, change:
-
-       const SHOW_INTRO_ALWAYS = true;
-
-       to:
-
-       const SHOW_INTRO_ALWAYS = false;
-    */
-
-    const SHOW_INTRO_ALWAYS = true;
-
-    const hasSeenIntro =
-        localStorage.getItem("taanaBaanaIntroSeen");
-
-    if (!SHOW_INTRO_ALWAYS && hasSeenIntro) {
-
+    if (intro) {
+        intro.style.display = "none";
         intro.classList.add("hide");
-
-        document.body.classList.remove("no-scroll");
-
-        return;
     }
-
-    /*
-       Prevent scrolling while intro is visible.
-    */
-
-    document.body.classList.add("no-scroll");
+    document.body.classList.remove("no-scroll");
+}
 
 
     function closeIntro() {

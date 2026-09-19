@@ -120,6 +120,8 @@ a {
 
 .intro-screen {
 
+    display: none !important;
+
     position: fixed;
 
     inset: 0;
