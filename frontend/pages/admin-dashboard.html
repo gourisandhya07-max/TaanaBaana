@@ -2316,8 +2316,9 @@
 
 
             <a
-                href="../index.html"
+                href="login.html"
                 id="adminLogout"
+                data-auth-logout
             >
 
                 <span class="admin-sidebar-icon">
@@ -3704,20 +3705,20 @@ document.addEventListener(
 
                     event.preventDefault();
 
+                    localStorage.removeItem("taanaBaanaUser");
 
                     showAdminToast(
-                        "Leaving admin workspace..."
+                        "Signing out of admin workspace..."
                     );
-
 
                     setTimeout(
                         () => {
 
                             window.location.href =
-                                "../index.html";
+                                "login.html";
 
                         },
-                        700
+                        500
                     );
 
                 }
