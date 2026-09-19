@@ -178,7 +178,11 @@ function initAuthFlow() {
 
     function logoutUser() {
         localStorage.removeItem(AUTH_KEY);
-        window.location.href = "../index.html";
+
+        const inPagesFolder = window.location.pathname.includes("/pages/") || window.location.pathname.endsWith("/pages/");
+        const target = inPagesFolder ? "login.html" : "./pages/login.html";
+
+        window.location.href = target;
     }
 
     function getRoleDashboard(role) {
@@ -256,10 +260,31 @@ function initAuthFlow() {
         const emailInput = document.getElementById("loginEmail");
         const passwordInput = document.getElementById("loginPassword");
 
+        const demoCredentialsByRole = {
+            artisan: {
+                email: "demo@taanabaana.in",
+                password: "password"
+            },
+            buyer: {
+                email: "buyer@taanabaana.in",
+                password: "password"
+            },
+            admin: {
+                email: "admin@taanabaana.in",
+                password: "password"
+            }
+        };
+
         roleCards.forEach((card) => {
             card.addEventListener("click", () => {
                 roleCards.forEach((item) => item.classList.remove("active"));
                 card.classList.add("active");
+
+                const selectedRole = normalizeRole(card.dataset.role || "artisan");
+                const credentials = demoCredentialsByRole[selectedRole] || demoCredentialsByRole.artisan;
+
+                if (emailInput) emailInput.value = credentials.email;
+                if (passwordInput) passwordInput.value = credentials.password;
             });
         });
 
@@ -268,7 +293,7 @@ function initAuthFlow() {
         }
 
         loginButton.addEventListener("click", () => {
-            const selectedRole = document.querySelector(".role-card.active")?.dataset.role || "artisan";
+            const selectedRole = normalizeRole(document.querySelector(".role-card.active")?.dataset.role || "artisan");
             const email = (emailInput?.value || "").trim();
             const password = passwordInput?.value || "";
 
@@ -288,43 +313,32 @@ function initAuthFlow() {
                 return user.email.toLowerCase() === email.toLowerCase() && user.password === password;
             });
 
-            const user = matchedUser || {
-                name: email.split("@")[0].replace(/[._-]/g, " "),
-                email,
-                password,
-                role: normalizeRole(selectedRole)
-            };
+            const finalRole = matchedUser ? matchedUser.role : selectedRole;
 
-            if (!matchedUser && !email.endsWith("@taanabaana.in") && !email.includes("@")) {
-                window.TaanaBaana?.showToast("Invalid login credentials.");
-                return;
-            }
-
-            if (!matchedUser && !password) {
+            if (!matchedUser && !email.includes("@")) {
                 window.TaanaBaana?.showToast("Invalid login credentials.");
                 return;
             }
 
             if (!matchedUser) {
-                const fallbackRole = normalizeRole(selectedRole);
                 setCurrentUser({
-                    name: user.name,
-                    email: user.email,
-                    role: fallbackRole
+                    name: email.split("@")[0].replace(/[._-]/g, " "),
+                    email,
+                    role: finalRole
                 });
                 window.TaanaBaana?.showToast("Welcome to Taana-Baana.");
-                redirectByRole(fallbackRole);
+                redirectByRole(finalRole);
                 return;
             }
 
             setCurrentUser({
                 name: matchedUser.name,
                 email: matchedUser.email,
-                role: matchedUser.role
+                role: finalRole
             });
 
             window.TaanaBaana?.showToast("Login successful.");
-            redirectByRole(matchedUser.role);
+            redirectByRole(finalRole);
         });
     }
 
@@ -2323,11 +2337,11 @@ function closeModal(modalId) {
    TaanaBaana.showToast("Done!");
 */
 
-window.TaanaBaana = {
+window.TaanaBaana = Object.assign(window.TaanaBaana || {}, {
     openModal,
     closeModal,
     showToast
-};
+});
 
 
 /* ============================================================

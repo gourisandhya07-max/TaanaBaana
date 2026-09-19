@@ -237,6 +237,9 @@ ul {
     width: 100%;
     height: var(--nav-height);
     z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     background: rgba(252,246,234,.82);
     backdrop-filter: blur(18px);
@@ -259,37 +262,57 @@ ul {
     width: min(var(--container), calc(100% - 40px));
     height: 100%;
     margin: auto;
+    padding: 0 8px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 22px;
 }
 
 .brand {
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-shrink: 0;
+}
+
+.brand-logo-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    text-decoration: none;
 }
 
 .brand-logo {
     width: 130px;
     height: auto;
     object-fit: contain;
+    display: block;
 }
 
 .nav-links {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
+    flex: 1;
+    min-width: 0;
 }
 
 .nav-links a,
 .nav-dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 10px 14px;
     border-radius: 50px;
     color: var(--brown-soft);
     font-size: .92rem;
     font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
     transition: var(--transition);
 }
 
@@ -358,13 +381,26 @@ ul {
 .nav-actions {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 9px;
+    flex-shrink: 0;
+}
+
+.nav-login,
+.nav-cta,
+.nav-actions a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    line-height: 1.2;
 }
 
 .nav-login {
     font-size: .9rem;
     font-weight: 600;
     padding: 10px 14px;
+    color: var(--brown-soft);
 }
 
 .nav-cta,
@@ -709,11 +745,200 @@ ul {
     line-height: 1.5;
 }
 
-.app-shell .dashboard-grid {
+.app-shell .artisan-insights {
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-columns: 1.25fr 0.75fr;
     gap: 18px;
     margin-bottom: 20px;
+}
+
+.app-shell .insight-card {
+    min-height: 100%;
+}
+
+.app-shell .insight-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.app-shell .insight-header h2 {
+    margin-top: 10px;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.9rem, 3vw, 2.5rem);
+    letter-spacing: -0.05em;
+    color: var(--brown);
+}
+
+.app-shell .trend-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(15,124,120,0.12);
+    color: #0f7c78;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.app-shell .score-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.app-shell .score-row strong {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2.2rem, 4vw, 3.1rem);
+    line-height: 1;
+    color: var(--brown);
+}
+
+.app-shell .score-row span {
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brown-soft);
+}
+
+.app-shell .mini-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(59,41,34,0.08);
+}
+
+.app-shell .mini-grid small {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.app-shell .mini-grid strong {
+    display: block;
+    font-size: 1.12rem;
+    color: var(--brown);
+}
+
+.app-shell .monthly-bars {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    align-items: end;
+    gap: 10px;
+    min-height: 118px;
+    margin-top: 24px;
+    padding: 18px 10px 0;
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(201,111,74,0.04), rgba(19,124,120,0.02));
+}
+
+.app-shell .monthly-bars span {
+    display: block;
+    border-radius: 999px 999px 0 0;
+    background: linear-gradient(180deg, var(--terracotta), var(--gold));
+    opacity: 0.9;
+}
+
+.app-shell .task-list {
+    display: grid;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.app-shell .artisan-insight-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 18px;
+    margin-top: 28px;
+}
+
+.app-shell .compact-head {
+    margin-top: 0;
+    margin-bottom: 18px;
+}
+
+.app-shell .product-summary .section-title,
+.app-shell .priority-summary .section-title {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+}
+
+.app-shell .product-list {
+    display: grid;
+    gap: 12px;
+}
+
+.app-shell .product-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 14px 14px 14px 16px;
+    border-radius: 14px;
+    background: rgba(201,111,74,0.05);
+    border: 1px solid rgba(201,111,74,0.1);
+}
+
+.app-shell .product-list strong {
+    display: block;
+    font-size: 0.96rem;
+    color: var(--brown);
+}
+
+.app-shell .product-list small {
+    display: block;
+    margin-top: 2px;
+    color: var(--brown-soft);
+}
+
+.app-shell .product-list span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 84px;
+    padding: 8px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.7);
+    color: var(--brown);
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+.app-shell .readiness-stack {
+    display: grid;
+    gap: 12px;
+}
+
+.app-shell .readiness-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: rgba(15,124,120,0.06);
+    border: 1px solid rgba(15,124,120,0.1);
+}
+
+.app-shell .readiness-item span {
+    color: var(--brown-soft);
+    font-size: 0.77rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.app-shell .readiness-item strong {
+    font-size: 1.2rem;
+    color: var(--brown);
 }
 
 .app-shell .card {
@@ -837,7 +1062,8 @@ ul {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .app-shell .dashboard-grid {
+    .app-shell .artisan-insights,
+    .app-shell .artisan-insight-grid {
         grid-template-columns: 1fr;
     }
 }

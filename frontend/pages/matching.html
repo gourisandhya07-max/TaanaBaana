@@ -2547,32 +2547,49 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("noRequirement");
 
 
-    if (!storedRequirement) {
+    const demoRequirement = {
+        id: "REQ-TAANA-2025",
+        productName: "Eco-friendly jute packaging",
+        category: "Home & Lifestyle",
+        craftPreference: "Handwoven jute",
+        quantity: 1200,
+        budget: 210,
+        deliveryLocation: "Bengaluru, Karnataka",
+        deadline: "2025-06-18",
+        customisation: "Custom branding, natural-dye finish, retail-ready packaging",
+        preferences: ["Eco-friendly", "Volume-ready", "Custom branding"]
+    };
 
-        matchList.style.display = "none";
 
-        noRequirement.classList.add("show");
+    let requirement = demoRequirement;
 
-        return;
+
+    if (storedRequirement) {
+
+        try {
+
+            requirement =
+                JSON.parse(storedRequirement);
+
+        } catch (error) {
+
+            requirement = demoRequirement;
+
+        }
 
     }
 
 
-    let requirement;
+    if (noRequirement) {
+
+        noRequirement.classList.remove("show");
+
+    }
 
 
-    try {
+    if (matchList) {
 
-        requirement =
-            JSON.parse(storedRequirement);
-
-    } catch (error) {
-
-        matchList.style.display = "none";
-
-        noRequirement.classList.add("show");
-
-        return;
+        matchList.style.display = "grid";
 
     }
 
