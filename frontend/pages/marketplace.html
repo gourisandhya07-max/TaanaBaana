@@ -214,9 +214,16 @@
 
             </div>
 
+            <!-- View toggle -->
+            <div class="view-toggle">
+                <button class="view-btn active" id="gridViewBtn" title="Grid View" type="button">⊞</button>
+                <button class="view-btn" id="tableViewBtn" title="Table View" type="button">☰</button>
+            </div>
+
         </div>
 
 
+        <!-- GRID VIEW -->
         <div
             id="productGrid"
             class="product-grid"
@@ -444,11 +451,242 @@
 
         </div>
 
+
+        <!-- TABLE VIEW -->
+        <div id="productTable" style="display:none; overflow-x:auto;">
+
+            <style>
+                .mkt-table { width:100%; border-collapse:collapse; font-size:0.92rem; }
+                .mkt-table th {
+                    background: var(--cream-dark, #f4eadb);
+                    color: var(--brown-dark, #3b2922);
+                    padding: 12px 16px;
+                    text-align: left;
+                    font-weight: 700;
+                    letter-spacing: .04em;
+                    cursor: pointer;
+                    user-select: none;
+                    white-space: nowrap;
+                    border-bottom: 2px solid var(--terracotta, #c96f4a);
+                }
+                .mkt-table th:hover { background: #eddcc8; }
+                .mkt-table th .sort-arrow { margin-left:6px; opacity:.5; font-size:.75em; }
+                .mkt-table td {
+                    padding: 11px 16px;
+                    border-bottom: 1px solid #eddcc8;
+                    color: var(--brown-dark, #3b2922);
+                    vertical-align: middle;
+                }
+                .mkt-table tr:hover td { background: #fdf6ee; }
+                .mkt-table tr.hidden-row { display:none; }
+                .mkt-badge {
+                    display: inline-block;
+                    padding: 3px 10px;
+                    border-radius: 20px;
+                    font-size: 0.78rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: .06em;
+                }
+                .mkt-badge.textile  { background:#f0e4d7; color:#c96f4a; }
+                .mkt-badge.pottery  { background:#e8f0e4; color:#4a7a3a; }
+                .mkt-badge.wood     { background:#f5ead0; color:#8a6028; }
+                .mkt-badge.painting { background:#e4e8f5; color:#3a4a8a; }
+                .mkt-badge.metal    { background:#e8e4f0; color:#5a3a8a; }
+                .mkt-status { padding:3px 10px; border-radius:20px; font-size:.78rem; font-weight:600; }
+                .mkt-status.active  { background:#d4edda; color:#2a6a3a; }
+                .mkt-status.limited { background:#fff3cd; color:#856404; }
+                .mkt-status.sold-out{ background:#f8d7da; color:#842029; }
+                .mkt-table td.price { font-weight:700; color:var(--terracotta,#c96f4a); }
+                .mkt-enquire-btn {
+                    padding: 5px 14px;
+                    background: var(--terracotta, #c96f4a);
+                    color:#fff;
+                    border:none;
+                    border-radius:20px;
+                    cursor:pointer;
+                    font-size:.82rem;
+                    font-weight:600;
+                    transition: background .2s;
+                }
+                .mkt-enquire-btn:hover { background:#a8542e; }
+                .view-toggle { display:flex; gap:6px; }
+                .view-btn {
+                    padding: 7px 14px;
+                    border: 2px solid var(--terracotta, #c96f4a);
+                    background: transparent;
+                    color: var(--terracotta, #c96f4a);
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-size: 1.1rem;
+                    font-weight: 700;
+                    transition: all .2s;
+                }
+                .view-btn.active { background: var(--terracotta, #c96f4a); color:#fff; }
+                .marketplace-toolbar { display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+                .mkt-table-wrap { border-radius: 16px; overflow:hidden; box-shadow: 0 2px 20px rgba(60,30,10,.07); }
+            </style>
+
+            <div class="mkt-table-wrap">
+            <table class="mkt-table" id="mktDataTable">
+                <thead>
+                    <tr>
+                        <th data-col="name">Product <span class="sort-arrow">↕</span></th>
+                        <th data-col="category">Category <span class="sort-arrow">↕</span></th>
+                        <th data-col="artisan">Artisan <span class="sort-arrow">↕</span></th>
+                        <th data-col="state">State <span class="sort-arrow">↕</span></th>
+                        <th data-col="material">Material <span class="sort-arrow">↕</span></th>
+                        <th data-col="price">Price (₹) <span class="sort-arrow">↕</span></th>
+                        <th data-col="stock">Stock <span class="sort-arrow">↕</span></th>
+                        <th data-col="status">Status <span class="sort-arrow">↕</span></th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="mktTbody">
+                    <tr data-name="handwoven kasavu saree" data-category="textile" data-price="2850" data-stock="18">
+                        <td>Handwoven Kasavu Saree</td>
+                        <td><span class="mkt-badge textile">Textile</span></td>
+                        <td>Anjali Weaves</td>
+                        <td>Kerala</td>
+                        <td>Cotton &amp; Gold Zari</td>
+                        <td class="price">₹2,850</td>
+                        <td>18</td>
+                        <td><span class="mkt-status active">Active</span></td>
+                        <td><button class="mkt-enquire-btn" onclick="showToast('Enquiry sent for Handwoven Kasavu Saree 🛍️')">Enquire</button></td>
+                    </tr>
+                    <tr data-name="terracotta heritage pot" data-category="pottery" data-price="780" data-stock="34">
+                        <td>Terracotta Heritage Pot</td>
+                        <td><span class="mkt-badge pottery">Pottery</span></td>
+                        <td>Maya Clay Studio</td>
+                        <td>West Bengal</td>
+                        <td>Natural Clay</td>
+                        <td class="price">₹780</td>
+                        <td>34</td>
+                        <td><span class="mkt-status active">Active</span></td>
+                        <td><button class="mkt-enquire-btn" onclick="showToast('Enquiry sent for Terracotta Heritage Pot 🛍️')">Enquire</button></td>
+                    </tr>
+                    <tr data-name="carved wooden elephant" data-category="wood" data-price="1250" data-stock="12">
+                        <td>Carved Wooden Elephant</td>
+                        <td><span class="mkt-badge wood">Wood</span></td>
+                        <td>Ramesh Crafts</td>
+                        <td>Rajasthan</td>
+                        <td>Sheesham Wood</td>
+                        <td class="price">₹1,250</td>
+                        <td>12</td>
+                        <td><span class="mkt-status active">Active</span></td>
+                        <td><button class="mkt-enquire-btn" onclick="showToast('Enquiry sent 🛍️')">Enquire</button></td>
+                    </tr>
+                    <tr data-name="hand embroidered textile" data-category="textile" data-price="1950" data-stock="9">
+                        <td>Hand Embroidered Textile</td>
+                        <td><span class="mkt-badge textile">Textile</span></td>
+                        <td>Noor Handcrafts</td>
+                        <td>Kashmir</td>
+                        <td>Pashmina Wool</td>
+                        <td class="price">₹1,950</td>
+                        <td>9</td>
+                        <td><span class="mkt-status limited">Limited</span></td>
+                        <td><button class="mkt-enquire-btn" onclick="showToast('Enquiry sent 🛍️')">Enquire</button></td>
+                    </tr>
+                    <tr data-name="madhubani painting on canvas" data-category="painting" data-price="3200" data-stock="6">
+                        <td>Madhubani Painting on Canvas</td>
+                        <td><span class="mkt-badge painting">Painting</span></td>
+                        <td>Sunita Devi Arts</td>
+                        <td>Bihar</td>
+                        <td>Natural Pigments &amp; Canvas</td>
+                        <td class="price">₹3,200</td>
+                        <td>6</td>
+                        <td><span class="mkt-status limited">Limited</span></td>
+                        <td><button class="mkt-enquire-btn" onclick="showToast('Enquiry sent 🛍️')">Enquire</button></td>
+                    </tr>
+                    <tr data-name="dhokra brass figurine" data-category="metal" data-price="4500" data-stock="8">
+                        <td>Dhokra Brass Figurine</td>
+                        <td><span class="mkt-badge metal">Metal</span></td>
+                        <td>Bastar Craft Village</td>
+                        <td>Chhattisgarh</td>
+                        <td>Lost-Wax Cast Brass</td>
+                        <td class="price">₹4,500</td>
+                        <td>8</td>
+                        <td><span class="mkt-status active">Active</span></td>
+                        <td><button class="mkt-enquire-btn" onclick="showToast('Enquiry sent 🛍️')">Enquire</button></td>
+                    </tr>
+                    <tr data-name="blue pottery vase" data-category="pottery" data-price="1100" data-stock="22">
+                        <td>Blue Pottery Vase</td>
+                        <td><span class="mkt-badge pottery">Pottery</span></td>
+                        <td>Jaipur Blue Arts</td>
+                        <td>Rajasthan</td>
+                        <td>Quartz &amp; Clay</td>
+                        <td class="price">₹1,100</td>
+                        <td>22</td>
+                        <td><span class="mkt-status active">Active</span></td>
+                        <td><button class="mkt-enquire-btn" onclick="showToast('Enquiry sent 🛍️')">Enquire</button></td>
+                    </tr>
+                    <tr data-name="kantha embroidered stole" data-category="textile" data-price="2400" data-stock="15">
+                        <td>Kantha Embroidered Stole</td>
+                        <td><span class="mkt-badge textile">Textile</span></td>
+                        <td>Kolkata Kantha Co-op</td>
+                        <td>West Bengal</td>
+                        <td>Mulberry Silk</td>
+                        <td class="price">₹2,400</td>
+                        <td>15</td>
+                        <td><span class="mkt-status active">Active</span></td>
+                        <td><button class="mkt-enquire-btn" onclick="showToast('Enquiry sent 🛍️')">Enquire</button></td>
+                    </tr>
+                    <tr data-name="sandalwood incense box" data-category="wood" data-price="650" data-stock="0">
+                        <td>Sandalwood Incense Box</td>
+                        <td><span class="mkt-badge wood">Wood</span></td>
+                        <td>Mysore Artisans</td>
+                        <td>Karnataka</td>
+                        <td>Sandalwood</td>
+                        <td class="price">₹650</td>
+                        <td>0</td>
+                        <td><span class="mkt-status sold-out">Sold Out</span></td>
+                        <td><button class="mkt-enquire-btn" onclick="showToast('You will be notified when restocked 🔔')">Notify</button></td>
+                    </tr>
+                    <tr data-name="pattachitra wall art" data-category="painting" data-price="5800" data-stock="4">
+                        <td>Pattachitra Wall Art</td>
+                        <td><span class="mkt-badge painting">Painting</span></td>
+                        <td>Raghurajpur Village Arts</td>
+                        <td>Odisha</td>
+                        <td>Natural Colours on Cloth</td>
+                        <td class="price">₹5,800</td>
+                        <td>4</td>
+                        <td><span class="mkt-status limited">Limited</span></td>
+                        <td><button class="mkt-enquire-btn" onclick="showToast('Enquiry sent 🛍️')">Enquire</button></td>
+                    </tr>
+                    <tr data-name="bamboo lamp shade" data-category="wood" data-price="920" data-stock="30">
+                        <td>Bamboo Lamp Shade</td>
+                        <td><span class="mkt-badge wood">Wood</span></td>
+                        <td>Assam Bamboo Crafts</td>
+                        <td>Assam</td>
+                        <td>Bamboo Strips</td>
+                        <td class="price">₹920</td>
+                        <td>30</td>
+                        <td><span class="mkt-status active">Active</span></td>
+                        <td><button class="mkt-enquire-btn" onclick="showToast('Enquiry sent 🛍️')">Enquire</button></td>
+                    </tr>
+                    <tr data-name="warli painted tray" data-category="painting" data-price="1400" data-stock="11">
+                        <td>Warli Painted Tray</td>
+                        <td><span class="mkt-badge painting">Painting</span></td>
+                        <td>Palghar Women Collective</td>
+                        <td>Maharashtra</td>
+                        <td>Wooden Tray + Rice Paste</td>
+                        <td class="price">₹1,400</td>
+                        <td>11</td>
+                        <td><span class="mkt-status active">Active</span></td>
+                        <td><button class="mkt-enquire-btn" onclick="showToast('Enquiry sent 🛍️')">Enquire</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+
+        </div>
+
     </section>
 
 </div>
 
 </main>
+
 
 
 <!-- =====================================================
@@ -546,6 +784,150 @@
 
 <script src="../js/main.js"></script>
 <script src="../js/pages.js"></script>
+
+<script>
+/* =====================================================
+   MARKETPLACE TABLE & VIEW TOGGLE
+===================================================== */
+(function () {
+
+    const gridViewBtn  = document.getElementById("gridViewBtn");
+    const tableViewBtn = document.getElementById("tableViewBtn");
+    const productGrid  = document.getElementById("productGrid");
+    const productTable = document.getElementById("productTable");
+    const searchInput  = document.getElementById("productSearch");
+    const filterBtns   = document.querySelectorAll(".filter-button");
+    const tableRows    = document.querySelectorAll("#mktTbody tr");
+
+    let currentCategory = "all";
+    let sortCol = null;
+    let sortAsc = true;
+
+    /* --- View toggle --- */
+    gridViewBtn?.addEventListener("click", () => {
+        productGrid.style.display = "";
+        productTable.style.display = "none";
+        gridViewBtn.classList.add("active");
+        tableViewBtn.classList.remove("active");
+    });
+
+    tableViewBtn?.addEventListener("click", () => {
+        productGrid.style.display = "none";
+        productTable.style.display = "block";
+        gridViewBtn.classList.remove("active");
+        tableViewBtn.classList.add("active");
+        filterTableRows();
+    });
+
+    /* --- Category filter (syncs both views) --- */
+    filterBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            filterBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            currentCategory = btn.dataset.category;
+
+            /* filter grid cards */
+            document.querySelectorAll(".product-card").forEach(card => {
+                const match = currentCategory === "all" || card.dataset.category === currentCategory;
+                card.style.display = match ? "" : "none";
+            });
+
+            /* filter table rows */
+            filterTableRows();
+        });
+    });
+
+    /* --- Search filter --- */
+    searchInput?.addEventListener("input", () => {
+        const q = searchInput.value.toLowerCase();
+
+        document.querySelectorAll(".product-card").forEach(card => {
+            const name = (card.dataset.name || "").toLowerCase();
+            const catMatch = currentCategory === "all" || card.dataset.category === currentCategory;
+            card.style.display = (catMatch && name.includes(q)) ? "" : "none";
+        });
+
+        filterTableRows();
+    });
+
+    function filterTableRows() {
+        const q = (searchInput?.value || "").toLowerCase();
+        tableRows.forEach(row => {
+            const name = (row.dataset.name || "").toLowerCase();
+            const cat  = row.dataset.category || "";
+            const catMatch = currentCategory === "all" || cat === currentCategory;
+            const searchMatch = name.includes(q) || q === "";
+            row.classList.toggle("hidden-row", !(catMatch && searchMatch));
+        });
+    }
+
+    /* --- Table column sorting --- */
+    document.querySelectorAll("#mktDataTable th[data-col]").forEach(th => {
+        th.addEventListener("click", () => {
+            const col = th.dataset.col;
+
+            if (sortCol === col) {
+                sortAsc = !sortAsc;
+            } else {
+                sortCol = col;
+                sortAsc = true;
+            }
+
+            // Update arrow indicators
+            document.querySelectorAll("#mktDataTable th .sort-arrow").forEach(a => a.textContent = "↕");
+            th.querySelector(".sort-arrow").textContent = sortAsc ? "↑" : "↓";
+
+            const tbody = document.getElementById("mktTbody");
+            const rows  = Array.from(tbody.querySelectorAll("tr"));
+
+            rows.sort((a, b) => {
+                let va = "", vb = "";
+                if (col === "price") {
+                    va = parseFloat(a.dataset.price) || 0;
+                    vb = parseFloat(b.dataset.price) || 0;
+                } else if (col === "stock") {
+                    va = parseInt(a.dataset.stock) || 0;
+                    vb = parseInt(b.dataset.stock) || 0;
+                } else if (col === "name") {
+                    va = a.dataset.name || "";
+                    vb = b.dataset.name || "";
+                } else if (col === "category") {
+                    va = a.dataset.category || "";
+                    vb = b.dataset.category || "";
+                } else {
+                    /* artisan, state, material — read from cell text */
+                    const colIndex = { artisan: 2, state: 3, material: 4, status: 7 };
+                    const idx = colIndex[col] || 0;
+                    va = (a.cells[idx]?.textContent || "").trim().toLowerCase();
+                    vb = (b.cells[idx]?.textContent || "").trim().toLowerCase();
+                }
+
+                if (typeof va === "number") return sortAsc ? va - vb : vb - va;
+                return sortAsc ? va.localeCompare(vb) : vb.localeCompare(va);
+            });
+
+            rows.forEach(r => tbody.appendChild(r));
+        });
+    });
+
+    /* --- Toast helper (if not defined by pages.js) --- */
+    if (typeof window.showToast !== "function") {
+        window.showToast = function(msg) {
+            let t = document.querySelector(".toast");
+            if (!t) {
+                t = document.createElement("div");
+                t.className = "toast";
+                document.body.appendChild(t);
+            }
+            t.textContent = msg;
+            t.classList.add("show");
+            clearTimeout(window._toastTimer);
+            window._toastTimer = setTimeout(() => t.classList.remove("show"), 2800);
+        };
+    }
+
+})();
+</script>
 
 </body>
 </html>

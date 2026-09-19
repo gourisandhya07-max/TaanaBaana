@@ -2911,5 +2911,132 @@
 <script src="js/main.js"></script>
 <script src="js/app.js"></script>
 
+<script>
+/* =========================================================
+   TAANA-BAANA AI ASSISTANT (Gemini 2.0 Flash)
+   Powers the assistant modal on the homepage
+========================================================= */
+
+(function () {
+
+    /* --- Config --- */
+    const GEMINI_API_KEY = "AIzaSyDqFPV1M02lzn5XSNSf7AMxHxNS6BoB9bM";
+    const GEMINI_ENDPOINT =
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" +
+        GEMINI_API_KEY;
+
+    const SYSTEM_CONTEXT =
+        "You are the Taana-Baana AI Business Manager — a friendly, knowledgeable assistant " +
+        "for Indian artisans and craft businesses. Taana-Baana is a digital platform that " +
+        "helps artisans list, price and sell handmade products. Help users with: product " +
+        "descriptions, fair pricing, marketplace strategy, B2B buyer matching, inventory, " +
+        "and digital identity for their craft. Respond in warm, simple English. " +
+        "Keep answers concise (2-4 sentences) unless more detail is requested. " +
+        "Use ₹ for prices. Begin with Namaste when greeting.";
+
+    /* --- Elements --- */
+    const chatBox        = document.querySelector(".chat-box");
+    const input          = document.getElementById("assistantInput");
+    const sendBtn        = document.getElementById("sendAssistant");
+    const quickButtons   = document.querySelectorAll(".assistant-quick-options button");
+
+    if (!chatBox || !input || !sendBtn) return;
+
+    /* --- Send message --- */
+    async function sendMessage(text) {
+
+        if (!text.trim()) return;
+
+        appendMessage(text, "user");
+        input.value = "";
+        sendBtn.disabled = true;
+        sendBtn.textContent = "…";
+
+        const thinking = appendMessage("Thinking…", "ai");
+
+        try {
+            const reply = await callGemini(text);
+            thinking.remove();
+            appendMessage(reply, "ai");
+        } catch (err) {
+            thinking.remove();
+            appendMessage(getFallback(text), "ai");
+        }
+
+        sendBtn.disabled = false;
+        sendBtn.textContent = "→";
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+    }
+
+    /* --- Append bubble --- */
+    function appendMessage(text, role) {
+        const div = document.createElement("div");
+        div.className = "chat-message " + role;
+        div.textContent = text;
+        chatBox.appendChild(div);
+        chatBox.scrollTop = chatBox.scrollHeight;
+        return div;
+    }
+
+    /* --- Gemini API call --- */
+    async function callGemini(userMessage) {
+
+        const res = await fetch(GEMINI_ENDPOINT, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                contents: [
+                    {
+                        role: "user",
+                        parts: [{ text: SYSTEM_CONTEXT + "\n\nUser: " + userMessage }]
+                    }
+                ],
+                generationConfig: {
+                    temperature: 0.7,
+                    maxOutputTokens: 300
+                }
+            })
+        });
+
+        if (!res.ok) throw new Error("API error " + res.status);
+
+        const data = await res.json();
+        return data.candidates?.[0]?.content?.parts?.[0]?.text ||
+               "I couldn't generate a response. Please try again.";
+
+    }
+
+    /* --- Offline fallback --- */
+    function getFallback(msg) {
+        msg = msg.toLowerCase();
+        if (msg.includes("price") || msg.includes("cost"))
+            return "Add your material, labour and packaging costs. Taana-Baana suggests minimum (cost + 20%), recommended (cost + 50%) and premium prices based on market data.";
+        if (msg.includes("describe") || msg.includes("listing") || msg.includes("catalog"))
+            return "Tell me the product name, material, technique and what makes it special — I'll turn that into a professional marketplace description.";
+        if (msg.includes("buyer") || msg.includes("b2b") || msg.includes("bulk"))
+            return "B2B Connect matches your cluster with bulk buyers based on product type, minimum order quantity and location. Share a few details to get started.";
+        if (msg.includes("sales") || msg.includes("sell"))
+            return "Your products can reach buyers through the Taana-Baana marketplace, B2B connect, and direct artisan profile sharing. Let me know which channel fits best.";
+        return "Namaste! 🌿 I can help with pricing, product descriptions, finding buyers and building your digital artisan identity. What would you like to explore?";
+    }
+
+    /* --- Event listeners --- */
+    sendBtn.addEventListener("click", () => sendMessage(input.value));
+
+    input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage(input.value);
+        }
+    });
+
+    quickButtons.forEach((btn) => {
+        btn.addEventListener("click", () => sendMessage(btn.textContent.trim()));
+    });
+
+})();
+</script>
+
 </body>
 </html>

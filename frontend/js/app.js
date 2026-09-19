@@ -23,11 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
        INTRO ANIMATION
     ===================================================== */
 
-    const intro = $("#intro") || $("#introScreen");
-    if (intro) {
-        intro.style.display = "none";
-    }
-    document.body.classList.remove("no-scroll");
+    // Intro animation is handled by main.js — do not override it here
 
 
     /* =====================================================
