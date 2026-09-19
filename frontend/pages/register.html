@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register — Taana-Baana</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/culture.css">
+</head>
+<body>
+<div class="login-page">
+    <section class="login-art">
+        <a href="../index.html">
+            <img src="../assets/logo.png" alt="Taana-Baana" style="width:180px; filter:brightness(0) invert(1);">
+        </a>
+        <div style="margin-top:70px;">
+            <span class="eyebrow" style="color:white;border-color:rgba(255,255,255,.2);">From Hands to Markets</span>
+            <h1 style="margin-top:25px;">Start your<br>digital craft journey.<br><em>Today.</em></h1>
+            <p>Create a Taana-Baana account to manage products, orders, and marketplace opportunities with confidence.</p>
+        </div>
+    </section>
+
+    <section class="login-form-side">
+        <div class="login-box">
+            <span class="eyebrow">Create account</span>
+            <h2 class="page-title" style="margin-top:15px;">Join Taana-Baana</h2>
+            <p class="muted" style="margin-top:10px;">Set up your profile as an artisan, buyer, or admin.</p>
+
+            <div class="form-group">
+                <label class="form-label">Full name</label>
+                <input id="registerName" class="form-control" type="text" placeholder="Your full name" />
+            </div>
+
+            <div class="form-group" style="margin-top:15px;">
+                <label class="form-label">Email</label>
+                <input id="registerEmail" class="form-control" type="email" placeholder="you@example.com" />
+            </div>
+
+            <div class="form-group" style="margin-top:15px;">
+                <label class="form-label">Role</label>
+                <select id="registerRole" class="form-control">
+                    <option value="artisan">Artisan</option>
+                    <option value="buyer">Buyer</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+
+            <div class="form-group" style="margin-top:15px;">
+                <label class="form-label">Password</label>
+                <input id="registerPassword" class="form-control" type="password" placeholder="At least 6 characters" />
+            </div>
+
+            <div class="form-group" style="margin-top:15px;">
+                <label class="form-label">Confirm password</label>
+                <input id="registerConfirmPassword" class="form-control" type="password" placeholder="Confirm your password" />
+            </div>
+
+            <button id="registerButton" class="btn btn-primary" style="width:100%;margin-top:22px;">Create account →</button>
+
+            <p class="muted" style="font-size:11px;text-align:center;margin-top:20px;">
+                Already have an account? <a href="login.html">Log in</a>
+            </p>
+        </div>
+    </section>
+</div>
+
+<script src="../js/main.js"></script>
+<script src="../js/pages.js"></script>
+</body>
+</html>

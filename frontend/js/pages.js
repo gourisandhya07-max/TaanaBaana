@@ -700,6 +700,102 @@ const productCards =
     );
 
 
+function updateCartCount() {
+
+    const cartCount =
+        document.querySelector(
+            ".cart-count"
+        );
+
+    if (!cartCount) return;
+
+    try {
+        const cart =
+            JSON.parse(
+                localStorage.getItem(
+                    "taanaBaanaCart"
+                ) || "[]"
+            );
+
+        cartCount.textContent =
+            String(cart.length);
+
+    } catch (error) {
+        cartCount.textContent = "0";
+    }
+
+}
+
+
+function openProductModal(card) {
+
+    if (!card) return;
+
+    const modal =
+        document.getElementById(
+            "productModal"
+        );
+
+    if (!modal) return;
+
+    const name =
+        card.dataset.name || "Handcrafted product";
+
+    const artisan =
+        card.querySelector(
+            ".product-artisan"
+        )?.textContent || "Local artisan";
+
+    const price =
+        card.dataset.price || "0";
+
+    const image =
+        card.dataset.image ||
+        "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=85";
+
+    const modalName =
+        modal.querySelector(
+            ".product-modal-name"
+        );
+
+    const modalArtisan =
+        modal.querySelector(
+            ".product-modal-artisan"
+        );
+
+    const modalPrice =
+        modal.querySelector(
+            ".product-modal-price"
+        );
+
+    const modalImage =
+        modal.querySelector(
+            ".product-modal-image"
+        );
+
+    if (modalName) modalName.textContent = name;
+    if (modalArtisan) modalArtisan.textContent = artisan;
+    if (modalPrice) modalPrice.textContent = `₹${Number(price).toLocaleString("en-IN")}`;
+    if (modalImage) modalImage.src = image;
+
+    modal.classList.add("active");
+    document.body.classList.add("modal-open");
+
+    const closeButton =
+        modal.querySelector(
+            ".modal-close"
+        );
+
+    if (closeButton) {
+        closeButton.onclick = () => {
+            modal.classList.remove("active");
+            document.body.classList.remove("modal-open");
+        };
+    }
+
+}
+
+
 function filterProducts() {
 
     const query =
@@ -812,7 +908,8 @@ document
 
         button.addEventListener(
             "click",
-            () => {
+            (event) => {
+                event.stopPropagation();
 
                 const active =
                     button.classList.toggle(
@@ -824,12 +921,13 @@ document
                         ? "♥"
                         : "♡";
 
-
-                window.TaanaBaana.showToast(
-                    active
-                        ? "Added to favorites ❤️"
-                        : "Removed from favorites"
-                );
+                if (window.TaanaBaana?.showToast) {
+                    window.TaanaBaana.showToast(
+                        active
+                            ? "Added to favorites ❤️"
+                            : "Removed from favorites"
+                    );
+                }
 
             }
         );
@@ -849,40 +947,79 @@ document
 
         button.addEventListener(
             "click",
-            () => {
+            (event) => {
+                event.stopPropagation();
 
                 const card =
                     button.closest(
                         ".product-card"
                     );
 
-
                 const name =
                     card?.dataset.name ||
                     "Handcrafted product";
-
 
                 const price =
                     card?.dataset.price ||
                     "0";
 
+                if (window.TaanaBaana?.addToCart) {
+                    window.TaanaBaana.addToCart({
+                        name,
+                        price,
+                        addedAt:
+                            new Date()
+                                .toISOString()
+                    });
+                } else {
+                    const cart =
+                        JSON.parse(
+                            localStorage.getItem(
+                                "taanaBaanaCart"
+                            ) || "[]"
+                        );
 
-                window.TaanaBaana.addToCart({
+                    cart.push({ name, price });
+                    localStorage.setItem(
+                        "taanaBaanaCart",
+                        JSON.stringify(cart)
+                    );
+                }
 
-                    name,
-
-                    price,
-
-                    addedAt:
-                        new Date()
-                            .toISOString()
-
-                });
+                updateCartCount();
 
             }
         );
 
     });
+
+
+document
+    .querySelectorAll(
+        ".product-card"
+    )
+    .forEach(card => {
+        card.addEventListener(
+            "click",
+            (event) => {
+                if (
+                    event.target.closest(
+                        ".favorite-button"
+                    ) ||
+                    event.target.closest(
+                        ".add-cart"
+                    )
+                ) {
+                    return;
+                }
+
+                openProductModal(card);
+            }
+        );
+    });
+
+
+updateCartCount();
 
 
 /* =========================================================

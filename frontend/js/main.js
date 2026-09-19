@@ -31,11 +31,76 @@
    - Accessibility
    ============================================================ */
 
+window.TaanaBaana = window.TaanaBaana || {};
+
+const TAANA_SUPABASE_CONFIG = {
+    url: "https://noyrfotqdzwnalbnmbcu.supabase.co",
+    anonKey: "sb_publishable_owxWgT3liD0TTwl7Z3TkwQ_7-bV1dJz"
+};
+
+function loadSupabaseSdk() {
+    if (window.supabase) {
+        return Promise.resolve(window.supabase);
+    }
+
+    return new Promise((resolve, reject) => {
+        const existingScript = document.querySelector("script[data-taana-supabase]");
+        if (existingScript) {
+            existingScript.addEventListener("load", () => resolve(window.supabase), { once: true });
+            existingScript.addEventListener("error", () => reject(new Error("Supabase SDK failed to load.")), { once: true });
+            return;
+        }
+
+        const script = document.createElement("script");
+        script.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+        script.async = true;
+        script.setAttribute("data-taana-supabase", "true");
+        script.onload = () => resolve(window.supabase);
+        script.onerror = () => reject(new Error("Supabase SDK failed to load."));
+        document.head.appendChild(script);
+    });
+}
+
+async function initSupabaseConnection() {
+    try {
+        const supabaseSdk = await loadSupabaseSdk();
+        if (!supabaseSdk || !supabaseSdk.createClient) {
+            console.warn("Supabase SDK is not available in this browser session.");
+            return;
+        }
+
+        const supabaseClient = supabaseSdk.createClient(TAANA_SUPABASE_CONFIG.url, TAANA_SUPABASE_CONFIG.anonKey, {
+            auth: {
+                persistSession: true,
+                autoRefreshToken: true,
+                detectSessionInUrl: true
+            }
+        });
+
+        window.TaanaBaana.supabase = supabaseClient;
+        window.TaanaBaana.supabaseReady = true;
+        window.TaanaBaana.supabaseConfig = TAANA_SUPABASE_CONFIG;
+
+        const { data: { session }, error } = await supabaseClient.auth.getSession();
+
+        if (error) {
+            console.warn("Supabase session warning:", error.message);
+        }
+
+        if (session) {
+            window.TaanaBaana.authSession = session;
+        }
+    } catch (error) {
+        console.warn("Supabase connection unavailable:", error.message || error);
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     /* ========================================================
        INITIAL SETUP
        ======================================================== */
 
+    initSupabaseConnection();
     initIntro();
     initCustomCursor();
     initNavbar();
@@ -57,6 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initLazyImages();
     initImageFallback();
     initKeyboardAccessibility();
+    initAuthFlow();
 
     console.log(
         "%cTAANA-BAANA 🧵",
@@ -73,6 +139,372 @@ document.addEventListener("DOMContentLoaded", () => {
         "color:#879b76;"
     );
 });
+
+function initAuthFlow() {
+    const AUTH_KEY = "taanaBaanaUser";
+    const DEMO_USERS = [
+        {
+            name: "Meera Devi",
+            email: "demo@taanabaana.in",
+            password: "password",
+            role: "artisan"
+        },
+        {
+            name: "Aarav Kumar",
+            email: "buyer@taanabaana.in",
+            password: "password",
+            role: "buyer"
+        },
+        {
+            name: "Priya Nair",
+            email: "admin@taanabaana.in",
+            password: "password",
+            role: "admin"
+        }
+    ];
+
+    function getCurrentUser() {
+        try {
+            const raw = localStorage.getItem(AUTH_KEY);
+            return raw ? JSON.parse(raw) : null;
+        } catch (error) {
+            return null;
+        }
+    }
+
+    function setCurrentUser(user) {
+        localStorage.setItem(AUTH_KEY, JSON.stringify(user));
+    }
+
+    function logoutUser() {
+        localStorage.removeItem(AUTH_KEY);
+        window.location.href = "../index.html";
+    }
+
+    function getRoleDashboard(role) {
+        const dashboardMap = {
+            artisan: "artisan-dashboard.html",
+            buyer: "buyer-dashboard.html",
+            admin: "admin-dashboard.html"
+        };
+
+        return dashboardMap[role] || "login.html";
+    }
+
+    function normalizeRole(value) {
+        const role = (value || "").toLowerCase();
+        if (["artisan", "seller", "maker"].includes(role)) return "artisan";
+        if (["buyer", "customer", "user"].includes(role)) return "buyer";
+        if (["admin", "administrator"].includes(role)) return "admin";
+        return "buyer";
+    }
+
+    function redirectByRole(role) {
+        const target = getRoleDashboard(role);
+        const currentPage = window.location.pathname.split("/").pop();
+
+        if (currentPage === target) return;
+
+        const pagePath = window.location.pathname.includes("/pages/")
+            ? "./"
+            : "./pages/";
+
+        const href = pagePath + target;
+        window.location.href = href;
+    }
+
+    function handleProtectedPage() {
+        const currentPage = window.location.pathname.split("/").pop();
+        const protectedPages = [
+            "artisan-dashboard.html",
+            "buyer-dashboard.html",
+            "admin-dashboard.html"
+        ];
+
+        if (!protectedPages.includes(currentPage)) {
+            return;
+        }
+
+        const user = getCurrentUser();
+
+        if (!user) {
+            window.location.href = "login.html";
+            return;
+        }
+
+        const userRole = normalizeRole(user.role);
+
+        if (currentPage === "artisan-dashboard.html" && userRole !== "artisan") {
+            redirectByRole(userRole);
+            return;
+        }
+
+        if (currentPage === "buyer-dashboard.html" && userRole !== "buyer") {
+            redirectByRole(userRole);
+            return;
+        }
+
+        if (currentPage === "admin-dashboard.html" && userRole !== "admin") {
+            redirectByRole(userRole);
+            return;
+        }
+    }
+
+    function attachLoginSubmit() {
+        const loginButton = document.getElementById("loginButton");
+        const roleCards = document.querySelectorAll(".role-card");
+        const emailInput = document.getElementById("loginEmail");
+        const passwordInput = document.getElementById("loginPassword");
+
+        roleCards.forEach((card) => {
+            card.addEventListener("click", () => {
+                roleCards.forEach((item) => item.classList.remove("active"));
+                card.classList.add("active");
+            });
+        });
+
+        if (!loginButton) {
+            return;
+        }
+
+        loginButton.addEventListener("click", () => {
+            const selectedRole = document.querySelector(".role-card.active")?.dataset.role || "artisan";
+            const email = (emailInput?.value || "").trim();
+            const password = passwordInput?.value || "";
+
+            if (!email) {
+                window.TaanaBaana?.showToast("Please enter your email.");
+                emailInput?.focus();
+                return;
+            }
+
+            if (!password) {
+                window.TaanaBaana?.showToast("Please enter your password.");
+                passwordInput?.focus();
+                return;
+            }
+
+            const matchedUser = DEMO_USERS.find((user) => {
+                return user.email.toLowerCase() === email.toLowerCase() && user.password === password;
+            });
+
+            const user = matchedUser || {
+                name: email.split("@")[0].replace(/[._-]/g, " "),
+                email,
+                password,
+                role: normalizeRole(selectedRole)
+            };
+
+            if (!matchedUser && !email.endsWith("@taanabaana.in") && !email.includes("@")) {
+                window.TaanaBaana?.showToast("Invalid login credentials.");
+                return;
+            }
+
+            if (!matchedUser && !password) {
+                window.TaanaBaana?.showToast("Invalid login credentials.");
+                return;
+            }
+
+            if (!matchedUser) {
+                const fallbackRole = normalizeRole(selectedRole);
+                setCurrentUser({
+                    name: user.name,
+                    email: user.email,
+                    role: fallbackRole
+                });
+                window.TaanaBaana?.showToast("Welcome to Taana-Baana.");
+                redirectByRole(fallbackRole);
+                return;
+            }
+
+            setCurrentUser({
+                name: matchedUser.name,
+                email: matchedUser.email,
+                role: matchedUser.role
+            });
+
+            window.TaanaBaana?.showToast("Login successful.");
+            redirectByRole(matchedUser.role);
+        });
+    }
+
+    async function handleSupabaseSignup(name, email, password, role) {
+        const client = window.TaanaBaana?.supabase;
+        if (!client || !client.auth || !client.auth.signUp) {
+            return false;
+        }
+
+        try {
+            const { data, error } = await client.auth.signUp({
+                email,
+                password,
+                options: {
+                    data: {
+                        full_name: name,
+                        role
+                    }
+                }
+            });
+
+            if (error) {
+                console.warn("Supabase signup failed:", error.message);
+                return false;
+            }
+
+            const user = data?.user;
+            if (!user) {
+                return false;
+            }
+
+            setCurrentUser({
+                name: name || user.email?.split("@")[0] || "Taana-Baana User",
+                email: user.email,
+                role
+            });
+
+            window.TaanaBaana?.showToast("Account created and synced with Supabase.");
+            redirectByRole(role);
+            return true;
+        } catch (error) {
+            console.warn("Supabase signup error:", error);
+            return false;
+        }
+    }
+
+    function attachRegisterSubmit() {
+        const registerButton = document.getElementById("registerButton");
+        if (!registerButton) return;
+
+        registerButton.addEventListener("click", async () => {
+            const role = document.getElementById("registerRole")?.value || "artisan";
+            const name = document.getElementById("registerName")?.value?.trim() || "";
+            const email = document.getElementById("registerEmail")?.value?.trim() || "";
+            const password = document.getElementById("registerPassword")?.value || "";
+            const confirmPassword = document.getElementById("registerConfirmPassword")?.value || "";
+
+            if (!name || !email || !password) {
+                window.TaanaBaana?.showToast("Please complete all required fields.");
+                return;
+            }
+
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                window.TaanaBaana?.showToast("Please enter a valid email address.");
+                return;
+            }
+
+            if (password.length < 6) {
+                window.TaanaBaana?.showToast("Password must be at least 6 characters.");
+                return;
+            }
+
+            if (password !== confirmPassword && document.getElementById("registerConfirmPassword")) {
+                window.TaanaBaana?.showToast("Passwords do not match.");
+                return;
+            }
+
+            const normalizedRole = normalizeRole(role);
+
+            if (window.TaanaBaana?.supabaseReady) {
+                const supabaseSignedUp = await handleSupabaseSignup(name, email, password, normalizedRole);
+                if (supabaseSignedUp) {
+                    return;
+                }
+            }
+
+            const user = {
+                name,
+                email,
+                role: normalizedRole
+            };
+
+            setCurrentUser(user);
+            window.TaanaBaana?.showToast("Account created successfully.");
+            redirectByRole(user.role);
+        });
+    }
+
+    function attachLogoutButtons() {
+        document.querySelectorAll("[data-auth-logout], [data-logout]").forEach((button) => {
+            button.addEventListener("click", (event) => {
+                event.preventDefault();
+                logoutUser();
+            });
+        });
+    }
+
+    function attachDashboardButtons() {
+        document.querySelectorAll("[data-open-dashboard]").forEach((button) => {
+            button.addEventListener("click", () => {
+                const user = getCurrentUser();
+                const target = user ? getRoleDashboard(normalizeRole(user.role)) : "login.html";
+                const href = window.location.pathname.includes("/pages/") ? "./" + target : "./pages/" + target;
+                window.location.href = href;
+            });
+        });
+
+        document.querySelectorAll("[data-open-studio]").forEach((button) => {
+            button.addEventListener("click", () => {
+                const currentPath = window.location.pathname;
+                const href = currentPath.includes("/pages/") ? "./studio.html" : "./pages/studio.html";
+                window.location.href = href;
+            });
+        });
+
+        document.querySelectorAll("[data-open-marketplace]").forEach((button) => {
+            button.addEventListener("click", () => {
+                const href = window.location.pathname.includes("/pages/") ? "./marketplace.html" : "./pages/marketplace.html";
+                window.location.href = href;
+            });
+        });
+    }
+
+    if (window.location.pathname.endsWith("/login.html") || window.location.pathname.endsWith("login.html")) {
+        attachLoginSubmit();
+    }
+
+    if (window.location.pathname.endsWith("/register.html") || window.location.pathname.endsWith("register.html")) {
+        attachRegisterSubmit();
+    }
+
+    attachLogoutButtons();
+    attachDashboardButtons();
+    handleProtectedPage();
+
+    if (window.TaanaBaana) {
+        window.TaanaBaana.auth = {
+            getCurrentUser,
+            setCurrentUser,
+            logout: logoutUser,
+            isLoggedIn: () => Boolean(getCurrentUser()),
+            redirectToRole: redirectByRole,
+            getRoleDashboard
+        };
+
+        window.TaanaBaana.apiRequest = async function(path, options = {}) {
+            const API_BASE_URL = window.TB_API_BASE_URL || "http://127.0.0.1:5000";
+            const url = `${API_BASE_URL.replace(/\/$/, "")}${path}`;
+            const response = await fetch(url, {
+                headers: { "Content-Type": "application/json", ...(options.headers || {}) },
+                ...options,
+                body: options.body ? options.body : undefined
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(errorText || "The AI service is currently unavailable.");
+            }
+
+            return response.json();
+        };
+
+        window.TaanaBaana.addToCart = function(productItem) {
+            const cart = JSON.parse(localStorage.getItem("taanaBaanaCart") || "[]");
+            cart.push(productItem);
+            localStorage.setItem("taanaBaanaCart", JSON.stringify(cart));
+            window.TaanaBaana.showToast(`${productItem.name || "Product"} added to your enquiry`);
+        };
+    }
+}
 
 
 /* ============================================================

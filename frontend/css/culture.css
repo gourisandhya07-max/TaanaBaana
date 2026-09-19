@@ -86,6 +86,283 @@ body::before {
 
 
 /* =========================================================
+   AUTH PAGES
+========================================================= */
+
+.login-page {
+    display: grid;
+    grid-template-columns: minmax(320px, 0.9fr) minmax(420px, 1.1fr);
+    min-height: 100vh;
+    background: linear-gradient(135deg, rgba(59, 41, 34, 0.97), rgba(35, 54, 61, 0.96));
+    position: relative;
+    overflow: hidden;
+}
+
+.login-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(201,111,74,0.2), transparent 18%),
+        radial-gradient(circle at 80% 18%, rgba(15,124,120,0.18), transparent 20%),
+        radial-gradient(circle at 70% 80%, rgba(196,61,115,0.12), transparent 18%);
+    pointer-events: none;
+}
+
+.login-art,
+.login-form-side {
+    position: relative;
+    z-index: 1;
+}
+
+.login-art {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 52px 58px 58px;
+    color: white;
+    background: linear-gradient(180deg, rgba(59,41,34,0.42), rgba(30,26,24,0.74));
+    border-right: 1px solid rgba(255,255,255,0.08);
+}
+
+.login-art .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: rgba(255,255,255,0.82);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.18);
+    padding-bottom: 10px;
+}
+
+.login-art .eyebrow::before {
+    content: "";
+    width: 28px;
+    height: 2px;
+    background: rgba(255,255,255,0.7);
+    display: block;
+}
+
+.login-art h1 {
+    margin-top: 24px;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2.8rem, 4vw, 4.3rem);
+    line-height: 0.96;
+    letter-spacing: -0.05em;
+    color: white;
+}
+
+.login-art h1 em {
+    color: #f4d4b7;
+    font-style: italic;
+}
+
+.login-art p {
+    margin-top: 20px;
+    max-width: 470px;
+    color: rgba(255,255,255,0.76);
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.login-form-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 28px;
+    background: rgba(252,246,234,0.96);
+}
+
+.login-box {
+    width: min(100%, 540px);
+    background: rgba(255,255,255,0.78);
+    border: 1px solid rgba(59,41,34,0.08);
+    border-radius: 30px;
+    padding: 34px 30px 28px;
+    box-shadow: 0 24px 55px rgba(59,41,34,0.12);
+    backdrop-filter: blur(10px);
+}
+
+.login-box .eyebrow {
+    color: var(--culture-terracotta-dark);
+    margin-bottom: 0;
+}
+
+.page-title,
+.login-box h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2.1rem, 3vw, 3rem);
+    line-height: 1.04;
+    letter-spacing: -0.05em;
+    color: var(--culture-brown);
+    margin-top: 16px;
+}
+
+.muted {
+    color: var(--brown-soft);
+    line-height: 1.7;
+}
+
+.role-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 28px;
+    margin-bottom: 20px;
+}
+
+.role-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 110px;
+    border-radius: 18px;
+    border: 1px solid rgba(59,41,34,0.08);
+    background: rgba(255,255,255,0.68);
+    padding: 14px 10px;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    text-align: center;
+}
+
+.role-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(201,111,74,0.32);
+    box-shadow: 0 12px 22px rgba(59,41,34,0.08);
+}
+
+.role-card.active {
+    background: linear-gradient(135deg, rgba(201,111,74,0.12), rgba(15,124,120,0.08));
+    border-color: rgba(201,111,74,0.32);
+    box-shadow: 0 16px 28px rgba(201,111,74,0.09);
+}
+
+.role-icon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    background: rgba(59,41,34,0.06);
+    font-size: 1.2rem;
+}
+
+.role-card strong {
+    font-size: 0.88rem;
+    color: var(--culture-brown);
+}
+
+.role-card small {
+    color: var(--brown-soft);
+}
+
+.form-group {
+    margin-top: 18px;
+}
+
+.form-label {
+    display: inline-block;
+    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brown-soft);
+}
+
+.form-control {
+    width: 100%;
+    min-height: 52px;
+    border-radius: 14px;
+    border: 1px solid rgba(59,41,34,0.12);
+    background: rgba(255,255,255,0.9);
+    padding: 0 16px;
+    color: var(--culture-brown);
+    font-size: 0.96rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: rgba(201,111,74,0.5);
+    box-shadow: 0 0 0 4px rgba(201,111,74,0.08);
+}
+
+.btn,
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    border: none;
+    border-radius: 14px;
+    padding: 0 22px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--culture-brown), var(--culture-terracotta-dark));
+    color: white;
+    box-shadow: 0 14px 28px rgba(59,41,34,0.18);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 34px rgba(169,83,56,0.22);
+}
+
+.login-box .btn {
+    width: 100%;
+    margin-top: 22px;
+}
+
+.login-box a {
+    color: var(--culture-terracotta-dark);
+    font-weight: 700;
+}
+
+.login-box a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+    .login-page {
+        grid-template-columns: 1fr;
+    }
+
+    .login-art {
+        padding: 40px 28px 32px;
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .login-form-side {
+        padding: 28px 18px 40px;
+    }
+}
+
+@media (max-width: 560px) {
+    .login-box {
+        padding: 24px 18px 20px;
+        border-radius: 22px;
+    }
+
+    .role-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================================
    NAVBAR
 ========================================================= */
 

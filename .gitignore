@@ -1,0 +1,19 @@
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+
+# env / secrets
+.env
+.env.*
+
+# build artifacts
+node_modules/

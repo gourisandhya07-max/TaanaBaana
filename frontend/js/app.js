@@ -822,7 +822,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     aiForm?.addEventListener(
         "submit",
-        (event) => {
+        async (event) => {
 
             event.preventDefault();
 
@@ -837,18 +837,19 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
             aiInput.value = "";
+            aiInput.disabled = true;
+            aiForm.querySelector("button[type='submit']")?.setAttribute("disabled", "disabled");
 
-
-            setTimeout(() => {
-
-                addMessage(
-                    generateAIResponse(
-                        message
-                    ),
-                    "bot"
-                );
-
-            }, 700);
+            try {
+                const reply = await generateAIResponse(message);
+                addMessage(reply, "bot");
+            } catch (error) {
+                addMessage("The AI service is currently unavailable. Please try again in a moment.", "bot");
+            } finally {
+                aiInput.disabled = false;
+                aiForm.querySelector("button[type='submit']")?.removeAttribute("disabled");
+                aiInput.focus();
+            }
 
         }
     );
@@ -859,7 +860,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             button.addEventListener(
                 "click",
-                () => {
+                async () => {
 
                     const question =
                         button.textContent.trim();
@@ -869,16 +870,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         "user"
                     );
 
-                    setTimeout(() => {
-
-                        addMessage(
-                            generateAIResponse(
-                                question
-                            ),
-                            "bot"
-                        );
-
-                    }, 700);
+                    try {
+                        const response = await generateAIResponse(question);
+                        addMessage(response, "bot");
+                    } catch (error) {
+                        addMessage("The AI service is currently unavailable. Please try again in a moment.", "bot");
+                    }
 
                 }
             );
@@ -925,80 +922,41 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    function generateAIResponse(
-        message
-    ) {
+    async function generateAIResponse(message) {
+        const payload = { message: message.trim() };
 
-        const text =
-            message.toLowerCase();
-
-
-        if (
-            text.includes("price") ||
-            text.includes("pricing")
-        ) {
-
-            return `
-                Start with your raw material,
-                labour, packaging and other costs.
-                Taana-Baana's smart pricing assistant
-                can then suggest a minimum sustainable,
-                recommended and premium price.
-            `;
-
+        if (!payload.message) {
+            return "Please type a question to continue.";
         }
 
+        try {
+            const result = await window.TaanaBaana.apiRequest("/api/business-advisor", {
+                method: "POST",
+                body: JSON.stringify(payload)
+            });
 
-        if (
-            text.includes("description") ||
-            text.includes("catalog")
-        ) {
+            return result.message || "I can help with that.";
+        } catch (error) {
+            const text = message.toLowerCase();
 
-            return `
-                Tell me your product name,
-                material, how it was made and what makes
-                it special. I can turn those details into
-                a professional marketplace description.
-            `;
+            if (text.includes("price") || text.includes("pricing")) {
+                return "Start with your raw material, labour, packaging and other costs. Taana-Baana’s smart pricing assistant can then suggest a minimum sustainable, recommended and premium price.";
+            }
 
+            if (text.includes("description") || text.includes("catalog")) {
+                return "Tell me your product name, material, how it was made and what makes it special. I can turn those details into a professional marketplace description.";
+            }
+
+            if (text.includes("buyer") || text.includes("b2b")) {
+                return "B2B matching can connect buyer requirements with artisan clusters based on product type, quantity, location and pricing.";
+            }
+
+            if (text.includes("sell") || text.includes("market")) {
+                return "Your product can be prepared as a digital listing and shared with buyers, marketplaces, cooperatives and your artisan network.";
+            }
+
+            return "I can help with product descriptions, pricing, marketplace preparation, buyer matching and your digital artisan profile. Tell me what you are making.";
         }
-
-
-        if (
-            text.includes("buyer") ||
-            text.includes("b2b")
-        ) {
-
-            return `
-                B2B matching can connect buyer requirements
-                with artisan clusters based on product type,
-                quantity, location and pricing.
-            `;
-
-        }
-
-
-        if (
-            text.includes("sell") ||
-            text.includes("market")
-        ) {
-
-            return `
-                Your product can be prepared as a digital
-                listing and shared with buyers, marketplaces,
-                cooperatives and your artisan network.
-            `;
-
-        }
-
-
-        return `
-            I can help with product descriptions,
-            pricing, marketplace preparation,
-            buyer matching and your digital artisan profile.
-            Tell me what you are making.
-        `;
-
     }
 
 
