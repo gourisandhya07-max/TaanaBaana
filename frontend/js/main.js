@@ -1175,84 +1175,14 @@ function initDropdowns() {
    ============================================================ */
 
 function initScrollReveal() {
-
-    const elements =
-        document.querySelectorAll(
-            ".reveal, .reveal-left, .reveal-right, .reveal-scale"
-        );
-
-
-    if (!elements.length) {
-        return;
-    }
-
-
-    /*
-       Respect reduced-motion preference.
-    */
-
-    const reduceMotion =
-        window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-        ).matches;
-
-
-    if (reduceMotion) {
-
-        elements.forEach(
-            (element) => {
-
-                element.classList.add(
-                    "revealed"
-                );
-            }
-        );
-
-        return;
-    }
-
-
-    const observer =
-        new IntersectionObserver(
-            (entries, observer) => {
-
-                entries.forEach(
-                    (entry) => {
-
-                        if (
-                            !entry.isIntersecting
-                        ) {
-                            return;
-                        }
-
-
-                        entry.target.classList.add(
-                            "revealed"
-                        );
-
-
-                        observer.unobserve(
-                            entry.target
-                        );
-                    }
-                );
-            },
-            {
-                threshold: 0.12,
-                rootMargin:
-                    "0px 0px -60px 0px"
-            }
-        );
-
-
-    elements.forEach(
-        (element) => {
-
-            observer.observe(
-                element
-            );
-        }
+    const elements = document.querySelectorAll(
+        ".reveal, .reveal-left, .reveal-right, .reveal-scale"
     );
+
+    elements.forEach(element => {
+        element.classList.add("revealed");
+        element.classList.add("visible");
+    });
 }
 
 
