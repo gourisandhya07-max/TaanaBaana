@@ -685,93 +685,67 @@ function formatRupee(
 
 
 /* =========================================================
-   MARKETPLACE FILTER
+   MARKETPLACE (SUPABASE INTEGRATION)
 ========================================================= */
 
-const searchInput =
-    document.getElementById(
-        "productSearch"
-    );
+const SUPABASE_REST_URL = "https://noyrfotqdzwnalbnmbcu.supabase.co/rest/v1/marketplace?select=*&order=created_at.desc";
+const SUPABASE_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5veXJmb3RxZHp3bmFsYm5tYmN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk3MzQ3MTEsImV4cCI6MjEwNTMxMDcxMX0.gSOtf53nY_lFsKbnQyS7TsUCo71ecqZ7tpHlF6rcfYk";
 
-
-const productCards =
-    document.querySelectorAll(
-        ".product-card"
-    );
-
+function escapeHtml(str) {
+    if (!str) return "";
+    return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
 
 function updateCartCount() {
-
-    const cartCount =
-        document.querySelector(
-            ".cart-count"
-        );
-
+    const cartCount = document.querySelector(".cart-count");
     if (!cartCount) return;
-
     try {
-        const cart =
-            JSON.parse(
-                localStorage.getItem(
-                    "taanaBaanaCart"
-                ) || "[]"
-            );
-
-        cartCount.textContent =
-            String(cart.length);
-
+        const cart = JSON.parse(localStorage.getItem("taanaBaanaCart") || "[]");
+        cartCount.textContent = String(cart.length);
     } catch (error) {
         cartCount.textContent = "0";
     }
-
 }
 
+function filterProducts() {
+    const searchInput = document.getElementById("productSearch");
+    const query = searchInput ? searchInput.value.toLowerCase().trim() : "";
+    const activeFilter = document.querySelector(".filter-button.active");
+    const category = activeFilter ? activeFilter.dataset.category : "all";
+
+    const productCards = document.querySelectorAll(".product-card");
+    productCards.forEach(card => {
+        const name = card.dataset.name?.toLowerCase() || "";
+        const artisan = card.dataset.artisan?.toLowerCase() || "";
+        const material = card.dataset.material?.toLowerCase() || "";
+        const cardCategory = card.dataset.category || "all";
+
+        const matchesSearch = !query || name.includes(query) || artisan.includes(query) || material.includes(query);
+        const matchesCategory = category === "all" || cardCategory === category;
+
+        card.style.display = matchesSearch && matchesCategory ? "" : "none";
+    });
+}
 
 function openProductModal(card) {
-
     if (!card) return;
-
-    const modal =
-        document.getElementById(
-            "productModal"
-        );
-
+    const modal = document.getElementById("productModal");
     if (!modal) return;
 
-    const name =
-        card.dataset.name || "Handcrafted product";
+    const name = card.dataset.name || "Handcrafted product";
+    const artisan = card.dataset.artisan || "Local artisan";
+    const price = card.dataset.price || "0";
+    const image = card.dataset.image || "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=85";
 
-    const artisan =
-        card.querySelector(
-            ".product-artisan"
-        )?.textContent || "Local artisan";
-
-    const price =
-        card.dataset.price || "0";
-
-    const image =
-        card.dataset.image ||
-        "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=85";
-
-    const modalName =
-        modal.querySelector(
-            ".product-modal-name"
-        );
-
-    const modalArtisan =
-        modal.querySelector(
-            ".product-modal-artisan"
-        );
-
-    const modalPrice =
-        modal.querySelector(
-            ".product-modal-price"
-        );
-
-    const modalImage =
-        modal.querySelector(
-            ".product-modal-image"
-        );
+    const modalName = modal.querySelector(".product-modal-name");
+    const modalArtisan = modal.querySelector(".product-modal-artisan");
+    const modalPrice = modal.querySelector(".product-modal-price");
+    const modalImage = modal.querySelector(".product-modal-image");
 
     if (modalName) modalName.textContent = name;
     if (modalArtisan) modalArtisan.textContent = artisan;
@@ -781,245 +755,159 @@ function openProductModal(card) {
     modal.classList.add("active");
     document.body.classList.add("modal-open");
 
-    const closeButton =
-        modal.querySelector(
-            ".modal-close"
-        );
-
+    const closeButton = modal.querySelector(".modal-close");
     if (closeButton) {
         closeButton.onclick = () => {
             modal.classList.remove("active");
             document.body.classList.remove("modal-open");
         };
     }
-
 }
 
+function bindMarketplaceEvents() {
+    const searchInput = document.getElementById("productSearch");
+    if (searchInput) {
+        searchInput.removeEventListener("input", filterProducts);
+        searchInput.addEventListener("input", filterProducts);
+    }
 
-function filterProducts() {
+    document.querySelectorAll(".filter-button").forEach(button => {
+        button.onclick = () => {
+            document.querySelectorAll(".filter-button").forEach(item => item.classList.remove("active"));
+            button.classList.add("active");
+            filterProducts();
+        };
+    });
 
-    const query =
-        searchInput
-            ? searchInput.value
-                .toLowerCase()
-            : "";
+    document.querySelectorAll(".product-card").forEach(card => {
+        card.onclick = (e) => {
+            if (e.target.closest(".favorite-button") || e.target.closest("[data-add-cart]")) return;
+            openProductModal(card);
+        };
+    });
 
+    document.querySelectorAll(".favorite-button").forEach(button => {
+        button.onclick = (event) => {
+            event.stopPropagation();
+            const active = button.classList.toggle("liked");
+            button.textContent = active ? "♥" : "♡";
+            if (window.TaanaBaana?.showToast) {
+                window.TaanaBaana.showToast(active ? "Added to favorites ❤️" : "Removed from favorites");
+            }
+        };
+    });
 
-    const activeFilter =
-        document
-            .querySelector(
-                ".filter-button.active"
-            );
+    document.querySelectorAll("[data-add-cart]").forEach(button => {
+        button.onclick = (event) => {
+            event.stopPropagation();
+            const card = button.closest(".product-card");
+            const name = card?.dataset.name || "Handcrafted product";
+            const price = card?.dataset.price || "0";
 
+            if (window.TaanaBaana?.addToCart) {
+                window.TaanaBaana.addToCart({
+                    name,
+                    price,
+                    addedAt: new Date().toISOString()
+                });
+            } else {
+                try {
+                    const cart = JSON.parse(localStorage.getItem("taanaBaanaCart") || "[]");
+                    cart.push({ name, price, addedAt: new Date().toISOString() });
+                    localStorage.setItem("taanaBaanaCart", JSON.stringify(cart));
+                    updateCartCount();
+                    if (window.TaanaBaana?.showToast) {
+                        window.TaanaBaana.showToast(`Added ${name} to cart 🛍️`);
+                    }
+                } catch (e) {}
+            }
+        };
+    });
+}
 
-    const category =
-        activeFilter
-            ? activeFilter.dataset.category
-            : "all";
+function renderMarketplaceItems(items) {
+    const productGrid = document.getElementById("productGrid");
+    if (!productGrid || !items || items.length === 0) return;
 
+    productGrid.innerHTML = items.map(item => `
+        <article
+            class="product-card"
+            data-id="${item.id}"
+            data-name="${escapeHtml(item.title)}"
+            data-category="${(item.category || 'all').toLowerCase()}"
+            data-price="${item.price}"
+            data-image="${item.image_url || 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=85'}"
+            data-artisan="${escapeHtml(item.artisan_name || 'Artisan')} · ${escapeHtml(item.artisan_location || 'India')}"
+            data-description="${escapeHtml(item.description || '')}"
+            data-technique="${escapeHtml(item.craft_technique || '')}"
+            data-material="${escapeHtml(item.material || '')}"
+        >
+            <div class="product-image">
+                <img
+                    src="${item.image_url || 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=85'}"
+                    alt="${escapeHtml(item.title)}"
+                    loading="lazy"
+                >
+                <button class="favorite-button" type="button" aria-label="Add to favorites">♡</button>
+            </div>
 
-    productCards.forEach(
-        card => {
+            <div class="product-info">
+                <div class="product-category">${escapeHtml((item.category || 'Craft').toUpperCase())}</div>
+                <h3 class="product-name">${escapeHtml(item.title)}</h3>
+                <p class="product-artisan">${escapeHtml(item.artisan_name || 'Artisan')} · ${escapeHtml(item.artisan_location || 'India')}</p>
 
-            const name =
-                card.dataset.name
-                    ?.toLowerCase() || "";
+                <div class="product-bottom">
+                    <span class="product-price">₹${Number(item.price).toLocaleString("en-IN")}</span>
+                    <button class="add-cart" type="button" data-add-cart>+</button>
+                </div>
+            </div>
+        </article>
+    `).join("");
 
+    bindMarketplaceEvents();
+}
 
-            const cardCategory =
-                card.dataset.category ||
-                "all";
+async function initSupabaseMarketplace() {
+    const productGrid = document.getElementById("productGrid");
+    if (!productGrid) return;
 
+    bindMarketplaceEvents();
+    updateCartCount();
 
-            const matchesSearch =
-                name.includes(
-                    query
-                );
+    try {
+        let items = [];
 
+        if (window.TaanaBaana?.supabase) {
+            const { data, error } = await window.TaanaBaana.supabase
+                .from("marketplace")
+                .select("*")
+                .order("created_at", { ascending: false });
 
-            const matchesCategory =
-                category === "all" ||
-                cardCategory === category;
-
-
-            card.style.display =
-                matchesSearch &&
-                matchesCategory
-                    ? ""
-                    : "none";
-
+            if (!error && data && data.length > 0) {
+                items = data;
+            }
         }
-    );
+
+        if (!items || items.length === 0) {
+            const res = await fetch(SUPABASE_REST_URL, {
+                headers: { "apikey": SUPABASE_API_KEY }
+            });
+            if (res.ok) {
+                items = await res.json();
+            }
+        }
+
+        if (items && items.length > 0) {
+            renderMarketplaceItems(items);
+        }
+    } catch (err) {
+        console.warn("Marketplace Supabase sync warning:", err);
+    }
 }
 
-
-if (searchInput) {
-
-    searchInput.addEventListener(
-        "input",
-        filterProducts
-    );
-
-}
-
-
-document
-    .querySelectorAll(
-        ".filter-button"
-    )
-    .forEach(button => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                document
-                    .querySelectorAll(
-                        ".filter-button"
-                    )
-                    .forEach(
-                        item =>
-                            item.classList.remove(
-                                "active"
-                            )
-                    );
-
-                button.classList.add(
-                    "active"
-                );
-
-                filterProducts();
-
-            }
-        );
-
-    });
-
-
-/* =========================================================
-   FAVORITES
-========================================================= */
-
-document
-    .querySelectorAll(
-        ".favorite-button"
-    )
-    .forEach(button => {
-
-        button.addEventListener(
-            "click",
-            (event) => {
-                event.stopPropagation();
-
-                const active =
-                    button.classList.toggle(
-                        "liked"
-                    );
-
-                button.textContent =
-                    active
-                        ? "♥"
-                        : "♡";
-
-                if (window.TaanaBaana?.showToast) {
-                    window.TaanaBaana.showToast(
-                        active
-                            ? "Added to favorites ❤️"
-                            : "Removed from favorites"
-                    );
-                }
-
-            }
-        );
-
-    });
-
-
-/* =========================================================
-   ADD TO CART
-========================================================= */
-
-document
-    .querySelectorAll(
-        "[data-add-cart]"
-    )
-    .forEach(button => {
-
-        button.addEventListener(
-            "click",
-            (event) => {
-                event.stopPropagation();
-
-                const card =
-                    button.closest(
-                        ".product-card"
-                    );
-
-                const name =
-                    card?.dataset.name ||
-                    "Handcrafted product";
-
-                const price =
-                    card?.dataset.price ||
-                    "0";
-
-                if (window.TaanaBaana?.addToCart) {
-                    window.TaanaBaana.addToCart({
-                        name,
-                        price,
-                        addedAt:
-                            new Date()
-                                .toISOString()
-                    });
-                } else {
-                    const cart =
-                        JSON.parse(
-                            localStorage.getItem(
-                                "taanaBaanaCart"
-                            ) || "[]"
-                        );
-
-                    cart.push({ name, price });
-                    localStorage.setItem(
-                        "taanaBaanaCart",
-                        JSON.stringify(cart)
-                    );
-                }
-
-                updateCartCount();
-
-            }
-        );
-
-    });
-
-
-document
-    .querySelectorAll(
-        ".product-card"
-    )
-    .forEach(card => {
-        card.addEventListener(
-            "click",
-            (event) => {
-                if (
-                    event.target.closest(
-                        ".favorite-button"
-                    ) ||
-                    event.target.closest(
-                        ".add-cart"
-                    )
-                ) {
-                    return;
-                }
-
-                openProductModal(card);
-            }
-        );
-    });
-
-
-updateCartCount();
+document.addEventListener("DOMContentLoaded", () => {
+    initSupabaseMarketplace();
+});
 
 
 /* =========================================================

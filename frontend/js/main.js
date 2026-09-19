@@ -35,7 +35,7 @@ window.TaanaBaana = window.TaanaBaana || {};
 
 const TAANA_SUPABASE_CONFIG = {
     url: "https://noyrfotqdzwnalbnmbcu.supabase.co",
-    anonKey: "sb_publishable_owxWgT3liD0TTwl7Z3TkwQ_7-bV1dJz"
+    anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5veXJmb3RxZHp3bmFsYm5tYmN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk3MzQ3MTEsImV4cCI6MjEwNTMxMDcxMX0.gSOtf53nY_lFsKbnQyS7TsUCo71ecqZ7tpHlF6rcfYk"
 };
 
 function loadSupabaseSdk() {
