@@ -537,139 +537,72 @@ const calculatePrice =
 
 
 if (calculatePrice) {
+    calculatePrice.addEventListener("click", async () => {
+        const material = Number(document.getElementById("materialCost")?.value) || 0;
+        const labour = Number(document.getElementById("labourCost")?.value) || 0;
+        const packaging = Number(document.getElementById("packagingCost")?.value) || 0;
+        const transport = Number(document.getElementById("transportCost")?.value) || 0;
+        const overhead = Number(document.getElementById("overheadCost")?.value) || 0;
+        const other = transport + overhead;
 
-    calculatePrice.addEventListener(
-        "click",
-        () => {
+        if (window.TaanaBaana?.apiRequest) {
+            try {
+                const res = await window.TaanaBaana.apiRequest("/api/pricing", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        materialCost: material,
+                        labourCost: labour,
+                        packagingCost: packaging,
+                        otherCost: other
+                    })
+                });
 
-            const material =
-                Number(
-                    document.getElementById(
-                        "materialCost"
-                    )?.value
-                ) || 0;
+                if (res && res.recommendedPrice !== undefined) {
+                    const minElem = document.getElementById("minimumPrice");
+                    const recElem = document.getElementById("recommendedPrice");
+                    const premElem = document.getElementById("premiumPrice");
+                    const resultElem = document.getElementById("priceResult");
+                    const reasonElem = document.getElementById("priceReason");
 
-
-            const labour =
-                Number(
-                    document.getElementById(
-                        "labourCost"
-                    )?.value
-                ) || 0;
-
-
-            const packaging =
-                Number(
-                    document.getElementById(
-                        "packagingCost"
-                    )?.value
-                ) || 0;
-
-
-            const transport =
-                Number(
-                    document.getElementById(
-                        "transportCost"
-                    )?.value
-                ) || 0;
-
-
-            const overhead =
-                Number(
-                    document.getElementById(
-                        "overheadCost"
-                    )?.value
-                ) || 0;
-
-
-            const profit =
-                Number(
-                    document.getElementById(
-                        "profitMargin"
-                    )?.value
-                ) || 30;
-
-
-            const totalCost =
-                material +
-                labour +
-                packaging +
-                transport +
-                overhead;
-
-
-            const recommended =
-                totalCost *
-                (1 + profit / 100);
-
-
-            const minimum =
-                totalCost *
-                1.10;
-
-
-            const premium =
-                totalCost *
-                1.65;
-
-
-            document.getElementById(
-                "minimumPrice"
-            ).textContent =
-                formatRupee(minimum);
-
-
-            document.getElementById(
-                "recommendedPrice"
-            ).textContent =
-                formatRupee(recommended);
-
-
-            document.getElementById(
-                "premiumPrice"
-            ).textContent =
-                formatRupee(premium);
-
-
-            const result =
-                document.getElementById(
-                    "priceResult"
-                );
-
-
-            if (result) {
-
-                result.style.display =
-                    "block";
-
+                    if (minElem) minElem.textContent = formatRupee(res.minimumPrice);
+                    if (recElem) recElem.textContent = formatRupee(res.recommendedPrice);
+                    if (premElem) premElem.textContent = formatRupee(res.premiumPrice);
+                    if (resultElem) resultElem.style.display = "block";
+                    if (reasonElem) {
+                        reasonElem.innerHTML = `
+                            Base estimated cost is <strong>${formatRupee(res.baseCost)}</strong>.
+                            ${res.explanation}
+                        `;
+                    }
+                    return;
+                }
+            } catch (err) {
+                console.warn("AI Pricing API fallback:", err);
             }
-
-
-            const reason =
-                document.getElementById(
-                    "priceReason"
-                );
-
-
-            if (reason) {
-
-                reason.innerHTML = `
-                    Your total estimated cost is
-                    <strong>
-                        ${formatRupee(totalCost)}
-                    </strong>.
-                    Based on your selected margin,
-                    Taana-Baana suggests
-                    <strong>
-                        ${formatRupee(recommended)}
-                    </strong>
-                    as a sustainable starting price.
-                `;
-
-            }
-
         }
-    );
+
+        const totalCost = material + labour + packaging + transport + overhead;
+        const recommended = totalCost * 1.50;
+        const minimum = totalCost * 1.20;
+        const premium = totalCost * 1.80;
+
+        const minElem = document.getElementById("minimumPrice");
+        const recElem = document.getElementById("recommendedPrice");
+        const premElem = document.getElementById("premiumPrice");
+        const resultElem = document.getElementById("priceResult");
+        const reasonElem = document.getElementById("priceReason");
+
+        if (minElem) minElem.textContent = formatRupee(minimum);
+        if (recElem) recElem.textContent = formatRupee(recommended);
+        if (premElem) premElem.textContent = formatRupee(premium);
+        if (resultElem) resultElem.style.display = "block";
+        if (reasonElem) {
+            reasonElem.innerHTML = `
+                Your total estimated cost is <strong>${formatRupee(totalCost)}</strong>.
+                Taana-Baana AI suggests <strong>${formatRupee(recommended)}</strong> as a sustainable recommended price.
+            `;
+        }
+    });
 }
 
 

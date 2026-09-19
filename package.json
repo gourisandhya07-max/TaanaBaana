@@ -1,0 +1,19 @@
+{
+  "name": "taana-baana",
+  "version": "1.0.0",
+  "description": "Taana-Baana - From Hands to Markets",
+  "main": "frontend/index.html",
+  "scripts": {
+    "start": "npx serve frontend -p 3000",
+    "dev": "npx serve frontend -p 3000",
+    "ai": "python ai/python/app.py"
+  },
+  "keywords": [
+    "artisan",
+    "handicrafts",
+    "taana-baana",
+    "marketplace"
+  ],
+  "author": "",
+  "license": "ISC"
+}

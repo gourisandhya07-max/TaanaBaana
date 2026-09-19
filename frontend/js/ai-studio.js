@@ -804,74 +804,51 @@ function initCatalogGenerator() {
 
     if (!button) return;
 
+    button.addEventListener("click", async () => {
+        const text = story?.value.trim();
 
-    button.addEventListener(
-        "click",
-        () => {
+        if (!text) {
+            showToast("Tell us something about your product first.");
+            story?.focus();
+            return;
+        }
 
-            const text =
-                story?.value.trim();
+        button.disabled = true;
+        button.textContent = "✦ Processing with AI Engine...";
 
-
-            if (!text) {
-
-                showToast(
-                    "Tell us something about your product first."
-                );
-
-                story?.focus();
-
-                return;
+        try {
+            let generated;
+            if (window.TaanaBaana?.apiRequest) {
+                generated = await window.TaanaBaana.apiRequest("/api/catalog", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        name: text,
+                        category: document.getElementById("craftCategory")?.value || "handicraft",
+                        material: text,
+                        notes: text
+                    })
+                });
             }
 
+            if (!generated || !generated.title) {
+                generated = generateDemoCatalog(text);
+            }
 
-            button.disabled =
-                true;
+            if (title) title.textContent = generated.title;
+            if (description) description.textContent = generated.description;
 
-            button.textContent =
-                "✦ Understanding your story...";
-
-
-            setTimeout(() => {
-
-                const generated =
-                    generateDemoCatalog(
-                        text
-                    );
-
-
-                if (title) {
-
-                    title.textContent =
-                        generated.title;
-
-                }
-
-
-                if (description) {
-
-                    description.textContent =
-                        generated.description;
-
-                }
-
-
-                button.disabled =
-                    false;
-
-                button.textContent =
-                    "✦ Generate Multilingual Catalog";
-
-
-                showToast(
-                    "Multilingual catalog generated."
-                );
-
-            }, 1400);
-
+            showToast("Multilingual AI catalog generated! ✨");
+        } catch (err) {
+            console.warn("AI Catalog API fallback:", err);
+            const fallback = generateDemoCatalog(text);
+            if (title) title.textContent = fallback.title;
+            if (description) description.textContent = fallback.description;
+            showToast("Catalog generated.");
+        } finally {
+            button.disabled = false;
+            button.textContent = "✦ Generate Multilingual Catalog";
         }
-    );
-
+    });
 }
 
 
