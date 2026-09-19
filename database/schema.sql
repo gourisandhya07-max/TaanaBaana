@@ -11,39 +11,27 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 -- 2. ENUM TYPES
 DO $$ BEGIN
     CREATE TYPE user_role AS ENUM ('artisan', 'buyer', 'admin');
-EXCEPTION
-    WHEN duplicate_object THEN null;
-END $$;
+EXCEPTION WHEN duplicate_object THEN null; END $$;
 
 DO $$ BEGIN
     CREATE TYPE product_status AS ENUM ('draft', 'published', 'archived');
-EXCEPTION
-    WHEN duplicate_object THEN null;
-END $$;
+EXCEPTION WHEN duplicate_object THEN null; END $$;
 
 DO $$ BEGIN
     CREATE TYPE requirement_status AS ENUM ('open', 'matched', 'closed');
-EXCEPTION
-    WHEN duplicate_object THEN null;
-END $$;
+EXCEPTION WHEN duplicate_object THEN null; END $$;
 
 DO $$ BEGIN
     CREATE TYPE quotation_status AS ENUM ('submitted', 'accepted', 'rejected', 'negotiating');
-EXCEPTION
-    WHEN duplicate_object THEN null;
-END $$;
+EXCEPTION WHEN duplicate_object THEN null; END $$;
 
 DO $$ BEGIN
     CREATE TYPE order_status AS ENUM ('pending', 'processing', 'shipped', 'delivered', 'cancelled');
-EXCEPTION
-    WHEN duplicate_object THEN null;
-END $$;
+EXCEPTION WHEN duplicate_object THEN null; END $$;
 
 DO $$ BEGIN
     CREATE TYPE payment_status AS ENUM ('pending', 'paid', 'refunded', 'failed');
-EXCEPTION
-    WHEN duplicate_object THEN null;
-END $$;
+EXCEPTION WHEN duplicate_object THEN null; END $$;
 
 -- =====================================================================
 -- 3. TABLES DEFINITION
@@ -98,6 +86,27 @@ CREATE TABLE IF NOT EXISTS public.products (
     keywords TEXT[] DEFAULT '{}',
     languages TEXT[] DEFAULT '{"English", "Hindi"}',
     status product_status NOT NULL DEFAULT 'published',
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- TABLE: marketplace (Digital Marketplace Items & Artisan Craft Discoveries)
+CREATE TABLE IF NOT EXISTS public.marketplace (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    title TEXT NOT NULL,
+    category TEXT NOT NULL,
+    artisan_name TEXT NOT NULL,
+    artisan_location TEXT NOT NULL,
+    price NUMERIC(10, 2) NOT NULL,
+    rating NUMERIC(3, 2) DEFAULT 4.85,
+    reviews_count INT DEFAULT 15,
+    material TEXT,
+    craft_technique TEXT,
+    description TEXT,
+    image_url TEXT,
+    stock_quantity INT NOT NULL DEFAULT 10,
+    is_featured BOOLEAN DEFAULT false,
+    status TEXT NOT NULL DEFAULT 'active',
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
@@ -217,6 +226,8 @@ CREATE TABLE IF NOT EXISTS public.cart_items (
 CREATE INDEX IF NOT EXISTS idx_profiles_role ON public.profiles(role);
 CREATE INDEX IF NOT EXISTS idx_products_artisan ON public.products(artisan_id);
 CREATE INDEX IF NOT EXISTS idx_products_category ON public.products(category);
+CREATE INDEX IF NOT EXISTS idx_marketplace_category ON public.marketplace(category);
+CREATE INDEX IF NOT EXISTS idx_marketplace_status ON public.marketplace(status);
 CREATE INDEX IF NOT EXISTS idx_buyer_req_buyer ON public.buyer_requirements(buyer_id);
 CREATE INDEX IF NOT EXISTS idx_buyer_req_status ON public.buyer_requirements(status);
 CREATE INDEX IF NOT EXISTS idx_quotations_req ON public.quotations(requirement_id);
@@ -235,21 +246,11 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE TRIGGER trg_profiles_updated_at
-    BEFORE UPDATE ON public.profiles
-    FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
-
-CREATE OR REPLACE TRIGGER trg_products_updated_at
-    BEFORE UPDATE ON public.products
-    FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
-
-CREATE OR REPLACE TRIGGER trg_buyer_req_updated_at
-    BEFORE UPDATE ON public.buyer_requirements
-    FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
-
-CREATE OR REPLACE TRIGGER trg_orders_updated_at
-    BEFORE UPDATE ON public.orders
-    FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
+CREATE OR REPLACE TRIGGER trg_profiles_updated_at BEFORE UPDATE ON public.profiles FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
+CREATE OR REPLACE TRIGGER trg_products_updated_at BEFORE UPDATE ON public.products FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
+CREATE OR REPLACE TRIGGER trg_marketplace_updated_at BEFORE UPDATE ON public.marketplace FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
+CREATE OR REPLACE TRIGGER trg_buyer_req_updated_at BEFORE UPDATE ON public.buyer_requirements FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
+CREATE OR REPLACE TRIGGER trg_orders_updated_at BEFORE UPDATE ON public.orders FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
 
 -- =====================================================================
 -- 6. AUTOMATIC AUTH USER PROFILE SYNC TRIGGER
@@ -282,6 +283,7 @@ CREATE TRIGGER on_auth_user_created
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.artisan_clusters ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.products ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.marketplace ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.buyer_requirements ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.cluster_matches ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.quotations ENABLE ROW LEVEL SECURITY;
@@ -291,14 +293,14 @@ ALTER TABLE public.artisan_earnings ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.enquiries ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.cart_items ENABLE ROW LEVEL SECURITY;
 
--- Public Read access
+-- Policies
 CREATE POLICY "Public profiles are readable" ON public.profiles FOR SELECT USING (true);
 CREATE POLICY "Artisan clusters are readable" ON public.artisan_clusters FOR SELECT USING (true);
 CREATE POLICY "Products are readable by all" ON public.products FOR SELECT USING (true);
+CREATE POLICY "Marketplace items are readable by all" ON public.marketplace FOR SELECT USING (true);
 CREATE POLICY "Buyer requirements readable by all" ON public.buyer_requirements FOR SELECT USING (true);
 CREATE POLICY "Cluster matches readable by all" ON public.cluster_matches FOR SELECT USING (true);
 
--- Authenticated User Access
 CREATE POLICY "Users can edit own profile" ON public.profiles FOR UPDATE USING (auth.uid() = id);
 CREATE POLICY "Artisans can insert/edit own products" ON public.products FOR ALL USING (auth.uid() = artisan_id);
 CREATE POLICY "Buyers can insert/edit own requirements" ON public.buyer_requirements FOR ALL USING (auth.uid() = buyer_id);
@@ -324,4 +326,17 @@ INSERT INTO public.products (title, category, material, description, price, mini
 VALUES
 ('Handwoven Terracotta Vase', 'Pottery & Ceramics', 'Natural Clay', 'A handcrafted clay vase made using traditional wheel spinning techniques.', 1250.00, 1000.00, 1250.00, 1500.00, 25, ARRAY['pottery', 'clay', 'handmade', 'terracotta']),
 ('Kantha Embroidered Silk Stole', 'Textiles & Handloom', 'Pure Mulberry Silk', 'Exquisite hand-stitched silk shawl crafted by Bengali women artisans.', 3400.00, 2800.00, 3400.00, 4200.00, 15, ARRAY['handloom', 'embroidery', 'silk', 'kantha'])
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.marketplace 
+(title, category, artisan_name, artisan_location, price, rating, reviews_count, material, craft_technique, description, image_url, stock_quantity, is_featured)
+VALUES
+('Handwoven Kasavu Silk Saree', 'textile', 'Anjali Weaves', 'Kerala', 2850.00, 4.90, 28, 'Pure Cotton & Gold Zari', 'Handloom Weaving', 'Traditional Keralite cream saree with handcrafted golden zari borders woven on organic handlooms.', 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=85', 12, true),
+('Terracotta Heritage Clay Pot', 'pottery', 'Maya Clay Studio', 'West Bengal', 780.00, 4.85, 19, 'Natural River Clay', 'Wheel Spinning & Pit Firing', 'Hand-turned eco-friendly clay pot crafted by Bengal rural artisans using natural riverbed soil.', 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=800&q=85', 25, true),
+('Rosewood Carved Heritage Elephant', 'wood', 'Royal Saharanpur Crafts', 'Uttar Pradesh', 1250.00, 4.95, 42, 'Seasoned Sheesham Wood', 'Hand Carving & Natural Polish', 'Intricately carved solid wooden elephant statue highlighting traditional North Indian woodcraft mastery.', 'https://images.unsplash.com/photo-1590845947676-fa2576f401d2?auto=format&fit=crop&w=800&q=85', 8, true),
+('Pattachitra Hand-Painted Silk Scroll', 'painting', 'Raghurajpur Craft Village', 'Odisha', 4500.00, 4.98, 35, 'Tussar Silk & Natural Pigments', 'Fine Brush Miniature Painting', 'Authentic heritage artwork painted on silk using organic vegetable & stone pigments illustrating Indian mythology.', 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=85', 5, false),
+('Dhokra Brass Tribal Dancing Figurine', 'metal', 'Bastar Tribal Collective', 'Chhattisgarh', 1950.00, 4.88, 14, 'Lost-Wax Brass Alloy', 'Dhokra Lost-Wax Metal Casting', 'Handcrafted brass artifact made using an ancient 4,000-year-old non-ferrous metal casting technique.', 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=85', 10, false),
+('Blue Pottery Decorative Wall Plate', 'pottery', 'Jaipur Blue Pottery Studio', 'Rajasthan', 1400.00, 4.92, 22, 'Quartz Stone Powder & Glass Glaze', 'Underglaze Painting & Kiln Firing', 'Vibrant cobalt blue wall hanging display plate handcrafted without clay using traditional Jaipur technique.', 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=800&q=85', 15, true),
+('Pashmina Hand-Embroidered Shawl', 'textile', 'Kashmir Craft Guild', 'Jammu & Kashmir', 8900.00, 4.99, 50, 'Pure Himalayan Pashmina Wool', 'Sozni Hand Needlework', 'Luxurious handwoven Pashmina shawl detailed with delicate needle embroidery by Kashmiri master artisans.', 'https://images.unsplash.com/photo-1606760227091-3dd850d492a7?auto=format&fit=crop&w=800&q=85', 4, true),
+('Bidriware Silver Inlaid Vessel', 'metal', 'Bidar Heritage Artisans', 'Karnataka', 3200.00, 4.91, 18, 'Zinc-Copper Alloy & Pure Silver Wire', 'Bidri Sheet Inlay & Oxidation', 'Stunning blackened metal craft inlaid with pure silver wire patterns, unique to Bidar district.', 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=85', 7, false)
 ON CONFLICT DO NOTHING;
